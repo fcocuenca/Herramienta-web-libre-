@@ -1,0 +1,6 @@
+Personalización de servicios/factory para angular. 
+#user.service.js: encapsulación con la web api para todas las operaciones CRUD.
+
+#flash.service.js: encargado de mostrar los mensajes que se han llevado de forma satisfactoria y erronea en angular.
+
+

@@ -1,0 +1,148 @@
+                
+            <div class="tittleContent"> 
+                    <div class="idea">
+                         <a href="" title="¿Que es un Requisito Funcional?" data-toggle="popover" data-trigger="focus" data-content="Afirmación sobre lo que debería hacer el sistema" data-placement="bottom"><img src="app-content/bombilla.jpg" class="idea" alt="User Image" width="40px;" height="40px"></a>
+                    </div>
+                            <p>Modelo de Requisitos: Especificación de Requisistos Funcionales</p>  
+            </div>
+                            
+             <div class="flash-message" ng-if="flash">
+                    <div class="{{'alert alert-' + flash.type}}" ng-bind="flash.message"></div>
+             </div>         
+
+            <div class="col-md-12">
+                <!--Header de la tabla-->
+                <div class="box box-solid box-success">
+                    <div class="box-header">
+                            <h3 class="box-tittle"> Insercción de Requisitos Funcionales</h3>
+                    </div>
+                </div>
+
+                <div class="box-body">
+                    <div class="panel panel-default">
+                        <div class="box-body table-responsive no-padding">
+                            <table class ="table">
+                                <tbody>
+                                    <tr>
+                                        <th><center>Define tus requisitos funcionales</center></th>
+                                    </tr>
+                                    <tr>
+                                        <th>
+                                        <center> 
+                                            Ejemplo: RFX El sitema <"sistema"> debería <"funcionar">
+                                        </center>
+                                        </th>
+
+                                     </tr>
+                                     <tr>
+                                     </tr>
+                                     <tr>
+               
+                                        <th>
+                                        <center> 
+                                              <input type="text" id="content" class="form-control" ng-model="vm.requisito.content" required />
+                                        </center>
+                                        </th>
+                                     </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                     <div class="button">
+                            <center><button id ="save" class="btn btn-primary" ng-click="vm.saveRf()" onclick="recarga()">Save</button></center>
+                    </div>
+
+
+            </div>
+                 
+            <div class="col-md-12 ancho" > 
+                <!--Header de la tabla-->
+                        <div class="box box-solid box-success">
+                            <div class="box-header">
+                                    <h3 class="box-tittle"> Listado de Requisitos Funcionales</h3>
+                                   
+                                    <div class="box-tools pull-right" >
+                                        <a href="" onclick="pdf()" ><span class="imprimir glyphicon glyphicon-print"></span></a>
+                                    </div>
+                            </div>
+                        </div>
+                
+                            <table id="table" class="table">
+                                <tr>
+                                        <th>Requisitos: </th>
+                                        <th></th>
+                                        <th></th>
+                                </tr>
+                                <tr class="tr" ng-repeat=" r in vm.rf">
+                                        <td>
+                                            <li><a display="content" ng-model="vm.modificado" editable="{{r.content}}">{{r.content}}</a></li>
+                                        </td>
+                                        
+                                        <td>
+                                            <a href="" id ="update" ng-click="vm.updateRf($index)" onclick="recarga()"><span width="30px;" heigth="30px;" class="glyphicon glyphicon-pencil"></span></a>
+                                        </td>
+                                        <td>
+                                            <a href="" id ="delete" ng-click="vm.deleteRf($index)" onclick="recarga()"><span width="30px;" heigth="30px;" class="glyphicon glyphicon-trash"></span></a>
+                                        </td>
+                                        <td></td>
+
+                                </tr>       
+                            </table>
+            </div>  
+
+<script>
+
+function recarga() {
+    location.reload();
+}
+
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover();   
+});
+
+function pdf() {
+
+  var doc = new jsPDF('a4');
+  var elem = document.getElementById('table');
+  var data = doc.autoTableHtmlToJson(elem);
+
+  //var imgData = 'data:image/jpeg;base64,/Use http://dataurl.net/#dataurlmaker
+
+  //doc.addImage(imgData, 'JPEG', 15, 40, 20, 20);
+  doc.text("Especificación de requisitos: ", 70, 40);
+  doc.text("Requisitos Funcionales", 75, 48);
+  columns = [" Id    Requisito"];
+  doc.autoTable(columns, data.rows,{
+        
+    theme: 'grid',
+    styles: {
+        overflow: 'linebreak',
+        fontSize: 10,
+        valign: 'middle',
+        rowHeight: 9
+    },
+    margin: {top: 60},
+    alternateRowStyles: {
+      fillColor: [239, 239, 239],
+    },
+    headerStyles: {
+      fillColor: [00, 166, 90],
+      fontStyle: 'normal',
+      fontSize: 13
+    }
+  });
+  doc.save("table.pdf");
+}
+
+</script>
+
+
+    
+    
+ 
+                
+           
+     
+
+                    

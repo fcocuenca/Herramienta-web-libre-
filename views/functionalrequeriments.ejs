@@ -1,0 +1,29 @@
+<%- include('partials/header') %>
+
+<div class="form">
+	<p>Especifiacion de requisitos</p>
+	<br>
+
+	<%if(locals.error){ %>
+		<div class="alert alert-danger"><%= error %></div>
+	<% } %>
+
+	<form method="post">
+		<div class="input">
+			<label for="tittle">Introduce el Rf1</label>
+			<input type="text" name="tittle" id="tittle" class="form-control" value="<%= locals.tittle || '' %>" required />
+		</div>
+
+		<div class="input">
+		        <label for="content">Contenido del requisito funcional</label>
+		        <input type="text" name="content" id="content" class="form-control" value="<%= locals.content || '' %>" required />
+            	</div>
+		<div class="button">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+            <br>    
+            	</div>
+    	</form>
+</div>
+<%- include('partials/footer') %>
+
+
