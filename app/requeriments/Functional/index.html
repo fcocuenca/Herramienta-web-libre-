@@ -22,7 +22,7 @@
                     <div class="panel panel-default">
                         <div class="box-body table-responsive no-padding">
                             <table class ="table">
-                                <tbody>
+                                <thead>
                                     <tr>
                                         <th><center>Define tus requisitos funcionales</center></th>
                                     </tr>
@@ -34,6 +34,8 @@
                                         </th>
 
                                      </tr>
+                                </thead>
+                                <tbody>
                                      <tr>
                                      </tr>
                                      <tr>
@@ -69,26 +71,29 @@
                         </div>
                 
                             <table id="table" class="table">
-                                <tr>
-                                        <th>Requisitos: </th>
-                                        <th></th>
-                                        <th></th>
-                                </tr>
-                                <tr class="tr" ng-repeat=" r in vm.rf">
-                                        <td>
-                                            <li><a display="content" ng-model="vm.modificado" editable="{{r.content}}">{{r.content}}</a></li>
-                                        </td>
-                                        
-                                        <td>
-                                            <a href="" id ="update" ng-click="vm.updateRf($index)" onclick="recarga()"><span width="30px;" heigth="30px;" class="glyphicon glyphicon-pencil"></span></a>
-                                        </td>
-                                        <td>
-                                            <a href="" id ="delete" ng-click="vm.deleteRf($index)" onclick="recarga()"><span width="30px;" heigth="30px;" class="glyphicon glyphicon-trash"></span></a>
-                                        </td>
-                                        <td></td>
-
-                                </tr>       
+                              <thead>
+                                  <tr>
+                                          <th>Requisitos: </th>
+                                          <th></th>
+                                          <th></th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  <tr class="tr" ng-repeat=" r in vm.rf" ng-click="vm.table()">
+                                          <td>
+                                              <a display="content" ng-model="vm.modificado" editable="{{r.content}}">{{r.content}}</a>
+                                          </td>
+                                          <td>
+                                              <a href="" id ="update" ng-click="vm.updateRf($index)" onclick="recarga()"><span width="30px;" heigth="30px;" class="glyphicon glyphicon-pencil"></span></a>
+                                          </td>
+                                          <td>
+                                              <a href="" id ="delete" ng-click="vm.deleteRf($index)" onclick="recarga()"><span width="30px;" heigth="30px;" class="glyphicon glyphicon-trash"></span></a>
+                                          </td>
+                                          <td></td>
+                                  </tr>  
+                              </tbody>     
                             </table>
+                            <div id="choose"> </div>
             </div>  
 
 <script>
@@ -101,6 +106,13 @@ $(document).ready(function(){
     $('[data-toggle="popover"]').popover();   
 });
 
+/*
+$(document).ready(function() {
+    $('#table').dataTable({
+      data: datos
+    });
+});
+*/
 function pdf() {
 
   var doc = new jsPDF('a4');
@@ -132,7 +144,7 @@ function pdf() {
       fontSize: 13
     }
   });
-  doc.save("table.pdf");
+  doc.save("RequisitosFuncionales.pdf");
 }
 
 </script>

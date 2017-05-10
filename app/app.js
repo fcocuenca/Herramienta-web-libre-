@@ -38,6 +38,20 @@
                 controller: 'NoFunctionalRequeriments.IndexController',
                 controllerAs: 'vm',
                 data: { activeTab: 'nofunctionalrequeriments' }
+            })
+            .state('glosary',{
+                url:'/glosary',
+                templateUrl:'glosary/index.html',
+                controller: 'Glosary.IndexController',
+                controllerAs: 'vm',
+                data:{activeTab:'glosary'}
+            })
+            .state('diagram',{
+                url:'/diagram',
+                templateUrl:'useCase/Diagram/index.html',
+                controller:'Diagram.IndexController',
+                controllerAs:'vm',
+                data:{activeTab: 'diagram'}
             });
     }
  

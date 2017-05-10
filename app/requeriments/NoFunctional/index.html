@@ -64,7 +64,7 @@
 					                <h3 class="box-tittle"> Listado de Requisitos No Funcionales</h3>
 					               
 					                <div class="box-tools pull-right" >
-					               	 	 <a href="" onclick="javascript:demoFromHTML();"> <span class="imprimir glyphicon glyphicon-print"></span></button></a>
+					               	 	 <a href="" onclick = "pdf()"> <span class="imprimir glyphicon glyphicon-print"></span></button></a>
 					                </div>
 					        </div>
 					    </div>
@@ -77,7 +77,7 @@
 				     			</tr>
 				      			<tr class="tr" ng-repeat=" rnf in vm.nrf">
 								        <td>
-								        	<li><a display="content" ng-model="vm.modificadonf" editablenrf="{{rnf.content}}">{{rnf.content}}</a></li>
+								        	<a display="content" ng-model="vm.modificadonf" editablenrf="{{rnf.content}}">{{rnf.content}}</a>
 								        </td>
 								       	
 								       	<td>
@@ -103,44 +103,38 @@ $(document).ready(function(){
 });
 
 
-function demoFromHTML() {
-    var pdf = new jsPDF('p', 'pt', 'letter');
-    // source can be HTML-formatted string, or a reference
-    // to an actual DOM element from which the text will be scraped.
-    source = $('#table')[0];
+function pdf() {
 
-    // we support special element handlers. Register them with jQuery-style 
-    // ID selector for either ID or node name. ("#iAmID", "div", "span" etc.)
-    // There is no support for any other type of selectors 
-    // (class, of compound) at this time.
-    specialElementHandlers = {
-        // element with id of "bypass" - jQuery style selector
-        '#bypassme': function (element, renderer) {
-            // true = "handled elsewhere, bypass text extraction"
-            return true
-        }
-    };
-    margins = {
-        top: 40,
-        bottom: 60,
-        left: 10,
-        width: 7
-    };
-    // all coords and widths are in jsPDF instance's declared units
-    // 'inches' in this case
-    pdf.fromHTML(
-    source, // HTML string or DOM elem ref.
-    margins.left, // x coord
-    margins.top, { // y coord
-        'width': margins.width, // max width of content on PDF
-        'elementHandlers': specialElementHandlers
+  var doc = new jsPDF('a4');
+  var elem = document.getElementById('table');
+  var data = doc.autoTableHtmlToJson(elem);
+
+  //var imgData = 'data:image/jpeg;base64,/Use http://dataurl.net/#dataurlmaker
+
+  //doc.addImage(imgData, 'JPEG', 15, 40, 20, 20);
+  doc.text("Especificación de requisitos: ", 68, 40);
+  doc.text("Requisitos No Funcionales", 70, 48);
+  columns = [" Id    Requisito"];
+  doc.autoTable(columns, data.rows,{
+        
+    theme: 'grid',
+    styles: {
+        overflow: 'linebreak',
+        fontSize: 10,
+        valign: 'middle',
+        rowHeight: 9
     },
-
-    function (dispose) {
-        // dispose: object with X, Y of the last line add to the PDF 
-        //          this allow the insertion of new lines after html
-        pdf.save('Test.pdf');
-    }, margins);
+    margin: {top: 60},
+    alternateRowStyles: {
+      fillColor: [239, 239, 239],
+    },
+    headerStyles: {
+      fillColor: [187, 36, 36],
+      fontStyle: 'normal',
+      fontSize: 13
+    }
+  });
+  doc.save("requisitosNoFuncionales.pdf");
 }
 </script>
 

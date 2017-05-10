@@ -84,12 +84,12 @@
           <input id="group-2" type="checkbox" hidden />
           <label for="group-2"><span class="fa fa-angle-right"></span> <i class="glyphicon glyphicon-pencil"></i> Modelo de Casos de Uso</label>
               <ul class="group-list">
-                <li><a href="#">Diagramas de Casos de Uso</a></li>
+                <li><a ui-sref="diagram"><ng-class="{active: activeTab ==='diagram'}">Diagramas de Casos de Uso</a></li>
                 <li><a href="#">Especificaciones de Casos de Uso</a></li>
               </ul>
          </li>
         <li><a href="#"><i class="glyphicon glyphicon-list-alt"></i> Matriz de Trazabilidad</a></li>
-        <li>  <a href="#"><i class="glyphicon glyphicon-book"></i> Glosario</a> </li>
+        <li>  <a ui-sref="glosary"> <ng-class="{active: activeTab === 'glosary'}"><i class="glyphicon glyphicon-book"></i> Glosario</a> </li>
       </ul>
    </div>
 
@@ -126,10 +126,15 @@
     <script src="app-services/flash.service.js"></script>
     <script src="app-services/functionalrequeriments.service.js"></script>
     <script src="app-services/nofunctionalrequeriments.service.js"></script>
+    <script src="app-services/glosary.service.js"></script>
+    <script src="app-services/diagram.service.js"></script>
+
     <script src="home/index.controller.js"></script>
     <script src="account/index.controller.js"></script>
     <script src="requeriments/Functional/index.controller.js"></script>
     <script src="requeriments/NoFunctional/index.controller.js"></script>
+    <script src="glosary/index.controller.js"></script>
+    <script src="useCase/Diagram/index.controller.js"></script>
 
 
 </html>

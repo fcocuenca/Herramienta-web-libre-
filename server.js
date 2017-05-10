@@ -27,6 +27,8 @@ app.use('/app', require('./controllers/app.controller'));
 app.use('/api/users', require('./controllers/api/users.controller'));
 app.use('/api/functionalrequeriments', require('./controllers/api/functionalrequeriments.controller'));
 app.use('/api/nofunctionalrequeriments', require('./controllers/api/nofunctionalrequeriments.controller'));
+app.use('/api/glosary', require('./controllers/api/glosarys.controller'));
+app.use('/api/diagram', require('./controllers/api/diagrams.controller'));
 
 // pagina por defecto de inicio
 app.get('/', function (req, res) {

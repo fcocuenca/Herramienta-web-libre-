@@ -42,8 +42,7 @@ function Controller(UserService, RfService, FlashService) {
     vm.saveRf = saveRf;
     vm.deleteRf=deleteRf;
     vm.updateRf=updateRf;
-    vm.print = print;
-
+    
 
     /*####Funciones para obtener todos los requisitos existentes en la bd ####*/
     initController();
@@ -114,7 +113,6 @@ function Controller(UserService, RfService, FlashService) {
                     });
        
     }
-
 }
 
 })();
