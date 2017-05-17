@@ -122,7 +122,7 @@ div.topnav a{
   width: 220px;
   display: block;
   background: #333;
-  height: 890px;"
+  height: 100%!important;
 }
 
 /*####logo Superior####*/
@@ -258,6 +258,78 @@ label > span {
   transform: rotate(90deg);
 }
 
+/*####MenuAcordeon Edicion####*/
+
+.menuEdicion {
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none;
+  margin-top: 0px;
+  border-right: 1px solid #c6c6c6; 
+
+
+}
+
+/* Estilo niveles superiores*/
+.menuEdicion a, .menuEdicion label {
+  display: block;
+  padding: 4px 10px 20px 0px;
+  color: #fff;
+  background-color: #999;
+  box-shadow: inset 0 -1px #ccc;
+  -webkit-transition: all .25s ease-in;
+  transition: all .25s ease-in;
+  font-family: 'Lobster', cursive;
+  text-align: center;
+  text-decoration: none;
+  height: 28px;
+}
+
+.menuEdicion a:focus, .menuEdicion a:hover, .menuEdicion label:focus, .menuEdicion label:hover {
+  color: rgba(255, 255, 255, 0.5);
+  background: #848484;
+}
+
+.menuEdicion label { cursor: pointer; }
+
+/**Estilo primeros niveles*/
+
+.group-list a, .group-list label {
+  padding-left: 1rem;
+  background: #252525;
+  box-shadow: inset 0 -1px #373737;
+  text-decoration: none;
+}
+
+.group-list a:focus, .group-list a:hover, .group-list label:focus, .group-list label:hover { background: #131313; }
+
+/*Esconder acordeon*/
+.group-list, .sub-group-list, .sub-sub-group-list {
+  height: 100%;
+  max-height: 0;
+  overflow: hidden;
+  -webkit-transition: max-height .5s ease-in-out;
+  transition: max-height .5s ease-in-out;
+}
+
+/*Mover acordeon*/
+.menuEdicion__list input[type=checkbox]:checked + label + ul {
+  max-height: 1000px; 
+}
+
+/*Icono rotacion*/
+label > span {
+  float: right;
+  -webkit-transition: -webkit-transform .65s ease;
+  transition: transform .65s ease;
+}
+
+.menuEdicion__list input[type=checkbox]:checked + label > span {
+  -webkit-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+
 
 /*####Parte Derecha(contenido)####*/
 .right-side {
@@ -277,7 +349,7 @@ label > span {
 }
 
 .content {
-    padding: 0px 15px;
+    padding: 0px 0px;
     background: #f9f9f9;
 }
 
@@ -495,6 +567,66 @@ label > span {
   width: 70%;
 }
 
+/*####Edicion Diagramas CU####*/
+.panelEdicion{
+  width: 130px;
+  display: block;
+  background: #efebe3;
+  float:left;
+  border-right: 1px solid #c6c6c6;
+  height: 550px;
+}
+
+.panelEdicionDesplazar{
+    display: block;
+    text-decoration: none;
+    height: 18px;
+    padding: 0px 10px;
+    cursor: pointer;
+    overflow: hidden;
+    background: #747474
+ 
+}
+.icondesplazar{
+  float: right; 
+  color: #fff;
+
+}
+
+hr.style13 {
+  height: 10px;
+  border: 0;
+  box-shadow: 0 10px 10px -10px #8c8b8b inset;
+}
+
+hr {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.hojaEdicion{
+  display: block;
+  background-image: url("fondoEdicion.png");
+  height: 550px;
+  /* width: 550px; */
+  margin: 0 20px 0 120px;
+}
+.herramientas{
+    background: #efebe3;
+    height: 85px;
+    padding-top: 42px;
+}
+.herramientasDerecha{
+  background: #efebe3;
+  float: right;
+  height: 550px; 
+  width: 20px;
+}
+.herramientasAbajo{
+  background: #efebe3;
+  margin: 0px 0px 0px 0px;
+  height: 20px;
+}
 /*#####Fomulario /MiCuenta#####*/
 
 .form {
@@ -631,7 +763,7 @@ td{
 }
 
 .popover{
-  font-family:'Lobster', cursive;!important;
+  font-family:'Lobster', cursive!important;
 }
 
 .imprimir{
@@ -646,6 +778,77 @@ td{
     color: #fff;
 
 }
+
+.iconsEdicion{
+    position: relative;
+    top: 5px;
+    display: inline-block;
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1;
+    color: #fff;
+    margin: 2px 24px 6px 0px;
+    padding: 0;
+    float: right;
+}
+
+.iconsEdicionDer{
+    position: relative;
+    top:3px;
+    display: inline-block;
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1;
+    color: #fff;
+    margin: 2px 20px 6px 0px;
+    padding: 0 0 0 30px;
+}
+
+.tituloEdicion{
+    padding-left: 3%;
+    font-family: Pacifico;
+    font-size: 24px;
+    margin-left: 22px;
+
+}
+.tituloHerramientas{
+  font-family: 'Lobster', cursive;
+  margin: 0 0 0 4px;
+  font-size: 18px;
+}
+
+.textEdicion{
+  margin: 0 0 0 0;
+}
+
+.buttonFlecha{
+    margin: 12px 0px 8px 40px;
+}
+
+.actorCU{
+   margin: 12px 0px 8px 40px;
+}
+
+.buttonCU{
+      margin: 0px 6px 18px 16px;
+}
+
+.buttonAsoc{
+  margin: 0px 6px 18px 16px;
+}
+
+.buttonExclude{
+  margin: 0px 6px 18px 16px;
+}
+
+.buttonText
+{
+  margin: 12px 0px 8px 40px; 
+}
+
+
 
 /*
 .sidebar {
