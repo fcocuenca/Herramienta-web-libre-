@@ -9,12 +9,55 @@
              <div class="flash-message" ng-if="flash">
                     <div class="{{'alert alert-' + flash.type}}" ng-bind="flash.message"></div>
              </div>         
+            <!--
+            <div> 
+                Introduce la categoria: <input type="text" ng-model="vm.categoria.category"><button ng-click="vm.saveCat()" onclick="recarga()">Guardar_Cat</button>
+
+                <div ng-repeat="c in vm.cat">{{c.category}}</div>
+
+            </div>
+
+            -->
+                  <!--Header de la tabla-->
+                 
+              <div class="col-md-12">
+                   <div class="box box-solid box-success">
+                      <div class="box-header">
+                              <h3 class="box-tittle"> Inserción de categorias</h3>
+                      </div>
+                  </div>
+
+                  <div class="box-body">
+                      <div class="panel panel-default">
+                          <div class="box-body table-responsive no-padding">
+                              <table class ="table">
+                                  <tbody>
+                                       <tr>
+                                          <th width="150px">
+                                               Define tu categoría: 
+                                          </th>
+                                          <th><input type="text" id="content" class="textCategory" ng-model=vm.categoria.category required/></th>
+                                       </tr>
+                                  </tbody>
+                              </table>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="button">
+                              <center><button id ="save" class="btn btn-primary" ng-click="vm.saveCat()" onclick="recarga()" >Guardar Catergoría</button></center>
+                  </div>       
+                </div>
+              
+            
+
+
+
 
             <div class="col-md-12">
                 <!--Header de la tabla-->
                 <div class="box box-solid box-success">
                     <div class="box-header">
-                            <h3 class="box-tittle"> Insercción de Requisitos Funcionales</h3>
+                            <h3 class="box-tittle"> Inserción de Requisitos Funcionales</h3>
                     </div>
                 </div>
 
@@ -24,26 +67,35 @@
                             <table class ="table">
                                 <thead>
                                     <tr>
-                                        <th><center>Define tus requisitos funcionales</center></th>
+                                        <th colspan="3"><center>Define tus requisitos funcionales</center></th>
+                                     
                                     </tr>
                                     <tr>
-                                        <th>
+                                        <th colspan="3">
                                         <center> 
                                             Ejemplo: RFX El sitema <"sistema"> debería <"funcionar">
                                         </center>
                                         </th>
-
                                      </tr>
                                 </thead>
                                 <tbody>
                                      <tr>
-                                     </tr>
-                                     <tr>
-               
                                         <th>
-                                        <center> 
-                                              <input type="text" id="content" class="form-control" ng-model="vm.requisito.content" required />
-                                        </center>
+                                              <input type="text" id="content" class="form-controlInput" ng-model="vm.requisito.content" required/>
+                                        </th>
+                                        <th>
+                                            <select name="priority" ng-model="vm.requisito.priority" required>
+                                                <option value="">--SeleccionarPrioridad---</option>
+                                                <option value="M">Must have</option>
+                                                <option value="S">Should have</option>
+                                                <option value="C">Could have</option>
+                                                <option value="W">Want to have</option>
+                                              </select>
+                                        </th>
+                                        <th>
+                                           <select name="category"  ng-model="vm.requisito.category" required>
+                                            <option value="">SeleccionarCategoría-</option>
+                                            <option ng-repeat="c in vm.cat">{{c.category}}</option>
                                         </th>
                                      </tr>
                                 </tbody>
@@ -52,7 +104,7 @@
                     </div>
                 </div>
                      <div class="button">
-                            <center><button id ="save" class="btn btn-primary" ng-click="vm.saveRf()" onclick="recarga()">Save</button></center>
+                            <center><button id ="save" class="btn btn-primary" ng-click="vm.saveRf()" onclick="recarga()">Guardar</button></center>
                     </div>
 
 
@@ -74,26 +126,31 @@
                               <thead>
                                   <tr>
                                           <th>Requisitos: </th>
+                                          <th>Prioridad: </th>
+                                          <th>Categoría: </th>
                                           <th></th>
                                           <th></th>
+                                          
                                   </tr>
                               </thead>
                               <tbody>
-                                  <tr class="tr" ng-repeat=" r in vm.rf" ng-click="vm.table()">
+                                  <tr class="tr" ng-repeat=" r in vm.rf | orderBy: 'content'" ng-click="vm.table()">
                                           <td>
-                                              <a display="content" ng-model="vm.modificado" editable="{{r.content}}">{{r.content}}</a>
+                                              <a display="content" ng-model="vm.modificado" editable="{{r.content}}">{{r.content}}</a> 
                                           </td>
+                                          <td>{{r.priority}}</td>
+                                          <td>{{r.category}}</td>
+                                          
                                           <td>
                                               <a href="" id ="update" ng-click="vm.updateRf($index)" onclick="recarga()"><span width="30px;" heigth="30px;" class="glyphicon glyphicon-pencil"></span></a>
                                           </td>
                                           <td>
                                               <a href="" id ="delete" ng-click="vm.deleteRf($index)" onclick="recarga()"><span width="30px;" heigth="30px;" class="glyphicon glyphicon-trash"></span></a>
                                           </td>
-                                          <td></td>
+                                         
                                   </tr>  
                               </tbody>     
                             </table>
-                            <div id="choose"> </div>
             </div>  
 
 <script>
@@ -119,12 +176,9 @@ function pdf() {
   var elem = document.getElementById('table');
   var data = doc.autoTableHtmlToJson(elem);
 
-  //var imgData = 'data:image/jpeg;base64,/Use http://dataurl.net/#dataurlmaker
-
-  //doc.addImage(imgData, 'JPEG', 15, 40, 20, 20);
   doc.text("Especificación de requisitos: ", 70, 40);
   doc.text("Requisitos Funcionales", 75, 48);
-  columns = [" Id    Requisito"];
+  columns = [" Id  Requisito", "Categoría", "Prioridad"];
   doc.autoTable(columns, data.rows,{
         
     theme: 'grid',
@@ -132,9 +186,11 @@ function pdf() {
         overflow: 'linebreak',
         fontSize: 10,
         valign: 'middle',
-        rowHeight: 9
+        rowHeight: 9,
+        columnWidth: 65
+
     },
-    margin: {top: 60},
+    margin: {top: 60, left: 10},
     alternateRowStyles: {
       fillColor: [239, 239, 239],
     },

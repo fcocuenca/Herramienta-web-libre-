@@ -364,8 +364,8 @@ label > span {
 {
   background-color: #fff;
   border-radius: 12px;
-  width: 65%;
-  margin-left: 16%;
+  width: 72%;
+  margin-left: 14%;
   margin-top: 15px;
 }
 .ancho{
@@ -485,6 +485,28 @@ label > span {
     padding-bottom: 45px;
     font-family: Pacifico;
 }
+.box-headerGlosary {
+    color: #fff;
+    background: #DCDC26 ;
+    position: relative;
+    -webkit-border-top-left-radius: 3px;
+    -webkit-border-top-right-radius: 3px;
+    -webkit-border-bottom-right-radius: 0;
+    -webkit-border-bottom-left-radius: 0;
+    -moz-border-radius-topleft: 3px;
+    -moz-border-radius-topright: 3px;
+    -moz-border-radius-bottomright: 0;
+    -moz-border-radius-bottomleft: 0;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    border-bottom: 0px solid #f4f4f4;
+    padding-bottom: 45px;
+    font-family: Pacifico;
+}
+
+
 
 .box-tittle{
     display: inline-block;
@@ -569,7 +591,7 @@ label > span {
 
 /*####Edicion Diagramas CU####*/
 .panelEdicion{
-  width: 130px;
+  width: 140px;
   display: block;
   background: #efebe3;
   float:left;
@@ -815,40 +837,137 @@ td{
 }
 .tituloHerramientas{
   font-family: 'Lobster', cursive;
-  margin: 0 0 0 4px;
+  margin: 0 0 0 12px;
   font-size: 18px;
 }
 
-.textEdicion{
-  margin: 0 0 0 0;
+/*texto Iconos Edicion*/
+
+.textHerramientasActor{
+  font-family: 'Lobster', cursive;
+  float: right;
+  margin: 2px 60px 0px 0px;
+  font-size: 14px;
 }
 
-.buttonFlecha{
-    margin: 12px 0px 8px 40px;
+.textHerramientasCU{
+  font-family: 'Lobster', cursive;
+  float: right;
+  margin: 2px 26px 0px 0px;
+  font-size: 14px;
 }
+.textHerramientasSistema{
+  font-family: 'Lobster', cursive;
+  float: right;
+  margin: 2px 49px 0px 0px;
+  font-size: 14px;
+}
+.textHerramientasAsoc{
+ font-family: 'Lobster', cursive;
+  float: right;
+  margin: 2px 29px 0px 0px;
+  font-size: 14px; 
+}
+.textHerramientasInclude{
+ font-family: 'Lobster', cursive;
+  float: right;
+  margin: 2px 52px 0px 0px;
+  font-size: 14px;  
+}
+
+.textHerramientasExclude{
+ font-family: 'Lobster', cursive;
+  float: right;
+  margin: 2px 58px 0px 0px;
+  font-size: 14px;  
+}
+
+.textHerramientasGen{
+ font-family: 'Lobster', cursive;
+  float: right;
+  margin: 2px 12px 0px 0px;
+  font-size: 14px;  
+}
+.textHerramientasTexto{
+ font-family: 'Lobster', cursive;
+  float: right;
+  margin: 2px 63px 0px 0px;
+  font-size: 14px;   
+}
+
+
+/*Iconos Edicion*/
 
 .actorCU{
-   margin: 12px 0px 8px 40px;
+   margin: 10px 0px 5px 12px;
 }
 
-.buttonCU{
-      margin: 0px 6px 18px 16px;
+.casoUso{
+  margin: 5px 0px 5px 12px;
 }
 
-.buttonAsoc{
-  margin: 0px 6px 18px 16px;
+.system{
+  margin: 5px 0px 5px 12px;
 }
 
-.buttonExclude{
-  margin: 0px 6px 18px 16px;
+.asociacion{
+  margin: 5px 0px 5px 13px;
 }
 
-.buttonText
-{
-  margin: 12px 0px 8px 40px; 
+.include{
+  margin: 5px 0px 5px 12px;
+}
+
+.extend{
+  margin: 5px 0px 5px 12px;
+}
+
+.generalizacion{
+  margin: 5px 0px 5px 12px;
+}
+
+.buttonText{
+  margin: 5px 0px 5px 12px; 
 }
 
 
+
+.form-controlInput {
+    display: block;
+    width: 100%;
+    height: 34px;
+    padding: 6px 12px;
+    margin: 0px 215px 0px 0px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+.textCategory{
+  display: block;
+    height: 25px;
+    width: 100%;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
 
 /*
 .sidebar {

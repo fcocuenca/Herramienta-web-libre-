@@ -23,7 +23,7 @@
 			function Create(word){
 				return $http.post('/api/glosary/createW', word).then(handleSuccess, handleError);
 			}
-
+			
 			function Delete(word) {
             	return $http.post('/api/glosary/deleteW', word).then(handleSuccess, handleError);
         	}
@@ -31,7 +31,7 @@
         	function Update(word) {
             	return $http.post('/api/glosary/updateW', word).then(handleSuccess, handleError);
         	}
-
+			
 			function handleSuccess(res) {
            		 return res.data;
         	}

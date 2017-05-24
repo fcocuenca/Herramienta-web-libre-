@@ -40,7 +40,7 @@ function createWord(req, res){
 		.catch(function(err){
 			res.status(400).send(err);
 		});
-        console.log("entrado en el contoller createRf12");
+        console.log("entrado en el contoller createGlosar");
 }
 
 /**
@@ -96,7 +96,7 @@ function updateWord(req, res) {
                 res.status(400).send(err);
             });
 
-            console.log("deleteRFfin")
+            console.log("updateWord")
 }
  
 

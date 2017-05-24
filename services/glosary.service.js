@@ -44,7 +44,7 @@ module.exports = service;
  * @return  {promesa ok or fail}
  */
 function create(word){
-
+	console.log("createGlosary");
 	var deferred = Q.defer();
 	
 	db.glosary.insert(
@@ -62,20 +62,20 @@ function create(word){
  * @return  {requisitos:_id, content}
  */
 function getById(){
-	console.log("ha entrado en showAll1");
+	console.log("ha entrado en showglosary");
 	var deferred = Q.defer();
 
-	db.glosary.find().toArray(function(err, rf){
+	db.glosary.find().toArray(function(err, word){
 			if(err) deferred.reject(err);
 
-			if(rf){
-					deferred.resolve(rf);
+			if(word){
+					deferred.resolve(word);
 			}else{
 				deferred.resolve();
 			}		
 	});
 
-	console.log("ha entrado en showAll");
+	console.log("ha entrado en showglosary");
 	return deferred.promise;
 }
 

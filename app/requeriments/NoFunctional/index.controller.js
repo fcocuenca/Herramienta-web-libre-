@@ -111,7 +111,6 @@ function Controller(UserService, NRfService, FlashService) {
 	                .catch(function (error) {
 	                    FlashService.Error(error);
 	                });
-	   
 	}	         
 }
 

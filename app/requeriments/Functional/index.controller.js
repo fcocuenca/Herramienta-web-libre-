@@ -31,17 +31,27 @@
         
  
 
-function Controller(UserService, RfService, FlashService) {
+function Controller(UserService, RfService, FlashService, CategoryService) {
     
     /*###Declaracion de variables y funciones####*/    
     var vm = this;
+
     vm.user=null;
     vm.rf = null;
+    vm.cat=null;
+
     vm.requisito=null;
+    vm.categoria=null;
+    
     vm.modificado=null;
+    vm.priority=null;
+
     vm.saveRf = saveRf;
     vm.deleteRf=deleteRf;
     vm.updateRf=updateRf;
+
+    vm.saveCat = saveCat;
+
     
 
     /*####Funciones para obtener todos los requisitos existentes en la bd ####*/
@@ -50,7 +60,9 @@ function Controller(UserService, RfService, FlashService) {
     /*####Funciones para obtener todos los requisitos existentes en la bd ####*/
     rfController();
 
-    
+    catController();
+
+
     function initController() {
       
         UserService.GetCurrent().then(function (user) {
@@ -65,9 +77,18 @@ function Controller(UserService, RfService, FlashService) {
         });
     }
 
+    function catController(){
+        CategoryService.GetCurrent().then(function (cat){
+            vm.cat = cat;
+        });
+    }
+
+
+
 /**
  * saveRf: llama al controlador Create y inserta un requisito en la bd
 */
+
     function saveRf(){
 
         if(RfService.Create(vm.requisito))
@@ -75,6 +96,15 @@ function Controller(UserService, RfService, FlashService) {
         else
             FlashService.Success('Ha ocurrido un error, intentalo de nuevo');
     } 
+
+    function saveCat(){
+        if(CategoryService.Create(vm.categoria))
+            FlashService.Success('Categoria introducida correctamente');
+        else
+            FlashService.Success('Ha ocurrido un error, intentelo de nuevo');
+    }
+
+
 
 /**
  * deleteRf: llama al controlador Delete y borra un requisito de la bd
@@ -113,6 +143,10 @@ function Controller(UserService, RfService, FlashService) {
                     });
        
     }
+
+    
+
+
 }
 
 })();

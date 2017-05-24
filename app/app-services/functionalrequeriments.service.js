@@ -12,7 +12,7 @@
 			service.GetCurrent = GetCurrent;
 			service.Delete = Delete;
 			service.Update = Update;
-
+			
 			return service;
 
 
@@ -23,6 +23,7 @@
 			function Create(rf){
 				return $http.post('/api/functionalrequeriments/createRf', rf).then(handleSuccess, handleError);
 			}
+
 
 			function Delete(rf) {
             	return $http.post('/api/functionalrequeriments/deleteRf', rf).then(handleSuccess, handleError);

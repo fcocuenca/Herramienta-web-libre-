@@ -51,7 +51,7 @@
 			        </div>
 			    </div>
 			   		 <div class="button">
-                    		<center><button id ="save" class="btn btn-primary" ng-click="vm.saveNRf()" onclick="recarga()">Save</button></center>
+                    		<center><button id ="save" class="btn btn-primary" ng-click="vm.saveNRf()" onclick="recarga()">Guardar</button></center>
                		</div>
 
 
@@ -75,7 +75,7 @@
 								        <th></th>
 								        <th></th>
 				     			</tr>
-				      			<tr class="tr" ng-repeat=" rnf in vm.nrf">
+				      			<tr class="tr" ng-repeat=" rnf in vm.nrf | orderBy: 'content'">
 								        <td>
 								        	<a display="content" ng-model="vm.modificadonf" editablenrf="{{rnf.content}}">{{rnf.content}}</a>
 								        </td>

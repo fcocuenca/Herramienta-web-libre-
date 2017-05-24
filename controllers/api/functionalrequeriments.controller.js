@@ -21,7 +21,6 @@ router.get('/current', getCurrentRf);
 router.post('/deleteRf', deleteRf);
 router.post('/updateRf', updateRf);
 
-
 module.exports = router;
 
 /*####Creacion de los controladores####*/
