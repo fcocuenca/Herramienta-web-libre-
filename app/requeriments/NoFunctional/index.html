@@ -9,7 +9,47 @@
 							
 			 <div class="flash-message" ng-if="flash">
             		<div class="{{'alert alert-' + flash.type}}" ng-bind="flash.message"></div>
-       		 </div>    		
+       		 </div>   
+
+       		   <div class="col-md-12">
+                   <div class="box box-solid box-success">
+                      <div class="box-headernrf">
+                              <h3 class="box-tittle"> Inserción de categorias</h3>
+                      </div>
+                  </div>
+
+                  <div class="box-body">
+                      <div class="panel panel-default">
+                          <div class="box-body table-responsive no-padding">
+                              <table class ="table">
+                                  <tbody>
+                                       <tr>
+                                        
+                                          <td  width="150px">
+                                               <span class ="textTabla">Define tu categoría: </span>
+                                          </td>
+
+
+                                          <td><input type="text" id="content" class="textCategory" ng-model=vm.categorianrf.category required/></td>
+                                          
+                                            <td width="170px"><center>Listado de categorias: </center></td>
+                                              <td><center><ul ng-repeat="c in vm.catnrf">
+                                                  <a display="category" ng-model="vm.modcategorynrf" editable="{{c.category}}">{{c.category}}</a>
+
+                                                  <a href="" id ="update" ng-click="vm.updateCatNrf($index)" onclick="recarga()"><span width="30px;" heigth="30px;" class="glyphicon glyphicon-pencil"></span></a>
+                                                  <a href="" id ="delete" ng-click="vm.deleteCatNrf($index)" onclick="recarga()"><span width="30px;" heigth="30px;" class="glyphicon glyphicon-trash"></span></a></ul></center>
+                                              </td>
+                                  </tbody>
+                              </table>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="button">
+                              <center><button id ="save" class="btn btn-primary" ng-click="vm.saveCatNrf()"  onclick="recarga()">Guardar Catergoría</button></center>
+                  </div>       
+                </div>
+
+
 
 			<div class="col-md-12">
 				<!--Header de la tabla-->
@@ -18,7 +58,6 @@
 			                <h3 class="box-tittle"> Insercción de Requisitos No Funcionales</h3>
 			        </div>
 			    </div>
-
 			    <div class="box-body">
 			        <div class="panel panel-default">
 			            <div class="box-body table-responsive no-padding">
@@ -44,6 +83,20 @@
 			                            	  <input type="text" id="content" class="form-control" ng-model="vm.requisitonf.content" required />
  			                            </center>
 			                            </th>
+			                             <th>
+                                            <select name="priority" ng-model="vm.requisitonf.priority" required>
+                                                <option value="">--SeleccionarPrioridad---</option>
+                                                <option value="M">Must have</option>
+                                                <option value="S">Should have</option>
+                                                <option value="C">Could have</option>
+                                                <option value="W">Want to have</option>
+                                              </select>
+                                        </th>
+                                        <th>
+                                           <select name="category"  ng-model="vm.requisitonf.category" required>
+                                            <option value="">SeleccionarCategoría-</option>
+                                            <option ng-repeat="c in vm.catnrf">{{c.category}}</option>
+                                        </th>
 			                         </tr>
 			                    </tbody>
 			                </table>
@@ -72,6 +125,8 @@
 						    <table id="table" class="table">
 				    			<tr>
 				    					<th>Requisitos:</th>
+				    					<th>Prioridad: </th>
+                                        <th>Categoría: </th>
 								        <th></th>
 								        <th></th>
 				     			</tr>
@@ -79,6 +134,8 @@
 								        <td>
 								        	<a display="content" ng-model="vm.modificadonf" editablenrf="{{rnf.content}}">{{rnf.content}}</a>
 								        </td>
+								        <td>{{rnf.priority}}</td>
+                                        <td>{{rnf.category}}</td>
 								       	
 								       	<td>
 								        	<a href="" id ="updatenrf" ng-click="vm.updateNRf($index)" onclick="recarga()"><span width="30px;" heigth="30px;" class="glyphicon glyphicon-pencil"></span></a>

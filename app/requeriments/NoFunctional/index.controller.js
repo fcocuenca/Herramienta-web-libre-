@@ -31,17 +31,27 @@
         
  
 
-function Controller(UserService, NRfService, FlashService) {
+function Controller(UserService, NRfService, FlashService, CategoryServiceNRf) {
     
     /*###Declaracion de variables y funciones####*/    
 	var vm = this;
 	vm.user=null;
     vm.nrf = null;
+    vm.catnrf= null;
+
     vm.requisitonf=null;
     vm.modificadonf=null;
+
+    vm.categorianrf=null;
+    vm.modcategorynrf=null;
+
     vm.saveNRf = saveNRf;
     vm.deleteNRf=deleteNRf;
     vm.updateNRf=updateNRf;
+
+    vm.saveCatNrf = saveCatNrf;
+    vm.updateCatNrf= updateCatNrf;
+    vm.deleteCatNrf = deleteCatNrf;
 
 
     /*####Funciones para obtener todos los requisitos existentes en la bd ####*/
@@ -50,6 +60,7 @@ function Controller(UserService, NRfService, FlashService) {
     /*####Funciones para obtener todos los requisitos existentes en la bd ####*/
     nrfController();
 
+    CatNRfController();
     
 	function initController() {
 	  
@@ -57,6 +68,13 @@ function Controller(UserService, NRfService, FlashService) {
 	        vm.user = user;
 	    });
 	}
+
+    function CatNRfController() {
+      
+        CategoryServiceNRf.GetCurrent().then(function (catnrf) {
+            vm.catnrf = catnrf;
+        });
+    }
 
 	function nrfController() {
 	   
@@ -111,7 +129,44 @@ function Controller(UserService, NRfService, FlashService) {
 	                .catch(function (error) {
 	                    FlashService.Error(error);
 	                });
-	}	         
+	}
+	
+	function saveCatNrf(){
+    
+        if(CategoryServiceNRf.Create(vm.categorianrf))
+            FlashService.Success('Categoria introducida correctamente');
+        else
+            FlashService.Success('Ha ocurrido un error, intentelo de nuevo');
+    }
+
+
+	function updateCatNrf(index){
+        vm.catnrf[index].category = vm.modcategorynrf;
+
+                CategoryServiceNRf.Update(vm.catnrf[index])
+                    .then(function () {
+                        FlashService.Success('Categoría modificada correctamente: '+vm.catnrf[index].category);
+                    })
+                    .catch(function (error) {
+                        FlashService.Error(error);
+                    });
+    }
+
+    function deleteCatNrf(index){
+        angular.forEach(vm.catnrf, function(value, key){
+            if(index === key)
+            {
+                CategoryServiceNRf.Delete(vm.catnrf[key])
+                .then(function () {
+                    FlashService.Success('Categoría borrada correctamente: '+vm.catnrf[key].category);
+                })
+                .catch(function (error) {
+                    FlashService.Error(error);
+                });
+               
+            } 
+       }); 
+    }	         
 }
 
 })();

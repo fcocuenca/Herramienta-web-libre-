@@ -30,6 +30,8 @@ app.use('/api/nofunctionalrequeriments', require('./controllers/api/nofunctional
 app.use('/api/glosary', require('./controllers/api/glosarys.controller'));
 app.use('/api/diagram', require('./controllers/api/diagrams.controller'));
 app.use('/api/functionalrequeriments', require('./controllers/api/categoriesRf.controller'));
+app.use('/api/nofunctionalrequeriments', require('./controllers/api/categoriesNRf.controller'));
+
 
 // pagina por defecto de inicio
 app.get('/', function (req, res) {

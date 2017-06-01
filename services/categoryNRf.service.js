@@ -5,7 +5,7 @@ var Q = require('q');
 var mongo = require('mongoskin');
 
 var db = mongo.db(config.connectionString, {native_parser: true});
-db.bind('categoryRf');
+db.bind('categoryNRf');
 
 var service = {};
 
@@ -19,7 +19,7 @@ module.exports = service;
 function create(CatParam){
 	var deferred = Q.defer();
 
-	db.categoryRf.insert(
+	db.categoryNRf.insert(
 		CatParam,
 		function(err, doc){
 			if(err) deferred.reject(err);
@@ -33,7 +33,7 @@ function getById(){
 	console.log("ha llegado al getById");
 	var deferred = Q.defer();
 
-	db.categoryRf.find().toArray(function(err, cat){
+	db.categoryNRf.find().toArray(function(err, cat){
 			if(err) deferred.reject(err);
 
 			if(cat){
@@ -53,7 +53,7 @@ function _delete(CatParam){
     var deferred = Q.defer();
     var id= CatParam._id;
 
-    db.categoryRf.remove(
+    db.categoryNRf.remove(
     {_id: mongo.helper.toObjectID(CatParam._id)},
     function(err){
     	if(err) deferred.reject(err);
@@ -76,7 +76,7 @@ function update(CatParam){
     			category: category,
     };
 
-    db.categoryRf.update(
+    db.categoryNRf.update(
     {_id: mongo.helper.toObjectID(CatParam._id)},
     {$set: set},
     function(err){

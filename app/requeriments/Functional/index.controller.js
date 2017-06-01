@@ -31,17 +31,24 @@
         
  
 
-function Controller(UserService, RfService, FlashService, CategoryService) {
-    
-    /*###Declaracion de variables y funciones####*/    
+function Controller(UserService, RfService, FlashService, CategoryService,$filter) {
+
+/*###########################################
+###Declaracion de variables##################
+###########################################*/    
     var vm = this;
+    var numberInt;
+    var result;
+
 
     vm.user=null;
     vm.rf = null;
     vm.cat=null;
 
     vm.requisito=null;
+
     vm.categoria=null;
+    vm.modcategory=null;
     
     vm.modificado=null;
     vm.priority=null;
@@ -51,8 +58,10 @@ function Controller(UserService, RfService, FlashService, CategoryService) {
     vm.updateRf=updateRf;
 
     vm.saveCat = saveCat;
-
-    
+    vm.updateCat = updateCat;
+    vm.deleteCat = deleteCat;
+    vm.verificarReqRepe = verificarReqRepe;
+    vm.orden = orden;
 
     /*####Funciones para obtener todos los requisitos existentes en la bd ####*/
     initController();
@@ -60,7 +69,13 @@ function Controller(UserService, RfService, FlashService, CategoryService) {
     /*####Funciones para obtener todos los requisitos existentes en la bd ####*/
     rfController();
 
+    /*####Funcion para obtener todaas las categorias de la bd*/
     catController();
+
+
+/*##################################
+###########GETCURRENT()#############
+###################################*/
 
 
     function initController() {
@@ -85,25 +100,33 @@ function Controller(UserService, RfService, FlashService, CategoryService) {
 
 
 
+/*###################################
+###########CRUD REQUISITOS###########
+#####################################*/
+
 /**
  * saveRf: llama al controlador Create y inserta un requisito en la bd
 */
-
     function saveRf(){
 
+        /*conversion del string a numero*/    
+       vm.requisito.number =  parseInt(vm.requisito.number);
+
+        verificarReqRepe();
+
+        if(result == true)
+        {
+            FlashService.Error('Este id ya esta insertado');
+        }else
+        {
         if(RfService.Create(vm.requisito))
-            FlashService.Success('Requisito funcional introducido correctamente');
+                FlashService.Success('Requisito funcional introducido correctamente');
         else
             FlashService.Success('Ha ocurrido un error, intentalo de nuevo');
+        }
+
+        
     } 
-
-    function saveCat(){
-        if(CategoryService.Create(vm.categoria))
-            FlashService.Success('Categoria introducida correctamente');
-        else
-            FlashService.Success('Ha ocurrido un error, intentelo de nuevo');
-    }
-
 
 
 /**
@@ -126,6 +149,7 @@ function Controller(UserService, RfService, FlashService, CategoryService) {
             } 
        }); 
     }
+
 /**
  * updateRf: llama al controlador update y modifica un requisito de la bd
  * @param  {index}
@@ -143,9 +167,68 @@ function Controller(UserService, RfService, FlashService, CategoryService) {
                     });
        
     }
-
     
 
+/*###################################
+###########CRUD CATEGORIAS###########
+#####################################*/
+    function saveCat(){
+        if(CategoryService.Create(vm.categoria))
+            FlashService.Success('Categoria introducida correctamente');
+        else
+            FlashService.Success('Ha ocurrido un error, intentelo de nuevo');
+    }
+
+
+
+    function updateCat(index){
+        vm.cat[index].category = vm.modcategory;
+
+                CategoryService.Update(vm.cat[index])
+                    .then(function () {
+                        FlashService.Success('Categoría modificada correctamente: '+vm.cat[index].category);
+                    })
+                    .catch(function (error) {
+                        FlashService.Error(error);
+                    });
+    }
+
+    function deleteCat(index){
+        angular.forEach(vm.cat, function(value, key){
+            if(index === key)
+            {
+                CategoryService.Delete(vm.cat[key])
+                .then(function () {
+                    FlashService.Success('Categoría borrada correctamente: '+vm.cat[key].category);
+                })
+                .catch(function (error) {
+                    FlashService.Error(error);
+                });
+               
+            } 
+       }); 
+    }
+    
+
+    /*################################
+    ############COMPROBACIONES########
+    ################################*/
+
+    function verificarReqRepe(){
+        
+        angular.forEach(vm.rf, function(value, key){
+
+            if(vm.requisito.number === vm.rf[key].number)
+                 return result = true;
+       });
+    }
+
+   vm.orderReverse = true;
+
+    function orden(){
+        vm.orderReverse = !vm.orderReverse;
+        vm.rf = $filter('orderBy')(vm.rf, 'number', vm.orderReverse);
+    }
 
 }
 

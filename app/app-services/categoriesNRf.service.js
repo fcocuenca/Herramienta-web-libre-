@@ -3,7 +3,7 @@
 
 	angular
 		.module('app')
-		.factory('CategoryService', Service);
+		.factory('CategoryServiceNRf', Service);
 
 		function Service($http, $q){
 			var service = {};
@@ -17,20 +17,20 @@
 		
 		
 		function Create(cat){
-			return $http.post('/api/functionalrequeriments/createCatRf', cat).then(handleSuccess, handleError);
+			return $http.post('/api/nofunctionalrequeriments/createCatNRf', cat).then(handleSuccess, handleError);
 		}
 
 		function GetCurrent(){
-			return $http.get('/api/functionalrequeriments/currentCatRf').then(handleSuccess, handleError);
+			return $http.get('/api/nofunctionalrequeriments/currentCatNRf').then(handleSuccess, handleError);
 		}
 
 
 		function Delete(cat){
-			return $http.post('/api/functionalrequeriments/deleteCatRf', cat).then(handleSuccess, handleError);
+			return $http.post('/api/nofunctionalrequeriments/deleteCatNRf', cat).then(handleSuccess, handleError);
 		}
 
 		function Update(cat){
-			return $http.post('/api/functionalrequeriments/updateCatRf', cat).then(handleSuccess, handleError);
+			return $http.post('/api/nofunctionalrequeriments/updateCatNRf', cat).then(handleSuccess, handleError);
 		}
 
 

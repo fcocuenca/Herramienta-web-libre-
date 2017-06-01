@@ -4,16 +4,16 @@ var jwt = require('jsonwebtoken');
 var router = express.Router();
 
 /*servicios de las categorias*/
-var categoryService = require('services/categoryRf.service');
+var categoryService = require('services/categoryNRf.service');
 
-router.post('/createCatRf', createCat);
-router.get('/currentCatRf', getCurrentCat);
-router.post('/deleteCatRf', deleteCat);
-router.post('/updateCatRf', updateCat);
+router.post('/createCatNRf', createCatnrf);
+router.get('/currentCatNRf', getCurrentCatnrf);
+router.post('/deleteCatNRf', deleteCatnrf);
+router.post('/updateCatNRf', updateCatnrf);
 
 module.exports = router;
 
-function createCat(req, res){
+function createCatnrf(req, res){
 	console.log("createCat");
 	categoryService.create(req.body)
 		.then(function(){
@@ -24,7 +24,7 @@ function createCat(req, res){
 		});
 }
 
-function getCurrentCat(req, res){
+function getCurrentCatnrf(req, res){
 	categoryService.getById()
         .then(function(cat){
             if(cat){
@@ -37,7 +37,7 @@ function getCurrentCat(req, res){
             res.status(400).send(err);
         });
 }
-function deleteCat(req, res){
+function deleteCatnrf(req, res){
 	console.log("deleteCat");
 	categoryService.delete(req.body)
 		.then(function(){
@@ -48,7 +48,7 @@ function deleteCat(req, res){
 		});
 }
 
-function updateCat(req, res){
+function updateCatnrf(req, res){
 	console.log("updateCat");
 	categoryService.update(req.body)
 		.then(function(){
