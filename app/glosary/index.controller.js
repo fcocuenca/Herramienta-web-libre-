@@ -30,14 +30,22 @@
         });
         
  
-    function Controller($window, UserService, FlashService, GlosaryService) {
+    function Controller($window, UserService, FlashService, GlosaryService, $filter) {
         var vm = this;
+        vm.letraA=[];
+
         vm.glosary= null;
     	vm.termino=null;
         vm.modificadoTerm = null;
         vm.saveTerm = saveTerm;
         vm.deleteTerm = deleteTerm;
         vm.updateTerm = updateTerm;
+        vm.terminos;
+        var result;
+        vm.orden = orden;
+        vm.comprobar = comprobar;
+       // vm.bubbleSort = bubbleSort;
+
 
         initGlosary();
 
@@ -50,10 +58,13 @@
         }
 
         function saveTerm(){
-        	if(GlosaryService.Create(vm.termino))
-        			FlashService.Success('Término introducido correctamente');
-        	else
-        		FlashService.Success('Ha ocurrido un error, intentalo de nuevo');
+
+                vm.orden();
+           
+            	if(GlosaryService.Create(vm.termino))
+            			FlashService.Success('Término introducido correctamente');
+            	else
+           		 		FlashService.Success('Ha ocurrido un error, intentalo de nuevo');
         }
 
         function deleteTerm(index){
@@ -84,6 +95,59 @@
 	                    FlashService.Error(error);
 	            });
          }
+
+         vm.orderReverse = true;
+
+	    function orden(){
+	        vm.orderReverse = !vm.orderReverse;
+	        vm.glosary = $filter('orderBy')(vm.glosary, 'content', vm.orderReverse);
+	    }
+
+	    function comprobar(){
+
+        	var primeraletra;
+            var longitud = vm.glosary.length
+            var i=0;
+            var str; 
+            var res; 
+            var palabraA=[];
+            var palabraB=[];
+
+            for(i=0; i<longitud; i++)
+            {
+                str = vm.glosary[i].content;
+                res = str.substr(0,1);
+
+                if(res === "A")
+                    palabraA.push({'content': vm.glosary[i].content});
+
+                /*if(res === "B")
+                    palabraB.push({'content': vm.glosary[i].content});                    
+                    */
+            }
+            
+           // vm.bubbleSort(palabraA);
+            vm.letraA = palabraA
+        }
+         
+
     }
  
 })();
+
+/*
+        function bubbleSort(array){
+            var size = array.length;
+            var pass = 1;
+            var left = 0;
+            for(pass = 1; pass<size; pass++){
+                for(left; left<(size-pass); left++){
+                    var right = left + 1;
+                    if(array[left] > array[right]){
+                        FlashService.Success('esto va del carajo')
+                    } 
+                }
+            }
+            return array;
+        }
+  */ 

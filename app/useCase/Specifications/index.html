@@ -1,0 +1,136 @@
+                
+            <div class="tittleContent"> 
+                    <div class="idea">
+                         <a href="" title="¿Que es un Requisito Funcional?" data-toggle="popover" data-trigger="focus" data-content="Afirmación sobre lo que debería hacer el sistema" data-placement="bottom"><img src="app-content/bombilla.jpg" class="idea" alt="User Image" width="40px;" height="40px"></a>
+                    </div>
+                            <p>Modelo de Casos de uso: Especificación de Casos de usos</p>  
+            </div>
+                            
+             <div class="flash-message" ng-if="flash">
+                    <div class="{{'alert alert-' + flash.type}}" ng-bind="flash.message"></div>
+             </div>         
+            
+           
+
+            <div class="col-md-12">
+                <!--Header de la tabla-->
+                <div class="box box-solid box-success">
+                    <div class="box-headerSpec">
+                            <h3 class="box-tittle"> Especificación de Caso de uso</h3>
+                    </div>
+                </div>
+
+                <div class="box-body">
+                    <div class="panel panel-default">
+                        <div class="box-body table-responsive no-padding">
+                            <table class ="table" border="3">
+                                <thead>
+                                <tr>
+                                  <th colspan="2"> Insersción de especificaciones</th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                  <tr>
+                                     <td class="attrTextSpec">Nombre: </td> 
+                                     <td>          
+                                                      <select name="priority" ng-model="vm.spec.name" required>
+                                                          <option value="">-SeleccionarCasoDeUso-</option>
+                                                          <option value="caso de uso 1">Caso de uso 1</option>
+                                                          <option value="caso de uso 2">Caso de uso 2</option>
+                                                          <option value="caso de uso 3">Caso de uso 3</option>
+                                                          <option value="caso de uso 4">Caso de uso 4</option>
+                                                      </select>
+                                         
+                                     </td> 
+                                  </tr>
+                                  <tr>
+                                       <td class="attrTextSpec">Id: </td>
+                                      <td>          
+                                                      <select name="priority" ng-model="vm.spec.id" required>
+                                                          <option value="">-SeleccionarId-</option>
+                                                          <option value="1">1</option>
+                                                          <option value="2">2</option>
+                                                          <option value="3">3</option>
+                                                          <option value="4">4</option>
+                                                      </select><ng-model=vm.spec.id required/>
+                                      </td>
+                                  </tr>
+                                   
+                                   <tr>
+                                       <td class="attrTextSpec">Descripción: </td>
+                                       <td> <input type="text" id="descripcion" class="form-controlInputSpec" ng-model=vm.spec.desc required/>
+                                           
+                                    </tr>
+                                   
+                                  <tr>
+
+                                      <td class="attrTextSpec">Actor Principal: </td>
+                                      <td><input type="text" id="actorPrin" class="form-controlInputSpec" ng-model=vm.spec.actorPrin required/>
+                                      </td>
+                                  </tr>
+
+                                   <tr>
+                                      <td class="attrTextSpec">Actor Secundario: </td>
+                                      <td><input type="text" id="actorSec" class="form-controlInputSpec" ng-model=vm.spec.actorSec required/>
+                                      </td>
+                                  </tr>
+                                  
+                                  <tr>
+                                      <td class="attrTextSpec">Pre-Condición:</td>
+                                      <td> <input type="text" id="preCon" class="form-controlInputSpec" ng-model=vm.spec.preCon required/> 
+                                      </td>
+                                  </tr>
+                                  
+                                  <tr>
+                                    <td class="attrTextSpec">FlujoPrincipal: </td>
+                                    <td><input type="text" id="flujoPrin" class="form-controlInputSpec" ng-model=vm.spec.flujoPrin required/>
+                                    </td>
+                                  </tr>
+                                  
+                                  <tr>
+                                    <td class="attrTextSpec">Post-Condición:</td>
+                                    <td><input type="text" id="postCon" class="form-controlInputSpec" ng-model=vm.spec.postCon required/>
+                                    </td>
+
+                                  </tr>
+
+                                  <tr>
+                                     <td class="attrTextSpec">Flujo Alternativo:</td>
+                                     <td> <input type="text" id="flujoAlt" class="form-controlInputSpec" ng-model=vm.spec.flujoAlt required/>
+                                      </td>
+                                  </tr>    
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                     <center><div>
+                          <button id ="save" class="btn btn-primary" ng-click="vm.saveSpec()" onclick="recarga()">Guardar</button>
+                          <a ui-sref="verEspecificaciones"><button class="btn btn-primary">Ver especificaciones</button></a>
+                      </div></center>
+              </div>
+
+   
+<script>
+
+function recarga() {
+    location.reload();
+}
+
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover();   
+});
+
+</script>
+
+
+    
+    
+ 
+                
+           
+     
+
+                    

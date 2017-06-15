@@ -93,7 +93,7 @@
                                         </th>
                                         <th>
                                             <select name="priority" ng-model="vm.requisito.priority" required>
-                                                <option value="">--SeleccionarPrioridad---</option>
+                                                <option value="">-SeleccionarPrioridad-</option>
                                                 <option value="M">Must have</option>
                                                 <option value="S">Should have</option>
                                                 <option value="C">Could have</option>
@@ -102,7 +102,7 @@
                                         </th>
                                         <th>
                                            <select name="category"  ng-model="vm.requisito.category" required>
-                                            <option value="">SeleccionarCategoría-</option>
+                                            <option value="">-SeleccionarCategoría-</option>
                                             <option ng-repeat="c in vm.cat">{{c.category}}</option>
                                         </th>
                                      </tr>
@@ -191,19 +191,25 @@ function pdf() {
 
   doc.text("Especificación de requisitos: ", 70, 40);
   doc.text("Requisitos Funcionales", 75, 48);
-  columns = [" Id",  "Requisito", "Categoría", "Prioridad"];
+  columns = [" Id",  "Requisito", "Prioridad", "Categoría"];
   doc.autoTable(columns, data.rows,{
-        
+    
+    columnStyles:{
+      0: {columnWidth: 18},
+      1: {columnWidth: 120},
+      2: {columnWidth: 29},
+      3: {columnWidth: 29}
+    },     
     theme: 'grid',
     styles: {
         overflow: 'linebreak',
         fontSize: 10,
         valign: 'middle',
-        rowHeight: 9,
-        columnWidth: 40
+        rowHeight: 9
+
 
     },
-    margin: {top: 60, left: 10},
+    margin: {top: 60, left: 7},
     alternateRowStyles: {
       fillColor: [239, 239, 239],
     },

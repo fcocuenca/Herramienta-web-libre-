@@ -1,0 +1,160 @@
+
+ <div class="tittleContent"> 
+            <div class="idea">
+                 <a href="" title="¿Que es una Matriz de trazabilidad?" data-toggle="popover" data-trigger="focus" data-content="Afirmación sobre lo que debería hacer el sistema" data-placement="bottom"><img src="app-content/bombilla.jpg" class="idea" alt="User Image" width="40px;" height="40px"></a>
+            </div>
+                    <p>Modelo de Casos de Uso: Matriz de Trazabilidad</p>  
+</div>
+                            
+ <div class="flash-message" ng-if="flash">
+        <div class="{{'alert alert-' + flash.type}}" ng-bind="flash.message"></div>
+ </div>    
+
+ 	<center><p class="textMat">Atención:  tu matriz va a tener: <input type="text" id="filas" size="1" value="{{vm.rf.length}}">Requisitos funcionales y 
+ 	 <input type="text" id="columnas" value="{{vm.specifications.length}}" size="1"> Casos de Uso</p></center>  
+
+ 	 <br><center><button class="btn btn-primary" onclick="insert()">Generar Matriz</button></center>
+ 	
+ 	<div class="col-md-12">
+        <!--Header de la tabla-->
+        <div class="box box-solid box-success">
+            <div class="box-headerMat">
+                    <h3 class="box-tittle"> Matriz de trazabilidad</h3>
+            </div>
+		</div>
+		<div class="box-body">
+                    <div class="panel panel-default">
+                        <div class="box-body table-responsive no-padding">
+                        <table class="table">
+	                         	<thead>
+                                    <tr>
+                                        <th class="thMat">CU/RF</th>
+                                        <th class="thMat" ng-repeat="s in vm.specifications">CU {{s.id}}</th>
+                                    </tr>
+                                   
+	                            </thead>
+	                            <tbody>
+	                            	 <tr ng-repeat ="r in vm.rf">
+                                        <td class="tdMat">RF{{r.number}}</td>
+                                    </tr>
+	                           	</tbody>
+
+                        </table>
+              </div>
+                   <center><button class="btn btn-primary" onclick="">Resolver</button></center>
+                </div>
+	</div>
+
+
+
+ <script>
+
+
+		  function insert(){
+		   var columnas = document.getElementById("columnas").value;
+		   var filas = document.getElementById("filas").value;
+		   filas = filas+1
+		   for(var j = 1; j<filas; j++){
+		   	for(var i=0; i<columnas; i++){
+
+			   var row = document.getElementsByTagName("tr")[j];
+			   
+			   var x = row.insertCell(1);
+
+			   var elementid = document.getElementsByTagName("td").length
+			   x.setAttribute('id',elementid);
+			   x.className = "tdMat";
+			   x.innerHTML="<input type='checkbox'>";
+		 	  }
+			}
+		}
+
+
+											
+</script>
+
+<!--
+	<td><input type="checkbox" name="matrix" value="RF1CU1"></td>
+										<td><input type="checkbox" name="matrix" value="RF1CU2"></td>
+										<td><input type="checkbox" name="matrix" value="RF1CU3"></td>
+										<td><input type="checkbox" name="matrix" value="RF1CU4"></td>
+										<td><input type="checkbox" name="matrix" value="RF1CU5"></td>
+										<td><input type="checkbox" name="matrix" value="RF1CU6"></td>
+										<td><input type="checkbox" name="matrix" value="RF1CU7"></td>
+										<td><input type="checkbox" name="matrix" value="RF1CU8"></td>
+										<td><input type="checkbox" name="matrix" value="RF1CU9"></td>
+										<td><input type="checkbox" name="matrix" value="RF1CU10"></td>
+										<td><input type="checkbox" name="matrix" value="RF1CU11"></td>
+									</tr>
+									<tr>
+										<td></td>
+										<td><input type="checkbox" name="RF2CU1" value="RF2CU1"></td>
+										<td><input type="checkbox" name="RF2CU2" value="RF2CU2"></td>
+										<td><input type="checkbox" name="RF2CU3" value="RF2CU3"></td>
+										<td><input type="checkbox" name="RF2CU4" value="RF2CU4"></td>
+										<td><input type="checkbox" name="RF2CU5" value="RF2CU5"></td>
+										<td><input type="checkbox" name="RF2CU6" value="RF2CU6"></td>
+										<td><input type="checkbox" name="RF2CU7" value="RF2CU7"></td>
+										<td><input type="checkbox" name="RF2CU8" value="RF2CU8"></td>
+										<td><input type="checkbox" name="RF2CU9" value="RF2CU9"></td>
+										<td><input type="checkbox" name="RF2CU10" value="RF2CU10"></td>
+										<td><input type="checkbox" name="RF2CU11" value="RF2CU11"></td>
+										</tr>
+									<tr>
+									<td></td>
+										<td><input type="checkbox" name="RF3CU1" value="RF3CU1"></td>
+										<td><input type="checkbox" name="RF3CU2" value="RF3CU2"></td>
+										<td><input type="checkbox" name="RF3CU3" value="RF3CU3"></td>
+										<td><input type="checkbox" name="RF3CU4" value="RF3CU4"></td>
+										<td><input type="checkbox" name="RF3CU5" value="RF3CU5"></td>
+										<td><input type="checkbox" name="RF3CU6" value="RF3CU6"></td>
+										<td><input type="checkbox" name="RF3CU7" value="RF3CU7"></td>
+										<td><input type="checkbox" name="RF3CU8" value="RF3CU8"></td>
+										<td><input type="checkbox" name="RF3CU9" value="RF3CU9"></td>
+										<td><input type="checkbox" name="RF3CU10" value="RF3CU10"></td>
+										<td><input type="checkbox" name="RF3CU11" value="RF3CU11"></td>
+									</tr>
+									<tr>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+									</tr>
+									<tr>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+									</tr>
+									<tr>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+									</tr>
+
+-->

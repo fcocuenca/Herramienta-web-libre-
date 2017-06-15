@@ -36,11 +36,10 @@
                                      <tr>
                                      </tr>
                                      <tr>
-               
                                         <th>
-                                        <center> 
-                                              <input type="text" id="content" class="form-control" ng-model="vm.termino.content" required />
-                                        </center>
+	                                        <center> 
+	                                              <input type="text" id="content" class="form-control" ng-model="vm.termino.content" required />
+	                                        </center>
                                         </th>
                                      </tr>
                                 </tbody>
@@ -49,7 +48,7 @@
                     </div>
                 </div>
                      <div class="button">
-                            <center><button id ="save" class="btn btn-primary" ng-click="vm.saveTerm()" onclick="recarga()">Guardar</button></center>
+                            <center><button id ="save" class="btn btn-primary" onclick="recarga()" ng-click="vm.saveTerm()" >Guardar</button></center>
                     </div>
 
 
@@ -70,25 +69,23 @@
                             <table id="table" class="table">
                               <thead>
                                   <tr>
-                                          <th>Términos: </th>
+                                          <th>Términos:<a href="" ng-click="vm.orden()"> <span class="glyphicon glyphicon-sort-by-order"> </span></a>
+                                           			   <a href="" ng-click="vm.comprobar()" id="a">A</a> | 
+                                                   <a href="" ng-click="vm.comprobar()">B</a> | C | D | E | F | G | H | I | J | K | L | M | N | Ñ | O | P | Q | R | S | T | U | V | W | X | Y | Z  </th>
                                           <th></th>
                                           <th></th>
                                   </tr>
                               </thead>
-                              <tbody>
-                                  <tr class="tr" ng-repeat=" t in vm.glosary | orderBy: 'content'"  ng-click="vm.table()">
-                                          <td>
-                                              <a display="content" ng-model="vm.modificadoTerm" editable="{{t.content}}">{{t.content}}</a>
 
-                                          </td>
-                                          <td>
-                                              <a href="" id ="updateTerm" ng-click="vm.updateTerm($index)" onclick="recarga()"><span width="30px;" heigth="30px;" class="glyphicon glyphicon-pencil"></span></a>
-                                          </td>
-                                          <td>
-                                              <a href="" id ="delete" ng-click="vm.deleteTerm($index)" onclick="recarga()"><span width="30px;" heigth="30px;" class="glyphicon glyphicon-trash"></span></a>
-                                          </td>
-                                          <td></td>
-                                  </tr>  
+                              <tbody>
+
+                               	<tr ng-repeat="t in vm.glosary">
+                               		<td>
+                               			{{t.content}}
+                                    
+                               		</td>
+                               	</tr>
+
                               </tbody>     
                             </table>
             </div>  
@@ -129,7 +126,8 @@ function pdf() {
         overflow: 'linebreak',
         fontSize: 10,
         valign: 'middle',
-        rowHeight: 9
+        rowHeight: 9,
+        columnWidth: 'auto'
     },
     margin: {top: 60},
     alternateRowStyles: {
@@ -146,7 +144,19 @@ function pdf() {
 
 </script>
 
-
+<!--
+  <td>A</td>
+    <tr ng-repeat="a in vm.wordA">
+      <td>{{a.content}} <a href="" id ="delete" ng-click="vm.deleteTerm($index)" onclick="recarga()"><span width="30px;" heigth="30px;" class="glyphicon glyphicon-trash"></span></a></td>
+    </tr>
+  </tr>
+  <tr>
+    <td>B</td>
+  </tr>
+  <tr>
+    <td>C</td>
+  </tr>
+-->
     
     
  

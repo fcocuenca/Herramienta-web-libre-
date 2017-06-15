@@ -52,6 +52,27 @@
                 controller:'Diagram.IndexController',
                 controllerAs:'vm',
                 data:{activeTab: 'diagram'}
+            })
+            .state('specifications',{
+                url:'/specifications',
+                templateUrl:'useCase/Specifications/index.html',
+                controller:'Specifications.IndexController',
+                controllerAs:'vm',
+                data:{activeTab: 'specifications'}
+            })
+            .state('verEspecificaciones',{
+                url:'/verEspecificaciones',
+                templateUrl:'useCase/Specifications/verEspecificaciones.html',
+                controller:'Specifications.IndexController',
+                controllerAs:'vm',
+                data:{activeTab: 'specifications'}
+            })
+            .state('matrixTrazability',{
+                url:'/matrixTrazability',
+                templateUrl:'matrix/index.html',
+                controller:'Matrix.IndexController',
+                controllerAs:'vm',
+                data:{activeTab: 'matrixTrazability'}
             });
     }
  

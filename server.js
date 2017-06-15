@@ -31,6 +31,10 @@ app.use('/api/glosary', require('./controllers/api/glosarys.controller'));
 app.use('/api/diagram', require('./controllers/api/diagrams.controller'));
 app.use('/api/functionalrequeriments', require('./controllers/api/categoriesRf.controller'));
 app.use('/api/nofunctionalrequeriments', require('./controllers/api/categoriesNRf.controller'));
+app.use('/api/specifications', require('./controllers/api/specifications.controller'));
+app.use('/api/matrixTrazability', require('./controllers/api/matrix.controller'));
+//app.use('/api/matrixTrazability', require('./controllers/api/functionalrequeriments.controller'));
+//app.use('/api/matrixTrazability', require('./controllers/api/specifications.controller'));
 
 
 // pagina por defecto de inicio

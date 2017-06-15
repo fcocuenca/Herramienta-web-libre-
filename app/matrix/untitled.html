@@ -1,0 +1,98 @@
+
+
+<div class="col-md-12">
+        <!--Header de la tabla-->
+        <div class="box box-solid box-success">
+            <div class="box-headerMat">
+                    <h3 class="box-tittle"> Matriz de trazabilidad</h3>
+            </div>
+		</div>
+		<div class="box-body">
+                    <div class="panel panel-default">
+                        <div class="box-body table-responsive no-padding">
+                            <table class ="table" border="3">
+                                <thead>
+                                    <tr>
+                                        <th>CU/RF</th>
+                                        <th ng-repeat="s in vm.specifications" id="cu">CU {{s.id}}</th>
+                                    </tr>
+                                    <tr ng-repeat ="r in vm.rf">
+                                        <td>RF{{r.number}}</td>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                <tr ng-repeat = "r in vm.rf">
+									<td>RF{{r.number}}</td>
+									<td id="elementos"></td>
+									
+								</tr>
+								</tbody>
+                            </table>
+                        </div>
+                    </div>
+                   <center><button class="btn btn-primary">Resolver</button></center>
+                </div>
+	</div>
+
+
+	 <div class="col-md-12">
+        <!--Header de la tabla-->
+        <div class="box box-solid box-success">
+            <div class="box-headerMat">
+                    <h3 class="box-tittle"> Matriz de trazabilidad: Solución </h3>
+            </div>
+		</div>
+		<div class="box-body">
+                    <div class="panel panel-default">
+                        <div class="box-body table-responsive no-padding">
+                        			<ul>
+	                        			<li>El CU1 esta verificado por los RF1, RF3</li>
+	                        			<li>El CU2 esta verificado por RF2</li>
+                        			</ul>
+                        </div>
+                    </div>
+                </div>
+	</div>
+	</div>
+
+    
+function genMatriz(){
+    
+  // Obtener la referencia del elemento body
+  var body = document.getElementsByTagName("body")[0];
+  
+  var filas = document.getElementById("filas").value;
+  var columnas = document.getElementById("columnas").value;
+
+
+  // Crea un elemento <table> y un elemento <tbody>
+  var tabla   = document.createElement("table");
+  var tblBody = document.createElement("tbody");
+ 
+ 
+  // Crea las celdas
+  for (var i = 0; i < filas; i++) {
+    // Crea las hileras de la tabla
+    var hilera = document.createElement("tr");
+ 
+    for (var j = 0; j < columnas ; j++) {
+      // Crea un elemento <td> y un nodo de texto, haz que el nodo de
+      // texto sea el contenido de <td>, ubica el elemento <td> al final
+      // de la hilera de la tabla
+      var celda = document.createElement("td");
+      var textoCelda = document.createTextNode("celda en la hilera " +i+ ", columna "+j+"columnas"+columnas+" y filas: "+filas);
+      celda.appendChild(textoCelda);
+      hilera.appendChild(celda);
+    }
+ 
+    // agrega la hilera al final de la tabla (al final del elemento tblbody)
+    tblBody.appendChild(hilera);
+  }
+ 
+  // posiciona el <tbody> debajo del elemento <table>
+  tabla.appendChild(tblBody);
+  // appends <table> into <body>
+  body.appendChild(tabla);
+  // modifica el atributo "border" de la tabla y lo fija a "2";
+  tabla.setAttribute("border", "2");

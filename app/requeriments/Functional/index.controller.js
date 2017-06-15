@@ -31,13 +31,12 @@
         
  
 
-function Controller(UserService, RfService, FlashService, CategoryService,$filter) {
+function Controller(UserService, RfService, FlashService, CategoryService, $filter) {
 
 /*###########################################
 ###Declaracion de variables##################
 ###########################################*/    
     var vm = this;
-    var numberInt;
     var result;
 
 
@@ -119,10 +118,10 @@ function Controller(UserService, RfService, FlashService, CategoryService,$filte
             FlashService.Error('Este id ya esta insertado');
         }else
         {
-        if(RfService.Create(vm.requisito))
-                FlashService.Success('Requisito funcional introducido correctamente');
-        else
-            FlashService.Success('Ha ocurrido un error, intentalo de nuevo');
+            if(RfService.Create(vm.requisito))
+                    FlashService.Success('Requisito funcional introducido correctamente');
+            else
+                FlashService.Success('Ha ocurrido un error, intentalo de nuevo');
         }
 
         

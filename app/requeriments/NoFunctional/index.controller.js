@@ -31,10 +31,12 @@
         
  
 
-function Controller(UserService, NRfService, FlashService, CategoryServiceNRf) {
+function Controller(UserService, NRfService, FlashService, CategoryServiceNRf, $filter) {
     
     /*###Declaracion de variables y funciones####*/    
 	var vm = this;
+    var result;
+
 	vm.user=null;
     vm.nrf = null;
     vm.catnrf= null;
@@ -52,6 +54,8 @@ function Controller(UserService, NRfService, FlashService, CategoryServiceNRf) {
     vm.saveCatNrf = saveCatNrf;
     vm.updateCatNrf= updateCatNrf;
     vm.deleteCatNrf = deleteCatNrf;
+    vm.verificarReqRepe = verificarReqRepe;
+    vm.orden = orden;
 
 
     /*####Funciones para obtener todos los requisitos existentes en la bd ####*/
@@ -88,10 +92,21 @@ function Controller(UserService, NRfService, FlashService, CategoryServiceNRf) {
 */
 	function saveNRf(){
 
-	    if(NRfService.Create(vm.requisitonf))
-	        FlashService.Success('Requisito no funcional introducido correctamente');
-	    else
-	        FlashService.Success('Ha ocurrido un error, intentalo de nuevo');
+        vm.requisitonf.number = parseInt(vm.requisitonf.number);
+
+        verificarReqRepe();
+
+        if(result == true){
+            FlashService.Error('Este id ya esta insertado');
+        }else{
+
+            if(NRfService.Create(vm.requisitonf))
+                FlashService.Success('Requisito no funcional introducido correctamente');
+            else
+                FlashService.Success('Ha ocurrido un error, intentalo de nuevo');    
+        }
+
+	    
 	} 
 
 /**
@@ -166,7 +181,25 @@ function Controller(UserService, NRfService, FlashService, CategoryServiceNRf) {
                
             } 
        }); 
-    }	         
+    }
+
+    function verificarReqRepe(){
+        
+        angular.forEach(vm.nrf, function(value, key){
+
+            if(vm.requisitonf.number === vm.nrf[key].number)
+                 return result = true;
+       });
+    }
+
+   vm.orderReverse = true;
+
+    function orden(){
+        vm.orderReverse = !vm.orderReverse;
+        vm.nrf = $filter('orderBy')(vm.nrf, 'number', vm.orderReverse);
+    }
+
+
 }
 
 })();

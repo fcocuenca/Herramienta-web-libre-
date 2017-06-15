@@ -14,7 +14,7 @@ var mongo = require('mongoskin');
 
 //inserccion de la collection rf en mongoDB
 var db = mongo.db(config.connectionString, { native_parser: true });
-db.bind('funcionalrequeriments');
+db.bind('specification');
 
 /*especificacion de los servicios que vamos a implementar para posteriormente 
 que el controlador haga uso de ellos.*/
@@ -43,12 +43,12 @@ module.exports = service;
  * @param  {content}
  * @return  {promesa ok or fail}
  */
-function create(RfParam){
+function create(SpecParam){
 
 	var deferred = Q.defer();
 
-	db.funcionalrequeriments.insert(
-		RfParam,
+	db.specification.insert(
+		SpecParam,
 		function(err, doc){
 				if(err) deferred.reject(err);
 
@@ -62,14 +62,14 @@ function create(RfParam){
  * @return  {requisitos:_id, content}
  */
 function getById(){
-	console.log("ha entrado en showAll1");
+	console.log("ha entrado Spec");
 	var deferred = Q.defer();
 
-	db.funcionalrequeriments.find().toArray(function(err, rf){
+	db.specification.find().toArray(function(err, spec){
 			if(err) deferred.reject(err);
 
-			if(rf){
-					deferred.resolve(rf);
+			if(spec){
+					deferred.resolve(spec);
 			}else{
 				deferred.resolve();
 			}		
@@ -85,15 +85,15 @@ function getById(){
  * @param  {content}
  * @return  {usuario autenticado}
  */
-function _delete(RfParam){
+function _delete(SpecParam){
 	console.log("has entrado en _deete");
-	console.log(RfParam._id);
+	console.log(SpecParam._id);
     
     var deferred = Q.defer();
-    var id= RfParam._id;
+    var id= SpecParam._id;
 
-    db.funcionalrequeriments.remove(
-    {_id: mongo.helper.toObjectID(RfParam._id)},
+    db.specification.remove(
+    {_id: mongo.helper.toObjectID(SpecParam._id)},
     function(err){
     	if(err) deferred.reject(err);
     	
@@ -109,21 +109,20 @@ function _delete(RfParam){
  * @param  {content}
  * @return  {usuario modificado}
  */
-function update(RfParam){
+function update(SpecParam){
 	console.log("has entrado en update");
 	
-
     var deferred = Q.defer();
     
-    var id= RfParam._id;
-    var content = RfParam.content;
+    var id= SpecParam._id;
+    var content = SpecParam.content;
 
     var set = {	
     			content: content,
     };
 
-    db.funcionalrequeriments.update(
-    {_id: mongo.helper.toObjectID(RfParam._id)},
+    db.specification.update(
+    {_id: mongo.helper.toObjectID(SpecParam._id)},
     {$set: set},
     function(err){
     	if(err) deferred.reject(err);
@@ -133,7 +132,3 @@ function update(RfParam){
     	console.log("has salido update");
     return deferred.promise;
 }
-
-
-
-

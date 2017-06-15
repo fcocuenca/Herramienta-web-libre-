@@ -1,0 +1,141 @@
+   
+  <br><br>
+  
+
+ <div class="button">
+      <center><button id ="imprimir" class="btn btn-primary" onclick="pdf()">Imprimir</button></center>
+    </div>
+ <ul ng-repeat="s in vm.specifications">
+ <li>
+  <div class="col-md-12">
+                <!--Header de la tabla-->
+                <div class="box box-solid box-success">
+                    <div class="box-headerSpec">
+                            <h3 class="box-tittle"> Especificación de Caso de uso: Listado</h3>
+                    </div>
+                </div>
+
+                <div class="box-body">
+                    <div class="panel panel-default">
+                        <div class="box-body table-responsive no-padding">
+                            <table  id ="table" class ="table" border="3">
+                                <thead>
+                                    <tr>
+                                      <th colspan="2"> Insersción de especificaciones</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                  <tr>
+                                     <td class="attrTextSpec">Nombre: </td> 
+                                     <td>          
+                                          {{s.name}} 
+                                     </td> 
+                                  </tr>
+
+                                  <tr>
+                                      <td class="attrTextSpec">Id: </td>
+                                      <td>          
+                                           {{s.id}}
+                                      </td>
+                                  </tr>
+                                   
+                                    <tr>
+                                       <td class="attrTextSpec">Descripción: </td>
+                                       <td> 
+                                        {{s.desc}}
+                                       </td>
+                                    </tr>
+                                   
+                                    <tr>
+                                        <td class="attrTextSpec">Actor Principal: </td>
+                                        <td>
+                                            {{s.actorPrin}}
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                      <td class="attrTextSpec">Actor Secundario: </td>
+                                      <td>
+                                        {{s.actorSec}}
+                                      </td>
+                                    </tr>
+                                  
+                                    <tr>
+                                      <td class="attrTextSpec">Pre-Condición:</td>
+                                      <td> 
+                                        {{s.preCon}}
+                                      </td>
+                                    </tr>
+                                  
+                                    <tr>
+                                      <td class="attrTextSpec">FlujoPrincipal: </td>
+                                      <td>
+                                        {{s.flujoPrin}}
+                                      </td>
+                                    </tr>
+                                  
+                                    <tr>
+                                      <td class="attrTextSpec">Post-Condición:</td>
+                                      <td>
+                                        {{s.postCon}}
+                                      </td>
+                                    </tr>
+
+                                  <tr>
+                                     <td class="attrTextSpec">Flujo Alternativo:</td>
+                                     <td> 
+                                        {{s.flujoAlt}}
+                                      </td>
+                                  </tr>    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </li>
+            </ul>
+            
+
+<script>
+	
+function pdf() {
+
+  var doc = new jsPDF('a4');
+  var elem = document.getElementById('table');
+  var data = doc.autoTableHtmlToJson(elem);
+
+  doc.text("Modelo de Casos de uso:", 70, 40);
+  doc.text("Especificación de Casos de Uso", 70, 48);
+  columns = [" ",  "  Especificación de Casos de uso"];
+  
+  doc.autoTable(columns, data.rows,{
+    
+    columnStyles:{
+      0: {columnWidth: 40},
+      1: {columnWidth: 110},
+    },     
+    theme: 'grid',
+    styles: {
+        overflow: 'linebreak',
+        fontSize: 10,
+        valign: 'middle',
+        rowHeight: 9
+
+
+    },
+    margin: {top: 60, left: 25},
+    alternateRowStyles: {
+      fillColor: [239, 239, 239],
+    },
+    headerStyles: {
+      fillColor: [23, 110, 209],
+      fontStyle: 'normal',
+      fontSize: 13
+    }
+  });
+  doc.save("EspecificaciondeCasosdeUso.pdf");
+}
+
+</script>
