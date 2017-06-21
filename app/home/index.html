@@ -1,4 +1,87 @@
+  	<div class="tittleContent"> 
+       
+   	</div>
+                            
+             <div class="flash-message" ng-if="flash">
+                    <div class="{{'alert alert-' + flash.type}}" ng-bind="flash.message"></div>
+             </div>         
+            <br><br><br>
+                   <div class="col-md-Ppal">
+                   <div class="box box-solid box-success">
+                      <div class="box-headerHome">
+                              <h3 class="box-tittle">Tus Proyectos</h3>
+                      </div>
+                  </div>
 
-<h1>Has entrado como: {{vm.user.email}}!!</h1>
-<br>
-<p>En este aparado cargaremos todas las fases de la especificacion de requisitos.</p>
+                  <div class="box-body">
+                      <div class="panel panel-default">
+                          <div class="box-body table-responsive no-padding">
+                              <table class ="table">
+                                  <thead>
+                                      <tr>
+                                        <th>Nombre</th>
+                                        <th>Descripción</th>
+                                        <th>Fecha Inicio</th>
+                                        <th>Usuarios Invitados</th>
+                                      </tr>
+
+                                  </thead>
+
+                                  <tbody>
+                                    <tr>
+                                        <td>Proyecto Prueba</td>
+                                        <td>Especificacion de requisitos de un sistema bancario que  estar bien realizada y correctamnete </td>
+                                        <td>21/06/2017</td>
+                                        <td>No hay usuarios invitados</td>
+                                    </tr>
+                                  </tbody>                                
+                              </table>
+                          </div>
+                      </div>
+                  </div>
+
+                  <div>
+                   <center><p class="textHome">¿Todavía no has creado ningun proyecto en la aplicación?</p></center>
+                                          
+                   <center><a ui-sref="project"><button class="btn btn-success"><span width="15px;" heigth="15px;" class="glyphicon glyphicon-plus"></span><span class="btnHome"> Crear Proyecto</span></button></a></center>
+                  </div>
+                                    
+                                    
+                </div>
+                   <div class="col-md-Ppal">
+                   <div class="box box-solid box-success">
+                      <div class="box-headerHome">
+                              <h3 class="box-tittle"> Tus Usuarios Invitados</h3>
+                      </div>
+                  </div>
+
+                  <div class="box-body">
+                      <div class="panel panel-default">
+                          <div class="box-body table-responsive no-padding">
+                              <table class ="table">
+                                  <thead>
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Correo</th>
+                                        <th>Proyecto</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                        <tr>
+                                            <td>Ismael Ávila</td>                                            
+                                            <td>i22avoji@uco.es</td>
+                                            <td>ProyectoPrueba</td>
+                                        </tr>
+                                  </tbody>
+                              </table>
+                          </div>
+                      </div>
+                  </div>
+                 </div>
+                                       
+                  <div>
+                      <center><span class="textHome">¿Deseas compartir tu proyecto?</center>
+                       <center><button class="btn btn-success"><span width="15px;" heigth="15px;" class="glyphicon glyphicon-eye-open"></span><span class="btnHome"> Compartir</span></button></center>
+                  </div>
+                                           
+                                        

@@ -60,7 +60,6 @@ function Controller(UserService, RfService, FlashService, CategoryService, $filt
     vm.updateCat = updateCat;
     vm.deleteCat = deleteCat;
     vm.verificarReqRepe = verificarReqRepe;
-    vm.orden = orden;
 
     /*####Funciones para obtener todos los requisitos existentes en la bd ####*/
     initController();
@@ -222,12 +221,7 @@ function Controller(UserService, RfService, FlashService, CategoryService, $filt
        });
     }
 
-   vm.orderReverse = true;
 
-    function orden(){
-        vm.orderReverse = !vm.orderReverse;
-        vm.rf = $filter('orderBy')(vm.rf, 'number', vm.orderReverse);
-    }
 
 }
 

@@ -42,7 +42,6 @@
         vm.updateTerm = updateTerm;
         vm.terminos;
         var result;
-        vm.orden = orden;
         vm.comprobar = comprobar;
        // vm.bubbleSort = bubbleSort;
 
@@ -58,8 +57,6 @@
         }
 
         function saveTerm(){
-
-                vm.orden();
            
             	if(GlosaryService.Create(vm.termino))
             			FlashService.Success('Término introducido correctamente');
@@ -96,12 +93,6 @@
 	            });
          }
 
-         vm.orderReverse = true;
-
-	    function orden(){
-	        vm.orderReverse = !vm.orderReverse;
-	        vm.glosary = $filter('orderBy')(vm.glosary, 'content', vm.orderReverse);
-	    }
 
 	    function comprobar(){
 
@@ -150,4 +141,12 @@
             }
             return array;
         }
-  */ 
+  
+
+
+         vm.orderReverse = true;
+
+	   function orden(){
+	        vm.orderReverse = !vm.orderReverse;
+	        vm.glosary = $filter('orderBy')(vm.glosary, 'content', vm.orderReverse);
+	    }*/

@@ -36,6 +36,7 @@
 
 			vm.spec = null;
 			vm.specifications = null;
+			vm.fp = [];
 
 			vm.saveSpec = saveSpec;
 			vm.deleteSpec = deleteSpec;
@@ -86,4 +87,15 @@
 				});
 			}
 		}
+
 })();
+
+/*
+function verificarReqRepe(){
+        
+        angular.forEach(vm.rf, function(value, key){
+
+            if(vm.requisito.number === vm.rf[key].number)
+                 return result = true;
+       });
+    }*/

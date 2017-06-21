@@ -28,6 +28,9 @@
   <link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/jqueryui-editable/css/jqueryui-editable.css" rel="stylesheet" />
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
 
+
+
+
 </head>
 
 <body>
@@ -57,7 +60,7 @@
         					<img src="app-content/usericon.svg" class="img-circle" alt="User Image">
         		  </div>
               <div class="pull-left-infor">
-        					<p>Hola, Username</p>
+        					<p>{{user.firstName}}</p>
         					<!--<a href="#"> <i class="fa fa-circle text-success"> </i> Conectado</a>-->
               </div>
               <div class="pull-left-myProject">
@@ -116,7 +119,8 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+
     <!-- application scripts -->
     <script src="app.js"></script>
     <script src="app-services/user.service.js"></script>
@@ -129,6 +133,7 @@
     <script src="app-services/categoriesNRf.service.js"></script>
     <script src="app-services/specifications.service.js"></script>
     <script src="app-services/matrix.service.js"></script>
+    <script src="app-services/project.service.js"></script>
 
     <script src="home/index.controller.js"></script>
     <script src="account/index.controller.js"></script>
@@ -138,5 +143,6 @@
     <script src="useCase/Diagram/index.controller.js"></script>
     <script src="useCase/Specifications/index.controller.js"></script>
     <script src="matrix/index.controller.js"></script>
+    <script src="home/Proyecto/index.controller.js"></script>
 
 </html>

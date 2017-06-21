@@ -45,6 +45,9 @@ module.exports = service;
  */
 function create(word){
 	console.log("createGlosary");
+
+	//orden de los elementos antes d einsertarlos en a BD
+
 	var deferred = Q.defer();
 	
 	db.glosary.insert(
@@ -63,9 +66,11 @@ function create(word){
  */
 function getById(){
 	console.log("ha entrado en showglosary");
+	
 	var deferred = Q.defer();
+	var mysort = {content: 1};
 
-	db.glosary.find().toArray(function(err, word){
+	db.glosary.find().sort(mysort).toArray(function(err, word){
 			if(err) deferred.reject(err);
 
 			if(word){
@@ -78,6 +83,7 @@ function getById(){
 	console.log("ha entrado en showglosary");
 	return deferred.promise;
 }
+
 
  /**
  * _delete: Borrado de los requisitos funcionales en la bd

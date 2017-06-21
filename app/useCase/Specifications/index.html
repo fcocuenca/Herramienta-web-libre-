@@ -1,7 +1,7 @@
                 
             <div class="tittleContent"> 
                     <div class="idea">
-                         <a href="" title="¿Que es un Requisito Funcional?" data-toggle="popover" data-trigger="focus" data-content="Afirmación sobre lo que debería hacer el sistema" data-placement="bottom"><img src="app-content/bombilla.jpg" class="idea" alt="User Image" width="40px;" height="40px"></a>
+                         <a href="" title="¿Que son las especificaciones de casos de uso?" data-toggle="popover" data-trigger="focus" data-content="Las especificaciones de casos de uso son la versión completa del diagramado de casos de uso, proporcionando una descripción textual completa sobre el caso de uso. Este documento escrito sigue una estructura formada nombre, descripción, precondiciones, postcondiciones, flujos principales y alternativos." data-placement="bottom"><img src="app-content/bombilla.jpg" class="idea" alt="User Image" width="40px;" height="40px"></a>
                     </div>
                             <p>Modelo de Casos de uso: Especificación de Casos de usos</p>  
             </div>
@@ -83,8 +83,14 @@
                                   </tr>
                                   
                                   <tr>
-                                    <td class="attrTextSpec">FlujoPrincipal: </td>
-                                    <td><input type="text" id="flujoPrin" class="form-controlInputSpec" ng-model=vm.spec.flujoPrin required/>
+                                    <td class="attrTextSpec">Flujo Principal: </td>
+                                    <td>
+                                      <div class="col-md-1"><input type="button" class="btn btn-success" id="add_cancion()" onClick="addCancion()" value="+" /></div>
+                                      
+                                          <!-- El id="canciones" indica que la función de JavaScript dejará aquí el resultado -->
+                                      <div class="row" id="canciones">
+
+                                      </div>
                                     </td>
                                   </tr>
                                   
@@ -122,6 +128,16 @@ function recarga() {
 $(document).ready(function(){
     $('[data-toggle="popover"]').popover();   
 });
+ 
+a = 0;
+function addCancion(){
+    a++;
+
+    var div = document.createElement('div');
+    div.setAttribute('class', 'form-inline');
+    div.innerHTML = '<div style="clear:both" class="cancion_'+a+' col-md-offset-1 col-md-6"><input class="form-control" name="cancion_'+a+'" type="text"/></div>';
+        document.getElementById('canciones').appendChild(div);document.getElementById('canciones').appendChild(div);
+}
 
 </script>
 

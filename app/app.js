@@ -4,7 +4,8 @@
     angular
         .module('app', ['ui.router'])
         .config(config)
-        .run(run);
+        .run(run)
+        .controller('IndexController', Controller);
  
     function config($stateProvider, $urlRouterProvider) {
         // default route
@@ -17,6 +18,13 @@
                 controller: 'Home.IndexController',
                 controllerAs: 'vm',
                 data: { activeTab: 'home' }
+            })
+            .state('project', {
+                url: '/project',
+                templateUrl: 'home/Proyecto/index.html',
+                controller: 'Project.IndexController',
+                controllerAs: 'vm',
+                data: {activeTab: 'project'}
             })
             .state('account', {
                 url: '/account',
@@ -74,6 +82,21 @@
                 controllerAs:'vm',
                 data:{activeTab: 'matrixTrazability'}
             });
+    }
+
+    function Controller(UserService){
+
+        var vm = this
+        vm.user = null
+
+        initController();
+        function initController() {
+          
+            UserService.GetCurrent().then(function (user) {
+                vm.user = user;
+            });
+    }
+
     }
  
     function run($http, $rootScope, $window) {

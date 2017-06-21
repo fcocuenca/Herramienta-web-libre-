@@ -69,9 +69,9 @@
                             <table id="table" class="table">
                               <thead>
                                   <tr>
-                                          <th>Términos:<a href="" ng-click="vm.orden()"> <span class="glyphicon glyphicon-sort-by-order"> </span></a>
-                                           			   <a href="" ng-click="vm.comprobar()" id="a">A</a> | 
-                                                   <a href="" ng-click="vm.comprobar()">B</a> | C | D | E | F | G | H | I | J | K | L | M | N | Ñ | O | P | Q | R | S | T | U | V | W | X | Y | Z  </th>
+                                          <th>Términos:
+                                           			   
+                                                  <!-- <a href="" ng-click="vm.comprobar()" id="a">A</a> | <a href="" ng-click="vm.comprobar()">B</a> | C | D | E | F | G | H | I | J | K | L | M | N | Ñ | O | P | Q | R | S | T | U | V | W | X | Y | Z --> </th>
                                           <th></th>
                                           <th></th>
                                   </tr>
@@ -81,8 +81,13 @@
 
                                	<tr ng-repeat="t in vm.glosary">
                                		<td>
-                               			{{t.content}}
-                                    
+                               			 <a display="Term" ng-model="vm.modificadoTerm" editable="{{t.content}}">{{t.content}}</a>
+                               		</td>
+                               		<td>
+                               			<a href="" id ="update" ng-click="vm.updateTerm($index)" onclick="recarga()"><span width="30px;" heigth="30px;" class="glyphicon glyphicon-pencil"></span></a>
+                               		</td>
+                               		<td>
+                                        <a href="" id ="delete" ng-click="vm.deleteTerm($index)" onclick="recarga()"><span width="30px;" heigth="30px;" class="glyphicon glyphicon-trash"></span></a>
                                		</td>
                                	</tr>
 

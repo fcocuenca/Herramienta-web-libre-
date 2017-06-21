@@ -65,7 +65,9 @@ function getById(){
 	console.log("has entrado en getById nrf");
 	var deferred = Q.defer();
 
-	db.nofuncionalrequeriments.find().toArray(function(err, nrf){
+	var mysort = {number: 1};
+
+	db.nofuncionalrequeriments.find().sort(mysort).toArray(function(err, nrf){
 			if(err) deferred.reject(err);
 
 			if(nrf){

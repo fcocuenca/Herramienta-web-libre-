@@ -33,6 +33,7 @@ app.use('/api/functionalrequeriments', require('./controllers/api/categoriesRf.c
 app.use('/api/nofunctionalrequeriments', require('./controllers/api/categoriesNRf.controller'));
 app.use('/api/specifications', require('./controllers/api/specifications.controller'));
 app.use('/api/matrixTrazability', require('./controllers/api/matrix.controller'));
+app.use('/api/project', require('./controllers/api/projects.controller'));
 //app.use('/api/matrixTrazability', require('./controllers/api/functionalrequeriments.controller'));
 //app.use('/api/matrixTrazability', require('./controllers/api/specifications.controller'));
 

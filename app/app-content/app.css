@@ -368,6 +368,15 @@ label > span {
   margin-left: 14%;
   margin-top: 15px;
 }
+
+.col-md-Ppal {
+    background-color: #fff;
+    border-radius: 12px;
+    width: 90%;
+    margin-left: 5%;
+    margin-top: 15px;
+}
+
 .ancho{
   width: 85%;
   margin-left: 8%;
@@ -999,7 +1008,7 @@ td{
 
 .form-controlInputRf{
     display: block;
-    width: 100%;
+    width: 40px;
     height: 34px;
     padding: 6px 9px;
     margin: 0px 8px 0px 0px;
@@ -1078,6 +1087,79 @@ th.thMat{
 td.tdMat{
     width: 85px !important;
 }
+
+.box-headerHome{
+     color: #fff;
+    background: #333;
+    position: relative;
+    -webkit-border-top-left-radius: 3px;
+    -webkit-border-top-right-radius: 3px;
+    -webkit-border-bottom-right-radius: 0;
+    -webkit-border-bottom-left-radius: 0;
+    -moz-border-radius-topleft: 3px;
+    -moz-border-radius-topright: 3px;
+    -moz-border-radius-bottomright: 0;
+    -moz-border-radius-bottomleft: 0;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    border-bottom: 0px solid #f4f4f4;
+    padding-bottom: 45px;
+    font-family: Pacifico;
+
+}
+
+
+.textHome{
+  font-family: 'Lobster', cursive;
+  /*margin: 2px 60px 0px 0px;*/
+  font-size: 18px;
+}
+
+.btnHome{
+ font-family: 'Lobster', cursive;
+  /*margin: 2px 60px 0px 0px;*/
+  font-size: 15px; 
+}
+
+.box-headerProj{
+     color: #fff;
+    background: #333;
+    position: relative;
+    -webkit-border-top-left-radius: 3px;
+    -webkit-border-top-right-radius: 3px;
+    -webkit-border-bottom-right-radius: 0;
+    -webkit-border-bottom-left-radius: 0;
+    -moz-border-radius-topleft: 3px;
+    -moz-border-radius-topright: 3px;
+    -moz-border-radius-bottomright: 0;
+    -moz-border-radius-bottomleft: 0;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    border-bottom: 0px solid #f4f4f4;
+    padding-bottom: 45px;
+    font-family: Pacifico;
+
+}
+
+.textProj{
+  font-family: Pacifico;
+  /*margin: 2px 60px 0px 0px;*/
+  font-size: 15px;
+  margin-left: 15px;
+}
+
+.col-md-6{
+  margin-left: 20%;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 97px;
+}
+
+
 
 /*
 .sidebar {
