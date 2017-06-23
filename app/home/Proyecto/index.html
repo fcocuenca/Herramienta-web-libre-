@@ -16,35 +16,36 @@
 
                               	<div class="form-group">
 									<center><p class="textProj">Nombre</p></center>
-									<input type="text" class="form-controlInput">
+									<input type="text" class="form-controlInputProj" maxlength="15" ng-model="vm.project.name">
 								</div>
 
 								<div class="form-group">
 										<center><p class="textProj">Descripción</p></center>
-										<center><textarea></textarea></center>
+										<center><textarea class="form-controlInputProjTA" maxlength="65" ng-model="vm.project.desc"></textarea></center>
 								</div>
 
-								<div class='form-group' id='datetimepicker1'>
-
+								<div class='form-group'>
 								 		<center><p class="textProj">Fecha de Inicio</p></center>
-					                    <input type="date" class="form-controlInput">
+					                    <input type="date" class="form-controlInputProj">
 					            </div>
 
 								<div class="form-group">
-										<center><p class="textProj">Iniciado por</p></center>
-										
+										<center><p class="textProj">Iniciado por: </p></center>
+										<center><p class="textProj">{{vm.user.firstName}} {{vm.user.lastName}}, {{vm.user.email}}</p></center>
 								</div>
-
+								<br>
 								<div class="box-footer">
-									<center><button class="btn btn-primary">Crear Proyecto</button> </center>
+									<center><button class="btn btn-primary" ng-click="saveProject()">Crear Proyecto</button> </center> 
 								</div>
-
+								<br>
                           </div>
                       </div>
                   </div>
                  
             </div>
 
-
-
- 
+<script>
+function recarga() {
+    location.reload();
+}
+</script>

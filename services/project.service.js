@@ -60,7 +60,7 @@ function create(ProjParam){
  * @return  {requisitos:_id, content}
  */
 function getById(){
-	console.log("ha entrado en showAll1");
+	console.log("ha projectGetByID");
 	var deferred = Q.defer();
 
 	db.project.find().toArray(function(err, proj){
