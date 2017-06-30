@@ -112,17 +112,6 @@ function _delete(SpecParam){
 function update(SpecParam){
 
 	console.log("has entrado en updateSpec");
-
-	console.log("id: ", SpecParam.id);
-	console.log("name: ", SpecParam.name);
-	console.log("desc: ", SpecParam.desc);
-	console.log("AP: ", SpecParam.actorPrin);
-	console.log("AS: ", SpecParam.actorSec);
-	console.log("Prec: ", SpecParam.preCon);
-	console.log("flujoP: ", SpecParam.flujoPrin);
-	console.log("postCon: ", SpecParam.postCon);
-	console.log("flujoAlt: ", SpecParam.flujoAlt);
-
     var deferred = Q.defer();
     
     var id= SpecParam._id;
