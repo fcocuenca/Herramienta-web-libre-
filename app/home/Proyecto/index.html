@@ -1,8 +1,6 @@
-<div class="tittleContent">
-	<p>Nuevo Proyeto</p>
-</div>
 
 
+	
 			<div class="col-md-6">
                    <div class="box box-solid box-success">
                       <div class="box-headerProj">
@@ -15,27 +13,29 @@
                           <div class="box-body table-responsive no-padding">
 
                               	<div class="form-group">
-									<center><p class="textProj">Nombre</p></center>
-									<input type="text" class="form-controlInputProj" maxlength="15" ng-model="vm.project.name">
+									<p class="textProj">Nombre: </p>
+									<input type="text" class="form-controlInputProj" maxlength="20" ng-model="vm.project.name">
 								</div>
 
 								<div class="form-group">
-										<center><p class="textProj">Descripción</p></center>
-										<center><textarea class="form-controlInputProjTA" maxlength="65" ng-model="vm.project.desc"></textarea></center>
+										<p class="textProj">Descripción:  </p>
+										<textarea class="form-controlInputProjTA" maxlength="70" ng-model="vm.project.desc"></textarea>
 								</div>
 
 								<div class='form-group'>
-								 		<center><p class="textProj">Fecha de Inicio</p></center>
-					                    <input type="date" class="form-controlInputProj">
-					            </div>
+												<p class="textProj">Fecha de Inicio: </p>
+								 			  	<div class="input-group" ng-model="vm.project.fechaInicio">
+    												<input type="text" class="form-controlInputDataProj"  datepicker ng-model="vm.project.fechaInicio" />
+  												</div>
+  								</div>
 
 								<div class="form-group">
-										<center><p class="textProj">Iniciado por: </p></center>
-										<center><p class="textProj">{{vm.user.firstName}} {{vm.user.lastName}}, {{vm.user.email}}</p></center>
+										<p class="textProj">Iniciado por: </p>
+										<input type="text" class="form-controlInputProj"ng-model="vm.user.email" >
 								</div>
 								<br>
 								<div class="box-footer">
-									<center><button class="btn btn-primary" ng-click="saveProject()">Crear Proyecto</button> </center> 
+									<a ui-sref="home"><center><button class="btn btn-primary" ng-click="vm.saveProj()" onclick="recarga()">Crear Proyecto</button></center></a>
 								</div>
 								<br>
                           </div>
@@ -48,4 +48,5 @@
 function recarga() {
     location.reload();
 }
+
 </script>

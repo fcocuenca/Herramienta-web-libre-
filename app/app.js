@@ -75,6 +75,13 @@
                 controllerAs:'vm',
                 data:{activeTab: 'specifications'}
             })
+            .state('editarEspecificaciones',{
+                url:'/editarEspecificaciones',
+                templateUrl:'useCase/Specifications/edit.html',
+                controller:'Specifications.IndexController',
+                controllerAs:'vm',
+                data:{activeTab: 'specifications'}
+            })
             .state('matrixTrazability',{
                 url:'/matrixTrazability',
                 templateUrl:'matrix/index.html',

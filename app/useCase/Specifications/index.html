@@ -1,7 +1,8 @@
                 
             <div class="tittleContent"> 
                     <div class="idea">
-                         <a href="" title="¿Que son las especificaciones de casos de uso?" data-toggle="popover" data-trigger="focus" data-content="Las especificaciones de casos de uso son la versión completa del diagramado de casos de uso, proporcionando una descripción textual completa sobre el caso de uso. Este documento escrito sigue una estructura formada nombre, descripción, precondiciones, postcondiciones, flujos principales y alternativos." data-placement="bottom"><img src="app-content/bombilla.jpg" class="idea" alt="User Image" width="40px;" height="40px"></a>
+                         <a href="" title="¿Que son las especificaciones de casos de uso?" data-toggle="popover" data-trigger="focus" data-content="Las especificaciones de casos de uso son la versión completa del diagramado de casos de uso, proporcionando una descripción textual completa sobre el caso de uso. Este documento escrito sigue una estructura formada nombre, descripción, precondiciones, postcondiciones, flujos principales y alternativos." data-placement="bottom">
+                         <img src="app-content/bombilla.jpg" class="idea" alt="User Image" width="40px;" height="40px"></a>
                     </div>
                             <p>Modelo de Casos de uso: Especificación de Casos de usos</p>  
             </div>
@@ -34,7 +35,7 @@
                                   <tr>
                                      <td class="attrTextSpec">Nombre: </td> 
                                      <td>          
-                                                      <select name="priority" ng-model="vm.spec.name" required>
+                                                      <select name="priority" ng-model="vm.spec.name" class="btn" required>
                                                           <option value="">-SeleccionarCasoDeUso-</option>
                                                           <option value="caso de uso 1">Caso de uso 1</option>
                                                           <option value="caso de uso 2">Caso de uso 2</option>
@@ -43,28 +44,26 @@
                                                       </select>
                                          
                                      </td> 
-                                  </tr>
-                                  <tr>
+                                  	</tr>
+                                  	<tr>
                                        <td class="attrTextSpec">Id: </td>
-                                      <td>          
-                                                      <select name="priority" ng-model="vm.spec.id" required>
+                                      	<td>          
+                                                      <select name="priority" ng-model="vm.spec.id" class="btn" required>
                                                           <option value="">-SeleccionarId-</option>
                                                           <option value="1">1</option>
                                                           <option value="2">2</option>
                                                           <option value="3">3</option>
                                                           <option value="4">4</option>
                                                       </select><ng-model=vm.spec.id required/>
-                                      </td>
-                                  </tr>
+                                      	</td>
+                                  	</tr>
                                    
-                                   <tr>
+                                   	<tr>
                                        <td class="attrTextSpec">Descripción: </td>
-                                       <td> <input type="text" id="descripcion" class="form-controlInputSpec" ng-model=vm.spec.desc required/>
-                                           
+                                       <td> <input type="text" id="descripcion" class="form-controlInputSpec" ng-model=vm.spec.desc required/> </td>
                                     </tr>
                                    
                                   <tr>
-
                                       <td class="attrTextSpec">Actor Principal: </td>
                                       <td><input type="text" id="actorPrin" class="form-controlInputSpec" ng-model=vm.spec.actorPrin required/>
                                       </td>
@@ -72,7 +71,7 @@
 
                                    <tr>
                                       <td class="attrTextSpec">Actor Secundario: </td>
-                                      <td><input type="text" id="actorSec" class="form-controlInputSpec" ng-model=vm.spec.actorSec required/>
+                                      <td><input type="text" id="actorSec" class="form-controlInputSpec" ng-model=vm.spec.actorSec  required/>
                                       </td>
                                   </tr>
                                   
@@ -85,12 +84,7 @@
                                   <tr>
                                     <td class="attrTextSpec">Flujo Principal: </td>
                                     <td>
-                                      <div class="col-md-1"><input type="button" class="btn btn-success" id="add_cancion()" onClick="addCancion()" value="+" /></div>
-                                      
-                                          <!-- El id="canciones" indica que la función de JavaScript dejará aquí el resultado -->
-                                      <div class="row" id="canciones">
-
-                                      </div>
+                                   		 <textarea class="form-controlInputSpecTA" ng-model="vm.spec.flujoPrin"></textarea>
                                     </td>
                                   </tr>
                                   
@@ -103,10 +97,11 @@
 
                                   <tr>
                                      <td class="attrTextSpec">Flujo Alternativo:</td>
-                                     <td> <input type="text" id="flujoAlt" class="form-controlInputSpec" ng-model=vm.spec.flujoAlt required/>
+                                      <td>
+                                      		 <textarea class="form-controlInputSpecTA" ng-model="vm.spec.flujoAlt"></textarea>                                   
                                       </td>
+                                     	
                                   </tr>    
-
                                 </tbody>
                             </table>
                         </div>
@@ -128,21 +123,12 @@ function recarga() {
 $(document).ready(function(){
     $('[data-toggle="popover"]').popover();   
 });
- 
-a = 0;
-function addCancion(){
-    a++;
 
-    var div = document.createElement('div');
-    div.setAttribute('class', 'form-inline');
-    div.innerHTML = '<div style="clear:both" class="cancion_'+a+' col-md-offset-1 col-md-6"><input class="form-control" name="cancion_'+a+'" type="text"/></div>';
-        document.getElementById('canciones').appendChild(div);document.getElementById('canciones').appendChild(div);
+function clearInput() {
+    document.getElementById("input").value="";
 }
-
 </script>
 
-
-    
     
  
                 

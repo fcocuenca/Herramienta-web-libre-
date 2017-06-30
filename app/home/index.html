@@ -22,14 +22,18 @@
                                         <th>Nombre</th>
                                         <th>Descripción</th>
                                         <th>Fecha Inicio</th>
-                                        <th>Usuarios Invitados</th>
+                                        <th>Iniciado Por</th>
                                       </tr>
 
                                   </thead>
 
                                   <tbody>
-                                    <tr>
-                                       
+                                    <tr ng-repeat = "p in vm.projects">
+                                       <td>{{p.name}} </td>
+                                       <td>{{p.desc}} </td>
+                                       <td>{{p.fechaInicio}}</td>
+                                       <td>{{p.iniciadoPor}}</td>
+
                                     </tr>
                                   </tbody>                                
                               </table>
@@ -65,9 +69,7 @@
                                   </thead>
                                   <tbody>
                                         <tr>
-                                            <td>Ismael Ávila</td>                                            
-                                            <td>i22avoji@uco.es</td>
-                                            <td>ProyectoPrueba</td>
+                                            <td></td>
                                         </tr>
                                   </tbody>
                               </table>

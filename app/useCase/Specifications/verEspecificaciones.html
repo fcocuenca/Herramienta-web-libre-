@@ -1,19 +1,115 @@
    
   <br><br>
-  
-
- <div class="button">
-      <center><button id ="imprimir" class="btn btn-primary" onclick="pdf()">Imprimir</button></center>
-    </div>
+ 
  <ul ng-repeat="s in vm.specifications">
  <li>
   <div class="col-md-12">
                 <!--Header de la tabla-->
                 <div class="box box-solid box-success">
                     <div class="box-headerSpec">
-                            <h3 class="box-tittle"> Especificación de Caso de uso: Listado</h3>
+                            <h3 class="box-tittle"> Especificación de Caso de uso: id: {{s.id}}, nombre: {{s.name}}</h3>
+                             	<div class="box-tools pull-right" >
+                                        <a href="" onclick="pdf()" ><span class="imprimir glyphicon glyphicon-print"></span></a> &nbsp &nbsp
+                                        <a href="" id ="update" data-toggle="modal" ng-click="vm.getIndex($index)" data-target="#editar"><span width="30px;" heigth="30px;" class="imprimir glyphicon-pencil"></span></a>
+                                        &nbsp &nbsp   
+                            			<a href="" id ="delete" ng-click="vm.deleteSpec($index)" onclick="recarga()"><span width="30px;" heigth="30px;" class="imprimir glyphicon-trash"></span></a> 
+								</div>
                     </div>
+
+                    <!--*********INICIO VENTAN MODAL**********-->
+                     <div class="modal fade" id="editar" role="dialog">
+                        <div class="modal-dialog modal-lg" >
+                        <div class="modal-content">
+                          <!-- Modal content-->
+                          <div class="col-md-12">
+                            <div class="flash-message" ng-if="flash">
+                                 <div class="{{'alert alert-' + flash.type}}" ng-bind="flash.message"></div>
+                            </div>   
+                              <div class="box box-solid box-success">
+                                  <div class="box-headerSpec">
+                                          <h3 class="box-tittle"> Edición de Especificaciones</h3>
+                                  </div>
+                              </div>
+
+                              <div class="box-body">
+                                  <div class="panel panel-default">
+                                      <div class="box-body table-responsive no-padding">
+                                          <table class ="table" border="3">
+                                              <thead>
+                                              
+                                              </thead>
+
+                                              <tbody>
+                                                <tr>
+                                                   <td class="attrTextSpec">Nombre: </td> 
+                                                   <td>          
+                                                          <input type="text" ng-model="vm.specMod.name" class="form-controlInputSpec" required>
+                                                   </td> 
+                                                  </tr>
+                                                  <tr>
+                                                     <td class="attrTextSpec">Id: </td>
+                                                      <td>          
+                                                            <input type="text" ng-model="vm.specMod.id" class="form-controlInputSpec" required>
+                                                      </td>
+                                                  </tr>
+                                                 
+                                                  <tr>
+                                                     <td class="attrTextSpec">Descripción: </td>
+                                                     <td> <input type="text"  ng-model=vm.specMod.desc class="form-controlInputSpec" required/> 
+                                                     </td>
+                                                  </tr>
+                                                 
+                                                <tr>
+                                                    <td class="attrTextSpec">Actor Principal: </td>
+                                                    <td><input type="text" ng-model=vm.specMod.actorPrin class="form-controlInputSpec"   required/>
+                                                    </td>
+                                                </tr>
+
+                                                 <tr>
+                                                    <td class="attrTextSpec">Actor Secundario: </td>
+                                                    <td><input type="text" ng-model=vm.specMod.actorSec class="form-controlInputSpec" required/>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td class="attrTextSpec">Pre-Condición:</td>
+                                                    <td> <input type="text" ng-model=vm.specMod.preCon class="form-controlInputSpec" required/> 
+                                                    </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                  <td class="attrTextSpec">Flujo Principal: </td>
+                                                  <td>
+                                                     <textarea class="form-controlInputSpecTA" ng-model="vm.specMod.flujoPrin"></textarea>
+                                                  </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                  <td class="attrTextSpec">Post-Condición:</td>
+                                                  <td><input type="text" class="form-controlInputSpec" ng-model=vm.specMod.postCon required/>
+                                                  </td>
+
+                                                </tr>
+
+                                                <tr>
+                                                   <td class="attrTextSpec">Flujo Alternativo:</td>
+                                                    <td>
+                                                         <textarea class="form-controlInputSpecTA" ng-model="vm.specMod.flujoAlt"></textarea>
+                                                    </td>
+                                                </tr>    
+                                              </tbody>
+                                          </table>
+                                      </div>
+                                  </div>
+                              </div>
+                                  <center><button id ="save" class="btn btn-primary" ng-click="vm.updateSpec($index)" onclick="recarga()">Modificar</button></center>
+                        </div>
+                      </div>
+                      </div>
+
                 </div>
+                <!--****************FIN VENTANA MODAL*****************-->
+
 
                 <div class="box-body">
                     <div class="panel panel-default">
@@ -21,7 +117,7 @@
                             <table  id ="table" class ="table" border="3">
                                 <thead>
                                     <tr>
-                                      <th colspan="2"> Insersción de especificaciones</th>
+                                      <th colspan="2"></th>
                                     </tr>
                                 </thead>
 
@@ -29,14 +125,14 @@
                                   <tr>
                                      <td class="attrTextSpec">Nombre: </td> 
                                      <td>          
-                                          {{s.name}} 
+                                       {{s.name}} 
                                      </td> 
                                   </tr>
 
                                   <tr>
                                       <td class="attrTextSpec">Id: </td>
                                       <td>          
-                                           {{s.id}}
+                                          {{s.id}}
                                       </td>
                                   </tr>
                                    
@@ -67,39 +163,44 @@
                                         {{s.preCon}}
                                       </td>
                                     </tr>
-                                  
-                                    <tr>
-                                      <td class="attrTextSpec">FlujoPrincipal: </td>
-                                      <td>
-                                        {{s.flujoPrin}}
-                                      </td>
-                                    </tr>
-                                  
+                                  	<tr>
+                                  		<td class="attrTextSpec">FlujoPrincipal: </td>
+                                  		<td>
+                                  				{{s.flujoPrin}}
+                                  		</td>
                                     <tr>
                                       <td class="attrTextSpec">Post-Condición:</td>
                                       <td>
-                                        {{s.postCon}}
+                                       			 {{s.postCon}}
                                       </td>
                                     </tr>
 
                                   <tr>
-                                     <td class="attrTextSpec">Flujo Alternativo:</td>
-                                     <td> 
-                                        {{s.flujoAlt}}
-                                      </td>
+                                    <td class="attrTextSpec">Flujo Alternativo:</td>
+                                    <td>
+                                  		{{s.flujoAlt}}
+                                  	</td>
                                   </tr>    
                                 </tbody>
                             </table>
                         </div>
+
                     </div>
                 </div>
             </div>
             </li>
-            </ul>
-            
+        </ul>
+
+        	<div class="button">
+      			<center><button id ="imprimir" class="btn btn-primary" onclick="pdf()">Imprimir Todo</button></center>
+    			</div>
+
 
 <script>
-	
+	function recarga() {
+    	location.reload();
+	}
+
 function pdf() {
 
   var doc = new jsPDF('a4');

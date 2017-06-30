@@ -93,17 +93,15 @@ function create(userParam) {
                 deferred.reject('Usuario "' + userParam.email + '" ya existe en el base de datos');
             } else {
                 //comprobacion del correo electronico
-                var re = /^[i][0-9][0-9][a-z][a-z][a-z][a-z][a-z]*@[u][c][o][.][e][s]$/;
+                /*var re = /^[i][0-9][0-9][a-z][a-z][a-z][a-z][a-z]*@[u][c][o][.][e][s]$/;
                 if(re.test(userParam.email))
-                {
+                {*/
                     createUser();
                     
-                }else{
+                //}else{
 
-                    deferred.reject("Email incorrecto, introduce el correo de la UCO");
+                    //deferred.reject("Email incorrecto, introduce el correo de la UCO");
                 }
-                
-            }
         });
  
 	    function createUser() {

@@ -3,44 +3,21 @@
 
 	angular
 		.module('app')
-		.controller('Specifications.IndexController', Controller)
-		.directive('editable', function($timeout) {
-            return {
-                restrict: 'A',
-                require : 'ngModel',
-                link: function(scope, element, attrs, ngModel) {
-                    var loadeditable = function() {
-                        angular.element(element).editable({
-                            type:'text',
-                            mode: 'inline',
-                            emptytext: 'campo vacío',
-                            onblur:'submit',
-                            display: function(value, srcData) {
-                                scope.$apply(function(){
-                                    ngModel.$setViewValue(value);
-                                });
-                            }
-                        });
-                    };
-                    $timeout(function() {
-                        loadeditable();
-                    }, 10);
-                }
-            };
-        });
-
+		.controller('Specifications.IndexController', Controller);
 
 		function Controller(UserService, FlashService, SpecService)
 		{
 			var vm = this;
+			var i = 0;
 
-			vm.spec = null;
+			vm.specMod= null;
 			vm.specifications = null;
-			vm.fp = [];
-
+		
+		
 			vm.saveSpec = saveSpec;
 			vm.deleteSpec = deleteSpec;
 			vm.updateSpec = updateSpec;
+			vm.getIndex = getIndex;
 
 			initSpec();
 
@@ -51,6 +28,7 @@
 			}
 
 			function saveSpec(){
+
 				SpecService.Create(vm.spec)
 					.then(function(){
 						FlashService.Success('Especificacion almacenada correctamente');
@@ -58,8 +36,6 @@
 					.catch(function(error){
 						FlashService.Error(error);
 					});
-					
-
 			}
 
 			function deleteSpec(index){
@@ -67,7 +43,7 @@
 					if(index === key){
 						SpecService.Delete(vm.specifications[key])
 						.then(function(){
-							FlashService.Success('Especificación'+vm.spec[key].name +'eliminada correctamente')
+							FlashService.Success('Especificación eliminada correctamente')
 						})
 						.catch(function(error){
 							FlashService.Error(error);
@@ -75,9 +51,12 @@
 					}
 
 				});
-			}
+			}	
 
 			function updateSpec(index){
+
+				vm.specifications[index] = vm.specMod;
+				
 				SpecService.Update(vm.specifications[index])
 				.then(function(){
 					FlashService.Success('Especificación modificada correctamente');
@@ -86,6 +65,13 @@
 					FlashService.Error(error);
 				});
 			}
+
+			function getIndex(index){
+					vm.specMod = vm.specifications[index];
+			}
+
+			
+
 		}
 
 })();
@@ -99,3 +85,22 @@ function verificarReqRepe(){
                  return result = true;
        });
     }*/
+
+/*
+			function addNewAction(){
+
+				vm.fp.push({'fp': vm.spec.flujoPrin});
+				i++;
+			}	
+
+			function addNewActionFA(){
+
+				vm.fa.push({'fa': vm.spec.flujoAlt});
+				i++;
+			}	
+	
+			function removeChoice(){
+			    var lastItem = $scope.choices.length-1;
+			    vm.choices.splice(lastItem);
+			  };
+			*/

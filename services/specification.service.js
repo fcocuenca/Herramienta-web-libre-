@@ -110,15 +110,42 @@ function _delete(SpecParam){
  * @return  {usuario modificado}
  */
 function update(SpecParam){
-	console.log("has entrado en update");
-	
+
+	console.log("has entrado en updateSpec");
+
+	console.log("id: ", SpecParam.id);
+	console.log("name: ", SpecParam.name);
+	console.log("desc: ", SpecParam.desc);
+	console.log("AP: ", SpecParam.actorPrin);
+	console.log("AS: ", SpecParam.actorSec);
+	console.log("Prec: ", SpecParam.preCon);
+	console.log("flujoP: ", SpecParam.flujoPrin);
+	console.log("postCon: ", SpecParam.postCon);
+	console.log("flujoAlt: ", SpecParam.flujoAlt);
+
     var deferred = Q.defer();
     
     var id= SpecParam._id;
-    var content = SpecParam.content;
+    var name = SpecParam.name;
+    var idSpec = SpecParam.id;
+    var desc = SpecParam.desc;
+    var actorPrin = SpecParam.actorPrin;
+    var actorSec = SpecParam.actorSec;
+    var preCon = SpecParam.preCon;
+    var flujoPrin = SpecParam.flujoPrin;
+    var postCon = SpecParam.postCon;
+    var flujoAlt = SpecParam.flujoAlt
 
     var set = {	
-    			content: content,
+    			name: name,
+    			id: idSpec,
+    			desc: desc,
+    			actorPrin: actorPrin, 
+    			actorSec: actorSec, 
+    			preCon: preCon,
+    			flujoPrin: flujoPrin,
+    			postCon: postCon,
+    			flujoAlt: flujoAlt,
     };
 
     db.specification.update(
@@ -130,5 +157,6 @@ function update(SpecParam){
     	deferred.resolve();
     });
     	console.log("has salido update");
+        
     return deferred.promise;
 }

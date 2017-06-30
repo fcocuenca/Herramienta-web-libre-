@@ -78,10 +78,8 @@ function deleteSpec(req, res) {
  * updateRf: hacemos referencia al servicio update para modificar los requisitos funcionales
  */
 function updateSpec(req, res) {
-     console.log("dentro de UpdateRf")
-     console.log("id UpdateRf: "+req.body._id);
-     console.log("content: "+req.body.content);
-
+     console.log("dentro de UpdateSpec")
+ 
         specService.update(req.body)
             .then(function () {
                 res.sendStatus(200);
