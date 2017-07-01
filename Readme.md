@@ -14,7 +14,7 @@ Trabajo fin de grado realizado por Francisco Cuenca Salido, se procede a la crea
 
     docker run -it --rm -p 3000:3000 --link uml-mongo:mongodb --name uml-node iuml-node
 
-Here the web is working at: http://127.0.0.1:8080/ and the terminal displays log and errors
+Here the web is working at: http://127.0.0.1:3000/ and the terminal displays log and errors
 
 
 # Uso de MongoDB #
