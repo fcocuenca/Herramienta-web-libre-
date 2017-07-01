@@ -1,5 +1,5 @@
 {
-  "name"         : "Herramienta para la espec de req",
+  "name"         : "HerramientaParaEspReq",
   "version"      : "1.0.0",
   "description"  : "TFG: Herramienta web libre para la especificacion de requisitos en UML",
   "author"       : "FcoCuenca",
@@ -16,7 +16,6 @@
     "express-session": "~1.15.1",
     "jsonwebtoken": "~6.2.0",
     "lodash": "~4.17.4",
-    "mongodb": "~3.2.12",
     "mongoskin": "~2.1.0",
     "mongoose": "~4.8.3",
     "q": "~1.4.1",

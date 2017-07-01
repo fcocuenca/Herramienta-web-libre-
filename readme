@@ -1,8 +1,0 @@
-Trabajo fin de grado realizado por Francisco Cuenca Salido, se procede a la creación de una herramienta web libre para la especificación de requisitos con el lenguaje de notacion UML.
-
-###Uso de MongoDB###
-1.show databases para ver las bases de datos.
-2.use tfg para la eleccón de nuestra base de datos 
-3.show collections para ver las colecciones
-4.db.users.find().pretty() para mostrar los datos de forma ordenada.
-
