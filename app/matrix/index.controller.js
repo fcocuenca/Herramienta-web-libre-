@@ -8,25 +8,21 @@
 		{
 
 			var vm = this;
-
+		
 			vm.specifications=null;
 			vm.rf=null;
 			vm.matrix = null;
 
-			vm.resultado = null;
+			vm.name=null;
+			vm.selected=null;
+			vm.prueba = [];
 
-			vm.guardarMatriz = guardarMatriz;
+			/*funciones*/
+			vm.avisar = avisar;
+			vm.comprobar = comprobar;
 
-			/*FUNCIONAMIENTO: tenemos que acceder al campo id en la especificaciones y al campo
-			number en los requisitos para poder rellenar la matriz, posteriormente realizaremos
-			con un checkbox para saber donde se ha marcado.*/
 
-			//Con esta funcion nos traemos el id de las especificaciones
-
-			initSpec();
-			
-			
-			
+			initSpec();			
 			function initSpec(){
 				SpecService.GetCurrent().then(function(specifications){
 					vm.specifications = specifications;
@@ -35,7 +31,6 @@
 
 			
 			rfController();
-			/*con esta funcion traremos el numero del requisito funcional*/
 			function rfController() {
 		        RfService.GetCurrent().then(function (rf) {
 		            vm.rf = rf;
@@ -43,23 +38,46 @@
 		    }
 
 		    initMatrix();
-
 		    function initMatrix(){
 		    	MatrixService.GetCurrent().then(function(matrix){
 		    		vm.matrix = matrix;
 		    	});
 		    }
 
+		    function avisar(name, number, id){
+		    		console.log(name);
+		    		console.log(number);
+		    		console.log(id)
+		    		var i=0;
+		    		
+		    		if(vm.selected[id] == true){
+		    			vm.prueba.push({'idRF': number, 'idCU': name, 'id': id});
+		    			i++;
+		    		}
 
+	    			if(vm.selected[id] == false)
+	    			{
+	    				
+	    			}
+
+		    }
+
+		    function comprobar(id){
+					
+		    }
+	}
+})();
+
+
+
+
+
+
+		    /*
 		    function guardarMatriz(){
 		    	if(MatrixService.Create(vm.resultado))
 		    		FlashService.Success('El resultado se ha almacnado correctamente');
 		    	else
 		    		FlashService.Success('Ha ocurrido un error, intentelo de nuevo');
 		    }
-
-
-
-		}
-
-})();
+		    */

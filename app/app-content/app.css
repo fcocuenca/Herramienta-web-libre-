@@ -365,7 +365,7 @@ label > span {
   background-color: #fff;
   border-radius: 12px;
   width: 80%;
-  margin-left: 14%;
+  margin-left: 10%;
   margin-top: 15px;
 }
 
@@ -1259,7 +1259,18 @@ td.tdMat{
     font-family: Pacifico;
   }
 
-
+.inputMatBloq{
+    font-size: 18px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #f9f9f9;
+    background-image: none;
+    border: 1px solid #f9f9f9;
+    border-radius: 4px;
+    font-family: 'Lobster', cursive;
+    padding: 0 0 0 4px;
+    width: 2%;
+}
 /*
 .sidebar {
   margin-bottom: 100px;

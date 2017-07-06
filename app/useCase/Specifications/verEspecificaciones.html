@@ -1,25 +1,11 @@
    
   <br><br>
- 
- <ul ng-repeat="s in vm.specifications">
- <li>
-  <div class="col-md-12">
-                <!--Header de la tabla-->
-                <div class="box box-solid box-success">
-                    <div class="box-headerSpec">
-                            <h3 class="box-tittle"> Especificación de Caso de uso: id: {{s.id}}, nombre: {{s.name}}</h3>
-                             	<div class="box-tools pull-right" >
-                                        <a href="" onclick="pdf()" ><span class="imprimir glyphicon glyphicon-print"></span></a> &nbsp &nbsp
-                                        <a href="" id ="update" data-toggle="modal" ng-click="vm.getIndex($index)" data-target="#editar"><span width="30px;" heigth="30px;" class="imprimir glyphicon-pencil"></span></a>
-                                        &nbsp &nbsp   
-                            			<a href="" id ="delete" ng-click="vm.deleteSpec($index)" onclick="recarga()"><span width="30px;" heigth="30px;" class="imprimir glyphicon-trash"></span></a> 
-								</div>
-                    </div>
 
-                    <!--*********INICIO VENTAN MODAL**********-->
+  <!--*********INICIO VENTANA MODAL**********-->
                      <div class="modal fade" id="editar" role="dialog">
                         <div class="modal-dialog modal-lg" >
                         <div class="modal-content">
+
                           <!-- Modal content-->
                           <div class="col-md-12">
                             <div class="flash-message" ng-if="flash">
@@ -30,6 +16,7 @@
                                           <h3 class="box-tittle"> Edición de Especificaciones</h3>
                                   </div>
                               </div>
+                              
 
                               <div class="box-body">
                                   <div class="panel panel-default">
@@ -109,16 +96,27 @@
 
                 </div>
                 <!--****************FIN VENTANA MODAL*****************-->
+ 
+ <ul ng-repeat="s in vm.specifications">
+ <ol>
+  <div class="col-md-12">
+                <!--Header de la tabla-->
+                <div class="box box-solid box-success">
+                    <div class="box-headerSpec">
+                            <h3 class="box-tittle"> Especificación de Caso de uso: id: {{s.id}}, nombre: {{s.name}}</h3>
+                             	<div class="box-tools pull-right" >
+                                        <!--<a href="" onclick="pdf()" ><span class="imprimir glyphicon glyphicon-print"></span></a> &nbsp &nbsp-->
+                                        <a href="" id ="update" data-toggle="modal" ng-click="vm.getIndex($index)" data-target="#editar"><span width="30px;" heigth="30px;" class="imprimir glyphicon-pencil"></span></a>
+                                        &nbsp &nbsp   
+                            			<a href="" id ="delete" ng-click="vm.deleteSpec($index)" onclick="recarga()"><span width="30px;" heigth="30px;" class="imprimir glyphicon-trash"></span></a> 
+								              </div>
+                    </div>
 
-
-                <div class="box-body">
+                  <div class="box-body">
                     <div class="panel panel-default">
                         <div class="box-body table-responsive no-padding">
-                            <table  id ="table" class ="table" border="3">
+                            <table  class ="table" border="3" id="table">
                                 <thead>
-                                    <tr>
-                                      <th colspan="2"></th>
-                                    </tr>
                                 </thead>
 
                                 <tbody>
@@ -168,6 +166,7 @@
                                   		<td>
                                   				{{s.flujoPrin}}
                                   		</td>
+                                    </tr>
                                     <tr>
                                       <td class="attrTextSpec">Post-Condición:</td>
                                       <td>
@@ -187,56 +186,103 @@
 
                     </div>
                 </div>
-            </div>
-            </li>
+            </ol>
         </ul>
+        </div>
 
         	<div class="button">
-      			<center><button id ="imprimir" class="btn btn-primary" onclick="pdf()">Imprimir Todo</button></center>
-    			</div>
+      			<center><button id ="imprimir" class="btn btn-primary" onclick="pdfTodo()">Imprimir Todo</button></center>
 
+    			</div>
 
 <script>
 	function recarga() {
     	location.reload();
 	}
 
+function pdfTodo(){
+  var long = document.getElementsByTagName("table").length;
+  var i = 1;
+
+  while(i<long)
+  {
+        var doc = new jsPDF('a4');
+        var elem = document.getElementsByTagName("table")[i];
+        var data = doc.autoTableHtmlToJson(elem);
+
+        doc.text("Modelo de Casos de uso:", 70, 40);
+        doc.text("Especificación de Casos de Uso", 70, 48);
+        columns = [" ",  "  Especificación de Casos de uso"];
+        
+        while(i<long){
+          var elem = document.getElementsByTagName("table")[i];
+          var data = doc.autoTableHtmlToJson(elem);
+          doc.autoTable(columns, data.rows,{
+        
+          columnStyles:{
+            0: {columnWidth: 40},
+            1: {columnWidth: 110},
+          },     
+          theme: 'grid',
+          styles: {
+              overflow: 'linebreak',
+              fontSize: 10,
+              valign: 'middle',
+              rowHeight: 9
+          },
+          margin: {top: 60, left: 30},
+          alternateRowStyles: {
+            fillColor: [239, 239, 239],
+          },
+          headerStyles: {
+            fillColor: [23, 110, 209],
+            fontStyle: 'normal',
+            fontSize: 13
+          }
+        });
+             doc.addPage();
+             i++;
+        }     
+  }
+    doc.save("EspecificaciondeCasosdeUsoCompleta.pdf");
+}
+
 function pdf() {
 
-  var doc = new jsPDF('a4');
-  var elem = document.getElementById('table');
-  var data = doc.autoTableHtmlToJson(elem);
+        var long = document.getElementsByTagName("table").length;
 
-  doc.text("Modelo de Casos de uso:", 70, 40);
-  doc.text("Especificación de Casos de Uso", 70, 48);
-  columns = [" ",  "  Especificación de Casos de uso"];
-  
-  doc.autoTable(columns, data.rows,{
-    
-    columnStyles:{
-      0: {columnWidth: 40},
-      1: {columnWidth: 110},
-    },     
-    theme: 'grid',
-    styles: {
-        overflow: 'linebreak',
-        fontSize: 10,
-        valign: 'middle',
-        rowHeight: 9
+        var doc = new jsPDF('a4');
+        var elem = document.getElementById("table");
+        var data = doc.autoTableHtmlToJson(elem);
 
-
-    },
-    margin: {top: 60, left: 25},
-    alternateRowStyles: {
-      fillColor: [239, 239, 239],
-    },
-    headerStyles: {
-      fillColor: [23, 110, 209],
-      fontStyle: 'normal',
-      fontSize: 13
-    }
-  });
-  doc.save("EspecificaciondeCasosdeUso.pdf");
+        doc.text("Modelo de Casos de uso:", 70, 40);
+        doc.text("Especificación de Casos de Uso", 70, 48);
+        columns = [" ",  "  Especificación de Casos de uso"];
+        
+        doc.autoTable(columns, data.rows,{
+          
+          columnStyles:{
+            0: {columnWidth: 40},
+            1: {columnWidth: 110},
+          },     
+          theme: 'grid',
+          styles: {
+              overflow: 'linebreak',
+              fontSize: 10,
+              valign: 'middle',
+              rowHeight: 9
+          },
+          margin: {top: 60, left: 25},
+          alternateRowStyles: {
+            fillColor: [239, 239, 239],
+          },
+          headerStyles: {
+            fillColor: [23, 110, 209],
+            fontStyle: 'normal',
+            fontSize: 13
+          }
+        });
+        doc.save("EspecificaciondeCasosdeUso.pdf");
 }
 
 </script>

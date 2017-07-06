@@ -26,7 +26,7 @@
 					vm.specifications = specifications;
 				});
 			}
-
+  
 			function saveSpec(){
 
 				SpecService.Create(vm.spec)
