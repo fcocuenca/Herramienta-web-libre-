@@ -33,7 +33,6 @@
                                     <tr ng-repeat ="r in vm.rf">
                                         <td class="tdMat">RF{{r.number}}</td>
                                          <td ng-repeat="s in vm.specifications">
-                                      		
                                         	<input type='checkbox' ng-click="vm.avisar(s.id, r.number, $id)" ng-model="vm.selected[$id]" ng-changed="vm.comprobar($id)">
                                         </td>
                                    </tr>
