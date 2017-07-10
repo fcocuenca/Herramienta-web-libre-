@@ -1,0 +1,56 @@
+<div class="col-md-12">
+        <!--Header de la tabla-->
+        <div class="box box-solid box-success">
+            <div class="box-headerMat">
+                    <h3 class="box-tittle"> Matriz de trazabilidad: Resultado</h3>
+            </div>
+		</div>
+		<div class="box-body">
+                    <div class="panel panel-default">
+                        <div class="box-body table-responsive no-padding">
+
+                        <table class="table">
+	                         	<thead>
+                                   	<th class="thMat">CU/RF</th>
+                                    <th class="thMat" ng-repeat="s in vm.specifications">CU {{s.id}}</th>
+
+                                    <tr ng-repeat ="r in vm.rf">
+                                        <td class="tdMat">RF{{r.number}}</td>
+                                         <td ng-repeat="s in vm.specifications">
+                                         	<input type="checkbox">
+                                         	<span ng-repeat="select in vm.matrix">
+                                         	<span ng-if="select.idRF == r.number && select.idCU == s.id" ng-style="{color: 'green'}">
+                                            Almacenado
+                                        </td>
+                                   </tr>
+	                            </thead>
+                        </table>
+             	 </div>
+                 
+                </div>
+			</div>
+
+					<div class="box-body">
+                    <div class="panel panel-default">
+                        <div class="box-body table-responsive no-padding">
+
+                        <table class="table">
+	                            <tbody>
+										<tr ng-repeat="result in vm.matrix" >
+											<td>
+												<span> 
+													<center>El CU {{result.idCU}} esta cubierto por el RF{{result.idRF}} ||{{result.idRF}} {{result.idCU}} -> {{result.selected}}</center>
+												</span>
+											</td>	
+										</tr>
+	                           	</tbody>
+
+                        </table>
+             	 	</div>
+          
+                </div>
+                       <input type="button" onclick="pdfMatrix()" value="imprimir">
+			</div>
+				
+	</div>
+	<span ng-if="vm.selected[$id] == true" ng-style="{color: 'green'}"

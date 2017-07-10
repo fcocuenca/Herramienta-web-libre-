@@ -75,16 +75,16 @@
                 controllerAs:'vm',
                 data:{activeTab: 'specifications'}
             })
-            .state('editarEspecificaciones',{
-                url:'/editarEspecificaciones',
-                templateUrl:'useCase/Specifications/edit.html',
-                controller:'Specifications.IndexController',
-                controllerAs:'vm',
-                data:{activeTab: 'specifications'}
-            })
             .state('matrixTrazability',{
                 url:'/matrixTrazability',
                 templateUrl:'matrix/index.html',
+                controller:'Matrix.IndexController',
+                controllerAs:'vm',
+                data:{activeTab: 'matrixTrazability'}
+            })
+            .state('matrixLoad',{
+                url:'/matrixLoad',
+                templateUrl:'matrix/matrizCargada.html',
                 controller:'Matrix.IndexController',
                 controllerAs:'vm',
                 data:{activeTab: 'matrixTrazability'}

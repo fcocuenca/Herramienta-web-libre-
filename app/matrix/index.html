@@ -27,33 +27,33 @@
                         <div class="box-body table-responsive no-padding">
 
                         <table class="table">
-	                         	<thead>
-                                   	<th class="thMat">CU/RF</th>
-                                    <th class="thMat" ng-repeat="s in vm.specifications">CU {{s.id}}</th>
+                                   	<td class="thMat">CU/RF</td>
+                                    <td class="thMat" ng-repeat="s in vm.specifications">CU {{s.id}}</td>
+
                                     <tr ng-repeat ="r in vm.rf">
                                         <td class="tdMat">RF{{r.number}}</td>
                                          <td ng-repeat="s in vm.specifications">
-                                        	<input type='checkbox' ng-click="vm.avisar(s.id, r.number, $id)" ng-model="vm.selected[$id]" ng-changed="vm.comprobar($id)">
+                                        	<input type='checkbox' ng-click="vm.avisar(s.id, r.number, $id)" ng-model="vm.selected[$id]">{{r.number}}{{s.id}}
                                         </td>
+
                                    </tr>
-	                            </thead>
-
-	                            <tbody>
-	                            	  
-	                           	</tbody>
-
                         </table>
              	 </div>
                  
                 </div>
 			</div>
+				<div class="button">
+                              <a ui-sref="matrixLoad"><center><button  class="btn btn-primary" ng-click="vm.guardarMatriz()"  >Guardar Matriz</button></center></a> 
+                  </div>     
 	</div>
+
+
 
 	<div class="col-md-12">
         <!--Header de la tabla-->
         <div class="box box-solid box-success">
             <div class="box-headerMat">
-                    <h3 class="box-tittle"> Resultado de la matriz</h3>
+                    <h3 class="box-tittle"> Introduciendo en la matriz </h3>
             </div>
 		</div>
 		<div class="box-body">
@@ -63,7 +63,7 @@
                         <table class="table">
 	                            <tbody>
 										<tr ng-repeat="result in vm.prueba">
-											<td > <center>El CU {{result.idCU}} esta cubierto por el RF{{result.idRF}}</center></td>	
+											<td> <center>El CU {{result.idCU}} esta cubierto por el RF{{result.idRF}}</center></td>	
 										</tr>
 	                           	</tbody>
 
@@ -71,15 +71,15 @@
              	 	</div>
           
                 </div>
-                       <input type="button" onclick="pdfMatrix()" value="imprimir">
 			</div>
 	</div>
 
-				
-
-
 
  <script>	
+
+function recarga() {
+    location.reload();
+}
 
  $(document).ready(function(){
     $('[data-toggle="popover"]').popover();   
@@ -124,6 +124,7 @@
 </script>
 
 <!--
+onclick="recarga()"
 function informarItemsElegidos(elemento) {
 
 var elementosObtenidos = document.getElementsByName(elemento);

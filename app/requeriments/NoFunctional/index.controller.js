@@ -1,3 +1,4 @@
+/*####CONTROLADOR DE ANGULAR####*/
 (function () {
     'use strict';
  
@@ -33,27 +34,34 @@
 
 function Controller(UserService, NRfService, FlashService, CategoryServiceNRf, $filter) {
     
-    /*###Declaracion de variables y funciones####*/    
+/*###########################################
+##########DECLARACIÓN DE VARIABLES###########
+###########################################*/ 
 	var vm = this;
     var result;
 
+/*####OBTENCIÓN DE DATOS####*/
 	vm.user=null;
     vm.nrf = null;
     vm.catnrf= null;
 
+/*####VARIABLES SCOPE####*/
     vm.requisitonf=null;
     vm.modificadonf=null;
-
     vm.categorianrf=null;
     vm.modcategorynrf=null;
 
+/*FUNCIONES REQUISITOS NO FUNCIONALES*/
     vm.saveNRf = saveNRf;
     vm.deleteNRf=deleteNRf;
     vm.updateNRf=updateNRf;
 
+/*####FUNCIONES CATEGORIAS####*/
     vm.saveCatNrf = saveCatNrf;
     vm.updateCatNrf= updateCatNrf;
     vm.deleteCatNrf = deleteCatNrf;
+
+/*####VERIFICACIONES####*/
     vm.verificarReqRepe = verificarReqRepe;
     vm.orden = orden;
 
@@ -61,11 +69,17 @@ function Controller(UserService, NRfService, FlashService, CategoryServiceNRf, $
     /*####Funciones para obtener todos los requisitos existentes en la bd ####*/
     initController();
 
-    /*####Funciones para obtener todos los requisitos existentes en la bd ####*/
+    /*####Funciones para obtener todos los requisitos no funcionales existentes en la bd ####*/
     nrfController();
 
+    /*####Funciones para obtener todas las categorias existentes en la bd ####*/
     CatNRfController();
-    
+
+
+/*##################################
+###########GETCURRENT()#############
+###################################*/
+
 	function initController() {
 	  
 	    UserService.GetCurrent().then(function (user) {
@@ -87,8 +101,13 @@ function Controller(UserService, NRfService, FlashService, CategoryServiceNRf, $
 	    });
 	}
 
+/*###################################
+###########CRUD REQUISITOS###########
+#####################################*/
+
+
 /**
- * saveRf: llama al controlador Create y inserta un requisito en la bd
+ * saveNRf: llama al controlador Create y inserta un requisito no funcional en la bd
 */
 	function saveNRf(){
 
@@ -105,12 +124,10 @@ function Controller(UserService, NRfService, FlashService, CategoryServiceNRf, $
             else
                 FlashService.Success('Ha ocurrido un error, intentalo de nuevo');    
         }
-
-	    
 	} 
 
 /**
- * deleteRf: llama al controlador Delete y borra un requisito de la bd
+ * deleteNRf: llama al controlador Delete y borra un requisito de la bd
  * @param  {index}
 */
 	function deleteNRf(index){
@@ -129,6 +146,7 @@ function Controller(UserService, NRfService, FlashService, CategoryServiceNRf, $
 	        } 
 	   }); 
 	}
+
 /**
  * updateRf: llama al controlador update y modifica un requisito de la bd
  * @param  {index}
@@ -145,16 +163,27 @@ function Controller(UserService, NRfService, FlashService, CategoryServiceNRf, $
 	                    FlashService.Error(error);
 	                });
 	}
-	
-	function saveCatNrf(){
-    
+
+/*###################################
+###########CRUD CATEGORIAS###########
+#####################################*/	
+
+/**
+ * saveCat: almacena una categoria en la base de datos.
+ * @param  {}
+*/
+    function saveCatNrf(){
+
         if(CategoryServiceNRf.Create(vm.categorianrf))
             FlashService.Success('Categoria introducida correctamente');
         else
             FlashService.Success('Ha ocurrido un error, intentelo de nuevo');
     }
 
-
+/**
+ * updateCat: llama al controlador update y modifica una categoria de la bd
+ * @param  {index}
+*/
 	function updateCatNrf(index){
         vm.catnrf[index].category = vm.modcategorynrf;
 
@@ -166,7 +195,11 @@ function Controller(UserService, NRfService, FlashService, CategoryServiceNRf, $
                         FlashService.Error(error);
                     });
     }
-
+    
+/**
+ * deleteCat: llama al contraolador delete y elimina una categoria.
+ * @param  {index}
+*/
     function deleteCatNrf(index){
         angular.forEach(vm.catnrf, function(value, key){
             if(index === key)
@@ -183,6 +216,9 @@ function Controller(UserService, NRfService, FlashService, CategoryServiceNRf, $
        }); 
     }
 
+/*################################
+############VERIFICACIONES########
+################################*/
     function verificarReqRepe(){
         
         angular.forEach(vm.nrf, function(value, key){

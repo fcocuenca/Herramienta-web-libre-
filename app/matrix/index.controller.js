@@ -13,13 +13,14 @@
 			vm.rf=null;
 			vm.matrix = null;
 
-			vm.name=null;
+			vm.isChecked=isChecked;
 			vm.selected=[];
 			vm.prueba = [];
+			vm.edicion =[];
 
 			/*funciones*/
+			vm.guardarMatriz = guardarMatriz;
 			vm.avisar = avisar;
-			vm.comprobar = comprobar;
 			vm.eliminar =eliminar;
 
 
@@ -45,12 +46,29 @@
 		    	});
 		    }
 
+
+		    function guardarMatriz(){
+		    	
+		    	isChecked();
+
+		    	if(resul == true){
+		    		FlashService.Error('Ya ha sido seleccionado');
+		    	}else
+		    	{
+		    		if(MatrixService.Create(vm.prueba))
+		    			FlashService.Success('El resultado se ha almacenado correctamente');
+		    		else
+		    			FlashService.Success('Ha ocurrido un error, intentelo de nuevo');
+		    	} 	
+		    }
+
 		    function avisar(name, number, id){
 		    	
 		    		var i=0;
 		    		
 		    		if(vm.selected[id] == true){
-		    			vm.prueba.push({'idRF': number, 'idCU': name, 'id': id});
+
+		    			vm.prueba.push({'idRF': number, 'idCU': name, 'id': id, 'selected': true});
 		    			i++;
 		    			console.log("añado"+id);
 		    		}
@@ -64,9 +82,9 @@
 			    				vm.eliminar(i);
 			    			}
 			    		}
-		    		}
-		    		
+		    		}		    		
 		    }
+
 
 		    function eliminar(id)
 		    {
@@ -74,16 +92,22 @@
 		    	console.log(vm.prueba);
 		   	}
 
-		    function comprobar(id){
-				
-		    }
+		   	function isChecked(){
+
+		   		for(var i=0; i<vm.prueba.length; i++)
+		   		{
+		   			for(var j=0; j<vm.matrix.length; j++)
+		   			{
+		   				if((vm.prueba[i].idRF === vm.matrix[j].idRF) && (vm.prueba[i].idCU === vm.matrix[i].idCU)){
+							
+							//existe uno repetido  					
+		   					return result = true;
+		   				}
+		   			}
+		   		}
+		   	}
 	}
 })();
-
-
-
-
-
 
 		    /*
 		    function guardarMatriz(){

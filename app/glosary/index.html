@@ -10,6 +10,7 @@
                     <div class="{{'alert alert-' + flash.type}}" ng-bind="flash.message"></div>
              </div>         
 
+             <!--INSERCION DE TERMINOS-->
             <div class="col-md-12">
                 <!--Header de la tabla-->
                 <div class="box box-solid box-success">
@@ -50,10 +51,10 @@
                      <div class="button">
                             <center><button id ="save" class="btn btn-primary" onclick="recarga()" ng-click="vm.saveTerm()" >Guardar</button></center>
                     </div>
-
-
             </div>
-                 
+            <!--FIN INSERCION DE TERMINOS-->
+
+            <!--LISTADO DE TERMINOS-->                 
             <div class="col-md-12 ancho" > 
                 <!--Header de la tabla-->
                         <div class="box box-solid box-success">
@@ -78,7 +79,6 @@
                               </thead>
 
                               <tbody>
-
                                	<tr ng-repeat="t in vm.glosary">
                                		<td>
                                			 <a display="Term" ng-model="vm.modificadoTerm" editable="{{t.content}}">{{t.content}}</a>
@@ -90,10 +90,11 @@
                                         <a href="" id ="delete" ng-click="vm.deleteTerm($index)" onclick="recarga()"><span width="30px;" heigth="30px;" class="glyphicon glyphicon-trash"></span></a>
                                		</td>
                                	</tr>
-
                               </tbody>     
                             </table>
-            </div>  
+                      </div>  
+
+                      <!--FIN DE LISTADO-->
 
 <script>
 

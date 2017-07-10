@@ -1,3 +1,4 @@
+/*####CONTROLADOR DE ANGULAR####*/
 (function () {
     'use strict';
  
@@ -34,31 +35,34 @@
 function Controller(UserService, RfService, FlashService, CategoryService, $filter) {
 
 /*###########################################
-###Declaracion de variables##################
+##########DECLARACIÓN DE VARIABLES###########
 ###########################################*/    
     var vm = this;
     var result;
 
-
+/*####OBTENCIÓN DE DATOS####*/
     vm.user=null;
     vm.rf = null;
     vm.cat=null;
 
+/*####VARIABLES SCOPE####*/
     vm.requisito=null;
-
     vm.categoria=null;
     vm.modcategory=null;
-    
     vm.modificado=null;
     vm.priority=null;
 
+/*####FUNCIONES REQUISITOS FUNCIONALES####*/
     vm.saveRf = saveRf;
     vm.deleteRf=deleteRf;
     vm.updateRf=updateRf;
 
+/*####FUNCIONES CATEGORIAS####*/
     vm.saveCat = saveCat;
     vm.updateCat = updateCat;
     vm.deleteCat = deleteCat;
+
+/*####VERIFICACIONES####*/
     vm.verificarReqRepe = verificarReqRepe;
 
     /*####Funciones para obtener todos los requisitos existentes en la bd ####*/
@@ -103,7 +107,7 @@ function Controller(UserService, RfService, FlashService, CategoryService, $filt
 #####################################*/
 
 /**
- * saveRf: llama al controlador Create y inserta un requisito en la bd
+ * saveRf: llama al servicio Create y inserta un requisito en la bd
 */
     function saveRf(){
 
@@ -128,7 +132,7 @@ function Controller(UserService, RfService, FlashService, CategoryService, $filt
 
 
 /**
- * deleteRf: llama al controlador Delete y borra un requisito de la bd
+ * deleteRf: llama al servicio Delete y borra un requisito de la bd
  * @param  {index}
 */
     function deleteRf(index){
@@ -149,7 +153,7 @@ function Controller(UserService, RfService, FlashService, CategoryService, $filt
     }
 
 /**
- * updateRf: llama al controlador update y modifica un requisito de la bd
+ * updateRf: llama al servicio update y modifica un requisito de la bd
  * @param  {index}
 */
     function updateRf(index){
@@ -170,6 +174,10 @@ function Controller(UserService, RfService, FlashService, CategoryService, $filt
 /*###################################
 ###########CRUD CATEGORIAS###########
 #####################################*/
+/**
+ * saveCat: almacena una categoria en la base de datos.
+ * @param  {}
+*/
     function saveCat(){
         if(CategoryService.Create(vm.categoria))
             FlashService.Success('Categoria introducida correctamente');
@@ -177,8 +185,10 @@ function Controller(UserService, RfService, FlashService, CategoryService, $filt
             FlashService.Success('Ha ocurrido un error, intentelo de nuevo');
     }
 
-
-
+/**
+ * updateCat: llama al servicio update y modifica una categoria de la bd
+ * @param  {index}
+*/
     function updateCat(index){
         vm.cat[index].category = vm.modcategory;
 
@@ -191,6 +201,10 @@ function Controller(UserService, RfService, FlashService, CategoryService, $filt
                     });
     }
 
+/**
+ * deleteCat: llama al servicio delete y elimina una categoria.
+ * @param  {index}
+*/
     function deleteCat(index){
         angular.forEach(vm.cat, function(value, key){
             if(index === key)
@@ -206,12 +220,15 @@ function Controller(UserService, RfService, FlashService, CategoryService, $filt
             } 
        }); 
     }
+
     
-
-    /*################################
-    ############COMPROBACIONES########
-    ################################*/
-
+/*################################
+############VERIFICACIONES########
+################################*/
+/**
+ * verificarReqRepe: verificacion de id repetido en la bd
+ * @param  {index}
+*/
     function verificarReqRepe(){
         
         angular.forEach(vm.rf, function(value, key){
@@ -220,8 +237,6 @@ function Controller(UserService, RfService, FlashService, CategoryService, $filt
                  return result = true;
        });
     }
-
-
 
 }
 

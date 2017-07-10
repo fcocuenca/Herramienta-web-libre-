@@ -24,9 +24,8 @@ service.getById = getById;
 module.exports = service;
 
 function create(MatParam){
-
+	console.log("entra en createMatriz")
 	var deferred = Q.defer();
-
 	db.matrixTrazability.insert(
 		MatParam,
 		function(err, doc){

@@ -1,3 +1,4 @@
+/*####CONTROLADOR DE ANGULAR####*/
 (function () {
     'use strict';
  
@@ -31,122 +32,133 @@
         
  
     function Controller($window, UserService, FlashService, GlosaryService, $filter) {
-        var vm = this;
-        vm.letraA=[];
+        
+/*###########################################
+##########DECLARACIÓN DE VARIABLES###########
+###########################################*/   
+    var vm = this;
+    vm.letraA=[];
+    var result;
 
-        vm.glosary= null;
-    	vm.termino=null;
-        vm.modificadoTerm = null;
-        vm.saveTerm = saveTerm;
-        vm.deleteTerm = deleteTerm;
-        vm.updateTerm = updateTerm;
-        vm.terminos;
-        var result;
-        vm.comprobar = comprobar;
-       // vm.bubbleSort = bubbleSort;
+/*####OBTENCIÓN DE DATOS####*/
+	vm.glosary= null;
 
+/*####VARIABLES SCOPE####*/
+   	vm.termino=null;
+    vm.modificadoTerm = null;
+    vm.terminos;
+    
+/*####FUNCIONES GLOSARIO####*/
+    vm.saveTerm = saveTerm;
+    vm.deleteTerm = deleteTerm;
+    vm.updateTerm = updateTerm;
 
-        initGlosary();
-
-        /*Obtener TODOS los datos de la BD*/
-        function initGlosary(){
-        	GlosaryService.GetCurrent().then(function(glosary)
-        	{
-        		vm.glosary = glosary;
-        	});
-        }
-
-        function saveTerm(){
-           
-            	if(GlosaryService.Create(vm.termino))
-            			FlashService.Success('Término introducido correctamente');
-            	else
-           		 		FlashService.Success('Ha ocurrido un error, intentalo de nuevo');
-        }
-
-        function deleteTerm(index){
-        	 angular.forEach(vm.glosary, function(value, key){
-            if(index === key)
-            {
-                GlosaryService.Delete(vm.glosary[key])
-                .then(function () {
-                    FlashService.Success('Término borrado correctamente: '+vm.glosary[key].content);
-                })
-                .catch(function (error) {
-                    FlashService.Error(error);
-                });
-               
-        	    } 
-    	   }); 
-        	
-         }
-
-         function updateTerm(index){
-         	vm.glosary[index].content =vm.modificadoTerm;
-
-         	GlosaryService.Update(vm.glosary[index])
-         	.then(function(){
-	                    FlashService.Success('Término modificado correctamente: '+vm.glosary[index].content);
-         		})
-         	.catch(function (error) {
-	                    FlashService.Error(error);
-	            });
-         }
+/*####VERIFICACIONES####*/    
+    vm.comprobar = comprobar;
 
 
-	    function comprobar(){
+/*##################################
+###########GETCURRENT()#############
+###################################*/
+    initGlosary();
 
-        	var primeraletra;
-            var longitud = vm.glosary.length
-            var i=0;
-            var str; 
-            var res; 
-            var palabraA=[];
-            var palabraB=[];
-
-            for(i=0; i<longitud; i++)
-            {
-                str = vm.glosary[i].content;
-                res = str.substr(0,1);
-
-                if(res === "A")
-                    palabraA.push({'content': vm.glosary[i].content});
-
-                /*if(res === "B")
-                    palabraB.push({'content': vm.glosary[i].content});                    
-                    */
-            }
-            
-           // vm.bubbleSort(palabraA);
-            vm.letraA = palabraA
-        }
-         
-
+    function initGlosary(){
+    	GlosaryService.GetCurrent().then(function(glosary)
+    	{
+    		vm.glosary = glosary;
+    	});
     }
- 
+
+/*###################################
+###########CRUD REQUISITOS###########
+#####################################*/
+
+/**
+ * saveTerm: llama al servicio create para almacenar el termino en la bd
+*/
+    function saveTerm(){
+       
+        	if(GlosaryService.Create(vm.termino))
+        			FlashService.Success('Término introducido correctamente');
+        	else
+       		 		FlashService.Success('Ha ocurrido un error, intentalo de nuevo');
+    }
+
+/**
+ * deleteTerm: llama al servicio delete para almacenar el termino en la bd
+ * @param  {index}
+*/
+    function deleteTerm(index){
+    	 angular.forEach(vm.glosary, function(value, key){
+        if(index === key)
+        {
+            GlosaryService.Delete(vm.glosary[key])
+            .then(function () {
+                FlashService.Success('Término borrado correctamente: '+vm.glosary[key].content);
+            })
+            .catch(function (error) {
+                FlashService.Error(error);
+            });
+           
+    	    } 
+	   }); 
+    	
+     }
+
+/**
+ * updateTerm: llama al servicio update para almacenar el termino en la bd
+ * @param  {index}
+*/
+     function updateTerm(index){
+     	vm.glosary[index].content =vm.modificadoTerm;
+
+     	GlosaryService.Update(vm.glosary[index])
+     	.then(function(){
+                    FlashService.Success('Término modificado correctamente: '+vm.glosary[index].content);
+     		})
+     	.catch(function (error) {
+                    FlashService.Error(error);
+            });
+     }
+
+/*################################
+############VERIFICACIONES########
+################################*/
+    function comprobar(){
+
+    	var primeraletra;
+        var longitud = vm.glosary.length
+        var i=0;
+        var str; 
+        var res; 
+        var palabraA=[];
+        var palabraB=[];
+
+        for(i=0; i<longitud; i++)
+        {
+            str = vm.glosary[i].content;
+            res = str.substr(0,1);
+
+            if(res === "A")
+                palabraA.push({'content': vm.glosary[i].content});
+
+            /*if(res === "B")
+                palabraB.push({'content': vm.glosary[i].content});                    
+                */
+        }
+        
+        vm.letraA = palabraA
+    }
+     
+
+}
+
 })();
 
 /*
-        function bubbleSort(array){
-            var size = array.length;
-            var pass = 1;
-            var left = 0;
-            for(pass = 1; pass<size; pass++){
-                for(left; left<(size-pass); left++){
-                    var right = left + 1;
-                    if(array[left] > array[right]){
-                        FlashService.Success('esto va del carajo')
-                    } 
-                }
-            }
-            return array;
-        }
-  
+     vm.orderReverse = true;
 
-
-         vm.orderReverse = true;
-
-	   function orden(){
-	        vm.orderReverse = !vm.orderReverse;
-	        vm.glosary = $filter('orderBy')(vm.glosary, 'content', vm.orderReverse);
-	    }*/
+   function orden(){
+        vm.orderReverse = !vm.orderReverse;
+        vm.glosary = $filter('orderBy')(vm.glosary, 'content', vm.orderReverse);
+    }*/

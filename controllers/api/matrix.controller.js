@@ -25,7 +25,7 @@ router.get('/current', getCurrentMat);
 
 module.exports = router;
 
-function createMatrix(){
+function createMatrix(req, res){
 	console.log("has entrado en createMatrix");
 	matService.create(req.body)
 		.then(function(){
@@ -36,7 +36,7 @@ function createMatrix(){
 		});
 }
 
-function getCurrentMat(){
+function getCurrentMat(req, res){
 	console.log("has entrado en e getCurrentMat");
 	matService.getById()
         .then(function(result){
