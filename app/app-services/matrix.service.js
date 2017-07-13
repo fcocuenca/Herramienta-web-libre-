@@ -11,6 +11,8 @@
  
         service.GetCurrent = GetCurrent;
         service.Create = Create;
+        service.DeleteCheck = DeleteCheck;
+        service.Delete = Delete;
     
         return service;
  
@@ -21,6 +23,15 @@
         function Create(result) {
             return $http.post('/api/matrixTrazability/createMat', result).then(handleSuccess, handleError);
         }
+
+        function DeleteCheck(result) {
+            return $http.post('/api/matrixTrazability/deleteCheck', result).then(handleSuccess, handleError);
+        }
+
+        function Delete(result) {
+            return $http.post('/api/matrixTrazability/delete', result).then(handleSuccess, handleError);
+        }
+
 
 
         // private functions

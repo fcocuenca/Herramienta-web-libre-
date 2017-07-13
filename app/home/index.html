@@ -80,7 +80,58 @@
                                        
                   <div>
                       <center><span class="textHome">¿Deseas compartir tu proyecto?</center>
-                       <center><button class="btn btn-success"><span width="15px;" heigth="15px;" class="glyphicon glyphicon-eye-open"></span><span class="btnHome"> Compartir</span></button></center>
+                       <center><button class="btn btn-success"><span width="15px;" heigth="15px;" class="glyphicon glyphicon-eye-open" data-toggle="modal" data-target="#editar">
+                       										   		<span class="btnHome">Compartir</span></button>
+                       										   </span>
+						</center>
                   </div>
                                            
-                                        
+                                         <!--*********INICIO VENTANA MODAL**********-->
+                     <div class="modal fade" id="editar" role="dialog">
+                        <div class="modal-dialog modal-lg" >
+                        <div class="modal-contentCompartir">
+
+                          <!-- Modal content-->
+                          <div class="col-md-Compartir">
+                            <div class="flash-message" ng-if="flash">
+                                 <div class="{{'alert alert-' + flash.type}}" ng-bind="flash.message"></div>
+                            </div>   
+                              <div class="box box-solid box-success">
+                                  <div class="box-headerHome">
+                                          <h3 class="box-tittle">Compartir proyecto</h3>
+                                  </div>
+                              </div>
+                              
+
+                              <div class="box-body">
+                                  <div class="panel panel-default">
+                                      <div class="box-body table-responsive no-padding">
+                                          <table class ="table">
+                                              <thead>
+                                              
+                                              </thead>
+
+                                              <tbody>
+                                                <tr>
+                                                   <td class="compartirProy">Correo: </td> 
+                                                   <td class="compartirText">          
+                                                          <input type="text" ng-model="vm.specMod.name" class="form-controlInputSpec" required>
+                                                   </td> 
+                                                  </tr>
+                                                  <tr>
+                                                     <td class="compartirProy">Proyecto: </td>
+                                                      <td class="compartirText">          
+                                                            <input type="text" ng-model="vm.specMod.id" class="form-controlInputSpec" required>
+                                                      </td>
+                                                  </tr>
+                                              </tbody>
+                                          </table>
+                                      </div>
+                                  </div>
+                              </div>
+                                  <center><button id ="save" class="btn btn-primary" ng-click="vm.updateSpec($index)" onclick="recarga()">Enviar <span width="15px;" heigth="15px;" class="glyphicon glyphicon-cloud"></span></button></center>
+                        </div>
+                      </div>
+                      </div>
+
+                </div>

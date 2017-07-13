@@ -20,6 +20,8 @@ var service = {};
 
 service.create = create;
 service.getById = getById;
+service.deleteCheck = deleteCheck;
+service.delete = _delete;
 
 module.exports = service;
 
@@ -34,6 +36,41 @@ function create(MatParam){
 				deferred.resolve();
 		});
 	    return deferred.promise;
+}
+
+function deleteCheck(MatParam){
+    console.log("deleteCheck");
+
+    var deferred = Q.defer();
+    var id= MatParam._id;
+
+    db.matrixTrazability.remove(
+    {_id: mongo.helper.toObjectID(MatParam._id)},
+    function(err){
+        if(err) deferred.reject(err);
+        
+        deferred.resolve();
+    });
+        console.log("has salidod _delete");
+    return deferred.promise;
+
+}
+
+function _delete(){
+    console.log("has entrado en _deete");
+    
+    
+    var deferred = Q.defer();
+
+    db.matrixTrazability.remove(
+
+    function(err){
+        if(err) deferred.reject(err);
+        
+        deferred.resolve();
+    });
+        console.log("has salidod _delete");
+    return deferred.promise;
 }
 
 function getById(){
@@ -53,5 +90,6 @@ function getById(){
 	console.log("ha entrado en showAllMatrix");
 	return deferred.promise;
 }
+
 
 

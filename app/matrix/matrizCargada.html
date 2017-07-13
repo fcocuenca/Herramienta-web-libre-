@@ -2,25 +2,32 @@
         <!--Header de la tabla-->
         <div class="box box-solid box-success">
             <div class="box-headerMat">
-                    <h3 class="box-tittle"> Matriz de trazabilidad: Resultado</h3>
+                    <h3 class="box-tittle"> Matriz de trazabilidad</h3>
+                    	<div class="box-tools pull-right" >
+                            <a ui-sref="matrixTrazability" id ="update"><span width="30px;" heigth="30px;" class="imprimir glyphicon-pencil"></span></a>
+                                        &nbsp &nbsp   
+                            <a href="" id ="delete" ng-click="vm.eliminarTodo()" onclick="recarga()"><span width="30px;" heigth="30px;" class="imprimir glyphicon-trash"></span></a> 
+                             			&nbsp &nbsp 
+                            <a href="" onclick="pdfMatrix()" ><span class="imprimir glyphicon glyphicon-print"></span></a>
+						</div>
             </div>
 		</div>
 		<div class="box-body">
                     <div class="panel panel-default">
                         <div class="box-body table-responsive no-padding">
 
-                        <table class="table">
+                        <table class="table" border="3" id="table">
 	                         	<thead>
-                                   	<th class="thMat">CU/RF</th>
-                                    <th class="thMat" ng-repeat="s in vm.specifications">CU {{s.id}}</th>
+                                   	<td class="listRFCU"><center>CU/RF</center></td>
+                                    <td class="listRFCU" ng-repeat="s in vm.specifications"><center>CU {{s.id}}</center> </td>
 
                                     <tr ng-repeat ="r in vm.rf">
-                                        <td class="tdMat">RF{{r.number}}</td>
-                                         <td ng-repeat="s in vm.specifications">
-                                         	<input type="checkbox">
+                                        <td class="listRFCU"><center>RF{{r.number}}</center></td>
+                                         <td class="resulado"ng-repeat="s in vm.specifications">
                                          	<span ng-repeat="select in vm.matrix">
-                                         	<span ng-if="select.idRF == r.number && select.idCU == s.id" ng-style="{color: 'green'}">
-                                            Almacenado
+                                         	<span ng-if="select.idRF == r.number && select.idCU == s.id">
+                                            	<center><img src="app-content/ok.png" width="25px" height="25px"></span></center>
+                                            </span>                                         
                                         </td>
                                    </tr>
 	                            </thead>
@@ -30,27 +37,104 @@
                 </div>
 			</div>
 
+
+					 <div class="box box-solid box-success">
+            			<div class="box-headerMat">
+                    	<h3 class="box-tittle"> Matriz de trazabilidad: Resultado</h3> 
+                            <div class="box-tools pull-right" >
+                                <a href="" onclick="pdfListado()" ><span class="imprimir glyphicon glyphicon-print"></span></a>
+                            </div>
+            		</div>
+
+                                   
+				</div>
 					<div class="box-body">
                     <div class="panel panel-default">
                         <div class="box-body table-responsive no-padding">
-
                         <table class="table">
+                                <thead>
+                                    <th></th>
+                                </thead>
 	                            <tbody>
 										<tr ng-repeat="result in vm.matrix" >
 											<td>
-												<span> 
-													<center>El CU {{result.idCU}} esta cubierto por el RF{{result.idRF}} ||{{result.idRF}} {{result.idCU}} -> {{result.selected}}</center>
-												</span>
+													<center>El CU {{result.idCU}} esta cubierto por el RF{{result.idRF}}</center>
 											</td>	
 										</tr>
 	                           	</tbody>
 
                         </table>
              	 	</div>
-          
                 </div>
-                       <input type="button" onclick="pdfMatrix()" value="imprimir">
 			</div>
-				
-	</div>
-	<span ng-if="vm.selected[$id] == true" ng-style="{color: 'green'}"
+		</div>
+
+<script>
+function recarga() {
+    location.reload();
+}
+function pdfMatrix() {
+
+        var doc = new jsPDF('a4');
+        var elem = document.getElementsByTagName('table')[0];
+        var data = doc.autoTableHtmlToJson(elem);
+
+          doc.text("Modelo de Casos de Uso: ", 70, 40);
+          doc.text("Matriz de trazabilidad", 75, 48);
+          
+          doc.autoTable(data.columns, data.rows,{
+                
+            theme: 'grid',
+            styles: {
+                overflow: 'linebreak',
+                fontSize: 10,
+                valign: 'middle',
+                rowHeight: 9
+            },
+            margin: {top: 60, left: 7},
+            alternateRowStyles: {
+              fillColor: [239, 239, 239],
+            },
+            headerStyles: {
+              fillColor: [255, 87, 51],
+              fontStyle: 'normal',
+              fontSize: 13
+            }
+          });
+
+  doc.save("MatrizdeTrazabilidad.pdf");
+}
+function pdfListado() {
+
+        var doc = new jsPDF('a4');
+        var elem = document.getElementsByTagName('table')[1];
+        var data = doc.autoTableHtmlToJson(elem);
+    
+          doc.text("Modelo de Casos de Uso: ", 70, 40);
+          doc.text("Matriz de trazabilidad: Listado", 70, 48);
+        columns = ["Listado: "];
+          doc.autoTable(columns, data.rows,{
+            columnStyles:{
+                0: {columnWidth: 120},
+            }, 
+            theme: 'grid',
+            styles: {
+                overflow: 'linebreak',
+                fontSize: 10,
+                valign: 'middle',
+                rowHeight: 9,
+            },
+            margin: {top: 60, left: 50},
+            alternateRowStyles: {
+              fillColor: [239, 239, 239],
+            },
+            headerStyles: {
+              fillColor: [255, 87, 51],
+              fontStyle: 'normal',
+              fontSize: 13
+            }
+          });
+
+  doc.save("ListadoMatrizdeTrazabilidad.pdf");
+}
+</script>

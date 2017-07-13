@@ -1,7 +1,7 @@
 
  <div class="tittleContent"> 
             <div class="idea">
-                 <a href="" title="¿Que es una Matriz de trazabilidad?" data-toggle="popover" data-trigger="focus" data-content="La matriz de trazabilidad es un documento/herramienta que nos permite realizar el seguimiento de requisitos. Para obtener un buen seguimiento de requisitos, necesitamos relacionar el modelo de requisitos con el modelo de casos de uso, esto nos va a permitir averiguar si existe algun requisito que no esté tratado en los casos de uso o averiguar si hay algun requisito que este tratado en los casos de uso y no este en el modelo de requisitos. Consecuentemente obtendremos una relacion muchos a muchos donde un caso de uso tratará a muchos requisitos funcionales y un requisito funcional puede estar presente en varios casos de uso." data-placement="bottom"><img src="app-content/bombilla.jpg" class="idea" alt="User Image" width="40px;" height="40px"></a>
+                 <a href="" title="¿Que es una Matriz de trazabilidad?" data-toggle="popover" data-trigger="focus" data-content="La matriz de trazabilidad es un documento/herramienta que nos permite realizar el seguimiento de requisitos. Para obtener un buen seguimiento de requisitos, necesitamos relacionar el modelo de requisitos con el modelo de casos de uso, esto nos va a permitir averiguar si existe algun requisito que no esté tratado en los casos de uso o averiguar si hay algun requisito que este tratado en los casos de uso y no este en el modelo de requisitos. Consecuentemente obtendremos una relacion muchos a muchos donde un caso de uso tratará a muchos requisitos funcionales y un requisito funcional puede estar presente en varios casos de uso." data-placement="bottom"><img src="app-content/bombilla.png" class="ideaIMG" alt="User Image"></a>
             </div>
                     <p>Modelo de Casos de Uso: Matriz de Trazabilidad</p>  
 </div>
@@ -33,7 +33,12 @@
                                     <tr ng-repeat ="r in vm.rf">
                                         <td class="tdMat">RF{{r.number}}</td>
                                          <td ng-repeat="s in vm.specifications">
-                                        	<input type='checkbox' ng-click="vm.avisar(s.id, r.number, $id)" ng-model="vm.selected[$id]">{{r.number}}{{s.id}}
+                                         	<span ng-repeat="select in vm.matrix">
+											<span ng-if="select.idRF == r.number && select.idCU == s.id" ng-style="{color: 'green'}">
+                                            		<input type='checkbox' ng-click="vm.quitarMatrix(s.id, r.number, $id)" ng-model="vm.selectedMod[$id]">&nbsp<i class="fa fa-undo" aria-hidden="true"></i>
+                                            	</span>
+                                           	</span>
+                                          <input type='checkbox' ng-click="vm.avisar(s.id, r.number, $id)" ng-model="vm.selected[$id]">{{r.number}}{{s.id}}
                                         </td>
 
                                    </tr>
@@ -43,7 +48,17 @@
                 </div>
 			</div>
 				<div class="button">
-                              <a ui-sref="matrixLoad"><center><button  class="btn btn-primary" ng-click="vm.guardarMatriz()"  >Guardar Matriz</button></center></a> 
+					<center>
+					 	<div>
+
+                        	
+                        	<span ng-if="vm.matrix.length > 0"> <a ui-sref="matrixLoad"><button  class="btn btn-primary" ng-click="vm.updateMatrix()">Modificar Matriz</button></a></span>
+                        	
+                        	<a ui-sref="matrixLoad"><button  class="btn btn-primary" ng-click="vm.guardarMatriz()">Guardar Matriz</button></a>
+                       
+                         	<a ui-sref="matrixLoad"><button class="btn btn-primary">Ver Matriz</button></a>
+                      	</div>
+                    </center>
                   </div>     
 	</div>
 
@@ -124,6 +139,8 @@ function recarga() {
 </script>
 
 <!--
+                                        		<span ng-if="select.idRF == r.number && select.idCU == s.id; else elseBlock" ng-style="{color: 'green'}">
+
 onclick="recarga()"
 function informarItemsElegidos(elemento) {
 

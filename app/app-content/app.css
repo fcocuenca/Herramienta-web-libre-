@@ -143,7 +143,7 @@ div.topnav a{
 /*####Panel del Usuario####*/
 .user-panel {
   margin-top: 90px;
-  height: 180px;
+  height: 155px;
   font-family: 'Lobster', cursive;
 }
 
@@ -375,6 +375,28 @@ label > span {
     width: 90%;
     margin-left: 5%;
     margin-top: 15px;
+}
+
+.col-md-Compartir{
+ background-color: #fff;
+  border-radius: 12px;
+  width: 70%;
+  margin-left: 14%;
+  margin-top: 15px; 
+}
+.modal-contentCompartir{
+    position: relative;
+    width: 60%;
+    margin: 10% 0 0 30%;
+    background-color: #fff;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    border: 1px solid #999;
+    border: 1px solid rgba(0,0,0,.2);
+    border-radius: 6px;
+    outline: 0;
+    -webkit-box-shadow: 0 3px 9px rgba(0,0,0,.5);
+    box-shadow: 0 3px 9px rgba(0,0,0,.5);
 }
 
 .ancho{
@@ -803,6 +825,7 @@ button.btn-primary {
   background-color: #333;
   font-family: 'Lobster', cursive;
   font-size: 20px;
+  margin-bottom: 15px;
 }
 
 .btn-primary:hover{
@@ -827,7 +850,7 @@ button.btn-danger{
 }
 
 td{
-      padding: 8px;
+    padding: 8px;
     line-height: 1.42857143;
     vertical-align: top;
     border-top: 1px solid #ddd;
@@ -838,6 +861,12 @@ td{
     border-radius: 50%;
     width: 50px;
     height: 50px;
+}
+.ideaIMG{
+      margin-top: 70%;
+      width: 50px;
+      height: 50px;
+
 }
 
 .popover{
@@ -1122,10 +1151,11 @@ td{
   font-family: 'Lobster', cursive;
 }
 
-th.thMat{
+.listRFCU{
+  width: 2%;
 }
-td.tdMat{
-    width: 85px !important;
+.resuladoRFCU{
+    width: 2%;
 }
 
 .box-headerHome{
@@ -1270,6 +1300,19 @@ td.tdMat{
     font-family: 'Lobster', cursive;
     padding: 0 0 0 4px;
     width: 2%;
+}
+
+.compartirProy{
+    padding: 12px 0px 0 20px !important;
+    margin: 7px 17px 7px 34px!important;
+}
+
+.compartirText{
+    padding: 5px 0% 2% 5px !important;
+}
+
+.popoverText{
+
 }
 /*
 .sidebar {

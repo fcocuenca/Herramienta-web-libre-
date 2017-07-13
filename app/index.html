@@ -38,18 +38,6 @@
   <script src="//cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.5.3/picker.time.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.5.3/legacy.js"></script>
 
-<style type="text/css">
-  .largeWidth {
-    color-background: green;
-}
-
-.smallWidth {
-    color-background: red;
-}
-
-</style>
-
-
 </head>
 
 <body>
@@ -60,6 +48,7 @@
 		<div class="topnav">
 	        <a href="/login"> <span class="glyphicon glyphicon-off"></span> Logout</a>
 	        <a ui-sref="account"> <ng-class="{active: activeTab === 'account'}"> <span class="glyphicon glyphicon-user"></span> Mi Cuenta</a>	
+          <a ui-sref="home"><ng-class="{active: activeTab === 'home'}"> <span class="glyphicon glyphicon-home"></span> Mis Proyectos</a>
 		</div>
 	</nav>
 </header>
@@ -79,11 +68,8 @@
         					<img src="app-content/usericon.svg" class="img-circle" alt="User Image">
         		  </div>
               <div class="pull-left-infor">
-        					<p>{{user.firstName}}</p>
-        					<!--<a href="#"> <i class="fa fa-circle text-success"> </i> Conectado</a>-->
-              </div>
-              <div class="pull-left-myProject">
-                  <a ui-sref="home"><ng-class="{active: activeTab === 'home'}"> <span class="glyphicon glyphicon-home"></span> Mis Proyectos</a>
+        					<p> <i class="fa fa-circle text-success"> </i> Conectado</p>
+        					 
               </div>
 		  </div>
 

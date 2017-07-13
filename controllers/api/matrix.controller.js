@@ -20,7 +20,9 @@ var matService = require('services/matrix.service');
 
 /*####Definicion de las rutas####*/
 router.post('/createMat', createMatrix);
+router.post('/delete', deleteMatrix);
 router.get('/current', getCurrentMat);
+router.post('/deleteCheck', deleteCheckMat);
 
 
 module.exports = router;
@@ -35,6 +37,37 @@ function createMatrix(req, res){
 			res.status(400).send(err);
 		});
 }
+
+function deleteCheckMat(req, res) {
+
+        console.log("api/matrix"+req.body);
+    
+        matService.deleteCheck(req.body)
+            .then(function () {
+                res.sendStatus(200);
+            })
+            .catch(function (err) {
+                res.status(400).send(err);
+            });
+
+            console.log("deleteCheck")
+}
+
+function deleteMatrix(req, res) {
+
+        console.log("api/matrix"+req.body);
+    
+        matService.delete(req.body)
+            .then(function () {
+                res.sendStatus(200);
+            })
+            .catch(function (err) {
+                res.status(400).send(err);
+            });
+
+            console.log("delete")
+}
+
 
 function getCurrentMat(req, res){
 	console.log("has entrado en e getCurrentMat");

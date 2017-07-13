@@ -88,6 +88,13 @@
                 controller:'Matrix.IndexController',
                 controllerAs:'vm',
                 data:{activeTab: 'matrixTrazability'}
+            })
+            .state('matrixModify',{
+                url:'/matrixModify',
+                templateUrl:'matrix/modificarMatriz.html',
+                controller:'Matrix.IndexController',
+                controllerAs:'vm',
+                data:{activeTab: 'matrixTrazability'}
             });
     }
 

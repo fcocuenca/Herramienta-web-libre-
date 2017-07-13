@@ -1,0 +1,79 @@
+ <div class="flash-message" ng-if="flash">
+        <div class="{{'alert alert-' + flash.type}}" ng-bind="flash.message"></div>
+ </div>    
+ 	
+ 	
+ 	<div class="col-md-12">
+        <!--Header de la tabla-->
+        <div class="box box-solid box-success">
+            <div class="box-headerMat">
+                    <h3 class="box-tittle"> Matriz de trazabilidad</h3>
+            </div>
+		</div>
+		<div class="box-body">
+                    <div class="panel panel-default">
+                        <div class="box-body table-responsive no-padding">
+
+                        <table class="table">
+                                   	<td class="thMat">CU/RF</td>
+                                    <td class="thMat" ng-repeat="s in vm.specifications">CU {{s.id}}</td>
+
+                                    <tr ng-repeat ="r in vm.rf">
+                                        <td class="tdMat">RF{{r.number}}</td>
+                                         <td ng-repeat="s in vm.specifications">
+                                        	<input type='checkbox' ng-click="vm.quitarMatrix(s.id, r.number, $id)" ng-model="vm.selectedMod[$id]">{{r.number}}{{s.id}}
+                                        	<span ng-repeat="select in vm.matrix">
+                                        	   <span ng-if="select.idRF == r.number && select.idCU == s.id" ng-style="{color: 'green'}">
+                                            Ok!!!</span></span>
+                                        </td>
+
+                                   </tr>
+                        </table>
+             	 </div>
+                 
+                </div>
+			</div>
+				<div class="button">
+					<center>
+					 	<div>
+                        	<button  class="btn btn-primary" ng-click="vm.updateMatrix()">Modificar Matriz</button>
+                         	<a ui-sref="matrixLoad"><button class="btn btn-primary">Ver Matriz</button></a>
+                      	</div>
+                    </center>
+                  </div>     
+	</div>
+
+
+
+	<div class="col-md-12">
+        <!--Header de la tabla-->
+        <div class="box box-solid box-success">
+            <div class="box-headerMat">
+                    <h3 class="box-tittle"> Introduciendo en la matriz </h3>
+            </div>
+		</div>
+		<div class="box-body">
+                    <div class="panel panel-default">
+                        <div class="box-body table-responsive no-padding">
+
+                        <table class="table">
+	                            <tbody>
+										<tr ng-repeat="result in vm.prueba">
+											<td> <center>El CU {{result.idCU}} esta cubierto por el RF{{result.idRF}}</center></td>	
+										</tr>
+	                           	</tbody>
+
+                        </table>
+             	 	</div>
+          
+                </div>
+			</div>
+	</div>
+
+<script>
+
+function recarga() {
+    location.reload();
+}
+
+</script>
