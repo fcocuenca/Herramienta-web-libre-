@@ -76,11 +76,11 @@
                 <div class="box-body">
                     <div class="panel panel-default">
                         <div class="box-body table-responsive no-padding">
+                        <form name="myForm">
                             <table class ="table">
                                 <thead>
                                     <tr>
                                         <th colspan="5"><center>Define tus requisitos funcionales</center></th>
-                                     
                                     </tr>
                                     <tr>
                                         <th colspan="5">
@@ -97,9 +97,11 @@
                                         <th id="rf">
                                           RF
                                         </th>
-                                        <th><input type="text" id="number" class="form-controlInputRf" ng-model="vm.requisito.number" required/></th>
                                         <th>
-                                            <input type="text" id="content" class="form-controlInput" ng-model="vm.requisito.content" required/>
+                                          <input type="text" id="number" class="form-controlInputRf" name="number" ng-model="vm.requisito.number" required/>
+                                        </th>
+                                        <th>
+                                            <input type="text" id="content" class="form-controlInput" ng-model="vm.requisito.content" required />
                                         </th>
                                         <th>
                                             <select name="priority" ng-model="vm.requisito.priority" required>
@@ -108,7 +110,7 @@
                                                 <option value="S">Should have</option>
                                                 <option value="C">Could have</option>
                                                 <option value="W">Want to have</option>
-                                              </select>
+                                            </select>
                                         </th>
                                         <th>
                                            <select name="category"  ng-model="vm.requisito.category" required>
@@ -118,11 +120,12 @@
                                      </tr>
                                 </tbody>
                             </table>
+                            </form>
                         </div>
                     </div>
                 </div>
                      <div class="button">
-                            <center><button id ="save" class="btn btn-primary" ng-click="vm.saveRf()" onclick="recarga()">Guardar</button></center>
+                            <center><button id ="save" class="btn btn-primary" ng-click="vm.saveRf()">Guardar</button></center>
                     </div>
             </div>
 
@@ -195,6 +198,21 @@ $(document).ready(function() {
     });
 });
 */
+/*
+function validar(){
+  var number = document.getElementById('number').value;
+  var content = document.getElementById('content').value;
+
+  if(number === ''){
+    alert("No has introducido el Id");
+  }
+
+  if(content === ''){
+    alert("No has introducido el contenido del requisito");
+  }
+
+}*/
+
 function pdf() {
 
   var doc = new jsPDF('a4');

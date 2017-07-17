@@ -1,8 +1,11 @@
+ 			<div class="flash-message" ng-if="flash">
+		        <div class="{{'alert alert-' + flash.type}}" ng-bind="flash.message"></div>
+		 	</div>  
+				
 
-
-	
 			<div class="col-md-6">
-                   <div class="box box-solid box-success">
+		
+			                   <div class="box box-solid box-success">
                       <div class="box-headerProj">
                               <h3 class="box-tittle"> Información del proyecto</h3>
                       </div>
@@ -35,7 +38,7 @@
 								</div>
 								<br>
 								<div class="box-footer">
-									<a ui-sref="home"><center><button class="btn btn-primary" ng-click="vm.saveProj()" onclick="recarga()">Crear Proyecto</button></center></a>
+									<a href="#"><center><button class="btn btn-primary" ng-click="vm.saveProj()" onclick="recarga()">Crear Proyecto</button></center></a>
 								</div>
 								<br>
                           </div>

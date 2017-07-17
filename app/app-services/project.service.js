@@ -10,6 +10,7 @@
 
 			service.Create = Create;
 			service.GetCurrent = GetCurrent;
+			service.Delete = Delete;
 		
 			return service;
 
@@ -20,8 +21,11 @@
 			function Create(proj){
 				return $http.post('/api/project/createProj', proj).then(handleSuccess, handleError);
 			}
+			
+			function Delete(proj){
+				return $http.post('/api/project/deleteProj', proj).then(handleSuccess, handleError);
+			}
        
-
 			function handleSuccess(res) {
            		 return res.data;
         	}

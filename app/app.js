@@ -98,20 +98,37 @@
             });
     }
 
-    function Controller(UserService){
+    function Controller(UserService, ProjService){
 
-        var vm = this
-        vm.user = null
+        var vm = this;
+        vm.users;
+        vm.userId;
+        vm.proyecto;
 
-        initController();
-        function initController() {
-          
+        initControllerUser();
+        function initControllerUser() {
             UserService.GetCurrent().then(function (user) {
-                vm.user = user;
+                vm.userId = user._id;
+                vm.users = user;
             });
-    }
+        }
 
-    }
+        initControllerProject();
+        function initControllerProject(){
+            ProjService.GetCurrent().then(function(project){
+
+                for(var i=0; i<project.length; i++)
+                {
+                    if(vm.userId===project[i].userId){
+                         vm.proyecto = project;
+                    }else{
+                        console.log("no tiene proyecto creado!!!");
+                    }
+                }
+            })
+        }
+}
+
  
     function run($http, $rootScope, $window) {
         // add JWT token as default auth header

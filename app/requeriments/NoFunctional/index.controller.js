@@ -119,10 +119,14 @@ function Controller(UserService, NRfService, FlashService, CategoryServiceNRf, $
             FlashService.Error('Este id ya esta insertado');
         }else{
 
-            if(NRfService.Create(vm.requisitonf))
-                FlashService.Success('Requisito no funcional introducido correctamente');
-            else
-                FlashService.Success('Ha ocurrido un error, intentalo de nuevo');    
+            (NRfService.Create(vm.requisitonf))
+                .then(function (){
+                    FlashService.Success('Requisito no funcional introducido correctamente');  
+                })
+                .catch(function(error){
+                    FlashService.Error(error);    
+                });
+                
         }
 	} 
 

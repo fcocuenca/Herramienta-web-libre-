@@ -23,6 +23,7 @@
                                         <th>Descripción</th>
                                         <th>Fecha Inicio</th>
                                         <th>Iniciado Por</th>
+                                        <th></th>
                                       </tr>
 
                                   </thead>
@@ -33,7 +34,7 @@
                                        <td>{{p.desc}} </td>
                                        <td>{{p.fechaInicio}}</td>
                                        <td>{{p.iniciadoPor}}</td>
-
+                                       <td><a href="" id ="delete" ng-click="vm.deleteProject($index)" onclick="recarga()" ><span width="30px;" heigth="30px;" class="glyphicon glyphicon-trash"></span></a></td>
                                     </tr>
                                   </tbody>                                
                               </table>
@@ -81,7 +82,7 @@
                   <div>
                       <center><span class="textHome">¿Deseas compartir tu proyecto?</center>
                        <center><button class="btn btn-success"><span width="15px;" heigth="15px;" class="glyphicon glyphicon-eye-open" data-toggle="modal" data-target="#editar">
-                       										   		<span class="btnHome">Compartir</span></button>
+                       										   		<span class="btnHomeComp">Compartir</span></button>
                        										   </span>
 						</center>
                   </div>
@@ -129,9 +130,17 @@
                                       </div>
                                   </div>
                               </div>
-                                  <center><button id ="save" class="btn btn-primary" ng-click="vm.updateSpec($index)" onclick="recarga()">Enviar <span width="15px;" heigth="15px;" class="glyphicon glyphicon-cloud"></span></button></center>
+                                  <center><button id ="save" class="btn btn-primary" ng-click="vm.updateSpec($index)" onclick="recarga()">Enviar <span width="15px;" heigth="15px;" class=" nube glyphicon-cloud"></span></button></center>
                         </div>
                       </div>
                       </div>
 
                 </div>
+
+<script>
+  
+function recarga() {
+    location.reload();
+}
+
+</script>

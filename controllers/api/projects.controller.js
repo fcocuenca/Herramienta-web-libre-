@@ -18,6 +18,7 @@ var projService = require('services/project.service');
 /*####Definicion de las rutas####*/
 router.post('/createProj', createProject);
 router.get('/current', getCurrentProject);
+router.post('/deleteProj', deleteProject);
 
 module.exports = router;
 
@@ -56,6 +57,18 @@ function getCurrentProject(req, res){
         .catch(function(err){
             res.status(400).send(err);
         });
+}
+
+function deleteProject(req, res){
+    console.log("entrado en el delete project");
+    projService.delete(req.body)
+        .then(function(){
+            res.sendStatus(200);
+        })
+        .catch(function(err){
+            res.status(400).send(err);
+        });
+        console.log("entrado en el delete proekc");
 }
 
  

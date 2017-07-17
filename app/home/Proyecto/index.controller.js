@@ -62,11 +62,15 @@
         function saveProj(){
 
             vm.project.iniciadoPor=vm.user.email;
+            vm.project.userId=vm.user._id;
 
-           if(ProjService.Create(vm.project))
-                FlashService.Success("ok");
-            else
-                FlashService.Success("error");
+              (ProjService.Create(vm.project))
+                     .then(function(){
+                        FlashService.Success('Proyecto creado correctamente');
+                     })  
+                    .catch(function(error){
+                         FlashService.Error(error);
+                    });
         }
 
 

@@ -28,7 +28,7 @@
 
                         <table class="table">
                                    	<td class="thMat">CU/RF</td>
-                                    <td class="thMat" ng-repeat="s in vm.specifications">CU {{s.id}}</td>
+                                    <td class="thMat" ng-repeat="s in vm.specifications"> <span class="qs">CU {{s.id}}<span class="popover above">{{s.name}}</span></span></td>
 
                                     <tr ng-repeat ="r in vm.rf">
                                         <td class="tdMat">RF{{r.number}}</td>

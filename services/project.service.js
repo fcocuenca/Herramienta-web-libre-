@@ -22,6 +22,7 @@ var service = {};
 
 service.create = create;
 service.getById = getById;
+service.delete = _delete;
 
 module.exports = service;
 
@@ -76,6 +77,26 @@ function getById(){
 	console.log("ha entrado en showAll");
 	return deferred.promise;
 }
+
+function _delete(ProjParam){
+	console.log("has entrado en _deete");
+	console.log(ProjParam._id);
+    
+    var deferred = Q.defer();
+    var id= ProjParam._id;
+
+    db.project.remove(
+    {_id: mongo.helper.toObjectID(ProjParam._id)},
+    function(err){
+    	if(err) deferred.reject(err);
+    	
+    	deferred.resolve();
+    });
+    	console.log("has salidod _delete");
+    return deferred.promise;
+}
+
+
 
 
 

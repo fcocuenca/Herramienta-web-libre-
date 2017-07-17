@@ -63,23 +63,26 @@
       </div>
 
       <!--Informacion Usuario-->
-      <div class="user-panel">
+      <div class="user-panel" ng-controller="IndexController as settings">
               <div class="pull-left-img">
         					<img src="app-content/usericon.svg" class="img-circle" alt="User Image">
         		  </div>
               <div class="pull-left-infor">
-        					<p> <i class="fa fa-circle text-success"> </i> Conectado</p>
+        					<p> <i class="fa fa-circle text-success"> </i>Conectado<br>{{settings.users.email}}</p>
         					 
               </div>
 		  </div>
+      <br>
+
 
 <!--MenuIzquierdoAcordeon-->
+<div ng-controller="IndexController as mostrar" ng-show="mostrar.proyecto.length > 0">
     <div class="menu">
       <ul class="menu__list">
        <li>
           <input id="group-1" type="checkbox" hidden />
           <label for="group-1">
-          <span class="fa fa-angle-right"></span><i class="glyphicon glyphicon-list-alt"></i> Modelo de Requisitos</label>
+          <span class="fa fa-angle-right"></span><i class="glyphicon glyphicon-list"></i> Modelo de Requisitos</label>
               <ul class="group-list">
                 <li><a ui-sref="functionalrequeriments"><ng-class="{active: activeTab ==='functionalrequeriments'}">Requisitos Funcionales</a></li>
                 <li><a ui-sref="nofunctionalrequeriments"><ng-class="{active: activeTab ==='nofunctionalrequeriments'}">Requisitos No Funcionales</a></li>
@@ -93,10 +96,11 @@
                 <li><a ui-sref="specifications"><ng-class="{active: activeTab ==='specificacions'}">Especificaciones de Casos de Uso</a></li>
               </ul>
          </li>
-        <li><a ui-sref="matrixTrazability"><ng-class="{active: activeTab === 'matrixTrazability'}"><i class="glyphicon glyphicon-list-alt"></i> Matriz de Trazabilidad</a></li>
+        <li><a ui-sref="matrixTrazability"><ng-class="{active: activeTab === 'matrixTrazability'}"><i class="glyphicon glyphicon-calendar"></i> Matriz de Trazabilidad</a></li>
         <li>  <a ui-sref="glosary"> <ng-class="{active: activeTab === 'glosary'}"><i class="glyphicon glyphicon-book"></i> Glosario</a> </li>
       </ul>
    </div>
+</div>
 
    <!--Fin parte izquierda-->
 </aside>

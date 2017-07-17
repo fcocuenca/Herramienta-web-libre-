@@ -39,6 +39,7 @@ function Controller(UserService, RfService, FlashService, CategoryService, $filt
 ###########################################*/    
     var vm = this;
     var result;
+    var vacio;
 
 /*####OBTENCIÓN DE DATOS####*/
     vm.user=null;
@@ -51,6 +52,7 @@ function Controller(UserService, RfService, FlashService, CategoryService, $filt
     vm.modcategory=null;
     vm.modificado=null;
     vm.priority=null;
+    vm.required = false;
 
 /*####FUNCIONES REQUISITOS FUNCIONALES####*/
     vm.saveRf = saveRf;
@@ -111,23 +113,26 @@ function Controller(UserService, RfService, FlashService, CategoryService, $filt
 */
     function saveRf(){
 
-        /*conversion del string a numero*/    
-       vm.requisito.number =  parseInt(vm.requisito.number);
+                /*conversion del string a numero*/   
+                vm.requisito.number =  parseInt(vm.requisito.number);
 
-        verificarReqRepe();
+                verificarReqRepe();
 
-        if(result == true)
-        {
-            FlashService.Error('Este id ya esta insertado');
-        }else
-        {
-            if(RfService.Create(vm.requisito))
-                    FlashService.Success('Requisito funcional introducido correctamente');
-            else
-                FlashService.Success('Ha ocurrido un error, intentalo de nuevo');
-        }
-
-        
+                if(result == true)
+                {
+                    FlashService.Error('Este id ya esta insertado');
+                }else
+                {
+                    (RfService.Create(vm.requisito))
+                     .then(function(){
+                        FlashService.Success('Requisito funcional introducido correctamente');
+                     })  
+                    .catch(function(error){
+                         FlashService.Error(error);
+                    });
+                       
+                
+                }
     } 
 
 
@@ -239,6 +244,7 @@ function Controller(UserService, RfService, FlashService, CategoryService, $filt
     }
 
 }
+
 
 })();
 

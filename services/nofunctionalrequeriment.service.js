@@ -44,14 +44,20 @@ module.exports = service;
 function create(NRfParam){
 
 	var deferred = Q.defer();
-
-	db.nofuncionalrequeriments.insert(
-		NRfParam,
-		function(err, doc){
+		var re = /(?:\d*)?\d+/;
+		
+     	if(re.test(NRfParam.number))
+     	{
+			db.nofuncionalrequeriments.insert(
+			NRfParam,
+			function(err, doc){
 				if(err) deferred.reject(err);
 
 				deferred.resolve();
-		});
+			});
+		}else{
+			 deferred.reject('No has insertado correctamente el Id');
+		}
 		
 		return deferred.promise;
 }

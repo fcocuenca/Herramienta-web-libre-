@@ -1,2 +1,0 @@
-FROM herramientaweb
-ENV foo=bar

@@ -1192,6 +1192,12 @@ td{
   font-size: 15px; 
 }
 
+.btnHomeComp{
+ font-family: 'Lobster', cursive;
+  /*margin: 2px 60px 0px 0px;*/
+  font-size: 15px; 
+}
+
 .box-headerProj{
      color: #fff;
     background: #333;
@@ -1311,9 +1317,63 @@ td{
     padding: 5px 0% 2% 5px !important;
 }
 
-.popoverText{
-
+.nube{
+    position: relative;
+    top: 4px;
+    display: inline-block;
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
 }
+
+.qs {
+  /*background-color: #02bdda;
+  border-radius: 16px;*/
+  color: #333;
+  cursor: default;
+  font-family: Pacifico;
+  font-size: 18px;
+  height: 30px;
+  line-height: 30px;
+  position: relative;
+  text-align: center;
+  width: 30px;
+}
+.qs .popover {
+  background-color: rgba(0, 0, 0, 0.85);
+  border-radius: 5px;
+  bottom: 42px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+  color: #fff;
+  font-size: 18px;
+  font-family: 'Lobster', cursive;
+  left: 25px;
+  top: -3px;
+  padding: 5px 10px;
+  /*position: absolute;*/
+  width: 120px;
+  z-index: 4;
+  height: 38px;
+}
+.qs .popover:before {
+  border-top: 7px solid rgba(0, 0, 0, 0.85);
+  border-right: 7px solid transparent;
+  border-left: 7px solid transparent;
+  bottom: -7px;
+  left: 50%;
+  margin-left: -7px;
+  position: absolute;
+}
+.qs:hover .popover {
+  display: block;
+  -webkit-animation: fade-in .3s linear 1, move-up .3s linear 1;
+  -moz-animation: fade-in .3s linear 1, move-up .3s linear 1;
+  -ms-animation: fade-in .3s linear 1, move-up .3s linear 1;
+}
+
+
 /*
 .sidebar {
   margin-bottom: 100px;

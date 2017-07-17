@@ -46,16 +46,27 @@ module.exports = service;
 function create(RfParam){
 
 	var deferred = Q.defer();
+	console.log(RfParam.number);
+	console.log(RfParam.content);
 
-	db.funcionalrequeriments.insert(
-		RfParam,
-		function(err, doc){
-				if(err) deferred.reject(err);
+		var re = /(?:\d*)?\d+/;
+		
+     	if(re.test(RfParam.number))
+     	{
+     			db.funcionalrequeriments.insert(
+				RfParam,
+				function(err, doc){
+						if(err) deferred.reject(err);
 
-				deferred.resolve();
-		});
-	    return deferred.promise;
+						deferred.resolve();
+				});
+		}else{
+			 deferred.reject('No has insertado correctamente el Id');
+		}
+	return deferred.promise;
 }
+	
+
 
  /**
  * getById: obtencio de los requisitos funcionales de la bd
