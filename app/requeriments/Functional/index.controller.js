@@ -32,7 +32,7 @@
         
  
 
-function Controller(UserService, RfService, FlashService, CategoryService, $filter) {
+function Controller(UserService, RfService, FlashService, CategoryService, $filter, compartirDatos, ProjService) {
 
 /*###########################################
 ##########DECLARACIÓN DE VARIABLES###########
@@ -40,11 +40,14 @@ function Controller(UserService, RfService, FlashService, CategoryService, $filt
     var vm = this;
     var result;
     var vacio;
+    var idProjectFK = compartirDatos.getString();
 
 /*####OBTENCIÓN DE DATOS####*/
     vm.user=null;
     vm.rf = null;
     vm.cat=null;
+    vm.projects=null;
+
 
 /*####VARIABLES SCOPE####*/
     vm.requisito=null;
@@ -53,6 +56,9 @@ function Controller(UserService, RfService, FlashService, CategoryService, $filt
     vm.modificado=null;
     vm.priority=null;
     vm.required = false;
+    vm.requisitosFuncionales = [];
+    vm.categorias= [];
+
 
 /*####FUNCIONES REQUISITOS FUNCIONALES####*/
     vm.saveRf = saveRf;
@@ -89,16 +95,31 @@ function Controller(UserService, RfService, FlashService, CategoryService, $filt
         });
     }
 
+    function initProject(){
+        ProjService.GetCurrent().then(function(project){
+            vm.projects = project;
+        });
+    }
+
     function rfController() {
-       
-        RfService.GetCurrent().then(function (rf) {
+        RfService.GetCurrent().then(function (rf) {            
             vm.rf = rf;
+            for(var i =0; i<vm.rf.length; i++)
+            {
+                if(vm.rf[i].idProject === idProjectFK)
+                    vm.requisitosFuncionales.push(vm.rf[i]);
+            }
         });
     }
 
     function catController(){
         CategoryService.GetCurrent().then(function (cat){
             vm.cat = cat;
+            for(var i =0; i<vm.cat.length; i++){
+                if(vm.cat[i].idProject === idProjectFK){
+                    vm.categorias.push(vm.cat[i]);
+                }
+            }
         });
     }
 
@@ -115,14 +136,15 @@ function Controller(UserService, RfService, FlashService, CategoryService, $filt
 
                 /*conversion del string a numero*/   
                 vm.requisito.number =  parseInt(vm.requisito.number);
+                vm.requisito.idProject = idProjectFK;
 
-                verificarReqRepe();
+                //verificarReqRepe();
 
-                if(result == true)
+               /* if(result == true)
                 {
                     FlashService.Error('Este id ya esta insertado');
                 }else
-                {
+                {*/
                     (RfService.Create(vm.requisito))
                      .then(function(){
                         FlashService.Success('Requisito funcional introducido correctamente');
@@ -132,7 +154,7 @@ function Controller(UserService, RfService, FlashService, CategoryService, $filt
                     });
                        
                 
-                }
+               // }
     } 
 
 
@@ -142,7 +164,7 @@ function Controller(UserService, RfService, FlashService, CategoryService, $filt
 */
     function deleteRf(index){
        
-        angular.forEach(vm.rf, function(value, key){
+        angular.forEach(vm.requisitosFuncionales, function(value, key){
             if(index === key)
             {
                 RfService.Delete(vm.rf[key])
@@ -163,11 +185,11 @@ function Controller(UserService, RfService, FlashService, CategoryService, $filt
 */
     function updateRf(index){
 
-                vm.rf[index].content = vm.modificado;
+                vm.requisitosFuncionales[index].content = vm.modificado;
 
-                RfService.Update(vm.rf[index])
+                RfService.Update(vm.requisitosFuncionales[index])
                     .then(function () {
-                        FlashService.Success('Requisito funcional modificado correctamente: '+vm.rf[index].content);
+                        FlashService.Success('Requisito funcional modificado correctamente: '+vm.requisitosFuncionales[index].content);
                     })
                     .catch(function (error) {
                         FlashService.Error(error);
@@ -184,10 +206,15 @@ function Controller(UserService, RfService, FlashService, CategoryService, $filt
  * @param  {}
 */
     function saveCat(){
-        if(CategoryService.Create(vm.categoria))
+        vm.categoria.idProject = idProjectFK
+        CategoryService.Create(vm.categoria)
+        .then(function(){
             FlashService.Success('Categoria introducida correctamente');
-        else
+        })
+        .catch(function(error){
             FlashService.Success('Ha ocurrido un error, intentelo de nuevo');
+        });
+            
     }
 
 /**
@@ -195,11 +222,11 @@ function Controller(UserService, RfService, FlashService, CategoryService, $filt
  * @param  {index}
 */
     function updateCat(index){
-        vm.cat[index].category = vm.modcategory;
+        vm.categorias[index].category = vm.modcategory;
 
-                CategoryService.Update(vm.cat[index])
+                CategoryService.Update(vm.categorias[index])
                     .then(function () {
-                        FlashService.Success('Categoría modificada correctamente: '+vm.cat[index].category);
+                        FlashService.Success('Categoría modificada correctamente: '+vm.categorias[index].category);
                     })
                     .catch(function (error) {
                         FlashService.Error(error);
@@ -214,9 +241,9 @@ function Controller(UserService, RfService, FlashService, CategoryService, $filt
         angular.forEach(vm.cat, function(value, key){
             if(index === key)
             {
-                CategoryService.Delete(vm.cat[key])
+                CategoryService.Delete(vm.categorias[key])
                 .then(function () {
-                    FlashService.Success('Categoría borrada correctamente: '+vm.cat[key].category);
+                    FlashService.Success('Categoría borrada correctamente: '+vm.categoriass[key].category);
                 })
                 .catch(function (error) {
                     FlashService.Error(error);
@@ -248,4 +275,11 @@ function Controller(UserService, RfService, FlashService, CategoryService, $filt
 
 })();
 
-    
+    /*
+    for(var i =0; i<rf.length; i++)
+            {
+                if(vm.idProj === rf[i].idProject){
+                    vm.requisitosFuncionales.push(rf[i]);
+                }
+            }
+        });*/

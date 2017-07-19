@@ -2,11 +2,24 @@
     'use strict';
  
     angular
-        .module('app', ['ui.router'])
+        .module('app', ['ui.router','ngStorage'])
         .config(config)
         .run(run)
-        .controller('IndexController', Controller);
- 
+        .controller('IndexController', Controller)
+        .service('compartirDatos', function($localStorage){
+            var stringValue;
+            
+            return {
+                getString: function(){
+                    return $localStorage.id;
+                },
+                setString: function(value){
+                    /*esta el idProyecto*/
+                    $localStorage.id = value;
+                }
+            }
+        });
+
     function config($stateProvider, $urlRouterProvider) {
         // default route
         $urlRouterProvider.otherwise("/");
@@ -98,12 +111,13 @@
             });
     }
 
-    function Controller(UserService, ProjService){
+    function Controller(UserService, ProjService, compartirDatos){
 
         var vm = this;
         vm.users;
         vm.userId;
-        vm.proyecto;
+        vm.proyecto=[];
+        vm.idProject = compartirDatos.getString();
 
         initControllerUser();
         function initControllerUser() {
@@ -116,21 +130,18 @@
         initControllerProject();
         function initControllerProject(){
             ProjService.GetCurrent().then(function(project){
-
-                for(var i=0; i<project.length; i++)
-                {
-                    if(vm.userId===project[i].userId){
-                         vm.proyecto = project;
-                    }else{
-                        console.log("no tiene proyecto creado!!!");
+                    for(var i =0; i<project.length; i++)
+                    {
+                        if(vm.userId === project[i].userId){
+                            vm.proyecto.push(project[i]);
+                        }
                     }
-                }
-            })
+            });
         }
 }
 
  
-    function run($http, $rootScope, $window) {
+    function run($http, $rootScope, $window, compartirDatos) {
         // add JWT token as default auth header
         $http.defaults.headers.common['Authorization'] = 'Bearer ' + $window.jwtToken;
  
@@ -138,6 +149,7 @@
         $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
             $rootScope.activeTab = toState.data.activeTab;
         });
+
     }
  
     // manually bootstrap angular after the JWT token is retrieved from the server
@@ -150,3 +162,15 @@
         });
     });
 })();
+
+/*
+for(var i=0; i<project.length; i++)
+                {
+                    if(vm.userId===project[i].userId){
+
+
+                        }else{
+                        console.log("no tiene proyecto creado!!!");
+                    }
+                }
+*/

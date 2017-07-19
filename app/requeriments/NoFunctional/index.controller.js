@@ -32,13 +32,14 @@
         
  
 
-function Controller(UserService, NRfService, FlashService, CategoryServiceNRf, $filter) {
+function Controller(UserService, NRfService, FlashService, CategoryServiceNRf, $filter, compartirDatos) {
     
 /*###########################################
 ##########DECLARACIÓN DE VARIABLES###########
 ###########################################*/ 
 	var vm = this;
     var result;
+    var idProjectFK = compartirDatos.getString();
 
 /*####OBTENCIÓN DE DATOS####*/
 	vm.user=null;
@@ -50,6 +51,8 @@ function Controller(UserService, NRfService, FlashService, CategoryServiceNRf, $
     vm.modificadonf=null;
     vm.categorianrf=null;
     vm.modcategorynrf=null;
+    vm.requisitosNoFuncionales = [];
+    vm.categorias= [];
 
 /*FUNCIONES REQUISITOS NO FUNCIONALES*/
     vm.saveNRf = saveNRf;
@@ -87,19 +90,29 @@ function Controller(UserService, NRfService, FlashService, CategoryServiceNRf, $
 	    });
 	}
 
+    function nrfController() {
+       
+        NRfService.GetCurrent().then(function (nrf) {
+            vm.nrf = nrf;
+            for(var i =0; i<vm.nrf.length; i++){
+                if(vm.nrf[i].idProject === idProjectFK){
+                    vm.requisitosNoFuncionales.push(vm.nrf[i]);
+                }
+            }
+        });
+    }
+
     function CatNRfController() {
       
         CategoryServiceNRf.GetCurrent().then(function (catnrf) {
             vm.catnrf = catnrf;
+            for(var i =0; i<vm.catnrf.length; i++){
+                if(vm.catnrf[i].idProject === idProjectFK){
+                    vm.categorias.push(vm.catnrf[i]);
+                }
+            }
         });
     }
-
-	function nrfController() {
-	   
-	    NRfService.GetCurrent().then(function (nrf) {
-	        vm.nrf = nrf;
-	    });
-	}
 
 /*###################################
 ###########CRUD REQUISITOS###########
@@ -112,14 +125,15 @@ function Controller(UserService, NRfService, FlashService, CategoryServiceNRf, $
 	function saveNRf(){
 
         vm.requisitonf.number = parseInt(vm.requisitonf.number);
+        vm.requisitonf.idProject = idProjectFK;
 
         verificarReqRepe();
 
-        if(result == true){
+        /*if(result == true){
             FlashService.Error('Este id ya esta insertado');
         }else{
-
-            (NRfService.Create(vm.requisitonf))
+        */
+            NRfService.Create(vm.requisitonf)
                 .then(function (){
                     FlashService.Success('Requisito no funcional introducido correctamente');  
                 })
@@ -127,7 +141,7 @@ function Controller(UserService, NRfService, FlashService, CategoryServiceNRf, $
                     FlashService.Error(error);    
                 });
                 
-        }
+        //}
 	} 
 
 /**
@@ -136,12 +150,12 @@ function Controller(UserService, NRfService, FlashService, CategoryServiceNRf, $
 */
 	function deleteNRf(index){
 	   
-	  	angular.forEach(vm.nrf, function(value, key){
+	  	angular.forEach(vm.requisitosNoFuncionales, function(value, key){
 	        if(index === key)
 	        {
-	            NRfService.Delete(vm.nrf[key])
+	            NRfService.Delete(vm.requisitosNoFuncionales[key])
 	            .then(function () {
-	                FlashService.Success('Requisitos no funcional borrado correctamente: '+vm.nrf[key].content);
+	                FlashService.Success('Requisitos no funcional borrado correctamente: '+vm.requisitosNoFuncionales[key].content);
 	            })
 	            .catch(function (error) {
 	                FlashService.Error(error);
@@ -157,11 +171,11 @@ function Controller(UserService, NRfService, FlashService, CategoryServiceNRf, $
 */
 	function updateNRf(index){
 
-	            vm.nrf[index].content = vm.modificadonf;
+	            vm.requisitosNoFuncionales[index].content = vm.modificadonf;
 
-	            NRfService.Update(vm.nrf[index])
+	            NRfService.Update(vm.requisitosNoFuncionales[index])
 	               	.then(function () {
-	                    FlashService.Success('Requisito no funcional modificado correctamente: '+vm.nrf[index].content);
+	                    FlashService.Success('Requisito no funcional modificado correctamente: '+vm.requisitosNoFuncionales[index].content);
 	                })
 	                .catch(function (error) {
 	                    FlashService.Error(error);
@@ -178,7 +192,7 @@ function Controller(UserService, NRfService, FlashService, CategoryServiceNRf, $
 */
     function saveCatNrf(){
 
-        if(CategoryServiceNRf.Create(vm.categorianrf))
+        if(CategoryServiceNRf.Create(vm.categorias))
             FlashService.Success('Categoria introducida correctamente');
         else
             FlashService.Success('Ha ocurrido un error, intentelo de nuevo');
@@ -191,9 +205,9 @@ function Controller(UserService, NRfService, FlashService, CategoryServiceNRf, $
 	function updateCatNrf(index){
         vm.catnrf[index].category = vm.modcategorynrf;
 
-                CategoryServiceNRf.Update(vm.catnrf[index])
+                CategoryServiceNRf.Update(vm.categoria[index])
                     .then(function () {
-                        FlashService.Success('Categoría modificada correctamente: '+vm.catnrf[index].category);
+                        FlashService.Success('Categoría modificada correctamente: '+vm.categorias[index].category);
                     })
                     .catch(function (error) {
                         FlashService.Error(error);
@@ -208,9 +222,9 @@ function Controller(UserService, NRfService, FlashService, CategoryServiceNRf, $
         angular.forEach(vm.catnrf, function(value, key){
             if(index === key)
             {
-                CategoryServiceNRf.Delete(vm.catnrf[key])
+                CategoryServiceNRf.Delete(vm.categorias[key])
                 .then(function () {
-                    FlashService.Success('Categoría borrada correctamente: '+vm.catnrf[key].category);
+                    FlashService.Success('Categoría borrada correctamente: '+vm.categorias[key].category);
                 })
                 .catch(function (error) {
                     FlashService.Error(error);

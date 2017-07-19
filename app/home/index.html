@@ -9,7 +9,7 @@
                    <div class="col-md-Ppal">
                    <div class="box box-solid box-success">
                       <div class="box-headerHome">
-                              <h3 class="box-tittle">Tus Proyectos</h3>
+                              <h3 class="box-tittle">Tus Proyectos:</h3>
                       </div>
                   </div>
 
@@ -29,11 +29,12 @@
                                   </thead>
 
                                   <tbody>
-                                    <tr ng-repeat = "p in vm.projects">
-                                       <td>{{p.name}} </td>
-                                       <td>{{p.desc}} </td>
-                                       <td>{{p.fechaInicio}}</td>
-                                       <td>{{p.iniciadoPor}}</td>
+                                    <tr ng-repeat = "p in vm.proyectos">
+                                      <td>{{p.name}} </td>
+                                      <td>{{p.desc}} </td>
+                                      <td>{{p.fechaInicio}}</td>
+                                      <td>{{p.iniciadoPor}}</td>
+                                      <td><a ui-sref="functionalrequeriments"><button class="btn btn-success" ng-click="vm.getIdProject(p._id)"><span width="15px;" heigth="15px;" class=""></span>Abrir</td>
                                        <td><a href="" id ="delete" ng-click="vm.deleteProject($index)" onclick="recarga()" ><span width="30px;" heigth="30px;" class="glyphicon glyphicon-trash"></span></a></td>
                                     </tr>
                                   </tbody>                                

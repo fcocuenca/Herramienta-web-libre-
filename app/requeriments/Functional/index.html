@@ -40,7 +40,7 @@
                                           
                                             <td width="170px"><center>Listado de categorias: </center></td>
                                             <td></td>
-                                            <td><ul ng-repeat="c in vm.cat">
+                                            <td><ul ng-repeat="c in vm.categorias">
                                                       <li>  <a display="category" ng-model="vm.modcategory" editable="{{r.category}}">{{c.category}}</a> 
                                                         
                                                             <a href="" id ="update" ng-click="vm.updateCat($index)" onclick="recarga()"><span width="30px;" heigth="30px;" class="glyphicon glyphicon-pencil"></span></a>   
@@ -61,15 +61,15 @@
                 </div>
               
             <!---FIN INSERCION CATEROGIRAS->
-
+              
 
             <!INSERSCION DE REQUISITOS -->
-
+       
             <div class="col-md-12">
                 <!--Header de la tabla-->
                 <div class="box box-solid box-success">
                     <div class="box-header">
-                            <h3 class="box-tittle"> Inserción de Requisitos Funcionales</h3>
+                            <h3 class="box-tittle"> Inserción de Requisitos Funcionales:</h3>
                     </div>
                 </div>
 
@@ -115,7 +115,7 @@
                                         <th>
                                            <select name="category"  ng-model="vm.requisito.category" required>
                                             <option value="">-SeleccionarCategoría-</option>
-                                            <option ng-repeat="c in vm.cat">{{c.category}}</option>
+                                            <option ng-repeat="c in vm.categorias">{{c.category}}</option>
                                         </th>
                                      </tr>
                                 </tbody>
@@ -125,7 +125,7 @@
                     </div>
                 </div>
                      <div class="button">
-                            <center><button id ="save" class="btn btn-primary" ng-click="vm.saveRf()">Guardar</button></center>
+                            <center><button id ="save" class="btn btn-primary" ng-click="vm.saveRf()" onclick="recarga()">Guardar</button></center>
                     </div>
             </div>
 
@@ -159,7 +159,7 @@
                                   </tr>
                               </thead>
                               <tbody>
-                                  <tr class="tr" ng-repeat=" r in vm.rf" ng-click="vm.table()">
+                                  <tr class="tr" ng-repeat=" r in vm.requisitosFuncionales" ng-click="vm.table()">
                                           <td>RF{{r.number}}</td>
                                           <td>
                                               <a display="content" ng-model="vm.modificado" editable="{{r.content}}">{{r.content}}</a> 
