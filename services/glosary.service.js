@@ -6,7 +6,7 @@
  * History
  */
 
-var config = require('config.json');
+var config = require('config.js');
 var _ = require('lodash');
 var jwt = require('jsonwebtoken');
 var Q = require('q');

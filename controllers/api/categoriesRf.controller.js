@@ -1,4 +1,4 @@
-var config = require('config.json');
+var config = require('config.js');
 var express = require('express');
 var jwt = require('jsonwebtoken');
 var router = express.Router();

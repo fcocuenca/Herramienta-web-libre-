@@ -10,7 +10,7 @@
 var express = require('express');
 var router = express.Router();
 var request = require('request');
-var config = require('config.json');
+var config = require('config.js');
  
 // elimina o carga el estado del token en la session.
 router.get('/', function (req, res) {
