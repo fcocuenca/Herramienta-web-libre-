@@ -56,14 +56,14 @@ function deleteCheck(MatParam){
 
 }
 
-function _delete(){
+function _delete(MatParam){
     console.log("has entrado en _deete");
     
-    
+    var id= MatParam._id;
     var deferred = Q.defer();
 
     db.matrixTrazability.remove(
-
+    {_id: mongo.helper.toObjectID(MatParam._id)},
     function(err){
         if(err) deferred.reject(err);
         

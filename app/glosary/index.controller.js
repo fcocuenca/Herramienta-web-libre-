@@ -31,7 +31,7 @@
         });
         
  
-    function Controller($window, UserService, FlashService, GlosaryService, $filter) {
+    function Controller($window, UserService, FlashService, GlosaryService, $filter, compartirDatos) {
         
 /*###########################################
 ##########DECLARACIÓN DE VARIABLES###########
@@ -39,6 +39,7 @@
     var vm = this;
     vm.letraA=[];
     var result;
+    var idProjectFK = compartirDatos.getString();
 
 /*####OBTENCIÓN DE DATOS####*/
 	vm.glosary= null;
@@ -47,6 +48,7 @@
    	vm.termino=null;
     vm.modificadoTerm = null;
     vm.terminos;
+    vm.glosario = [];
     
 /*####FUNCIONES GLOSARIO####*/
     vm.saveTerm = saveTerm;
@@ -66,6 +68,11 @@
     	GlosaryService.GetCurrent().then(function(glosary)
     	{
     		vm.glosary = glosary;
+            for(var i =0; i<vm.glosary.length; i++)
+            {
+                if(vm.glosary[i].idProject === idProjectFK)
+                    vm.glosario.push(vm.glosary[i]);
+            }
     	});
     }
 
@@ -78,10 +85,15 @@
 */
     function saveTerm(){
        
-        	if(GlosaryService.Create(vm.termino))
+             vm.termino.idProject = idProjectFK;
+
+        	GlosaryService.Create(vm.termino)
+            .then(function(){
         			FlashService.Success('Término introducido correctamente');
-        	else
-       		 		FlashService.Success('Ha ocurrido un error, intentalo de nuevo');
+            })
+            .catch(function(){
+                FlashService.Success('Ha ocurrido un error, intentalo de nuevo');
+            });
     }
 
 /**
@@ -89,12 +101,12 @@
  * @param  {index}
 */
     function deleteTerm(index){
-    	 angular.forEach(vm.glosary, function(value, key){
+    	 angular.forEach(vm.glosario, function(value, key){
         if(index === key)
         {
-            GlosaryService.Delete(vm.glosary[key])
+            GlosaryService.Delete(vm.glosario[key])
             .then(function () {
-                FlashService.Success('Término borrado correctamente: '+vm.glosary[key].content);
+                FlashService.Success('Término borrado correctamente: '+vm.glosario[key].content);
             })
             .catch(function (error) {
                 FlashService.Error(error);
@@ -110,11 +122,11 @@
  * @param  {index}
 */
      function updateTerm(index){
-     	vm.glosary[index].content =vm.modificadoTerm;
+     	vm.glosario[index].content =vm.modificadoTerm;
 
-     	GlosaryService.Update(vm.glosary[index])
+     	GlosaryService.Update(vm.glosario[index])
      	.then(function(){
-                    FlashService.Success('Término modificado correctamente: '+vm.glosary[index].content);
+                    FlashService.Success('Término modificado correctamente: '+vm.glosario[index].content);
      		})
      	.catch(function (error) {
                     FlashService.Error(error);

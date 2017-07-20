@@ -1,150 +1,219 @@
+/*####CONTROLADOR DE ANGULAR####*/
 (function (){
 	'use strict';
 	angular
 		.module('app')
 		.controller('Matrix.IndexController', Controller);
 
-		function Controller(UserService, FlashService, MatrixService, SpecService, RfService)
-		{
+function Controller(UserService, FlashService, MatrixService, SpecService, RfService, compartirDatos)
+{
+/*###########################################
+##########DECLARACIÓN DE VARIABLES###########
+###########################################*/  
+	var vm = this;
+	var result;
+	var modificado;
+	var idProjectFK = compartirDatos.getString();
 
-			var vm = this;
-			var result;
-			var modificado;
-		
-			vm.specifications=null;
-			vm.rf=null;
-			vm.matrix = null;
 
-			vm.isChecked=isChecked;
-			vm.selected=[];
-			vm.selectedMod=[];
-			vm.prueba = [];
-			vm.idRFidCU;
-			vm.estado;
+/*####OBTENCIÓN DE DATOS####*/
+	vm.specifications=null;
+	vm.rf=null;
+	vm.matrix = null;
 
-			/*funciones*/
-			vm.guardarMatriz = guardarMatriz;
-			vm.avisar = avisar;
-			vm.eliminar =eliminar;
-			vm.quitarMatrix = quitarMatrix;
-			vm.updateMatrix = updateMatrix;
-			vm.eliminarTodo = eliminarTodo;
+/*####VARIABLES SCOPE####*/
+	vm.isChecked=isChecked;
+	vm.selected=[];
+	vm.selectedMod=[];
+	vm.prueba = [];
+	vm.idRFidCU;
+	vm.estado;
+	vm.especificaciones = []
+	vm.requisitosFuncionales = [];
+	vm.matriz = [];
 
-			initSpec();			
-			function initSpec(){
-				SpecService.GetCurrent().then(function(specifications){
-					vm.specifications = specifications;
-				});
-			}
 
+/*####FUNCIONES MATRIZ DE TRAZABILIDAD####*/
+	vm.guardarMatriz = guardarMatriz;
+	vm.avisar = avisar;
+	vm.eliminar =eliminar;
+	vm.quitarMatrix = quitarMatrix;
+	vm.updateMatrix = updateMatrix;
+	vm.eliminarTodo = eliminarTodo;
+
+    /*####Funciones para obtener todos las especificaciones existentes en la bd ####*/
+	initSpec();			
+
+    /*####Funciones para obtener todos los requisitos existentes en la bd ####*/
+	rfController();
+
+    /*####Funciones para obtener todos las matrices existentes en la bd ####*/
+    initMatrix();
+
+/*##################################
+###########GETCURRENT()#############
+###################################*/
+	function initSpec(){
+		SpecService.GetCurrent().then(function(specifications){
+			vm.specifications = specifications;
+			for(var i =0; i<vm.specifications.length; i++)
+            {
+                if(vm.specifications[i].idProject === idProjectFK)
+                    vm.especificaciones.push(vm.specifications[i]);
+            }
 			
-			rfController();
-			function rfController() {
-		        RfService.GetCurrent().then(function (rf) {
-		            vm.rf = rf;
-		        });
-		    }
+		});
+	}
 
-		    initMatrix();
-		    function initMatrix(){
-		    	MatrixService.GetCurrent().then(function(matrix){
-		    		vm.matrix = matrix;
-		    	});
-		    }
+	
+	function rfController() {
+        RfService.GetCurrent().then(function (rf) {
+            vm.rf = rf;
+            for(var i =0; i<vm.rf.length; i++)
+            {
+                if(vm.rf[i].idProject === idProjectFK)
+                    vm.requisitosFuncionales.push(vm.rf[i]);
+            }
+        });
+    }
 
-		    /*reesctructurar esto con if anidados*/
-		    function guardarMatriz(){
-		    	
-		    	isChecked();
+    function initMatrix(){
+    	MatrixService.GetCurrent().then(function(matrix){
+    		vm.matrix = matrix;
+    		 for(var i =0; i<vm.matrix.length; i++)
+            {
+                if(vm.matrix[i].idProject === idProjectFK)
+                    vm.matriz.push(vm.matrix[i]);
+            }
+    	});
+    }
 
-		    	if(result == true){
-		    		FlashService.Error('CU/RF ya ha sido seleccionado');
-		    	}else{
-		    		if(MatrixService.Create(vm.prueba))
-		    			FlashService.Success('El resultado se ha almacenado correctamente');
-		    		else
-		    			FlashService.Success('Ha ocurrido un error, intentelo de nuevo');
-		    	}
-		    }
+/*###################################
+#####CRUD MATRIZ DE TRAZABILIDAD#####
+#####################################*/
 
-		    /*quitar y poner cuando se ha seleccionado/deselccionado en el array prueba*/
-		    function avisar(name, number, id){
-		    	
-		    		var i=0;
-		    		
-		    		if(vm.selected[id] == true){
+/**
+ * guardarMatriz: llama al servicio Create y inserta un vector donde esta la matriz en la bd
+*/
+    /*reesctructurar esto con if anidados*/
+    function guardarMatriz(){
+    	
+    	isChecked();
 
-		    			vm.prueba.push({'idRF': number, 'idCU': name, 'id': id, 'selected': true});
-		    			i++;
-		    			console.log("añado"+id);
-		    		}
+    	if(result == true){
+    		FlashService.Error('CU/RF ya ha sido seleccionado');
+    	}else{
 
-		    		if(vm.selected[id] == false)
-		    		{
-		    			for(i=0; i<vm.prueba.length; i++)
-		    			{
-			    			if(id == vm.prueba[i].id)
-			    			{
-			    				vm.eliminar(i);
-			    			}
-			    		}
-		    		}		    		
-		    }
+    		if(MatrixService.Create(vm.prueba))
+    			FlashService.Success('El resultado se ha almacenado correctamente');
+    		else
+    			FlashService.Success('Ha ocurrido un error, intentelo de nuevo');
+    	}
+    }
 
-		    function eliminar(id)
-		    {
-		    	vm.prueba.splice(id, 1);
-		    	console.log(vm.prueba);
-		   	}
+/**
+ * avisar: Selecciona o deselecciona el elemento en el array
+ * @param  {name, number, id}
+*/
+    /*quitar y poner cuando se ha seleccionado/deselccionado en el array prueba*/
+    function avisar(name, number, id){
+    	
+    		var i=0;
+    		
+    		if(vm.selected[id] == true){
+    			 
+    			vm.prueba.push({'idRF': number, 'idCU': name, 'id': id, 'selected': true, 'idProject': idProjectFK});
+    			i++;
+    			console.log("añado"+id);
+    		}
 
-		   	/*comprobar que existe uno repetido en la bd*/
-		   	function isChecked(){
+    		if(vm.selected[id] == false)
+    		{
+    			for(i=0; i<vm.prueba.length; i++)
+    			{
+	    			if(id == vm.prueba[i].id)
+	    			{
+	    				vm.eliminar(i);
+	    			}
+	    		}
+    		}		    		
+    }
 
-		   		for(var i=0; i<vm.prueba.length; i++)
-		   		{
-		   			for(var j=0; j<vm.matrix.length; j++)
-		   			{
-		   				if((vm.prueba[i].idRF === vm.matrix[j].idRF) && (vm.prueba[i].idCU === vm.matrix[j].idCU)){
-							
-							//existe uno repetido
-		   					return result = true;
-		   				}
-		   				
-		   			}
-		   		}
-		   	}
+/**
+ * eliminar: Elimina el elemento del vector prueba
+ * @param  {id}
+*/
+    function eliminar(id)
+    {
+    	vm.prueba.splice(id, 1);
+    	console.log(vm.prueba);
+   	}
 
-		  /*para saber que elemento se tiene que quitar.*/
-		function quitarMatrix(idCU, idRF, id){
-   				if(vm.selectedMod[id] == true)
-   				{   					
-					for(var i=0; i<vm.matrix.length; i++)
-   					{
-   						if((idRF == vm.matrix[i].idRF) && (idCU === vm.matrix[i].idCU))
-   						{
-   							console.log("modifica RF:"+vm.matrix[i].idRF+" CU"+vm.matrix[i].idCU);
-   							updateMatrix(vm.matrix[i]);
-						}
-   					}
+   	/*comprobar que existe uno repetido en la bd*/
+   	function isChecked(){
+
+   		for(var i=0; i<vm.prueba.length; i++)
+   		{
+   			for(var j=0; j<vm.matriz.length; j++)
+   			{
+   				if((vm.prueba[i].idRF === vm.matriz[j].idRF) && (vm.prueba[i].idCU === vm.matriz[j].idCU)){
+					
+					//existe uno repetido
+   					return result = true;
    				}
+   				
+   			}
    		}
+   	}
 
-   		function updateMatrix(checkEliminar)
-   		{   
-   			var eliminar = checkEliminar; 	
-		    if(MatrixService.DeleteCheck(eliminar));
-		    	
-   		}
+ /**
+ * quitarMatriz: modifica el elemento que hay que quitar de la matriz
+ * @param  {idCU, idRF, id}
+*/
 
-   		function eliminarTodo(){
-   			if(MatrixService.Delete(vm.prueba))
-		    			FlashService.Success('Has borrado la matriz entera');
-		    		else
-		    			FlashService.Success('Ha ocurrido un error, intentelo de nuevo');
-   		}
-   		   	
-		   	
-   }
+  /*para saber que elemento se tiene que quitar.*/
+	function quitarMatrix(idCU, idRF, id){
+		if(vm.selectedMod[id] == true)
+		{   					
+		for(var i=0; i<vm.matriz.length; i++)
+			{
+				if((idRF == vm.matriz[i].idRF) && (idCU === vm.matriz[i].idCU))
+				{
+					console.log("modifica RF:"+vm.matriz[i].idRF+" CU"+vm.matriz[i].idCU);
+					updateMatrix(vm.matriz[i]);
+			}
+			}
+		}
+	}
+
+ /**
+ * updateMatrix: quita el check de la matriz
+ * @param  {checkEliminar}
+*/
+	function updateMatrix(checkEliminar){   
+		var eliminar = checkEliminar; 	
+    	if(MatrixService.DeleteCheck(eliminar));
+	}
+
+ /**
+ * eliminarTodo: elimina la matriz por completo
+*/
+	function eliminarTodo(){
+
+		 for(var i =0; i<vm.matriz.length; i++){
+		 	if(vm.matriz[i].idProject === idProjectFK){
+		 		MatrixService.Delete(vm.matriz[i])
+		 		.then(function(){
+		 			FlashService.Success('Has borrado la matriz entera');
+				})
+				.catch(function(){
+					FlashService.Success('Ha ocurrido un error, intentelo de nuevo');
+				});
+		 	}
+		 }
+	}
+   	
+}
 })();
 
 		    /*

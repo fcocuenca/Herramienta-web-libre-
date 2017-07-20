@@ -10,8 +10,8 @@
         <div class="{{'alert alert-' + flash.type}}" ng-bind="flash.message"></div>
  </div>    
 
- 	<center><p class="textMat">Atención:  tu matriz va a tener: <input type="text" class="inputMatBloq" id="filas" value="{{vm.rf.length}}" disabled>Requisitos funcionales y 
- 	 <input type="text" class="inputMatBloq" id="columnas" value="{{vm.specifications.length}}" disabled> Casos de Uso</p></center>  
+ 	<center><p class="textMat">Atención:  tu matriz va a tener: <input type="text" class="inputMatBloq" id="filas" value="{{vm.requisitosFuncionales.length}}" disabled>Requisitos funcionales y 
+ 	 <input type="text" class="inputMatBloq" id="columnas" value="{{vm.especificaciones.length}}" disabled> Casos de Uso</p></center>  
 
  	
  	
@@ -28,12 +28,12 @@
 
                         <table class="table">
                                    	<td class="thMat">CU/RF</td>
-                                    <td class="thMat" ng-repeat="s in vm.specifications"> <span class="qs">CU {{s.id}}<span class="popover above">{{s.name}}</span></span></td>
+                                    <td class="thMat" ng-repeat="s in vm.especificaciones"> <span class="qs">CU {{s.id}}<span class="popover above">{{s.name}}</span></span></td>
 
-                                    <tr ng-repeat ="r in vm.rf">
+                                    <tr ng-repeat ="r in vm.requisitosFuncionales">
                                         <td class="tdMat">RF{{r.number}}</td>
-                                         <td ng-repeat="s in vm.specifications">
-                                         	<span ng-repeat="select in vm.matrix">
+                                         <td ng-repeat="s in vm.especificaciones">
+                                         	<span ng-repeat="select in vm.matriz">
 											<span ng-if="select.idRF == r.number && select.idCU == s.id" ng-style="{color: 'green'}">
                                             		<input type='checkbox' ng-click="vm.quitarMatrix(s.id, r.number, $id)" ng-model="vm.selectedMod[$id]">&nbsp<i class="fa fa-undo" aria-hidden="true"></i>
                                             	</span>

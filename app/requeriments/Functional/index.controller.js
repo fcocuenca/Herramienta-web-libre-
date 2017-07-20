@@ -30,9 +30,7 @@
             };
         });
         
- 
-
-function Controller(UserService, RfService, FlashService, CategoryService, $filter, compartirDatos, ProjService) {
+ function Controller(UserService, RfService, FlashService, CategoryService, $filter, compartirDatos, ProjService) {
 
 /*###########################################
 ##########DECLARACIÓN DE VARIABLES###########
@@ -123,8 +121,6 @@ function Controller(UserService, RfService, FlashService, CategoryService, $filt
         });
     }
 
-
-
 /*###################################
 ###########CRUD REQUISITOS###########
 #####################################*/
@@ -134,27 +130,27 @@ function Controller(UserService, RfService, FlashService, CategoryService, $filt
 */
     function saveRf(){
 
-                /*conversion del string a numero*/   
-                vm.requisito.number =  parseInt(vm.requisito.number);
-                vm.requisito.idProject = idProjectFK;
+        /*conversion del string a numero*/   
+        vm.requisito.number =  parseInt(vm.requisito.number);
+        vm.requisito.idProject = idProjectFK;
 
-                //verificarReqRepe();
+        //verificarReqRepe();
 
-               /* if(result == true)
-                {
-                    FlashService.Error('Este id ya esta insertado');
-                }else
-                {*/
-                    (RfService.Create(vm.requisito))
-                     .then(function(){
-                        FlashService.Success('Requisito funcional introducido correctamente');
-                     })  
-                    .catch(function(error){
-                         FlashService.Error(error);
-                    });
-                       
-                
-               // }
+       /* if(result == true)
+        {
+            FlashService.Error('Este id ya esta insertado');
+        }else
+        {*/
+            (RfService.Create(vm.requisito))
+             .then(function(){
+                FlashService.Success('Requisito funcional introducido correctamente');
+             })  
+            .catch(function(error){
+                 FlashService.Error(error);
+            });
+               
+        
+       // }
     } 
 
 
@@ -243,7 +239,7 @@ function Controller(UserService, RfService, FlashService, CategoryService, $filt
             {
                 CategoryService.Delete(vm.categorias[key])
                 .then(function () {
-                    FlashService.Success('Categoría borrada correctamente: '+vm.categoriass[key].category);
+                    FlashService.Success('Categoría borrada correctamente: '+vm.categorias[key].category);
                 })
                 .catch(function (error) {
                     FlashService.Error(error);
@@ -275,11 +271,3 @@ function Controller(UserService, RfService, FlashService, CategoryService, $filt
 
 })();
 
-    /*
-    for(var i =0; i<rf.length; i++)
-            {
-                if(vm.idProj === rf[i].idProject){
-                    vm.requisitosFuncionales.push(rf[i]);
-                }
-            }
-        });*/

@@ -31,7 +31,6 @@ module.exports = service;
 	####Creacion de los servicios####
 */
 
-
 /*
 	####CONTENIDO DEL REQ FUNC.####
 	{Campos que consta un requisito funcioanl: _id: proporcionado por mongoDB, content: contenido del requisito no funcional}

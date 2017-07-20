@@ -19,12 +19,12 @@
                         <table class="table" border="3" id="table">
 	                         	<thead>
                                    	<td class="listRFCU"><center>CU/RF</center></td>
-                                    <td class="listRFCU" ng-repeat="s in vm.specifications"><center>CU {{s.id}}</center> </td>
+                                    <td class="listRFCU" ng-repeat="s in vm.especificaciones"><center>CU {{s.id}}</center> </td>
 
-                                    <tr ng-repeat ="r in vm.rf">
+                                    <tr ng-repeat ="r in vm.requisitosFuncionales">
                                         <td class="listRFCU"><center>RF{{r.number}}</center></td>
-                                         <td class="resulado"ng-repeat="s in vm.specifications">
-                                         	<span ng-repeat="select in vm.matrix">
+                                         <td class="resulado"ng-repeat="s in vm.especificaciones">
+                                         	<span ng-repeat="select in vm.matriz">
                                          	<span ng-if="select.idRF == r.number && select.idCU == s.id">
                                             	<center><img src="app-content/ok.png" width="25px" height="25px"></span></center>
                                             </span>                                         
@@ -56,7 +56,7 @@
                                     <th></th>
                                 </thead>
 	                            <tbody>
-										<tr ng-repeat="result in vm.matrix" >
+										<tr ng-repeat="result in vm.matriz" >
 											<td>
 													<center>El CU {{result.idCU}} esta cubierto por el RF{{result.idRF}}</center>
 											</td>	
