@@ -70,6 +70,7 @@
 
 /*####VERIFICACIONES####*/
     vm.verificarReqRepe = verificarReqRepe;
+    vm.vacioId =  vacioId;
 
     /*####Funciones para obtener todos los requisitos existentes en la bd ####*/
     initController();
@@ -130,17 +131,19 @@
 */
     function saveRf(){
 
+    	//vm.vacioId();
+
         /*conversion del string a numero*/   
         vm.requisito.number =  parseInt(vm.requisito.number);
         vm.requisito.idProject = idProjectFK;
 
-        //verificarReqRepe();
+        verificarReqRepe();
 
-       /* if(result == true)
+        if(result == true)
         {
             FlashService.Error('Este id ya esta insertado');
         }else
-        {*/
+        {
             (RfService.Create(vm.requisito))
              .then(function(){
                 FlashService.Success('Requisito funcional introducido correctamente');
@@ -148,9 +151,9 @@
             .catch(function(error){
                  FlashService.Error(error);
             });
-               
+       	}
+
         
-       // }
     } 
 
 
@@ -163,9 +166,9 @@
         angular.forEach(vm.requisitosFuncionales, function(value, key){
             if(index === key)
             {
-                RfService.Delete(vm.rf[key])
+                RfService.Delete(vm.requisitosFuncionales[key])
                 .then(function () {
-                    FlashService.Success('Requisitos funcional borrado correctamente: '+vm.rf[key].content);
+                    FlashService.Success('Requisitos funcional borrado correctamente');
                 })
                 .catch(function (error) {
                     FlashService.Error(error);
@@ -185,7 +188,7 @@
 
                 RfService.Update(vm.requisitosFuncionales[index])
                     .then(function () {
-                        FlashService.Success('Requisito funcional modificado correctamente: '+vm.requisitosFuncionales[index].content);
+                        FlashService.Success('El Requisito funcional se ha modificado correctamente');
                     })
                     .catch(function (error) {
                         FlashService.Error(error);
@@ -259,12 +262,17 @@
 */
     function verificarReqRepe(){
         
-        angular.forEach(vm.rf, function(value, key){
+        angular.forEach(vm.requisitosFuncionales, function(value, key){
 
-            if(vm.requisito.number === vm.rf[key].number)
+            if(vm.requisito.number === vm.requisitosFuncionales[key].number)
                  return result = true;
        });
     }
+
+    function vacioId(){
+
+    }
+
 
 }
 

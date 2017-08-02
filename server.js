@@ -6,6 +6,7 @@ var bodyParser = require('body-parser');
 var expressJwt = require('express-jwt');
 var config = require('config.js');
 var morgan = require('morgan'); // middleware para HTTP request
+var nodemailer = require('nodemailer');//send email
  
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views');
@@ -34,9 +35,6 @@ app.use('/api/nofunctionalrequeriments', require('./controllers/api/categoriesNR
 app.use('/api/specifications', require('./controllers/api/specifications.controller'));
 app.use('/api/matrixTrazability', require('./controllers/api/matrix.controller'));
 app.use('/api/project', require('./controllers/api/projects.controller'));
-//app.use('/api/matrixTrazability', require('./controllers/api/functionalrequeriments.controller'));
-//app.use('/api/matrixTrazability', require('./controllers/api/specifications.controller'));
-
 
 // pagina por defecto de inicio
 app.get('/', function (req, res) {

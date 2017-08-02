@@ -1,10 +1,10 @@
- 			<div class="flash-message" ng-if="flash">
-		        <div class="{{'alert alert-' + flash.type}}" ng-bind="flash.message"></div>
-		 	</div>  
+ 		
 				
 
 			<div class="col-md-6">
-		
+				<div class="flash-message" ng-if="flash">
+		       		 <div class="{{'alert alert-' + flash.type}}" ng-bind="flash.message"></div>
+		 		</div>  
 			                   <div class="box box-solid box-success">
                       <div class="box-headerProj">
                               <h3 class="box-tittle"> Información del proyecto</h3>
@@ -38,7 +38,7 @@
 								</div>
 								<br>
 								<div class="box-footer">
-									<a href="#"><center><button class="btn btn-primary" ng-click="vm.saveProj()" onclick="recarga()">Crear Proyecto</button></center></a>
+									<a href="#"><center><button class="btn btn-primary" ng-click="vm.saveProj()" onclick="recargaTime()" >Crear Proyecto</button></center></a>
 								</div>
 								<br>
                           </div>
@@ -50,6 +50,12 @@
 <script>
 function recarga() {
     location.reload();
+}
+
+function recargaTime() {
+	setTimeout(function(){
+   		window.location.reload(1);
+	}, 300);
 }
 
 </script>

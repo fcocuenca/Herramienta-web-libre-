@@ -24,6 +24,8 @@ service.create = create;
 service.getById = getById;
 service.delete = _delete;
 service.update = update;
+service.detectarReq = detectarReq;
+service.detectarCont = detectarCont;
 
 module.exports = service;
 
@@ -48,21 +50,39 @@ function create(RfParam){
 	console.log(RfParam.number);
 	console.log(RfParam.content);
 
-		var re = /(?:\d*)?\d+/;
-		
-     	if(re.test(RfParam.number))
-     	{
-     			db.funcionalrequeriments.insert(
-				RfParam,
-				function(err, doc){
-						if(err) deferred.reject(err);
+	
+    if(detectarCont(RfParam.content) == true && detectarReq(RfParam.number) == true){
+    	db.funcionalrequeriments.insert(
+							RfParam,
+							function(err, doc){
+									if(err) deferred.reject(err);
 
-						deferred.resolve();
-				});
-		}else{
-			 deferred.reject('No has insertado correctamente el Id');
-		}
+									deferred.resolve();
+							});
+
+    }else{
+    		deferred.reject('El contenido requisito no ha sido insertado correctamente');
+    }
+ 
 	return deferred.promise;
+}
+
+function detectarCont(contenido){
+	if(contenido != null){
+		return true;
+	}else{
+		return false;
+	}	
+}
+
+function detectarReq(requisito){
+	var re = /(?:\d*)?\d+/;
+
+	if(re.test(requisito)){
+		return true;
+	}else{
+		return false;
+	}
 }
 	
 

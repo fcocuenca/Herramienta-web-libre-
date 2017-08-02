@@ -23,6 +23,7 @@ service.getById = getById;
 service.create = create;
 service.update = update;
 service.delete = _delete;
+service.getCurrentAllUsers = getCurrentAllUsers;
  
 module.exports = service;
  
@@ -199,5 +200,20 @@ function _delete(_id) {
             deferred.resolve();
         });
  
+    return deferred.promise;
+}
+
+function getCurrentAllUsers(){
+    var deferred = Q.defer();
+
+    db.users.find().toArray(function(err, user){
+        if(err) deferred.reject(err);
+
+        if(user){
+            deferred.resolve(user);
+        }else{
+            deferred.resolve();
+        }
+    });
     return deferred.promise;
 }

@@ -58,10 +58,11 @@ function Controller(UserService, FlashService, SpecService, compartirDatos){
 	function saveSpec(){
 
 		vm.spec.idProject = idProjectFK;
-
+		vm.spec.id =  parseInt(vm.spec.id);
+		
 		SpecService.Create(vm.spec)
 			.then(function(){
-				FlashService.Success('Especificacion almacenada correctamente');
+				FlashService.Success('Especificacion insertada correctamente');
 			})
 			.catch(function(error){
 				FlashService.Error(error);

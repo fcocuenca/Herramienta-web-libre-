@@ -89,17 +89,27 @@
                                       </div>
                                   </div>
                               </div>
-                                  <center><button id ="save" class="btn btn-primary" ng-click="vm.updateSpec($index)" onclick="recarga()">Modificar</button></center>
+                                  <center><button id ="save" class="btn btn-primary" ng-click="vm.updateSpec($index)" onclick="recargaTime()" >Modificar</button></center>
                         </div>
                       </div>
                       </div>
 
                 </div>
                 <!--****************FIN VENTANA MODAL*****************-->
- 
+ <div class="col-md-12">
+    <div class="box box-solid box-success">
+                      <div class="box-headerSpec">
+                              <h3 class="box-tittle"> Listado de especificaciones</h3>
+                      </div>
+                  </div>
+                  </div>
  <ul ng-repeat="s in vm.especificaciones">
  <ol>
+
   <div class="col-md-12">
+            <div class="flash-message" ng-if="flash">
+                    <div class="{{'alert alert-' + flash.type}}" ng-bind="flash.message"></div>
+             </div> 
                 <!--Header de la tabla-->
                 <div class="box box-solid box-success">
                     <div class="box-headerSpec">
@@ -108,7 +118,7 @@
                                         <!--<a href="" onclick="pdf()" ><span class="imprimir glyphicon glyphicon-print"></span></a> &nbsp &nbsp-->
                                         <a href="" id ="update" data-toggle="modal" ng-click="vm.getIndex($index)" data-target="#editar"><span width="30px;" heigth="30px;" class="imprimir glyphicon-pencil"></span></a>
                                         &nbsp &nbsp   
-                            			<a href="" id ="delete" ng-click="vm.deleteSpec($index)" onclick="recarga()"><span width="30px;" heigth="30px;" class="imprimir glyphicon-trash"></span></a> 
+                            			<a href="" id ="delete" ng-click="vm.deleteSpec($index)" onclick="recargaTime()"><span width="30px;" heigth="30px;" class="imprimir glyphicon-trash"></span></a> 
 								              </div>
                     </div>
 
@@ -200,6 +210,13 @@
     	location.reload();
 	}
 
+
+function recargaTime() {
+  setTimeout(function(){
+      window.location.reload(1);
+  }, 300);
+}
+
 function pdfTodo(){
   var long = document.getElementsByTagName("table").length;
   var i = 1;
@@ -245,6 +262,7 @@ function pdfTodo(){
         }     
   }
     doc.save("EspecificaciondeCasosdeUsoCompleta.pdf");
+    alert("Imprimiendo EspecificacionesdeCasosdeUso.pdf")
 }
 
 function pdf() {

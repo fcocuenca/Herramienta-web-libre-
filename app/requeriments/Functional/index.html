@@ -11,13 +11,14 @@
                             <p>Modelo de Requisitos: Especificación de Requisistos Funcionales</p>  
             </div>
                             
-             <div class="flash-message" ng-if="flash">
-                    <div class="{{'alert alert-' + flash.type}}" ng-bind="flash.message"></div>
-             </div>         
+                     
             
               <!--INSERCION DE CATEGORIAS-->
                  
               <div class="col-md-12">
+               <div class="flash-message" ng-if="flash">
+                    <div class="{{'alert alert-' + flash.type}}" ng-bind="flash.message"></div>
+               </div>
                    <div class="box box-solid box-success">
                       <div class="box-header">
                               <h3 class="box-tittle"> Inserción de categorias</h3>
@@ -56,7 +57,7 @@
                       </div>
                   </div>
                   <div class="button">
-                              <center><button id ="save" class="btn btn-primary" ng-click="vm.saveCat()" onclick="recarga()" >Guardar Catergoría</button></center>
+                              <center><button id ="save" class="btn btn-primary" ng-click="vm.saveCat()" onclick="recargaTime()" >Guardar Catergoría</button></center>
                   </div>       
                 </div>
               
@@ -125,7 +126,7 @@
                     </div>
                 </div>
                      <div class="button">
-                            <center><button id ="save" class="btn btn-primary" ng-click="vm.saveRf()" onclick="recarga()">Guardar</button></center>
+                            <center><button id ="save" class="btn btn-primary" ng-click="vm.saveRf()" onclick="recargaTime()">Guardar</button></center>
                     </div>
             </div>
 
@@ -168,10 +169,10 @@
                                           <td>{{r.category}}</td>
                                           
                                           <td>
-                                              <a href="" id ="update" ng-click="vm.updateRf($index)" onclick="recarga()"><span width="30px;" heigth="30px;" class="glyphicon glyphicon-pencil"></span></a>
+                                              <a href="" id ="update" ng-click="vm.updateRf($index)" onclick="recargaTime()" ><span width="30px;" heigth="30px;" class="glyphicon glyphicon-pencil"></span></a>
                                           </td>
                                           <td>
-                                              <a href="" id ="delete" ng-click="vm.deleteRf($index)" onclick="recarga()"><span width="30px;" heigth="30px;" class="glyphicon glyphicon-trash"></span></a>
+                                              <a href="" id ="delete" ng-click="vm.deleteRf($index)" onclick="recargaTime()"><span width="30px;" heigth="30px;" class="glyphicon glyphicon-trash"></span></a>
                                           </td>
                                          
                                   </tr>  
@@ -187,6 +188,30 @@ function recarga() {
     location.reload();
 }
 
+function recargaTime() {
+	setTimeout(function(){
+   		window.location.reload(1);
+	}, 300);
+}
+
+
+/*
+function validar(){
+  var number = document.getElementById('number').value;
+  var content = document.getElementById('content').value;
+
+  if(number === ''){
+   document.getElementById('number').innerHTML="vacio"
+   alert(number);
+  }
+  
+  if(content === ''){
+    alert("No has introducido el contenido del requisito");
+  }
+
+}
+*/
+
 $(document).ready(function(){
     $('[data-toggle="popover"]').popover();   
 });
@@ -198,20 +223,8 @@ $(document).ready(function() {
     });
 });
 */
-/*
-function validar(){
-  var number = document.getElementById('number').value;
-  var content = document.getElementById('content').value;
 
-  if(number === ''){
-    alert("No has introducido el Id");
-  }
 
-  if(content === ''){
-    alert("No has introducido el contenido del requisito");
-  }
-
-}*/
 
 function pdf() {
 
@@ -250,6 +263,7 @@ function pdf() {
     }
   });
   doc.save("RequisitosFuncionales.pdf");
+  alert("Imprimiendo RequisitosFuncionales.pdf")
 }
 
 </script>

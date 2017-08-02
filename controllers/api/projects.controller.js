@@ -19,6 +19,12 @@ var projService = require('services/project.service');
 router.post('/createProj', createProject);
 router.get('/current', getCurrentProject);
 router.post('/deleteProj', deleteProject);
+router.post('/compartirProj', compartirProject);
+router.get('/currentInvitados', getCurrentInvitados);
+router.post('/deleteInvitado', deleteInvitadoUser);
+router.post('/compartidoCon', compartidoConOtroUsuario);
+router.get('/currentShare', getCurrentProjectShare);
+router.post('/deleteProjectShare', deleteProjShare);
 
 module.exports = router;
 
@@ -58,6 +64,19 @@ function getCurrentProject(req, res){
             res.status(400).send(err);
         });
 }
+function getCurrentProjectShare(req, res){
+    projService.getByIdProjectShare()
+        .then(function(proj){
+            if(proj){
+                res.send(proj);
+            }else{
+                res.sendStatus(404);
+            }
+        })
+        .catch(function(err){
+            res.status(400).send(err);
+        });
+}
 
 function deleteProject(req, res){
     console.log("entrado en el delete project");
@@ -71,6 +90,64 @@ function deleteProject(req, res){
         console.log("entrado en el delete proekc");
 }
 
- 
+function compartirProject(req, res){
+    console.log("entrado en el compartirProject project");
+    projService.compartir(req.body)
+        .then(function(){
+            res.sendStatus(200);
+        })
+        .catch(function(err){
+            res.status(400).send(err);
+        });
+        console.log("entrado en el compartir proejct");
+}
+
+function compartidoConOtroUsuario(req, res){
+    projService.compartidoCon(req.body)
+    .then(function(){
+        res.sendStatus(200);
+    })
+    .catch(function(err){
+        res.status(400).send(err);
+    });
+}
+
+function getCurrentInvitados(req, res){
+    projService.getByIdInvitados()
+        .then(function(proj){
+            if(proj){
+                res.send(proj);
+            }else{
+                res.sendStatus(404);
+            }
+        })
+        .catch(function(err){
+            res.status(400).send(err);
+        });
+}
+
+function deleteInvitadoUser(req, res){
+
+    projService.deleteUserInvitado(req.body)
+        .then(function(){
+            res.sendStatus(200);
+        })
+        .catch(function(err){
+            res.status(400).send(err);
+        });
+        console.log("usuario invitado");
+}
+
+function deleteProjShare(req, res){
+    console.log("proyecto compartido de otro usuario eliminar");
+         projService.deleteShareProject(req.body)
+        .then(function(){
+            res.sendStatus(200);
+        })
+        .catch(function(err){
+            res.status(400).send(err);
+        });
+        
+}
 
  

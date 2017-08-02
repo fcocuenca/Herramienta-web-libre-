@@ -1,6 +1,5 @@
 <div class="herramientas">
-    <a href="" ><span class="iconsEdicion"><img src="app-content/icons/importar.png"></span></a>
-    <a href="" ><span class="iconsEdicion"><img src="app-content/icons/exportar.png"></span></a>
+    <a href="" ><span class="iconsEdicion"><img src="app-content/icons/exportar.png" onclick="pdf()"></span></a>
     <a href="" ><span class="iconsEdicion"><img src="app-content/icons/guardar.png"></span></a>
     <span class="tituloHerramientas"><span class="glyphicon glyphicon-wrench"></span> Herramientas </span> 
 
@@ -38,6 +37,17 @@
   <div class="herramientasAbajo"></div>
 
 <script>
+
+function pdf(){
+  var doc = new jsPDF('a4');
+  var elem = document.getElementById('hojaEdicion');
+  //var data = doc.autoTableHtmlToJson(elem);
+
+  doc.text("Modelo de casos de uso: ", 70, 40);
+  doc.text("Diagrama de casos de uso", 70, 48);
+  doc.save("diagrama.pdf");
+  alert("Imprimiendo DiagramaCasosdDeUso.pdf");
+}
 
 	var canvas = new fabric.Canvas('pizarra');
 

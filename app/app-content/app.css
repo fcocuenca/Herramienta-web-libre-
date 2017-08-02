@@ -372,8 +372,8 @@ label > span {
 .col-md-Ppal {
     background-color: #fff;
     border-radius: 12px;
-    width: 90%;
-    margin-left: 5%;
+    width: 95%;
+    margin-left: 3%;
     margin-top: 15px;
 }
 
@@ -1371,6 +1371,10 @@ td{
   -webkit-animation: fade-in .3s linear 1, move-up .3s linear 1;
   -moz-animation: fade-in .3s linear 1, move-up .3s linear 1;
   -ms-animation: fade-in .3s linear 1, move-up .3s linear 1;
+}
+
+.ocultarLetra{
+  color: white;
 }
 
 

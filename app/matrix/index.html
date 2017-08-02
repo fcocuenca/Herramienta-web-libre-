@@ -6,16 +6,16 @@
                     <p>Modelo de Casos de Uso: Matriz de Trazabilidad</p>  
 </div>
                             
- <div class="flash-message" ng-if="flash">
-        <div class="{{'alert alert-' + flash.type}}" ng-bind="flash.message"></div>
- </div>    
-
+ 
  	<center><p class="textMat">Atención:  tu matriz va a tener: <input type="text" class="inputMatBloq" id="filas" value="{{vm.requisitosFuncionales.length}}" disabled>Requisitos funcionales y 
  	 <input type="text" class="inputMatBloq" id="columnas" value="{{vm.especificaciones.length}}" disabled> Casos de Uso</p></center>  
 
  	
  	
  	<div class="col-md-12">
+ 	 <div class="flash-message" ng-if="flash">
+        <div class="{{'alert alert-' + flash.type}}" ng-bind="flash.message"></div>
+ 	</div> 
         <!--Header de la tabla-->
         <div class="box box-solid box-success">
             <div class="box-headerMat">
@@ -32,13 +32,14 @@
 
                                     <tr ng-repeat ="r in vm.requisitosFuncionales">
                                         <td class="tdMat">RF{{r.number}}</td>
-                                         <td ng-repeat="s in vm.especificaciones">
-                                         	<span ng-repeat="select in vm.matriz">
-											<span ng-if="select.idRF == r.number && select.idCU == s.id" ng-style="{color: 'green'}">
-                                            		<input type='checkbox' ng-click="vm.quitarMatrix(s.id, r.number, $id)" ng-model="vm.selectedMod[$id]">&nbsp<i class="fa fa-undo" aria-hidden="true"></i>
-                                            	</span>
-                                           	</span>
-                                          <input type='checkbox' ng-click="vm.avisar(s.id, r.number, $id)" ng-model="vm.selected[$id]">{{r.number}}{{s.id}}
+                                        <td ng-repeat="s in vm.especificaciones">
+                                        	<input type='checkbox' ng-click="vm.avisar(s.id, r.number, $id)" ng-model="vm.selected[$id]">{{r.number}}{{s.id}}
+											<span ng-repeat="sel in vm.matriz">
+	                                        		<span ng-show="sel.idCU == s.id && sel.idRF == r.number">
+	                                        			<img src="app-content/ok.png" width="25px" height="25px">
+	                                        		</span>
+	                                        </span>
+                                        
                                         </td>
 
                                    </tr>
@@ -52,9 +53,9 @@
 					 	<div>
 
                         	
-                        	<span ng-if="vm.matrix.length > 0"> <a ui-sref="matrixLoad"><button  class="btn btn-primary" ng-click="vm.updateMatrix()">Modificar Matriz</button></a></span>
+                        	<!--<span ng-if="vm.matrix.length > 0"> <a ui-sref="matrixLoad"><button  class="btn btn-primary" ng-click="vm.updateMatrix()">Modificar Matriz</button></a></span>-->
                         	
-                        	<a ui-sref="matrixLoad"><button  class="btn btn-primary" ng-click="vm.guardarMatriz()">Guardar Matriz</button></a>
+                        	<a href=""><button  class="btn btn-primary" ng-click="vm.isChecked()">Guardar Matriz</button></a>
                        
                          	<a ui-sref="matrixLoad"><button class="btn btn-primary">Ver Matriz</button></a>
                       	</div>
@@ -94,6 +95,11 @@
 
 function recarga() {
     location.reload();
+}
+function recargaTime() {
+	setTimeout(function(){
+   		window.location.reload(1);
+	}, 300);
 }
 
  $(document).ready(function(){
@@ -139,6 +145,32 @@ function recarga() {
 </script>
 
 <!--
+                                        	
+	1/08/2017
+	
+
+ng-click="vm.quitarMatrix(s.id, r.number, $id)" ng-model="vm.selectedMod[$id]"
+
+
+
+
+
+                                        <span ng-repeat="select in vm.matriz">
+											<span ng-show="select.idRF == r.number && select.idCU == s.id">
+										    		<input type='checkbox' checked="true">
+										    </span>
+										</span>
+
+
+
+
+
+
+
+
+
+
+
                                         		<span ng-if="select.idRF == r.number && select.idCU == s.id; else elseBlock" ng-style="{color: 'green'}">
 
 onclick="recarga()"

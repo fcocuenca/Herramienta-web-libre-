@@ -8,12 +8,21 @@
     function Controller(UserService, ProjService, FlashService, compartirDatos, RfService, CategoryService, NRfService, CategoryServiceNRf, SpecService, MatrixService, GlosaryService ) {
     var vm = this;
     var idProjectFK = compartirDatos.getString();
+    
+    vm.proyectoCompartidoCon = proyectoCompartidoCon;
+    vm.flag;
+    vm.projectShare = [];
+    vm.currentProjectShare= null;
+    vm.projectsShareOwn = [];
+    vm.deleteProjectShare = deleteProjectShare;
 
     vm.user = null;
     vm.userId;
+    vm.users = null;
 
     vm.idProyecto= null;
     vm.proyectos = [];
+    vm.todosProyectos = null;
 
     vm.rf = null;
     vm.requisitosFuncionales = [];
@@ -32,11 +41,20 @@
 
     vm.glosary = null;
     vm.glosario = [];
+
+    vm.invitados = null;
+    vm.invitadosUser = [];
+    vm.eliminarUsuarioInvitado = eliminarUsuarioInvitado;
     
+    /*COMPARTIR PROYECTO*/
+    vm.compartir = null;
+    vm.enviarEmail = enviarEmail;
 
     vm.deleteProject = deleteProject;
     vm.getIdProject = getIdProject;
- 
+    vm.getIdProjectCompartido = getIdProjectCompartido;
+
+
     initController();
     function initController() {
         // get current user
@@ -46,10 +64,17 @@
         });
     }
 
+    initUsersAllController();
+    function initUsersAllController(){
+        UserService.GetAllUsers().then(function(users){
+            vm.users = users;
+        });
+    }
+
     initProjectController();
     function initProjectController(){
         ProjService.GetCurrent().then(function(projects){
-           
+           vm.todosProyectos = projects;
             for(var i=0; i<projects.length; i++)
             {   
             	if(vm.userId === projects[i].userId){
@@ -60,6 +85,32 @@
             }
             
         });
+    }
+
+    initProjectShareController();
+	function initProjectShareController(){
+		ProjService.GetCurrentProjectShare().then(function(projectsShare){
+			/*Todos los proyectos con compartidos con un usuario*/
+			vm.currentProjectShare = projectsShare;
+			for(var i =0; i<vm.currentProjectShare.length; i++){
+					if(vm.currentProjectShare[i].compartidoCon === vm.user.email){
+						/*Me traigo el proyecto compartido para cada usuario en concreto.*/
+						vm.projectsShareOwn.push(vm.currentProjectShare[i]);
+					}
+			}	
+		});
+	}
+
+    initInvitadosController();
+    function initInvitadosController(){
+    	ProjService.GetCurrentInvitados().then(function(invit){
+    		vm.invitados = invit;
+    		for(var i=0; i<vm.invitados.length; i++){
+    			if(vm.user.email === vm.invitados[i].usuarioOrigen){
+    				vm.invitadosUser.push(vm.invitados[i]);
+    			}
+    		}
+    	});
     }
 
     rfController();
@@ -136,6 +187,20 @@
     }
 
     function deleteProject(index){
+        console.log(index);
+
+        for(var i =0; i<vm.invitados.length; i++){
+            if(vm.invitados[i].nameProyecto === vm.proyectos[index].name){
+                ProjService.DeleteInvitado(vm.invitados[i]);                 
+            }
+        }       
+
+        for(var i =0; i<vm.currentProjectShare.length; i++){
+            if(vm.currentProjectShare[i].name == vm.proyectos[index].name){
+                ProjService.Deleteprojectshare(vm.currentProjectShare[i]);
+            }
+        }
+    
     	angular.forEach(vm.proyectos, function(value, key){
         if(index === key)
         {
@@ -221,7 +286,6 @@
             .catch(function (error) {
                 FlashService.Error(error);
             });
-           
         } 
         }); 
     }
@@ -232,8 +296,150 @@
            compartirDatos.setString(idProyecto);
         }
 
+        function getIdProjectCompartido(nameProyectoCompartido){
+            var idProyecto;
+            
+            for(var i=0; i<vm.invitados.length; i++){
+                if(nameProyectoCompartido === vm.invitados[i].nameProyecto){
+                    idProyecto = vm.invitados[i].idProject;
+                    compartirDatos.setString(idProyecto);
+                }
+            }
+        }
+
+
+        function enviarEmail(){
+        	
+            var encontradoNameproyect = false;
+            var encontradoEmailDestino = false;
+
+         	for(var i =0; i<vm.proyectos.length; i++){
+         		if(vm.proyectos[i].name === vm.compartir.nameProyecto){
+         				vm.compartir.idProject = vm.proyectos[i]._id;       			
+         		}
+         	}
+
+         	vm.compartir.usuarioOrigen = vm.user.email;	
+
+            for(var i =0; i<vm.invitados.length; i++){
+                    if(vm.invitados[i].nameProyecto === vm.compartir.nameProyecto){
+                        encontradoNameproyect = true;
+                }
+            }
+
+            if(encontradoNameproyect == true){
+                for(var i =0; i<vm.invitados.length; i++){
+                    if(vm.invitados[i].emailDestino === vm.compartir.emailDestino){
+                            encontradoEmailDestino = true;
+                    }
+                }
+            }                        
+
+            if((encontradoEmailDestino == true ) && (encontradoNameproyect == true)){
+                FlashService.Error('Ya se ha compartido');
+            }else{
+                  for(var i =0; i<vm.users.length; i++){
+                if(vm.compartir.emailDestino === vm.users[i].email){
+                    ProjService.compartirProyecto(vm.compartir)
+                        .then(function(){
+                            FlashService.Success('Proyecto compartido!!!');
+                        })
+                        .catch(function(error){
+                            FlashService.Error(error);
+                        });        
+                }else{
+                    FlashService.Error('El usuario destino no está registrado en la aplicación');   
+                }
+            }
+            }
+            
+
+        }
+
+        function eliminarUsuarioInvitado(index){
+           
+    	 angular.forEach(vm.invitadosUser, function(value, key){
+            if(index === key)
+            {
+                for(var i =0; i<vm.currentProjectShare.length; i++){
+                    if(vm.currentProjectShare[i].name == vm.invitadosUser[index].nameProyecto){
+                        ProjService.Deleteprojectshare(vm.currentProjectShare[i]);
+                        console.log(vm.currentProjectShare[i].name +"==="+vm.invitadosUser[index].nameProyecto) 
+
+                    }
+                }
+                
+                ProjService.DeleteInvitado(vm.invitadosUser[key])
+                .then(function () {
+                    FlashService.Success('Usuario invitado borrado correctamente');
+                })
+                .catch(function (error) {
+                    FlashService.Error(error);
+                });
+            } 
+            });
+          //vm.deleteProjectShare(index);
+
     }
- 
+
+	    
+    function proyectoCompartidoCon(){
+    	/*voy a comprobar si el usuario tiene proyectos compartidos*/
+   		vm.flag = false;
+   		
+    	for(var i =0; i<vm.invitados.length; i++){
+    		if(vm.invitados[i].emailDestino === vm.user.email){
+    				vm.flag = true;
+    				console.log("el usuario: "+vm.invitados[i].emailDestino+"tiene un proyecto compartido con alguien"+vm.flag);
+
+    		}
+    	}
+
+    	/*que proyecto me han compartido los usuarios*/
+    	if(vm.flag == true){
+    		for(var i=0; i<vm.todosProyectos.length; i++){
+    			for(var j=0; j<vm.invitados.length; j++){
+    				if(vm.todosProyectos[i]._id === vm.invitados[j].idProject){
+    				 	vm.todosProyectos[i]._id = parseInt(vm.todosProyectos[i]._id);
+    					vm.todosProyectos[i].compartidoCon=vm.user.email;
+
+    					ProjService.compartidoCon(vm.todosProyectos[i]);
+    				}
+    				
+    			}
+    		}
+    	}
+    }
+
+        function deleteProjectShare(index){
+            console.log(index);
+            for(var i =0; i<vm.invitados.length; i++){
+                if(vm.invitados[i].nameProyecto == vm.projectsShareOwn[index].name){
+                    ProjService.DeleteInvitado(vm.invitados[i]);                 
+                }
+            }            
+
+            angular.forEach(vm.projectsShareOwn, function(value, key){
+            if(index === key)
+            { 
+                ProjService.Deleteprojectshare(vm.projectsShareOwn[key])
+                .then(function () {
+                    FlashService.Success('Proyecto eliminado correctamente');
+                })
+                .catch(function (error) {
+                    FlashService.Error(error);
+                });
+            } 
+
+
+         });
+
+               //vm.eliminarUsuarioInvitado(index);
+
+        }    
+}
+
+
 })();
 
 /*for(var i=0; i<vm.projects.length; i++)

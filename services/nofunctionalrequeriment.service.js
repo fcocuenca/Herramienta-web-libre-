@@ -23,6 +23,8 @@ service.create = create;
 service.getById = getById;
 service.delete = _delete;
 service.update = update;
+service.detectarReq = detectarReq;
+service.detectarCont = detectarCont;
 
 module.exports = service;
 
@@ -46,21 +48,40 @@ function create(NRfParam){
 	var deferred = Q.defer();
 		var re = /(?:\d*)?\d+/;
 		
-     	if(re.test(NRfParam.number))
-     	{
-			db.nofuncionalrequeriments.insert(
-			NRfParam,
-			function(err, doc){
-				if(err) deferred.reject(err);
+		 if(detectarCont(NRfParam.content) == true && detectarReq(NRfParam.number) == true){
+    	db.nofuncionalrequeriments.insert(
+							RfParam,
+							function(err, doc){
+									if(err) deferred.reject(err);
 
-				deferred.resolve();
-			});
-		}else{
-			 deferred.reject('No has insertado correctamente el Id');
-		}
-		
-		return deferred.promise;
+									deferred.resolve();
+							});
+
+    }else{
+    		deferred.reject('El contenido requisito no ha sido insertado correctamente');
+    }	
+	
+	return deferred.promise;
 }
+
+function detectarCont(contenido){
+	if(contenido != null){
+		return true;
+	}else{
+		return false;
+	}	
+}
+
+function detectarReq(requisito){
+	var re = /(?:\d*)?\d+/;
+
+	if(re.test(requisito)){
+		return true;
+	}else{
+		return false;
+	}
+}
+
 
 
  /**

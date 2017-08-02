@@ -8,11 +8,12 @@
 
 			<!--INSERCION DE REQUISITOS -->
 
+			
+
+			<div class="col-md-12">
 			 <div class="flash-message" ng-if="flash">
             		<div class="{{'alert alert-' + flash.type}}" ng-bind="flash.message"></div>
        		 </div>   
-
-			<div class="col-md-12">
 				<!--Header de la tabla-->
 			    <div class="box box-solid box-success">
 			        <div class="box-headernrf">
@@ -80,7 +81,7 @@
 			        </div>
 			    </div>
 			   		 <div class="button">
-                    		<center><button id ="save" class="btn btn-primary" ng-click="vm.saveNRf()" onclick="recarga()">Guardar</button></center>
+                    		<center><button id ="save" class="btn btn-primary" ng-click="vm.saveNRf()" onclick="recargaTime()" >Guardar</button></center>
                		</div>
 
 
@@ -121,10 +122,10 @@
                                         <td>{{rnf.category}}</td>
 								       	
 								       	<td>
-								        	<a href="" id ="updatenrf" ng-click="vm.updateNRf($index)" onclick="recarga()"><span width="30px;" heigth="30px;" class="glyphicon glyphicon-pencil"></span></a>
+								        	<a href="" id ="updatenrf" ng-click="vm.updateNRf($index)" onclick="recargaTime()"><span width="30px;" heigth="30px;" class="glyphicon glyphicon-pencil"></span></a>
 										</td>
 								        <td>
-								        	<a href="" id ="deletenrf" ng-click="vm.deleteNRf($index)" onclick="recarga()"><span width="30px;" heigth="30px;" class="glyphicon glyphicon-trash"></span></a>
+								        	<a href="" id ="deletenrf" ng-click="vm.deleteNRf($index)" onclick="recargaTime()"><span width="30px;" heigth="30px;" class="glyphicon glyphicon-trash"></span></a>
 								        </td>
 								        <td></td>
 
@@ -138,6 +139,12 @@
 
 function recarga() {
     location.reload();
+}
+
+function recargaTime() {
+	setTimeout(function(){
+   		window.location.reload(1);
+	}, 300);
 }
 
 $(document).ready(function(){
@@ -179,6 +186,7 @@ function pdf() {
     }
   });
   doc.save("requisitosNoFuncionales.pdf");
+  alert("Imprimiendo requisitosNoFuncionales.pdf")
 }
 </script>
 

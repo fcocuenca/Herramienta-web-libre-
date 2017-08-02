@@ -15,6 +15,7 @@ var userService = require('services/user.service');
 router.post('/authenticate', authenticateUser);
 router.post('/register', registerUser);
 router.get('/current', getCurrentUser);
+router.get('/currentAllUsers', getCurrentUserAll)
 router.put('/:_id', updateUser);
 router.delete('/:_id', deleteUser);
  
@@ -119,4 +120,19 @@ function deleteUser(req, res) {
         .catch(function (err) {
             res.status(400).send(err);
         });
+}
+
+function getCurrentUserAll(req, res){   
+
+    userService.getCurrentAllUsers()
+    .then(function(user){
+        if(user){
+            res.send(user);
+        }else{
+            res.sendStatus(404);
+        }
+    })
+    .catch(function(err){
+        res.status(400).send(err);
+    });
 }

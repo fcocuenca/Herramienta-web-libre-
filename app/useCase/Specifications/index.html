@@ -7,13 +7,14 @@
                             <p>Modelo de Casos de uso: Especificación de Casos de usos</p>  
             </div>
                             
-             <div class="flash-message" ng-if="flash">
-                    <div class="{{'alert alert-' + flash.type}}" ng-bind="flash.message"></div>
-             </div>         
+                    
             
            
 
             <div class="col-md-12">
+             <div class="flash-message" ng-if="flash">
+                    <div class="{{'alert alert-' + flash.type}}" ng-bind="flash.message"></div>
+             </div> 
                 <!--Header de la tabla-->
                 <div class="box box-solid box-success">
                     <div class="box-headerSpec">
@@ -108,7 +109,7 @@
                     </div>
                 </div>
                      <center><div>
-                          <button id ="save" class="btn btn-primary" ng-click="vm.saveSpec()" onclick="recarga()">Guardar</button>
+                          <button id ="save" class="btn btn-primary" ng-click="vm.saveSpec()" onclick="recargaTime()">Guardar</button>
                           <a ui-sref="verEspecificaciones"><button class="btn btn-primary">Ver especificaciones</button></a>
                       </div></center>
               </div>
@@ -118,6 +119,12 @@
 
 function recarga() {
     location.reload();
+}
+
+function recargaTime() {
+  setTimeout(function(){
+      window.location.reload(1);
+  }, 300);
 }
 
 $(document).ready(function(){

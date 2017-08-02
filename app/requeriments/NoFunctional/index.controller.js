@@ -129,10 +129,9 @@ function Controller(UserService, NRfService, FlashService, CategoryServiceNRf, $
 
         verificarReqRepe();
 
-        /*if(result == true){
+        if(result == true){
             FlashService.Error('Este id ya esta insertado');
         }else{
-        */
             NRfService.Create(vm.requisitonf)
                 .then(function (){
                     FlashService.Success('Requisito no funcional introducido correctamente');  
@@ -141,7 +140,7 @@ function Controller(UserService, NRfService, FlashService, CategoryServiceNRf, $
                     FlashService.Error(error);    
                 });
                 
-        //}
+        }
 	} 
 
 /**
@@ -155,7 +154,7 @@ function Controller(UserService, NRfService, FlashService, CategoryServiceNRf, $
 	        {
 	            NRfService.Delete(vm.requisitosNoFuncionales[key])
 	            .then(function () {
-	                FlashService.Success('Requisitos no funcional borrado correctamente: '+vm.requisitosNoFuncionales[key].content);
+	                FlashService.Success('Requisito no funcional borrado correctamente');
 	            })
 	            .catch(function (error) {
 	                FlashService.Error(error);
@@ -175,7 +174,7 @@ function Controller(UserService, NRfService, FlashService, CategoryServiceNRf, $
 
 	            NRfService.Update(vm.requisitosNoFuncionales[index])
 	               	.then(function () {
-	                    FlashService.Success('Requisito no funcional modificado correctamente: '+vm.requisitosNoFuncionales[index].content);
+	                    FlashService.Success('Requisito no funcional modificado correctamente');
 	                })
 	                .catch(function (error) {
 	                    FlashService.Error(error);
@@ -239,9 +238,9 @@ function Controller(UserService, NRfService, FlashService, CategoryServiceNRf, $
 ################################*/
     function verificarReqRepe(){
         
-        angular.forEach(vm.nrf, function(value, key){
+        angular.forEach(vm.requisitosNoFuncionales, function(value, key){
 
-            if(vm.requisitonf.number === vm.nrf[key].number)
+            if(vm.requisitonf.number === vm.requisitosNoFuncionales[key].number)
                  return result = true;
        });
     }

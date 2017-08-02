@@ -6,12 +6,13 @@
                             <p>Modelo de Casos de Uso: Glosario</p>  
             </div>
                             
-             <div class="flash-message" ng-if="flash">
-                    <div class="{{'alert alert-' + flash.type}}" ng-bind="flash.message"></div>
-             </div>         
+                   
 
              <!--INSERCION DE TERMINOS-->
             <div class="col-md-12">
+            <div class="flash-message" ng-if="flash">
+                    <div class="{{'alert alert-' + flash.type}}" ng-bind="flash.message"></div>
+             </div>   
                 <!--Header de la tabla-->
                 <div class="box box-solid box-success">
                     <div class="box-headerGlosary">
@@ -49,7 +50,7 @@
                     </div>
                 </div>
                      <div class="button">
-                            <center><button id ="save" class="btn btn-primary" onclick="recarga()" ng-click="vm.saveTerm()" >Guardar</button></center>
+                            <center><button id ="save" class="btn btn-primary" ng-click="vm.saveTerm()" onclick="recargaTime()" >Guardar</button></center>
                     </div>
             </div>
             <!--FIN INSERCION DE TERMINOS-->
@@ -72,7 +73,7 @@
                                   <tr>
                                           <th>Términos:
                                            			   
-                                                  <!-- <a href="" ng-click="vm.comprobar()" id="a">A</a> | <a href="" ng-click="vm.comprobar()">B</a> | C | D | E | F | G | H | I | J | K | L | M | N | Ñ | O | P | Q | R | S | T | U | V | W | X | Y | Z --> </th>
+                                                  <!--  <a href="" ng-click="vm.comprobar()" id="a">A</a> | <a href="" ng-click="vm.comprobar()">B</a> | C | D | E | F | G | H | I | J | K | L | M | N | Ñ | O | P | Q | R | S | T | U | V | W | X | Y | Z --> </th>
                                           <th></th>
                                           <th></th>
                                   </tr>
@@ -84,10 +85,10 @@
                                			 <a display="Term" ng-model="vm.modificadoTerm" editable="{{t.content}}">{{t.content}}</a>
                                		</td>
                                		<td>
-                               			<a href="" id ="update" ng-click="vm.updateTerm($index)" onclick="recarga()"><span width="30px;" heigth="30px;" class="glyphicon glyphicon-pencil"></span></a>
+                               			<a href="" id ="update" ng-click="vm.updateTerm($index)" onclick="recargaTime()"><span width="30px;" heigth="30px;" class="glyphicon glyphicon-pencil"></span></a>
                                		</td>
                                		<td>
-                                        <a href="" id ="delete" ng-click="vm.deleteTerm($index)" onclick="recarga()"><span width="30px;" heigth="30px;" class="glyphicon glyphicon-trash"></span></a>
+                                        <a href="" id ="delete" ng-click="vm.deleteTerm($index)" onclick="recargaTime()"><span width="30px;" heigth="30px;" class="glyphicon glyphicon-trash"></span></a>
                                		</td>
                                	</tr>
                               </tbody>     
@@ -100,6 +101,12 @@
 
 function recarga() {
     location.reload();
+}
+
+function recargaTime() {
+  setTimeout(function(){
+      window.location.reload(1);
+  }, 300);
 }
 
 $(document).ready(function(){
@@ -146,6 +153,7 @@ function pdf() {
     }
   });
   doc.save("Glosario.pdf");
+  alert("Imprimiendo glosario.pdf")
 }
 
 </script>

@@ -21,6 +21,7 @@
     "morgan" : ">1.5.1",
     "q": "~1.4.1",
     "request": "~2.80.0",
-    "rootpath": "~0.1.2"
+    "rootpath": "~0.1.2",
+    "nodemailer": ">4.0.1"
   }
 }

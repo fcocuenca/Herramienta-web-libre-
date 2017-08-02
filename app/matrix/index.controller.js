@@ -31,6 +31,7 @@ function Controller(UserService, FlashService, MatrixService, SpecService, RfSer
 	vm.especificaciones = []
 	vm.requisitosFuncionales = [];
 	vm.matriz = [];
+	vm.elementosSeleccionados = [];
 
 
 /*####FUNCIONES MATRIZ DE TRAZABILIDAD####*/
@@ -96,20 +97,32 @@ function Controller(UserService, FlashService, MatrixService, SpecService, RfSer
  * guardarMatriz: llama al servicio Create y inserta un vector donde esta la matriz en la bd
 */
     /*reesctructurar esto con if anidados*/
-    function guardarMatriz(){
+    function guardarMatriz(elemento){
+   
+    		MatrixService.Create(elemento)
+    		.then(function(){
+    			FlashService.Success('La matriz se ha guardado correctamente');
+    		})
+    		.catch(function(err){
+    			FlashService.Error(err);
+    		});	 			
     	
-    	isChecked();
-
-    	if(result == true){
-    		FlashService.Error('CU/RF ya ha sido seleccionado');
-    	}else{
-
-    		if(MatrixService.Create(vm.prueba))
-    			FlashService.Success('El resultado se ha almacenado correctamente');
-    		else
-    			FlashService.Success('Ha ocurrido un error, intentelo de nuevo');
-    	}
     }
+
+ /**
+ * updateMatrix: quita el check de la matriz
+ * @param  {checkEliminar}
+*/
+	function updateMatrix(checkEliminar){   
+		var eliminar = checkEliminar; 	
+    	MatrixService.DeleteCheck(eliminar)
+    	.then(function(){
+    		FlashService.Success('La matriz ha sido modificada');
+    	})
+    	.catch(function(error){
+    		FlashService.Error(error);
+    	})
+	}
 
 /**
  * avisar: Selecciona o deselecciona el elemento en el array
@@ -151,19 +164,21 @@ function Controller(UserService, FlashService, MatrixService, SpecService, RfSer
 
    	/*comprobar que existe uno repetido en la bd*/
    	function isChecked(){
-
+   		var eliminard;
    		for(var i=0; i<vm.prueba.length; i++)
    		{
    			for(var j=0; j<vm.matriz.length; j++)
    			{
-   				if((vm.prueba[i].idRF === vm.matriz[j].idRF) && (vm.prueba[i].idCU === vm.matriz[j].idCU)){
-					
-					//existe uno repetido
-   					return result = true;
+   				if((vm.prueba[i].idRF == vm.matriz[j].idRF) && (vm.prueba[i].idCU == vm.matriz[j].idCU)){
+					updateMatrix(vm.matriz[j]);
+					eliminard = vm.matriz[j].id;
+					vm.prueba.splice(eliminar, 1);
    				}
-   				
    			}
+   			guardarMatriz(vm.prueba[i])
    		}
+
+   		
    	}
 
  /**
@@ -186,14 +201,7 @@ function Controller(UserService, FlashService, MatrixService, SpecService, RfSer
 		}
 	}
 
- /**
- * updateMatrix: quita el check de la matriz
- * @param  {checkEliminar}
-*/
-	function updateMatrix(checkEliminar){   
-		var eliminar = checkEliminar; 	
-    	if(MatrixService.DeleteCheck(eliminar));
-	}
+
 
  /**
  * eliminarTodo: elimina la matriz por completo
@@ -204,7 +212,7 @@ function Controller(UserService, FlashService, MatrixService, SpecService, RfSer
 		 	if(vm.matriz[i].idProject === idProjectFK){
 		 		MatrixService.Delete(vm.matriz[i])
 		 		.then(function(){
-		 			FlashService.Success('Has borrado la matriz entera');
+		 			FlashService.Success('La matriz de trazabilidad ha sido borrada');
 				})
 				.catch(function(){
 					FlashService.Success('Ha ocurrido un error, intentelo de nuevo');

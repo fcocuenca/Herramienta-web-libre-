@@ -15,6 +15,7 @@
         service.Create = Create;
         service.Update = Update;
         service.Delete = Delete;
+        service.GetAllUsers = GetAllUsers;
  
         return service;
  
@@ -22,6 +23,11 @@
             return $http.get('/api/users/current').then(handleSuccess, handleError);
         }
  
+
+        function GetAllUsers() {
+            return $http.get('/api/users/currentAllUsers').then(handleSuccess, handleError);
+        }
+
         function GetById(_id) {
             return $http.get('/api/users/' + _id).then(handleSuccess, handleError);
         }

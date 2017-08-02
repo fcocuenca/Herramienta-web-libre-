@@ -39,7 +39,6 @@ function createReqFun(req, res){
 		.catch(function(err){
 			res.status(400).send(err);
 		});
-        console.log("entrado en el contoller createRf12");
 }
 
 /**

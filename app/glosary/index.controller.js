@@ -83,16 +83,23 @@
 /**
  * saveTerm: llama al servicio create para almacenar el termino en la bd
 */
+
     function saveTerm(){
-       
-             vm.termino.idProject = idProjectFK;
+
+
+            if(vm.termino == null)
+            {
+                FlashService.Error("No has introducido ningún término, intentalo de nuevo");
+            }
+
+            vm.termino.idProject = idProjectFK;
 
         	GlosaryService.Create(vm.termino)
             .then(function(){
-        			FlashService.Success('Término introducido correctamente');
+        			FlashService.Success('Término insertado correctamente');
             })
-            .catch(function(){
-                FlashService.Success('Ha ocurrido un error, intentalo de nuevo');
+            .catch(function(error){
+                FlashService.Error(error);
             });
     }
 
@@ -106,7 +113,7 @@
         {
             GlosaryService.Delete(vm.glosario[key])
             .then(function () {
-                FlashService.Success('Término borrado correctamente: '+vm.glosario[key].content);
+                FlashService.Success('Término borrado correctamente');
             })
             .catch(function (error) {
                 FlashService.Error(error);
@@ -126,7 +133,7 @@
 
      	GlosaryService.Update(vm.glosario[index])
      	.then(function(){
-                    FlashService.Success('Término modificado correctamente: '+vm.glosario[index].content);
+                    FlashService.Success('Término modificado correctamente');
      		})
      	.catch(function (error) {
                     FlashService.Error(error);
