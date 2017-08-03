@@ -32,6 +32,7 @@ function Controller(UserService, FlashService, MatrixService, SpecService, RfSer
 	vm.requisitosFuncionales = [];
 	vm.matriz = [];
 	vm.elementosSeleccionados = [];
+	
 
 
 /*####FUNCIONES MATRIZ DE TRAZABILIDAD####*/
@@ -50,6 +51,7 @@ function Controller(UserService, FlashService, MatrixService, SpecService, RfSer
 
     /*####Funciones para obtener todos las matrices existentes en la bd ####*/
     initMatrix();
+
 
 /*##################################
 ###########GETCURRENT()#############
@@ -162,23 +164,49 @@ function Controller(UserService, FlashService, MatrixService, SpecService, RfSer
     	console.log(vm.prueba);
    	}
 
+function quitarMatrix(idCU, idRF){
+		var id;			
+		for(var i=0; i<vm.matriz.length; i++)
+		{
+			if((idRF == vm.matriz[i].idRF) && (idCU === vm.matriz[i].idCU))
+			{
+				console.log("modifica RF:"+vm.matriz[i].idRF+" CU"+vm.matriz[i].idCU);
+				updateMatrix(vm.matriz[i]);
+			}
+			
+		}
+	}
+
    	/*comprobar que existe uno repetido en la bd*/
    	function isChecked(){
-   		var eliminard;
-   		for(var i=0; i<vm.prueba.length; i++)
-   		{
-   			for(var j=0; j<vm.matriz.length; j++)
-   			{
-   				if((vm.prueba[i].idRF == vm.matriz[j].idRF) && (vm.prueba[i].idCU == vm.matriz[j].idCU)){
-					updateMatrix(vm.matriz[j]);
-					eliminard = vm.matriz[j].id;
-					vm.prueba.splice(eliminar, 1);
+   		
+   		console.log(vm.prueba.length+"sad"+vm.matriz.length)
+
+   		if(vm.prueba.length > vm.matriz.length){
+
+   			for(var i=0; i<vm.prueba.length; i++){	
+   				for(var j=0; j<vm.matriz.length; j++){
+   					if((vm.prueba[i].idRF == vm.matriz[j].idRF) && (vm.prueba[i].idCU == vm.matriz[j].idCU)){
+						vm.updateMatrix(vm.matriz[j]);
+						vm.eliminar(i);
+   					}
    				}
    			}
-   			guardarMatriz(vm.prueba[i])
+
+   		}else{
+	   			for(var i=0; i<vm.matriz.length; i++){
+	   				for(var j=0; j<vm.prueba.length; j++){
+	   					if((vm.matriz[i].idRF == vm.prueba[j].idRF) && (vm.matriz[i].idCU == vm.prueba[j].idCU)){
+							vm.updateMatrix(vm.matriz[i]);
+							vm.eliminar(j);
+	   					}
+	   				}
+	   			}
    		}
 
-   		
+			
+			if(vm.prueba.length > 0)
+   				vm.guardarMatriz(vm.prueba);
    	}
 
  /**
@@ -187,19 +215,7 @@ function Controller(UserService, FlashService, MatrixService, SpecService, RfSer
 */
 
   /*para saber que elemento se tiene que quitar.*/
-	function quitarMatrix(idCU, idRF, id){
-		if(vm.selectedMod[id] == true)
-		{   					
-		for(var i=0; i<vm.matriz.length; i++)
-			{
-				if((idRF == vm.matriz[i].idRF) && (idCU === vm.matriz[i].idCU))
-				{
-					console.log("modifica RF:"+vm.matriz[i].idRF+" CU"+vm.matriz[i].idCU);
-					updateMatrix(vm.matriz[i]);
-			}
-			}
-		}
-	}
+	
 
 
 
@@ -219,10 +235,11 @@ function Controller(UserService, FlashService, MatrixService, SpecService, RfSer
 				});
 		 	}
 		 }
-	}
-   	
+	}   	
 }
 })();
+
+
 
 		    /*
 		    function guardarMatriz(){

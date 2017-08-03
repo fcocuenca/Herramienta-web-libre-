@@ -76,8 +76,8 @@ function _delete(MatParam){
 function getById(){
 	console.log("ha entrado en showAllMat");
 	var deferred = Q.defer();
-
-	db.matrixTrazability.find().toArray(function(err, result){
+    var mysort = {idCU: 1};
+	db.matrixTrazability.find().sort(mysort).toArray(function(err, result){
 			if(err) deferred.reject(err);
 
 			if(result){

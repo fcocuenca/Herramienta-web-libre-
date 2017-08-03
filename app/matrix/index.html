@@ -55,7 +55,7 @@
                         	
                         	<!--<span ng-if="vm.matrix.length > 0"> <a ui-sref="matrixLoad"><button  class="btn btn-primary" ng-click="vm.updateMatrix()">Modificar Matriz</button></a></span>-->
                         	
-                        	<a href=""><button  class="btn btn-primary" ng-click="vm.isChecked()">Guardar Matriz</button></a>
+                        	<a href=""><button  class="btn btn-primary" ng-click="vm.isChecked()" onclick="recargaTime()">Guardar Matriz</button></a>
                        
                          	<a ui-sref="matrixLoad"><button class="btn btn-primary">Ver Matriz</button></a>
                       	</div>
@@ -105,42 +105,6 @@ function recargaTime() {
  $(document).ready(function(){
     $('[data-toggle="popover"]').popover();   
 });
-
- function pdfMatrix(){
-		var doc = new jsPDF('a4');
-        var elem = document.getElementsByTagName("table")[1];
-        var data = doc.autoTableHtmlToJson(elem);
-
-        doc.text("Modelo de Casos de uso:", 70, 40);
-        doc.text("Matriz de Trazabilidad", 70, 48);
-        columns = ["Resultado: Matriz de trazabilidad",""];
-        
-       	doc.autoTable(columns, data.rows,{
-	    
-	      columnStyles:{
-	        0: {columnWidth: 150},
-	      },     
-	      theme: 'grid',
-	      styles: {
-	          overflow: 'linebreak',
-	          fontSize: 10,
-	          valign: 'middle',
-	          rowHeight: 9
-	      },
-	      margin: {top: 60, left: 30},
-	      alternateRowStyles: {
-	        fillColor: [239, 239, 239],
-	      },
-	      headerStyles: {
-	        fillColor: [23, 110, 209],
-	        fontStyle: 'normal',
-	        fontSize: 13
-	      }
-	    });
-
-    doc.save("ResultadoMatrizTrazabilidad.pdf");
-  }
-
 
 </script>
 
@@ -224,87 +188,6 @@ function insert(){
 		 	  }
 			}
 		}
-	<td><input type="checkbox" name="matrix" value="RF1CU1"></td>
-										<td><input type="checkbox" name="matrix" value="RF1CU2"></td>
-										<td><input type="checkbox" name="matrix" value="RF1CU3"></td>
-										<td><input type="checkbox" name="matrix" value="RF1CU4"></td>
-										<td><input type="checkbox" name="matrix" value="RF1CU5"></td>
-										<td><input type="checkbox" name="matrix" value="RF1CU6"></td>
-										<td><input type="checkbox" name="matrix" value="RF1CU7"></td>
-										<td><input type="checkbox" name="matrix" value="RF1CU8"></td>
-										<td><input type="checkbox" name="matrix" value="RF1CU9"></td>
-										<td><input type="checkbox" name="matrix" value="RF1CU10"></td>
-										<td><input type="checkbox" name="matrix" value="RF1CU11"></td>
-									</tr>
-									<tr>
-										<td></td>
-										<td><input type="checkbox" name="RF2CU1" value="RF2CU1"></td>
-										<td><input type="checkbox" name="RF2CU2" value="RF2CU2"></td>
-										<td><input type="checkbox" name="RF2CU3" value="RF2CU3"></td>
-										<td><input type="checkbox" name="RF2CU4" value="RF2CU4"></td>
-										<td><input type="checkbox" name="RF2CU5" value="RF2CU5"></td>
-										<td><input type="checkbox" name="RF2CU6" value="RF2CU6"></td>
-										<td><input type="checkbox" name="RF2CU7" value="RF2CU7"></td>
-										<td><input type="checkbox" name="RF2CU8" value="RF2CU8"></td>
-										<td><input type="checkbox" name="RF2CU9" value="RF2CU9"></td>
-										<td><input type="checkbox" name="RF2CU10" value="RF2CU10"></td>
-										<td><input type="checkbox" name="RF2CU11" value="RF2CU11"></td>
-										</tr>
-									<tr>
-									<td></td>
-										<td><input type="checkbox" name="RF3CU1" value="RF3CU1"></td>
-										<td><input type="checkbox" name="RF3CU2" value="RF3CU2"></td>
-										<td><input type="checkbox" name="RF3CU3" value="RF3CU3"></td>
-										<td><input type="checkbox" name="RF3CU4" value="RF3CU4"></td>
-										<td><input type="checkbox" name="RF3CU5" value="RF3CU5"></td>
-										<td><input type="checkbox" name="RF3CU6" value="RF3CU6"></td>
-										<td><input type="checkbox" name="RF3CU7" value="RF3CU7"></td>
-										<td><input type="checkbox" name="RF3CU8" value="RF3CU8"></td>
-										<td><input type="checkbox" name="RF3CU9" value="RF3CU9"></td>
-										<td><input type="checkbox" name="RF3CU10" value="RF3CU10"></td>
-										<td><input type="checkbox" name="RF3CU11" value="RF3CU11"></td>
-									</tr>
-									<tr>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-									</tr>
-									<tr>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-									</tr>
-									<tr>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-									</tr>
+	
 
 -->
