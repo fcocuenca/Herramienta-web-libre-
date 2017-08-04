@@ -1,10 +1,8 @@
 <div class="herramientas">
-    <a href="" ><span class="iconsEdicion"><img src="app-content/icons/exportar.png" onclick="pdf()"></span></a>
-    <a href="" ><span class="iconsEdicion"><img src="app-content/icons/guardar.png"></span></a>
+    <a href="" ><span class="iconsEdicion"><img src="app-content/icons/exportar.png" onclick="exportarPDF()"></span></a>
+    <a href="" ><span class="iconsEdicion"><img src="app-content/icons/guardar.png" onclick="save()"></span></a>
     <span class="tituloHerramientas"><span class="glyphicon glyphicon-wrench"></span> Herramientas </span> 
 
-
-   
     
     <span class="tituloEdicion">Modelo de Casos de uso: Edición de Diagramas de Casos de Uso</span>
 
@@ -25,33 +23,23 @@
                     			
                 
   </div>
+
     <div class="herramientasDerecha"></div>
+
   <div class="hojaEdicion" id="hojaEdicion">
-      <canvas id="pizarra" height="550px" width="920px">
+      <canvas id="pizarra" fabric="fabric" height="550px" width="920px">
 
       </canvas>
   </div>
-
-
 
   <div class="herramientasAbajo"></div>
 
 <script>
 
-function pdf(){
-  var doc = new jsPDF('a4');
-  var elem = document.getElementById('hojaEdicion');
-  //var data = doc.autoTableHtmlToJson(elem);
+var canvas = new fabric.Canvas('pizarra');
 
-  doc.text("Modelo de casos de uso: ", 70, 40);
-  doc.text("Diagrama de casos de uso", 70, 48);
-  doc.save("diagrama.pdf");
-  alert("Imprimiendo DiagramaCasosdDeUso.pdf");
-}
 
-	var canvas = new fabric.Canvas('pizarra');
-
-	var HideControls = {
+  var HideControls = {
             'tl':true,
             'tr':false,
             'bl':true,
@@ -63,69 +51,80 @@ function pdf(){
             'mtr':true
         };
 
-	$("#actor").on("click", function(e) {
-  			fabric.Image.fromURL('app-content/icons/actor.png', function (img) {
-   							img.top = 60;
-   							img.left = 30;
-   							img.setControlsVisibility(HideControls);
-    						canvas.add(img);
+  $("#actor").on("click", function(e) {
+        fabric.Image.fromURL('app-content/icons/actor.svg', function (img) {
+                img.top = 60;
+                img.left = 30;
+                img.width = 31;
+                img.height = 70;
+                img.setControlsVisibility(HideControls);
+                canvas.add(img);
 
-					});
-	});
+          });
+  });
 
-	$("#CU").on("click", function(e) {
-  			fabric.Image.fromURL('app-content/icons/CU.png', function (img) {
-   							img.top = 60;
-   							img.left = 30;
-    						canvas.add(img);
-					});
-	});
+  $("#CU").on("click", function(e) {
+        fabric.Image.fromURL('app-content/icons/CU.svg', function (img) {
+                img.top = 60;
+                img.left = 30;
+                img.width = 130;
+                img.height = 60;
+                canvas.add(img);
+          });
+  });
 
-	$("#asoc").on("click", function(e) {
-  			fabric.Image.fromURL('app-content/icons/asoc.png', function (img) {
-   							img.top = 60;
-   							img.left = 30;
-    						canvas.add(img);
-					});
-	});
+  $("#asoc").on("click", function(e) {
+        fabric.Image.fromURL('app-content/icons/asoc.svg', function (img) {
+                img.top = 60;
+                img.left = 30;
+                canvas.add(img);
+          });
+  });
 
-	$("#system").on("click", function(e) {
-  			fabric.Image.fromURL('app-content/icons/system.png', function (img) {
-   							img.top = 60;
-   							img.left = 30;
-    						canvas.add(img);
-					});
-	});
-	$("#include").on("click", function(e) {
-  			fabric.Image.fromURL('app-content/icons/include.png', function (img) {
-   							img.top = 60;
-   							img.left = 30;
-    						canvas.add(img);
-					});
-	});
+  $("#system").on("click", function(e) {
+        fabric.Image.fromURL('app-content/icons/sistema.png', function (img) {
+                img.top = 60;
+                img.left = 30;
+                canvas.add(img);
+          });
+  });
+  $("#include").on("click", function(e) {
+        fabric.Image.fromURL('app-content/icons/include.svg', function (img) {
+                img.top = 60;
+                img.left = 30;
+                img.width = 130;
+                img.height = 35;
+                canvas.add(img);
+          });
+  });
 
-	$("#generalizacion").on("click", function(e) {
-  			fabric.Image.fromURL('app-content/icons/generalizacion.png', function (img) {
-   							img.top = 60;
-   							img.left = 30;
-    						canvas.add(img);
-					});
-	});
+  $("#generalizacion").on("click", function(e) {
+        fabric.Image.fromURL('app-content/icons/generalizacion.svg', function (img) {
+                img.top = 60;
+                img.left = 30;
+                img.height = 80;
+                img.width = 30;
+                canvas.add(img);
+          });
+  });
 
-	$("#exclude").on("click", function(e) {
-  			fabric.Image.fromURL('app-content/icons/exclude.png', function (img) {
-   							img.top = 60;
-   							img.left = 30;
-    						canvas.add(img);
-					});
-	});
-	$("#text").on("click", function(e) {
-  			fabric.Image.fromURL('app-content/icons/text.png', function (img) {
-   							img.top = 60;
-   							img.left = 30;
-    						canvas.add(img);
-					});
-	});
+  $("#exclude").on("click", function(e) {
+        fabric.Image.fromURL('app-content/icons/extend.svg', function (img) {
+                img.top = 60;
+                img.left = 30;
+                img.width = 130;
+                img.height = 40;
+                canvas.add(img);
+          });
+  });
+  $("#text").on("click", function(e) {
+          var text = new fabric.IText('Texto', {
+           fontSize: 20,
+           left: 100, 
+           top: 100, 
+         });
+          canvas.add(text);
+  });
 
 function addDeleteBtn(x, y){
     $(".deleteBtn").remove(); 
@@ -167,4 +166,54 @@ $(document).on('click',".deleteBtn",function(){
         $(".deleteBtn").remove();
     }
 });
+
+
+function save(){
+  canvas.forEachObject(function(obj){
+        obj.sourcePath = './app/diagram';
+        console.log(obj.sourcePath)
+     });
+
+ var data_json = JSON.stringify(canvas.toDatalessJSON());
+console.log(data_json);
+  //document.getElementById("demo").innerHTML = data_json;
+}
+
+
+
+function exportarPDF(){
+  var canvas = document.getElementById('pizarra');
+  var dataURL = canvas.toDataURL();
+
+  console.log(dataURL);
+  pdf(dataURL);
+
+}
+
+
+function pdf(imagen){
+  var doc = new jsPDF('a4');
+  var elem = document.getElementById('hojaEdicion');
+  //var data = doc.autoTableHtmlToJson(elem);
+
+  doc.text("Modelo de casos de uso: ", 70, 40);
+  doc.text("Diagrama de casos de uso", 70, 48);
+
+  doc.addImage(imagen, 'JPEG', 5, 55, 215, 150 )
+  doc.save("diagrama.pdf");
+  alert("Imprimiendo DiagramaCasosdDeUso.pdf");
+}
+
+ /*
+  canvas.forEachObject(function(obj){
+        obj.sourcePath = './diagrama.svg';
+        console.log(obj.sourcePath)
+     });
+
+  JSON.stringify(canvas.toDatalessJSON());
+
+  fabric.log('JSON without additional properties: ', canvas.toJSON());
+  console.log(canvas);
+*/
+
 </script>

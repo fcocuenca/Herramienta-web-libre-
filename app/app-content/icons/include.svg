@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 21.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 87 23.5" style="enable-background:new 0 0 87 23.5;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:none;stroke:#000000;stroke-width:2;stroke-miterlimit:10;}
+	.st1{fill:none;stroke:#000000;stroke-width:2;stroke-miterlimit:10;stroke-dasharray:7.7028,7.7028;}
+	.st2{font-family:'MyriadPro-Regular';}
+	.st3{font-size:9.8415px;}
+</style>
+<g>
+	<g>
+		<line class="st0" x1="0" y1="16.5" x2="2.4" y2="16.5"/>
+		<line class="st1" x1="7" y1="16.5" x2="78.9" y2="16.5"/>
+		<line class="st0" x1="81.2" y1="16.5" x2="83.6" y2="16.5"/>
+		<g>
+			<polygon points="76.5,22.9 76,21 83.5,16.5 76,12 76.5,10.1 87,16.5 			"/>
+		</g>
+	</g>
+</g>
+<text transform="matrix(0.8434 0 0 1 15.5 11.75)" class="st2 st3">&lt;&lt;Include&gt;&gt;</text>
+</svg>

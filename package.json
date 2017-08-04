@@ -1,27 +1,28 @@
 {
-  "name"         : "HerramientaParaEspReq",
-  "version"      : "1.0.0",
-  "description"  : "TFG: Herramienta web libre para la especificacion de requisitos en UML",
-  "author"       : "FcoCuenca",
-  "repository":{
-  		"type":"git",
-  		"url":"https://github.com/fcocuenca/TFG.git" 
-  	},
-  "dependencies" : {
-  	"bcryptjs": "~2.4.3",
-  	"body-parser": "~1.16.1",
-  	"ejs": "~2.5.6",
-    "express"    : "~4.14.1",
+  "name": "HerramientaParaEspReq",
+  "version": "1.0.0",
+  "description": "TFG: Herramienta web libre para la especificacion de requisitos en UML",
+  "author": "FcoCuenca",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fcocuenca/TFG.git"
+  },
+  "dependencies": {
+    "bcryptjs": "~2.4.3",
+    "body-parser": "~1.16.1",
+    "ejs": "~2.5.6",
+    "express": "~4.14.1",
     "express-jwt": "~5.1.0",
     "express-session": "~1.15.1",
+    "fabric": "^2.0.0-beta.4",
     "jsonwebtoken": "~6.2.0",
     "lodash": "~4.17.4",
-    "mongoskin": "~2.1.0",
     "mongoose": "~4.8.3",
-    "morgan" : ">1.5.1",
+    "mongoskin": "~2.1.0",
+    "morgan": ">1.5.1",
+    "nodemailer": ">4.0.1",
     "q": "~1.4.1",
     "request": "~2.80.0",
-    "rootpath": "~0.1.2",
-    "nodemailer": ">4.0.1"
+    "rootpath": "~0.1.2"
   }
 }

@@ -33,7 +33,7 @@
                                     <tr ng-repeat ="r in vm.requisitosFuncionales">
                                         <td class="tdMat">RF{{r.number}}</td>
                                         <td ng-repeat="s in vm.especificaciones">
-                                        	<input type='checkbox' ng-click="vm.avisar(s.id, r.number, $id)" ng-model="vm.selected[$id]">{{r.number}}{{s.id}}
+                                        	<input type='checkbox' ng-click="vm.avisar(s.id, r.number, $id)" ng-model="vm.selected[$id]">
 											<span ng-repeat="sel in vm.matriz">
 	                                        		<span ng-show="sel.idCU == s.id && sel.idRF == r.number">
 	                                        			<img src="app-content/ok.png" width="25px" height="25px">

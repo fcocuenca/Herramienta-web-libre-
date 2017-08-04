@@ -1,58 +1,6 @@
-<!-- Con menu -->
 
 
-
-<div class="herramientas">
-
-    <a href="" ><span class="iconsEdicion  glyphicon-floppy-disk"></span></a>
-    <a href="" onclick="pdf()"><span class="iconsEdicion glyphicon glyphicon-print"></span></a>
-
-          <div class="panelEdicion">  
-            	<div class="menuEdicion">
-                <ul class="menuEdicion__list">
-                <li>
-                <input id="group-5" type="checkbox" hidden />
-                  <label for="group-5">
-                      <span class="fa fa-angle-right"></span>
-                  </label>
-                    <ul class="group-list">
-                              <li><div class="buttonFlecha"><button><img src="app-content/icons/flecha.png"></button></div></li>
-                              <hr class="style13">
-
-                              <li><div class="actorCU"  ><button id="actor"><img src="app-content/icons/actor.png"></button></div></li>
-                              <hr class="style13">
-
-                              <li><div class="buttonCU"><button id="CU"><img src="app-content/icons/CU.png"></button>
-                              			                    <button id="system"><img src="app-content/icons/system.png"></button>
-                              </div></li>
-                              <hr class="style13">
-
-                              <li><div class="buttonAsoc" ><button id="asoc"><img src="app-content/icons/asoc.png"></button>
-                              			                       <button id="include"><img src="app-content/icons/include.png"></button>
-                              </div></li>
-
-                              <li><div class="buttonExclude"><button id="exclude"><img src="app-content/icons/exclude.png"></button> 
-                              			                         <button id="generalizacion"><img src="app-content/icons/generalizacion.png"></button>
-                              </div></li>
-                              <hr class="style13">
-                              			
-                              <li><div class="buttonText"><button id="text"><img src="app-content/icons/text.png"></button>
-                              </div></li>
-
-                  </ul>
-            	</div>
-            </div>
-  </div>
-  
-<div class="hojaEdicion" id="hojaEdicion">
-	<canvas id="pizarra" width="900px" height="700px" top="30px">
-
-	</canvas>
-</div>
-
-<script>
-
-	var canvas = new fabric.Canvas('pizarra');
+var canvas = new fabric.Canvas('pizarra');
 
 	var HideControls = {
             'tl':true,
@@ -170,4 +118,3 @@ $(document).on('click',".deleteBtn",function(){
         $(".deleteBtn").remove();
     }
 });
-</script>

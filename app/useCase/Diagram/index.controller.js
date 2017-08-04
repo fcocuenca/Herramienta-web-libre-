@@ -7,7 +7,7 @@
  
     function Controller($window, UserService, FlashService, DService) {
         var vm = this;
-        vm.prueba=0;
+        vm.data_json;
     }
  
 })();

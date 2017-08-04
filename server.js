@@ -1,6 +1,7 @@
 require('rootpath')();
 var express = require('express');
 var app = express();
+//var fabric = require('fabric');
 var session = require('express-session');
 var bodyParser = require('body-parser');
 var expressJwt = require('express-jwt');
