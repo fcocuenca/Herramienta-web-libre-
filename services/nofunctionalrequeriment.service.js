@@ -50,7 +50,7 @@ function create(NRfParam){
 		
 		 if(detectarCont(NRfParam.content) == true && detectarReq(NRfParam.number) == true){
     	db.nofuncionalrequeriments.insert(
-							RfParam,
+							NRfParam,
 							function(err, doc){
 									if(err) deferred.reject(err);
 
@@ -58,7 +58,7 @@ function create(NRfParam){
 							});
 
     }else{
-    		deferred.reject('El contenido requisito no ha sido insertado correctamente');
+    		deferred.reject('El requisito no ha sido insertado correctamente');
     }	
 	
 	return deferred.promise;

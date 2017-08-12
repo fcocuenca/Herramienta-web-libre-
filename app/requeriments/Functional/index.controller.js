@@ -225,7 +225,7 @@
 
                 CategoryService.Update(vm.categorias[index])
                     .then(function () {
-                        FlashService.Success('Categoría modificada correctamente: '+vm.categorias[index].category);
+                        FlashService.Success('Categoría modificada correctamente');
                     })
                     .catch(function (error) {
                         FlashService.Error(error);
@@ -242,7 +242,7 @@
             {
                 CategoryService.Delete(vm.categorias[key])
                 .then(function () {
-                    FlashService.Success('Categoría borrada correctamente: '+vm.categorias[key].category);
+                    FlashService.Success('Categoría borrada correctamente');
                 })
                 .catch(function (error) {
                     FlashService.Error(error);

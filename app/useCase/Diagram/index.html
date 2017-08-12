@@ -1,15 +1,23 @@
 <div class="herramientas">
     <a href="" ><span class="iconsEdicion"><img src="app-content/icons/exportar.png" onclick="exportarPDF()"></span></a>
-    <a href="" ><span class="iconsEdicion"><img src="app-content/icons/guardar.png" onclick="save()"></span></a>
-    <span class="tituloHerramientas"><span class="glyphicon glyphicon-wrench"></span> Herramientas </span> 
 
-    
+  <a href="" ><span class="iconsEdicion" ng-show = "vm.result == true"><img src="app-content/icons/edit.png" height="25px" ng-click="vm.modificarJson()" onclick="convertirJSON(), recargaTime()"></span></a>
+
+  <a href=""><span class="iconsEdicion" ng-show ="vm.result == false"><img src="app-content/icons/guardar.png" ng-click="vm.recibeJson()" onclick="convertirJSON(), recargaTime()"></span>
+  </a>
+ 
+   
+
+
+   <span class="tituloHerramientas"><span class="glyphicon glyphicon-wrench"></span> Herramientas </span> 
+
+
     <span class="tituloEdicion">Modelo de Casos de uso: Edición de Diagramas de Casos de Uso</span>
-
+       
 </div>
+
 <div class="panelEdicion"> 
                 
-
                     <div class="actorCU"  id="actor" ><img src="app-content/icons/actor.png"><div class="textHerramientasActor">Actor</div></div>
                     <div class="casoUso"  id="CU" ><img src="app-content/icons/CU.png"><div class="textHerramientasCU">Caso de Uso</div></div>
                     <div class="system"  id="system" ><img src="app-content/icons/system.png"><div class="textHerramientasSistema">Sistema</div></div>
@@ -19,7 +27,7 @@
                     <div class="generalizacion"  id="generalizacion" ><img src="app-content/icons/generalizacion.png"><div class="textHerramientasGen">Generalización</div></div>
                     <div class="buttonText"  id="text" ><img src="app-content/icons/text.png"><div class="textHerramientasTexto">Texto</div></div>
           
-                <hr class="style13">
+<hr class="style13">
                     			
                 
   </div>
@@ -27,7 +35,11 @@
     <div class="herramientasDerecha"></div>
 
   <div class="hojaEdicion" id="hojaEdicion">
-      <canvas id="pizarra" fabric="fabric" height="550px" width="920px">
+      <div class="flash-messageDiagram" ng-if="flash">
+                  <div class="{{'alertDiagram alert-' + flash.type}}" ng-bind="flash.message"></div>
+      </div>  
+      
+      <canvas  id="pizarra" height="550px" width="920px">
 
       </canvas>
   </div>
@@ -35,9 +47,14 @@
   <div class="herramientasAbajo"></div>
 
 <script>
+ 
+function recargaTime() {
+  setTimeout(function(){
+      location.reload(true);
+  }, 300);
+}
 
 var canvas = new fabric.Canvas('pizarra');
-
 
   var HideControls = {
             'tl':true,
@@ -58,8 +75,7 @@ var canvas = new fabric.Canvas('pizarra');
                 img.width = 31;
                 img.height = 70;
                 img.setControlsVisibility(HideControls);
-                canvas.add(img);
-
+                canvas.add(img);  
           });
   });
 
@@ -168,17 +184,20 @@ $(document).on('click',".deleteBtn",function(){
 });
 
 
-function save(){
-  canvas.forEachObject(function(obj){
-        obj.sourcePath = './app/diagram';
-        console.log(obj.sourcePath)
-     });
+/*Enviar JSON al angular*/
+function convertirJSON() {
 
- var data_json = JSON.stringify(canvas.toDatalessJSON());
-console.log(data_json);
-  //document.getElementById("demo").innerHTML = data_json;
+    var data = canvas.toJSON();  
+    var string  = JSON.stringify(data);
+    localStorage.setItem('addJson', string);     
+    
 }
 
+/*Muestra el diagrama que hemos editado para un proyecto concreto.*/
+  var json = localStorage.getItem('angularToHtml');
+  canvas.loadFromJSON(json, canvas.renderAll.bind(canvas), function(o, object) {
+    fabric.log(o, object);
+  });
 
 
 function exportarPDF(){
@@ -203,6 +222,9 @@ function pdf(imagen){
   doc.save("diagrama.pdf");
   alert("Imprimiendo DiagramaCasosdDeUso.pdf");
 }
+
+
+
 
  /*
   canvas.forEachObject(function(obj){

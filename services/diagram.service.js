@@ -22,7 +22,6 @@ var service = {};
 
 service.create = create;
 service.getById = getById;
-service.delete = _delete;
 service.update = update;
 
 module.exports = service;
@@ -62,20 +61,17 @@ function create(diag){
  * @return  {requisitos:_id, content}
  */
 function getById(){
-	console.log("ha entrado en showAll1");
 	var deferred = Q.defer();
 
-	db.diagram.find().toArray(function(err, rf){
+	db.diagram.find().toArray(function(err, diagram){
 			if(err) deferred.reject(err);
 
-			if(rf){
-					deferred.resolve(rf);
+			if(diagram){
+					deferred.resolve(diagram);
 			}else{
 				deferred.resolve();
 			}		
 	});
-
-	console.log("ha entrado en showAll");
 	return deferred.promise;
 }
 
@@ -110,19 +106,14 @@ function _delete(diag){
  * @return  {usuario modificado}
  */
 function update(diag){
-	console.log("has entrado en update");
-
 
     var deferred = Q.defer();
-    
-    var id= diag._id;
-    var content = diag.content;
-
+    var json= diag.json;
     var set = {	
-    			content: content,
+    			json: json,
     };
 
-    db.diagrama.update(
+    db.diagram.update(
     {_id: mongo.helper.toObjectID(diag._id)},
     {$set: set},
     function(err){
@@ -130,7 +121,6 @@ function update(diag){
     	
     	deferred.resolve();
     });
-    	console.log("has salido update");
     return deferred.promise;
 }
 

@@ -24,7 +24,7 @@ service.create = create;
 service.getById = getById;
 service.delete = _delete;
 service.update = update;
-service.detectarCont = detectarCont;
+
 module.exports = service;
 
 /*
@@ -47,12 +47,8 @@ function create(word){
 	console.log("createGlosary");
 
 	//orden de los elementos antes d einsertarlos en a BD
-	console.log("asdasdasdasdad");
-	console.log(word.content);
-	var deferred = Q.defer();
+		var deferred = Q.defer();
 
-
-	if(detectarCont == true){
 		db.glosary.insert(
 		word,
 		function(err, doc){
@@ -60,23 +56,10 @@ function create(word){
 
 				deferred.resolve();
 		});
-	}else{
-		deferred.reject('No has introducido ningún término, intentalo de nuevo');
-	}
-			
-	
-
-	
-	return deferred.promise;
+		
+		return deferred.promise;
 }
 
-function detectarCont(contenido){
-	if(contenido != null){
-		return true;
-	}else{
-		return false;
-	}	
-}
 
  /**
  * getById: obtencio de los requisitos funcionales de la bd

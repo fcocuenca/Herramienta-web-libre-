@@ -7,10 +7,6 @@
                             <p>Modelo de Casos de uso: Especificación de Casos de usos</p>  
             </div>
                             
-                    
-            
-           
-
             <div class="col-md-12">
              <div class="flash-message" ng-if="flash">
                     <div class="{{'alert alert-' + flash.type}}" ng-bind="flash.message"></div>
@@ -34,40 +30,23 @@
 
                                 <tbody>
                                   <tr>
-                                     <td class="attrTextSpec">Nombre: </td> 
-                                     <td>          
-                                                      <select name="priority" ng-model="vm.spec.name" class="btn" required>
-                                                          <option value="">-SeleccionarCasoDeUso-</option>
-                                                          <option value="caso de uso 1">Caso de uso 1</option>
-                                                          <option value="caso de uso 2">Caso de uso 2</option>
-                                                          <option value="caso de uso 3">Caso de uso 3</option>
-                                                          <option value="caso de uso 4">Caso de uso 4</option>
-                                                      </select>
-                                         
-                                     </td> 
-                                  	</tr>
-                                  	<tr>
-                                       <td class="attrTextSpec">Id: </td>
-                                      	<td>          
-                                                      <select name="priority" ng-model="vm.spec.id" class="btn" required>
-                                                          <option value="">-SeleccionarId-</option>
-                                                          <option value="1">1</option>
-                                                          <option value="2">2</option>
-                                                          <option value="3">3</option>
-                                                          <option value="4">4</option>
-                                                      </select><ng-model=vm.spec.id required/>
-                                      	</td>
-                                  	</tr>
-                                   
-                                   	<tr>
-                                       <td class="attrTextSpec">Descripción: </td>
-                                       <td> <input type="text" id="descripcion" class="form-controlInputSpec" ng-model=vm.spec.desc required/> </td>
-                                    </tr>
+                                    <td class="attrTextSpec">Nombre: </td> 
+                                    <td> <input type="text" id="descripcion" class="form-controlInputSpec" ng-model=vm.spec.name required/></td> 
+                                  </tr>
+
+                                  <tr>
+                                    <td class="attrTextSpec">Id: </td>
+                                    <td><input type="text" id="descripcion" class="form-controlInputSpec" ng-model=vm.spec.id required/></td>
+                                  </tr>
                                    
                                   <tr>
-                                      <td class="attrTextSpec">Actor Principal: </td>
-                                      <td><input type="text" id="actorPrin" class="form-controlInputSpec" ng-model=vm.spec.actorPrin required/>
-                                      </td>
+                                    <td class="attrTextSpec">Descripción: </td>
+                                    <td> <input type="text" id="descripcion" class="form-controlInputSpec" ng-model=vm.spec.desc required/></td>
+                                  </tr>
+                                   
+                                  <tr>
+                                    <td class="attrTextSpec">Actor Principal: </td>
+                                    <td><input type="text" id="actorPrin" class="form-controlInputSpec" ng-model=vm.spec.actorPrin required/></td>
                                   </tr>
 
                                    <tr>

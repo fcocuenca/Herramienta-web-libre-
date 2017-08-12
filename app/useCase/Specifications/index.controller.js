@@ -12,6 +12,7 @@ function Controller(UserService, FlashService, SpecService, compartirDatos){
 ##########DECLARACIÓN DE VARIABLES###########
 ###########################################*/    
 	var vm = this;
+	var result;
 	var i = 0;
 	var idProjectFK = compartirDatos.getString();
 
@@ -28,6 +29,7 @@ function Controller(UserService, FlashService, SpecService, compartirDatos){
 	vm.deleteSpec = deleteSpec;
 	vm.updateSpec = updateSpec;
 	vm.getIndex = getIndex;
+	vm.verificarEspecRepe = verificarEspecRepe;
 
 /*####Funciones para obtener todos las especificaciones existentes en la bd ####*/
 	initSpec();
@@ -60,13 +62,20 @@ function Controller(UserService, FlashService, SpecService, compartirDatos){
 		vm.spec.idProject = idProjectFK;
 		vm.spec.id =  parseInt(vm.spec.id);
 		
-		SpecService.Create(vm.spec)
+		verificarEspecRepe();
+
+		if(result == true)
+        {
+            FlashService.Error('Este id ya ha sido insertado');
+        }else{
+	    	SpecService.Create(vm.spec)
 			.then(function(){
 				FlashService.Success('Especificacion insertada correctamente');
 			})
 			.catch(function(error){
 				FlashService.Error(error);
 			});
+        }
 	}
 
 
@@ -108,6 +117,13 @@ function Controller(UserService, FlashService, SpecService, compartirDatos){
 
 	function getIndex(index){
 			vm.specMod = vm.especificaciones[index];
+	}
+
+	function verificarEspecRepe(){
+		 angular.forEach(vm.especificaciones, function(value, key){
+            if(vm.spec.id === vm.especificaciones[key].id)
+                 return result = true;
+       });
 	}
 
 	

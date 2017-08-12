@@ -2,12 +2,11 @@
     'use strict';
  
     angular
-        .module('app', ['ui.router','ngStorage'])
+        .module('app', ['ui.router','ngStorage', 'ngResource'])
         .config(config)
         .run(run)
         .controller('IndexController', Controller)
         .service('compartirDatos', function($localStorage){
-            var stringValue;
             
             return {
                 getString: function(){
@@ -160,17 +159,7 @@
  
             angular.bootstrap(document, ['app']);
         });
+
     });
 })();
 
-/*
-for(var i=0; i<project.length; i++)
-                {
-                    if(vm.userId===project[i].userId){
-
-
-                        }else{
-                        console.log("no tiene proyecto creado!!!");
-                    }
-                }
-*/

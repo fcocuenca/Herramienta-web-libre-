@@ -24,6 +24,7 @@ service.create = create;
 service.getById = getById;
 service.delete = _delete;
 service.update = update;
+service.detectarId = detectarId;
 
 module.exports = service;
 
@@ -46,15 +47,31 @@ module.exports = service;
 function create(SpecParam){
 
 	var deferred = Q.defer();
+    console.log(SpecParam.id);
+    if(detectarId(SpecParam.id) == true){
+       
+        db.specification.insert(
+        SpecParam,
+        function(err, doc){
+                if(err) deferred.reject(err);
 
-	db.specification.insert(
-		SpecParam,
-		function(err, doc){
-				if(err) deferred.reject(err);
+                deferred.resolve();
+        });
+     }else{
+            deferred.reject('Inserta el Id de la especificación');
+     }   
+    
+    return deferred.promise;    
+}
 
-				deferred.resolve();
-		});
-	    return deferred.promise;
+function detectarId(id){
+    var re = /(?:\d*)?\d+/;
+
+    if(re.test(id)){
+        return true;
+    }else{
+        return false;
+    }
 }
 
  /**

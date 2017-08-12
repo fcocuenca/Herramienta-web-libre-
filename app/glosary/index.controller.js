@@ -56,8 +56,6 @@
     vm.updateTerm = updateTerm;
 
 /*####VERIFICACIONES####*/    
-    vm.comprobar = comprobar;
-
 
 /*##################################
 ###########GETCURRENT()#############
@@ -86,21 +84,22 @@
 
     function saveTerm(){
 
-
             if(vm.termino == null)
             {
-                FlashService.Error("No has introducido ningún término, intentalo de nuevo");
-            }
+                FlashService.Error('No has introducido ningún término');
+            }else{
+                vm.termino.idProject = idProjectFK;
 
-            vm.termino.idProject = idProjectFK;
+                GlosaryService.Create(vm.termino)
+                .then(function(){
+                        FlashService.Success('Término insertado correctamente');
+                })
+                .catch(function(error){
+                    FlashService.Error(error);
+                });
+     
+                }
 
-        	GlosaryService.Create(vm.termino)
-            .then(function(){
-        			FlashService.Success('Término insertado correctamente');
-            })
-            .catch(function(error){
-                FlashService.Error(error);
-            });
     }
 
 /**
@@ -143,31 +142,7 @@
 /*################################
 ############VERIFICACIONES########
 ################################*/
-    function comprobar(){
-
-    	var primeraletra;
-        var longitud = vm.glosary.length
-        var i=0;
-        var str; 
-        var res; 
-        var palabraA=[];
-        var palabraB=[];
-
-        for(i=0; i<longitud; i++)
-        {
-            str = vm.glosary[i].content;
-            res = str.substr(0,1);
-
-            if(res === "A")
-                palabraA.push({'content': vm.glosary[i].content});
-
-            /*if(res === "B")
-                palabraB.push({'content': vm.glosary[i].content});                    
-                */
-        }
-        
-        vm.letraA = palabraA
-    }
+ 
      
 
 }

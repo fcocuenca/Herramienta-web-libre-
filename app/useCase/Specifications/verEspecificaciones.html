@@ -127,8 +127,11 @@
                         <div class="box-body table-responsive no-padding">
                             <table  class ="table" border="3" id="table">
                                 <thead>
+                                  <tr>
+                                      <th></th>
+                                      <th></th>
+                                  </tr>
                                 </thead>
-
                                 <tbody>
                                   <tr>
                                      <td class="attrTextSpec">Nombre: </td> 
@@ -172,9 +175,9 @@
                                       </td>
                                     </tr>
                                   	<tr>
-                                  		<td class="attrTextSpec">FlujoPrincipal: </td>
+                                  		<td class="attrTextSpec" id="flujoPrincipal">FlujoPrincipal: </td>
                                   		<td>
-                                  				{{s.flujoPrin}}
+                                  				<pre class="pre">{{s.flujoPrin}}</pre>
                                   		</td>
                                     </tr>
                                     <tr>
@@ -189,7 +192,7 @@
                                     <td>
                                   		{{s.flujoAlt}}
                                   	</td>
-                                  </tr>    
+                                  </tr>  
                                 </tbody>
                             </table>
                         </div>
@@ -206,9 +209,9 @@
     			</div>
 
 <script>
-	function recarga() {
-    	location.reload();
-	}
+function recarga() {
+	location.reload();
+}
 
 
 function recargaTime() {

@@ -16,10 +16,10 @@ var diagramService = require('services/diagram.service');
 
 
 /*####Definicion de las rutas####*/
-router.post('/createD', createDiagram);
+router.post('/createDiagram', createDiag);
 router.get('/current', getCurrentDiagram);
 router.post('/deleteD', deleteDiagram);
-router.post('/updateD', updateDiagram);
+router.post('/updateDiagram', updateDiag);
 
 
 module.exports = router;
@@ -31,8 +31,7 @@ module.exports = router;
  * createReqFun: hacemos referencia al servicio de la creacion de requisitos funcionales
  */
 
-function createDiagram(req, res){
-	console.log("entrado en el contoller glosary");
+function createDiag(req, res){
 	diagramService.create(req.body)
 		.then(function(){
 			res.sendStatus(200);
@@ -40,7 +39,6 @@ function createDiagram(req, res){
 		.catch(function(err){
 			res.status(400).send(err);
 		});
-        console.log("entrado en el contoller createRf12");
 }
 
 /**
@@ -49,9 +47,9 @@ function createDiagram(req, res){
  
 function getCurrentDiagram(req, res){
    diagramService.getById()
-        .then(function(d){
-            if(d){
-                res.send(d);
+        .then(function(diagram){
+            if(diagram){
+                res.send(diagram);
             }else{
                 res.sendStatus(404);
             }
@@ -83,11 +81,7 @@ function deleteDiagram(req, res) {
 /**
  * updateRf: hacemos referencia al servicio update para modificar los requisitos funcionales
  */
-function updateDiagram(req, res) {
-     console.log("dentro de UpdateRf")
-     console.log("id UpdateRf: "+req.body._id);
-     console.log("content: "+req.body.content);
-
+function updateDiag(req, res) {
         diagramService.update(req.body)
             .then(function () {
                 res.sendStatus(200);
@@ -95,8 +89,6 @@ function updateDiagram(req, res) {
             .catch(function (err) {
                 res.status(400).send(err);
             });
-
-            console.log("deleteRFfin")
 }
  
 

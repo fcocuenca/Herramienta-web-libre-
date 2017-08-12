@@ -61,7 +61,7 @@ function create(RfParam){
 							});
 
     }else{
-    		deferred.reject('El contenido requisito no ha sido insertado correctamente');
+    		deferred.reject('El requisito no ha sido insertado correctamente');
     }
  
 	return deferred.promise;
