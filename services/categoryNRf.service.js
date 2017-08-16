@@ -1,12 +1,20 @@
+/**
+ * @fileoverview categoryNRf.service.js: se exponen los servicios que va a utilizar 
+ * en el manejo de categorias 
+ */
+
 var config = require('config.js');
 var _ = require('lodash');
 var jwt = require('jsonwebtoken');
 var Q = require('q');
 var mongo = require('mongoskin');
 
+//Creación de la coleccion categoryNRf
 var db = mongo.db(config.connectionString, {native_parser: true});
 db.bind('categoryNRf');
 
+/*especificacion de los servicios que vamos a implementar para posteriormente 
+que el controlador haga uso de ellos.*/
 var service = {};
 
 service.create = create;
@@ -16,6 +24,11 @@ service.update = update;
 
 module.exports = service;
 
+//####Creacion de los servicios####
+
+ /**
+ * create: insercion de las categorias en la bd
+ */
 function create(CatParam){
 	var deferred = Q.defer();
 
@@ -29,8 +42,10 @@ function create(CatParam){
 	return deferred.promise;
 }
 
+ /**
+ * getById: obtencion de las categorias de la bd
+ */
 function getById(){
-	console.log("ha llegado al getById");
 	var deferred = Q.defer();
 
 	db.categoryNRf.find().toArray(function(err, cat){
@@ -46,10 +61,10 @@ function getById(){
 
 }
 
-function _delete(CatParam){
-	console.log("has entrado en _deeleteCat");
-
-    
+ /**
+ * _delete: Borrado de las categorias en la bd
+ */
+function _delete(CatParam){    
     var deferred = Q.defer();
     var id= CatParam._id;
 
@@ -60,13 +75,13 @@ function _delete(CatParam){
     	
     	deferred.resolve();
     });
-    	console.log("has salidod _deletecat");
     return deferred.promise;
 }
 
+ /**
+ * update: modificacion de las categorias
+ */
 function update(CatParam){
-	console.log("has entrado en update");
-	
     var deferred = Q.defer();
     
     var id= CatParam._id;
@@ -84,6 +99,5 @@ function update(CatParam){
     	
     	deferred.resolve();
     });
-    	console.log("has salido updateCat");
     return deferred.promise;
 }

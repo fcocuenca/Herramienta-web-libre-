@@ -1,8 +1,5 @@
 /**
  * @fileoverview norequerimentsfuncional.service.js: se exponen los metodos que utilizaran los requisitos no funcionales
- * @version 0.1
- * @author FcoCuenca 
- * History
  */
 
 var config = require('config.js');
@@ -11,7 +8,7 @@ var jwt = require('jsonwebtoken');
 var Q = require('q');
 var mongo = require('mongoskin');
 
-//inserccion de la collection nrf en mongoDB
+//Creación de la coleccion nofunctionalrequeriments
 var db = mongo.db(config.connectionString, { native_parser: true });
 db.bind('nofuncionalrequeriments');
 
@@ -28,20 +25,13 @@ service.detectarCont = detectarCont;
 
 module.exports = service;
 
-/*
-	####Creacion de los servicios####
-*/
-
-/*
-	####CONTENIDO DEL REQ NO FUNC.####
-	{Campos que consta un requisito no funcional: _id: proporcionado por mongoDB, content: contenido del requisito no funcional}
-*/
+//####Creacion de los servicios####
 
  /**
  * create: insercion de los requisitos no funcionales en la bd
  * @param  {_id}
  * @param  {content}
- * @return  {promesa ok or fail}
+ * @return  {promise}
  */
 function create(NRfParam){
 
@@ -64,6 +54,10 @@ function create(NRfParam){
 	return deferred.promise;
 }
 
+/*detectarCont: detetectar contenido no nulo
+	@param:{contenido}
+	@return  {boolean}
+*/
 function detectarCont(contenido){
 	if(contenido != null){
 		return true;
@@ -72,6 +66,10 @@ function detectarCont(contenido){
 	}	
 }
 
+/*detectarReq: detetectar requisito no nulo
+	@param:{contenido}
+	@return  {boolean}
+*/
 function detectarReq(requisito){
 	var re = /(?:\d*)?\d+/;
 
@@ -83,13 +81,11 @@ function detectarReq(requisito){
 }
 
 
-
- /**
+/**
  * getById: obtencio de los requisitos no funcionales de la bd
  * @return  {requisitos:_id, content}
  */
 function getById(){
-	console.log("has entrado en getById nrf");
 	var deferred = Q.defer();
 
 	var mysort = {number: 1};
@@ -103,8 +99,6 @@ function getById(){
 				deferred.resolve();
 			}		
 	});
-
-	console.log("ha salido nrf");
 	return deferred.promise;
 }
 
@@ -115,8 +109,6 @@ function getById(){
  * @return  {usuario autenticado}
  */
 function _delete(NRfParam){
-	console.log("has entrado en _deete");
-	 console.log(NRfParam._id);
     var deferred = Q.defer();
     var id= NRfParam._id;
 
@@ -127,7 +119,6 @@ function _delete(NRfParam){
     	
     	deferred.resolve();
     });
-    	console.log("has salidod _delete");
     return deferred.promise;
 }
 
@@ -138,8 +129,6 @@ function _delete(NRfParam){
  * @return  {usuario modificado}
  */
 function update(NRfParam){
-	console.log("has entrado en update");
-
     var deferred = Q.defer();
     
     var id= NRfParam._id;
@@ -157,7 +146,6 @@ function update(NRfParam){
     	
     	deferred.resolve();
     });
-    	console.log("has salido update");
     return deferred.promise;
 }
 

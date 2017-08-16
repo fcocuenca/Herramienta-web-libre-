@@ -1,13 +1,16 @@
 require('rootpath')();
 var express = require('express');
 var app = express();
-//var fabric = require('fabric');
 var session = require('express-session');
 var bodyParser = require('body-parser');
 var expressJwt = require('express-jwt');
 var config = require('config.js');
-var morgan = require('morgan'); // middleware para HTTP request
-var nodemailer = require('nodemailer');//send email
+
+// middleware para HTTP request
+var morgan = require('morgan');
+
+//enviar email
+var nodemailer = require('nodemailer');
  
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views');
@@ -15,8 +18,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(session({ secret: config.secret, resave: false, saveUninitialized: true }));
 
-app.use( express.static( "public" )); //Almacenamiento de imagenes
-app.use(morgan('dev')); //para ver cada request en la consola
+//Almacenamiento de imagenes
+app.use( express.static( "public" )); 
+
+//para ver cada request en la consola
+app.use(morgan('dev')); 
 
 // use JWT auth to secure the api
 app.use('/api', expressJwt({ secret: config.secret }).unless({ path: ['/api/users/authenticate', '/api/users/register'] }));

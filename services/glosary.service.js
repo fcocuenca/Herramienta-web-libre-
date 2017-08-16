@@ -1,9 +1,6 @@
 /**
- * @fileoverview requerimentsfuncional.service.js: se exponen los servicios que va a utilizar 
- * en el manejo de requisitos funcionales.
- * @version 0.1
- * @author FcoCuenca 
- * History
+ * @fileoverview glosary.service.js: se exponen los servicios que va a utilizar 
+ * en el manejo del glosario
  */
 
 var config = require('config.js');
@@ -12,7 +9,7 @@ var jwt = require('jsonwebtoken');
 var Q = require('q');
 var mongo = require('mongoskin');
 
-//inserccion de la collection rf en mongoDB
+//Creación de la coleccion glosary
 var db = mongo.db(config.connectionString, { native_parser: true });
 db.bind('glosary');
 
@@ -27,21 +24,10 @@ service.update = update;
 
 module.exports = service;
 
-/*
-	####Creacion de los servicios####
-*/
-
-
-/*
-	####CONTENIDO DEL REQ FUNC.####
-	{Campos que consta un requisito funcioanl: _id: proporcionado por mongoDB, content: contenido del requisito no funcional}
-*/
+//####Creacion de los servicios####
 
  /**
- * create: insercion de los requisitos funcionales en la bd
- * @param  {_id}
- * @param  {content}
- * @return  {promesa ok or fail}
+ * create: insercion de los terminos en la bd
  */
 function create(word){
 	console.log("createGlosary");
@@ -62,12 +48,10 @@ function create(word){
 
 
  /**
- * getById: obtencio de los requisitos funcionales de la bd
- * @return  {requisitos:_id, content}
+ * getById: obtencio de los términos de la bd
  */
 function getById(){
-	console.log("ha entrado en showglosary");
-	
+
 	var deferred = Q.defer();
 	var mysort = {content: 1};
 
@@ -80,20 +64,14 @@ function getById(){
 				deferred.resolve();
 			}		
 	});
-
-	console.log("ha entrado en showglosary");
 	return deferred.promise;
 }
 
 
  /**
- * _delete: Borrado de los requisitos funcionales en la bd
- * @param  {_id}
- * @param  {content}
- * @return  {usuario autenticado}
+ * _delete: Borrado de los terminos en la bd
  */
 function _delete(word){
-	console.log("has entrado en _deete");
 	console.log(word._id);
     
     var deferred = Q.defer();
@@ -106,18 +84,13 @@ function _delete(word){
     	
     	deferred.resolve();
     });
-    	console.log("has salidod _delete");
     return deferred.promise;
 }
 
  /**
- * update: modificacion de los requisitos funcionales
- * @param  {_id}
- * @param  {content}
- * @return  {usuario modificado}
+ * update: modificacion de los terminos
  */
 function update(word){
-	console.log("has entrado en update");
 	console.log(word._id);
 	
     var deferred = Q.defer();
@@ -137,7 +110,6 @@ function update(word){
     	
     	deferred.resolve();
     });
-    	console.log("has salido update");
     return deferred.promise;
 }
 

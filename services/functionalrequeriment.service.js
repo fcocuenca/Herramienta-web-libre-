@@ -1,9 +1,6 @@
 /**
  * @fileoverview requerimentsfuncional.service.js: se exponen los servicios que va a utilizar 
  * en el manejo de requisitos funcionales.
- * @version 0.1
- * @author FcoCuenca 
- * History
  */
 
 var config = require('config.js');
@@ -12,7 +9,7 @@ var jwt = require('jsonwebtoken');
 var Q = require('q');
 var mongo = require('mongoskin');
 
-//inserccion de la collection rf en mongoDB
+//Creación de la coleccion functionalrequeriments
 var db = mongo.db(config.connectionString, { native_parser: true });
 db.bind('funcionalrequeriments');
 
@@ -29,20 +26,10 @@ service.detectarCont = detectarCont;
 
 module.exports = service;
 
-/*
-	####Creacion de los servicios####
-*/
-
-/*
-	####CONTENIDO DEL REQ FUNC.####
-	{Campos que consta un requisito funcioanl: _id: proporcionado por mongoDB, content: contenido del requisito no funcional}
-*/
+//####Creacion de los servicios####
 
  /**
  * create: insercion de los requisitos funcionales en la bd
- * @param  {_id}
- * @param  {content}
- * @return  {promesa ok or fail}
  */
 function create(RfParam){
 
@@ -67,6 +54,8 @@ function create(RfParam){
 	return deferred.promise;
 }
 
+/*detectarCont: detetectar contenido no nulo
+*/
 function detectarCont(contenido){
 	if(contenido != null){
 		return true;
@@ -75,6 +64,8 @@ function detectarCont(contenido){
 	}	
 }
 
+/*detectarReq: detetectar requisito no nulo
+*/
 function detectarReq(requisito){
 	var re = /(?:\d*)?\d+/;
 
@@ -85,14 +76,10 @@ function detectarReq(requisito){
 	}
 }
 	
-
-
  /**
  * getById: obtencio de los requisitos funcionales de la bd
- * @return  {requisitos:_id, content}
  */
 function getById(){
-	console.log("ha entrado en showAll1");
 	var deferred = Q.defer();
 
 	var mysort = {number: 1};
@@ -106,19 +93,13 @@ function getById(){
 				deferred.resolve();
 			}		
 	});
-
-	console.log("ha entrado en showAll");
 	return deferred.promise;
 }
 
  /**
  * _delete: Borrado de los requisitos funcionales en la bd
- * @param  {_id}
- * @param  {content}
- * @return  {usuario autenticado}
  */
 function _delete(RfParam){
-	console.log("has entrado en _deete");
 	console.log(RfParam._id);
     
     var deferred = Q.defer();
@@ -131,19 +112,13 @@ function _delete(RfParam){
     	
     	deferred.resolve();
     });
-    	console.log("has salidod _delete");
     return deferred.promise;
 }
 
  /**
  * update: modificacion de los requisitos funcionales
- * @param  {_id}
- * @param  {content}
- * @return  {usuario modificado}
  */
 function update(RfParam){
-	console.log("has entrado en update");
-	
 
     var deferred = Q.defer();
     
@@ -162,7 +137,6 @@ function update(RfParam){
     	
     	deferred.resolve();
     });
-    	console.log("has salido update");
     return deferred.promise;
 }
 

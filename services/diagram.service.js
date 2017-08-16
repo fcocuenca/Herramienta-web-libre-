@@ -1,9 +1,6 @@
 /**
- * @fileoverview requerimentsfuncional.service.js: se exponen los servicios que va a utilizar 
- * en el manejo de requisitos funcionales.
- * @version 0.1
- * @author FcoCuenca 
- * History
+ * @fileoverview diagram.service.js: se exponen los servicios que va a utilizar 
+ * en el manejo de la edicion de diagramas.
  */
 
 var config = require('config.js');
@@ -12,7 +9,7 @@ var jwt = require('jsonwebtoken');
 var Q = require('q');
 var mongo = require('mongoskin');
 
-//inserccion de la collection rf en mongoDB
+//Creación de la coleccion matrixTrazability
 var db = mongo.db(config.connectionString, { native_parser: true });
 db.bind('diagram');
 
@@ -26,21 +23,10 @@ service.update = update;
 
 module.exports = service;
 
-/*
-	####Creacion de los servicios####
-*/
-
-
-/*
-	####CONTENIDO DEL REQ FUNC.####
-	{Campos que consta un requisito funcioanl: _id: proporcionado por mongoDB, content: contenido del requisito no funcional}
-*/
+//####Creacion de los servicios####
 
  /**
- * create: insercion de los requisitos funcionales en la bd
- * @param  {_id}
- * @param  {content}
- * @return  {promesa ok or fail}
+ * create: insercion del diagrama en la bd
  */
 function create(diag){
 
@@ -57,8 +43,7 @@ function create(diag){
 }
 
  /**
- * getById: obtencio de los requisitos funcionales de la bd
- * @return  {requisitos:_id, content}
+ * getById: obtencion de los elementos del diagrama de la bd
  */
 function getById(){
 	var deferred = Q.defer();
@@ -76,14 +61,9 @@ function getById(){
 }
 
  /**
- * _delete: Borrado de los requisitos funcionales en la bd
- * @param  {_id}
- * @param  {content}
- * @return  {usuario autenticado}
+ * _delete: Borrado de los elementos del diagrama en la bd
  */
 function _delete(diag){
-	console.log("has entrado en _deete");
-	console.log(diag._id);
     
     var deferred = Q.defer();
     var id= diag._id;
@@ -95,15 +75,11 @@ function _delete(diag){
     	
     	deferred.resolve();
     });
-    	console.log("has salidod _delete");
     return deferred.promise;
 }
 
  /**
- * update: modificacion de los requisitos funcionales
- * @param  {_id}
- * @param  {content}
- * @return  {usuario modificado}
+ * update: modificacion de los elementos del diagrama en la bd
  */
 function update(diag){
 

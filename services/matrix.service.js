@@ -1,9 +1,6 @@
 /**
- * @fileoverview requerimentsfuncional.service.js: se exponen los servicios que va a utilizar 
- * en el manejo de requisitos funcionales.
- * @version 0.1
- * @author FcoCuenca 
- * History
+ * @fileoverview matrix.service.js: se exponen los servicios que va a utilizar 
+ * en el manejo de la matriz.
  */
 
 var config = require('config.js');
@@ -12,10 +9,12 @@ var jwt = require('jsonwebtoken');
 var Q = require('q');
 var mongo = require('mongoskin');
 
-//inserccion de la collection rf en mongoDB
+//Creación de la coleccion matrixTrazability
 var db = mongo.db(config.connectionString, { native_parser: true });
 db.bind('matrixTrazability');
 
+/*especificacion de los servicios que vamos a implementar para posteriormente 
+que el controlador haga uso de ellos.*/
 var service = {};
 
 service.create = create;
@@ -25,8 +24,12 @@ service.delete = _delete;
 
 module.exports = service;
 
+//####Creacion de los servicios####
+
+ /**
+ * create: insercion de los CU/RF en la bd
+ */
 function create(MatParam){
-	console.log("entra en createMatriz")
 	var deferred = Q.defer();
 	db.matrixTrazability.insert(
 		MatParam,
@@ -38,9 +41,10 @@ function create(MatParam){
 	    return deferred.promise;
 }
 
+ /**
+ * deleteCheck: Borrado de los checks de la matriz
+ */
 function deleteCheck(MatParam){
-    console.log("deleteCheck");
-
     var deferred = Q.defer();
     var id= MatParam._id;
 
@@ -51,13 +55,14 @@ function deleteCheck(MatParam){
         
         deferred.resolve();
     });
-        console.log("has salidod _delete");
     return deferred.promise;
 
 }
 
+ /**
+ * _delete: Borrado de la matriz en la bd
+ */
 function _delete(MatParam){
-    console.log("has entrado en _deete");
     
     var id= MatParam._id;
     var deferred = Q.defer();
@@ -69,12 +74,13 @@ function _delete(MatParam){
         
         deferred.resolve();
     });
-        console.log("has salidod _delete");
     return deferred.promise;
 }
 
+ /**
+ * getById: obtencio de los checks de la bd
+ */
 function getById(){
-	console.log("ha entrado en showAllMat");
 	var deferred = Q.defer();
     var mysort = {idCU: 1};
 	db.matrixTrazability.find().sort(mysort).toArray(function(err, result){
@@ -86,8 +92,6 @@ function getById(){
 				deferred.resolve();
 			}		
 	});
-
-	console.log("ha entrado en showAllMatrix");
 	return deferred.promise;
 }
 
