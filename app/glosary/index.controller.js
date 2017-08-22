@@ -55,7 +55,6 @@
     vm.deleteTerm = deleteTerm;
     vm.updateTerm = updateTerm;
 
-/*####VERIFICACIONES####*/    
 
 /*##################################
 ###########GETCURRENT()#############
@@ -81,7 +80,6 @@
 /**
  * saveTerm: llama al servicio create para almacenar el termino en la bd
 */
-
     function saveTerm(){
 
             if(vm.termino == null)
@@ -104,7 +102,6 @@
 
 /**
  * deleteTerm: llama al servicio delete para almacenar el termino en la bd
- * @param  {index}
 */
     function deleteTerm(index){
     	 angular.forEach(vm.glosario, function(value, key){
@@ -125,7 +122,6 @@
 
 /**
  * updateTerm: llama al servicio update para almacenar el termino en la bd
- * @param  {index}
 */
      function updateTerm(index){
      	vm.glosario[index].content =vm.modificadoTerm;
@@ -142,17 +138,17 @@
 /*################################
 ############VERIFICACIONES########
 ################################*/
- 
+ /*
+    vm.orderReverse = true;
+
+   function orden(){
+        vm.orderReverse = !vm.orderReverse;
+        vm.glosary = $filter('orderBy')(vm.glosary, 'content', vm.orderReverse);
+    }
+*/
      
 
 }
 
 })();
 
-/*
-     vm.orderReverse = true;
-
-   function orden(){
-        vm.orderReverse = !vm.orderReverse;
-        vm.glosary = $filter('orderBy')(vm.glosary, 'content', vm.orderReverse);
-    }*/

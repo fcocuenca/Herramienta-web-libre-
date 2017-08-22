@@ -1,9 +1,6 @@
 /**
  * @fileoverview Se definen las rutas para las operaciones relacionadas con los usuarios 
  * tales como: authenticateUser(), registerUser(), getCurrentUser(), updateUser(), deleteUser()
- * @version 1.0
- * @author Fco Cuenca
- * History
  */
 
 var config = require('config.js');
@@ -23,8 +20,6 @@ module.exports = router;
 
 /**
  * authenticateUser: llama al servicio authenticate(username, password) y devuelve token en caso afirmativo.
- * @param {req}
- * @param {res} 
  */
 function authenticateUser(req, res) {
     userService.authenticate(req.body.email, req.body.password)
@@ -44,8 +39,6 @@ function authenticateUser(req, res) {
 
 /**
  * registerUser: llama al servicio create y realiza una respuesta.
- * @param  {req}
- * @param  {res}
  */
 function registerUser(req, res) {
     userService.create(req.body)
@@ -60,8 +53,6 @@ function registerUser(req, res) {
 /**
  * getCurrentUser: llama al servicio getById y verifica que corresponde 
  * con el id del usuario actual.
- * @param  {req}
- * @param  {res}
  */ 
 function getCurrentUser(req, res) {
     userService.getById(req.user.sub)
@@ -80,8 +71,6 @@ function getCurrentUser(req, res) {
 /**
  * updateUser: compara los id's para ver si corresponden al mismo y despues 
  * llama al servicio update para modificar el usuario.
- * @param  {req}
- * @param  {res}
  */ 
 function updateUser(req, res) {
     var userId = req.user.sub;
@@ -103,8 +92,6 @@ function updateUser(req, res) {
 /**
  * deleteUser: compara los id's para ver si corresponden al mismo y despues 
  * llama al servicio delete para eliminar el usuario.
- * @param  {req}
- * @param  {res}
  */ 
 function deleteUser(req, res) {
     var userId = req.user.sub;
@@ -122,6 +109,9 @@ function deleteUser(req, res) {
         });
 }
 
+/*
+*getCurrentUserAll: hacemos referencia al servicio getCurrentAllUsers para obtener todos usuarios
+*/
 function getCurrentUserAll(req, res){   
 
     userService.getCurrentAllUsers()

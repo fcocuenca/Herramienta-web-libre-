@@ -20,6 +20,7 @@
         });
 
     function config($stateProvider, $urlRouterProvider) {
+        
         // default route
         $urlRouterProvider.otherwise("/");
  
@@ -110,6 +111,7 @@
             });
     }
 
+    /*Controlador principal*/
     function Controller(UserService, ProjService, compartirDatos){
 
         var vm = this;

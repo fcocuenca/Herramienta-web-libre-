@@ -1,11 +1,16 @@
+/**
+ * @fileoverview definimos las rutas con las enlazamos a los servicios correspondientes al tratamiento de las categorias 
+ */
+
 var config = require('config.js');
 var express = require('express');
 var jwt = require('jsonwebtoken');
 var router = express.Router();
 
-/*servicios de las categorias*/
+/*####Ubicacion del servicios####*/
 var categoryService = require('services/categoryNRf.service');
 
+/*####Definicion de las rutas####*/
 router.post('/createCatNRf', createCatnrf);
 router.get('/currentCatNRf', getCurrentCatnrf);
 router.post('/deleteCatNRf', deleteCatnrf);
@@ -13,6 +18,12 @@ router.post('/updateCatNRf', updateCatnrf);
 
 module.exports = router;
 
+
+/*####Creacion de los controladores####*/
+
+/**
+ * createCatnrf: hacemos referencia al servicio de la creacion de categorias
+ */
 function createCatnrf(req, res){
 	console.log("createCat");
 	categoryService.create(req.body)
@@ -24,6 +35,9 @@ function createCatnrf(req, res){
 		});
 }
 
+/**
+ * getCurrentCarnrf: hacemos referencia al servicio getById
+ */
 function getCurrentCatnrf(req, res){
 	categoryService.getById()
         .then(function(cat){
@@ -37,6 +51,10 @@ function getCurrentCatnrf(req, res){
             res.status(400).send(err);
         });
 }
+
+/**
+ * deleteCatnrf: hacemos referencia al servicio delete para eliminar las categorias
+ */
 function deleteCatnrf(req, res){
 	console.log("deleteCat");
 	categoryService.delete(req.body)
@@ -48,6 +66,9 @@ function deleteCatnrf(req, res){
 		});
 }
 
+/**
+ * updateCatnrf: hacemos referencia al servicio delete para modificar las categorias
+ */
 function updateCatnrf(req, res){
 	console.log("updateCat");
 	categoryService.update(req.body)

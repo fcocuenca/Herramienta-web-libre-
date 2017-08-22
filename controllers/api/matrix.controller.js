@@ -1,8 +1,5 @@
 /**
- * @fileoverview definimos las rutas con las enlazamos a las operaciones correspondientes al tratamiento de los requisitos funcionales
- * @version 1.0
- * @author Fco Cuenca
- * History
+ * @fileoverview definimos las rutas con las enlazamos a los servicios correspondientes al tratamiento de la matriz
  */
 
 var config = require('config.js');
@@ -27,60 +24,65 @@ router.post('/deleteCheck', deleteCheckMat);
 
 module.exports = router;
 
+/*####Creacion de los controladores####*/
+
+/**
+ * createMatrix: hacemos referencia al servicio de la creacion de la matriz
+ */
 function createMatrix(req, res){
-	console.log("has entrado en createMatrix");
 	matService.create(req.body)
-		.then(function(){
-			res.sendStatus(200);
-		})
-		.catch(function(err){
-			res.status(400).send(err);
-		});
+	.then(function(){
+		res.sendStatus(200);
+	})
+	.catch(function(err){
+		res.status(400).send(err);
+	});
 }
+
+/**
+*deleteCheckMat: hacemos referencia al servicio deleteCheck
+*/
 
 function deleteCheckMat(req, res) {
-
-        console.log("api/matrix"+req.body);
     
-        matService.deleteCheck(req.body)
-            .then(function () {
-                res.sendStatus(200);
-            })
-            .catch(function (err) {
-                res.status(400).send(err);
-            });
-
-            console.log("deleteCheck")
+    matService.deleteCheck(req.body)
+    .then(function () {
+        res.sendStatus(200);
+    })
+    .catch(function (err) {
+        res.status(400).send(err);
+    });
 }
 
+/*
+*deleteMatriz: hacemos referencia al servicio delete
+*/
 function deleteMatrix(req, res) {
-
-        console.log("api/matrix"+req.body);
     
-        matService.delete(req.body)
-            .then(function () {
-                res.sendStatus(200);
-            })
-            .catch(function (err) {
-                res.status(400).send(err);
-            });
-
-            console.log("delete")
+    matService.delete(req.body)
+    .then(function () {
+        res.sendStatus(200);
+    })
+    .catch(function (err) {
+        res.status(400).send(err);
+    });
 }
 
-
+/*
+*getCurrentMat: hacemos referencia al servicio getById()
+*/
 function getCurrentMat(req, res){
-	console.log("has entrado en e getCurrentMat");
+
 	matService.getById()
-        .then(function(result){
-            if(result){
-                res.send(result);
-            }else{
-                res.sendStatus(404);
-            }
-        })
-        .catch(function(err){
-            res.status(400).send(err);
-        });
+    .then(function(result){
+        if(result){
+            res.send(result);
+        }else{
+            res.sendStatus(404);
+        }
+    })
+    .catch(function(err){
+        res.status(400).send(err);
+    });
 }
 

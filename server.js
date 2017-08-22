@@ -30,7 +30,6 @@ app.use('/api', expressJwt({ secret: config.secret }).unless({ path: ['/api/user
 // rutas
 app.use('/login', require('./controllers/login.controller'));
 app.use('/register', require('./controllers/register.controller'));
-app.use('/functionalrequeriments', require('./controllers/rf.controller'));
 app.use('/app', require('./controllers/app.controller'));
 app.use('/api/users', require('./controllers/api/users.controller'));
 app.use('/api/functionalrequeriments', require('./controllers/api/functionalrequeriments.controller'));

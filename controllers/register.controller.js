@@ -1,8 +1,5 @@
 /**
  * @fileoverview define las rutas para mostrar la vista y el registro de un nuevo usuario.
- * @version 1.0
- * @author Fco Cuenca
- * History
  */
 
 var express = require('express');

@@ -1,8 +1,5 @@
 /**
- * @fileoverview definimos las rutas con las enlazamos a las operaciones correspondientes al tratamiento de los requisitos funcionales
- * @version 1.0
- * @author Fco Cuenca
- * History
+ * @fileoverview definimos las rutas con las enlazamos a las operaciones correspondientes al tratamiento de las especificaciones
  */
 
 var config = require('config.js');
@@ -21,72 +18,64 @@ router.post('/updateSpec', updateSpec);
 module.exports = router;
 
 /**
- * createReqFun: hacemos referencia al servicio de la creacion de requisitos funcionales
+ * createSpec: hacemos referencia al servicio de la creacion de especificaciones
  */
-
 function createSpec(req, res){
-	console.log("entrado en el contoller createRf1");
+
 	specService.create(req.body)
-		.then(function(){
-			res.sendStatus(200);
-		})
-		.catch(function(err){
-			res.status(400).send(err);
-		});
-        console.log("entrado en el contoller createRf12");
+	.then(function(){
+		res.sendStatus(200);
+	})
+	.catch(function(err){
+		res.status(400).send(err);
+	});
 }
 
 /**
- * getCurrentRf: hacemos referencia al servicio getById
+ * getCurrentSpec: hacemos referencia al servicio getById
  */
- 
+
 function getCurrentSpec(req, res){
+	
    specService.getById()
-        .then(function(spec){
-            if(spec){
-                res.send(spec);
-            }else{
-                res.sendStatus(404);
-            }
-        })
-        .catch(function(err){
-            res.status(400).send(err);
-        });
+    .then(function(spec){
+        if(spec){
+            res.send(spec);
+        }else{
+            res.sendStatus(404);
+        }
+    })
+    .catch(function(err){
+        res.status(400).send(err);
+    });
 }
 
 
 /**
- * deleteRf: hacemos referencia al servicio delete para eliminar los requisitos
+ * deleteSpec: hacemos referencia al servicio delete para eliminar las especificaciones
  */
  
 function deleteSpec(req, res) {
-     console.log("deleteSpec")
-     console.log("id api: "+req.body._id);
 
-        specService.delete(req.body)
-            .then(function () {
-                res.sendStatus(200);
-            })
-            .catch(function (err) {
-                res.status(400).send(err);
-            });
-
-            console.log("deleteRFfin")
+    specService.delete(req.body)
+        .then(function () {
+            res.sendStatus(200);
+        })
+        .catch(function (err) {
+            res.status(400).send(err);
+        });
     }
 
-   /**
+ /**
  * updateRf: hacemos referencia al servicio update para modificar los requisitos funcionales
  */
-function updateSpec(req, res) {
-     console.log("dentro de UpdateSpec")
- 
-        specService.update(req.body)
-            .then(function () {
-                res.sendStatus(200);
-            })
-            .catch(function (err) {
-                res.status(400).send(err);
-            });
+function updateSpec(req, res) { 
 
-            console.log("specServiceUpdate")
+    specService.update(req.body)
+    .then(function () {
+        res.sendStatus(200);
+    })
+    .catch(function (err) {
+        res.status(400).send(err);
+    });
 }

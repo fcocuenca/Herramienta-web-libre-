@@ -1,8 +1,5 @@
 /**
- * @fileoverview definimos las rutas con las enlazamos a las operaciones correspondientes al tratamiento de los requisitos funcionales
- * @version 1.0
- * @author Fco Cuenca
- * History
+ * @fileoverview definimos las rutas con las enlazamos a los servicios correspondientes al tratamiento de los diagramas
  */
 
 var config = require('config.js');
@@ -18,9 +15,8 @@ var diagramService = require('services/diagram.service');
 /*####Definicion de las rutas####*/
 router.post('/createDiagram', createDiag);
 router.get('/current', getCurrentDiagram);
-router.post('/deleteD', deleteDiagram);
+router.post('/deleteDiagram', deleteDiag);
 router.post('/updateDiagram', updateDiag);
-
 
 module.exports = router;
 
@@ -28,7 +24,7 @@ module.exports = router;
 
 
 /**
- * createReqFun: hacemos referencia al servicio de la creacion de requisitos funcionales
+ * createDiag: hacemos referencia al servicio de la creacion de diagramas
  */
 
 function createDiag(req, res){
@@ -42,7 +38,7 @@ function createDiag(req, res){
 }
 
 /**
- * getCurrentRf: hacemos referencia al servicio getById
+ * getCurrentDiag: hacemos referencia al servicio getById 
  */
  
 function getCurrentDiagram(req, res){
@@ -60,35 +56,32 @@ function getCurrentDiagram(req, res){
 }
 
 /**
- * deleteRf: hacemos referencia al servicio delete para eliminar los requisitos
+ * deleteDiagram: hacemos referencia al servicio delete para eliminar un diagrama
  */
  
-function deleteDiagram(req, res) {
-     console.log("deleteRf")
-     console.log("id api: "+req.body._id);
-
-        diagramService.delete(req.body)
-            .then(function () {
-                res.sendStatus(200);
-            })
-            .catch(function (err) {
-                res.status(400).send(err);
-            });
-
-            console.log("deleteRFfin")
-    }
+function deleteDiag(req, res) {
+    
+   diagramService.delete(req.body)
+    .then(function () {
+        res.sendStatus(200);
+    })
+    .catch(function (err) {
+        res.status(400).send(err);
+    });
+}
 
 /**
- * updateRf: hacemos referencia al servicio update para modificar los requisitos funcionales
+ * updateDiag: hacemos referencia al servicio update para modificar los diagramas
  */
+
 function updateDiag(req, res) {
-        diagramService.update(req.body)
-            .then(function () {
-                res.sendStatus(200);
-            })
-            .catch(function (err) {
-                res.status(400).send(err);
-            });
+     diagramService.update(req.body)
+    .then(function () {
+        res.sendStatus(200);
+    })
+    .catch(function (err) {
+        res.status(400).send(err);
+    });
 }
  
 

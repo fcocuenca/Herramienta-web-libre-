@@ -113,7 +113,6 @@ function Controller(UserService, FlashService, MatrixService, SpecService, RfSer
 
  /**
  * updateMatrix: quita el check de la matriz
- * @param  {checkEliminar}
 */
 	function updateMatrix(checkEliminar){   
 		var eliminar = checkEliminar; 	
@@ -128,7 +127,6 @@ function Controller(UserService, FlashService, MatrixService, SpecService, RfSer
 
 /**
  * avisar: Selecciona o deselecciona el elemento en el array
- * @param  {name, number, id}
 */
     /*quitar y poner cuando se ha seleccionado/deselccionado en el array prueba*/
     function avisar(name, number, id){
@@ -139,7 +137,6 @@ function Controller(UserService, FlashService, MatrixService, SpecService, RfSer
     			 
     			vm.prueba.push({'idRF': number, 'idCU': name, 'id': id, 'selected': true, 'idProject': idProjectFK});
     			i++;
-    			console.log("añado"+id);
     		}
 
     		if(vm.selected[id] == false)
@@ -156,7 +153,6 @@ function Controller(UserService, FlashService, MatrixService, SpecService, RfSer
 
 /**
  * eliminar: Elimina el elemento del vector prueba
- * @param  {id}
 */
     function eliminar(id)
     {
@@ -170,8 +166,7 @@ function quitarMatrix(idCU, idRF){
 		{
 			if((idRF == vm.matriz[i].idRF) && (idCU === vm.matriz[i].idCU))
 			{
-				console.log("modifica RF:"+vm.matriz[i].idRF+" CU"+vm.matriz[i].idCU);
-				updateMatrix(vm.matriz[i]);
+							updateMatrix(vm.matriz[i]);
 			}
 			
 		}
@@ -180,8 +175,6 @@ function quitarMatrix(idCU, idRF){
    	/*comprobar que existe uno repetido en la bd*/
    	function isChecked(){
    		
-   		console.log(vm.prueba.length+"sad"+vm.matriz.length)
-
    		if(vm.prueba.length > vm.matriz.length){
 
    			for(var i=0; i<vm.prueba.length; i++){	
@@ -203,8 +196,6 @@ function quitarMatrix(idCU, idRF){
 	   				}
 	   			}
    		}
-
-			
 			if(vm.prueba.length > 0)
    				vm.guardarMatriz(vm.prueba);
    	}
@@ -231,21 +222,10 @@ function quitarMatrix(idCU, idRF){
 		 			FlashService.Success('La matriz de trazabilidad ha sido borrada');
 				})
 				.catch(function(){
-					FlashService.Success('Ha ocurrido un error, intentelo de nuevo');
+					FlashService.Error('Ha ocurrido un error, intentelo de nuevo');
 				});
 		 	}
 		 }
 	}   	
 }
 })();
-
-
-
-		    /*
-		    function guardarMatriz(){
-		    	if(MatrixService.Create(vm.resultado))
-		    		FlashService.Success('El resultado se ha almacnado correctamente');
-		    	else
-		    		FlashService.Success('Ha ocurrido un error, intentelo de nuevo');
-		    }
-		    */

@@ -1,9 +1,6 @@
 /**
- * @fileoverview requerimentsfuncional.service.js: se exponen los servicios que va a utilizar 
- * en el manejo de requisitos funcionales.
- * @version 0.1
- * @author FcoCuenca 
- * History
+ * @fileoverview project.service.js: se exponen los servicios que va a utilizar 
+ * en el manejo de proyectos.
  */
 
 var config = require('config.js');
@@ -13,13 +10,15 @@ var Q = require('q');
 var mongo = require('mongoskin');
 var nodemailer = require('nodemailer');
 
-//inserccion de la collection proyectos en mongoDB
+//Creación de la coleccion project
 var db = mongo.db(config.connectionString, { native_parser: true });
 db.bind('project');
 
+//Creación de la coleccion usuariosInvitados
 var db1 = mongo.db(config.connectionString, { native_parser: true });
 db1.bind('usuariosInvitados');
 
+//Creación de la coleccion projectShare
 var db2 = mongo.db(config.connectionString, { native_parser: true });
 db2.bind('projectShare');
 
@@ -40,22 +39,13 @@ service.deleteShareProject = deleteShareProject;
 
 module.exports = service;
 
-/*
-	####Creacion de los servicios####
-*/
 
-
-/*
-	####CONTENIDO DEL REQ FUNC.####
-	{Campos que consta un requisito funcioanl: _id: proporcionado por mongoDB, content: contenido del requisito no funcional}
-*/
+//####Creacion de los servicios####
 
  /**
- * create: insercion de los requisitos funcionales en la bd
- * @param  {_id}
- * @param  {content}
- * @return  {promesa ok or fail}
+ * create: insercion de los proyectos en la bd
  */
+
 function create(ProjParam){
 
 	var deferred = Q.defer();
@@ -70,6 +60,9 @@ function create(ProjParam){
 	    return deferred.promise;
 }
 
+ /**
+ * compartidoCon: insercion de los proyectos Compartidos en la bd
+ */
 function compartidoCon(ProjParam){
 	var deferred = Q.defer();
 
@@ -84,11 +77,9 @@ function compartidoCon(ProjParam){
 }
 
  /**
- * getById: obtencio de los requisitos funcionales de la bd
- * @return  {requisitos:_id, content}
+ * getById: obtencion de los proyectos la bd
  */
 function getById(){
-	console.log("ha projectGetByID");
 	var deferred = Q.defer();
 
 	db.project.find().toArray(function(err, proj){
@@ -100,12 +91,12 @@ function getById(){
 				deferred.resolve();
 			}		
 	});
-
-	console.log("ha entrado en showAll");
 	return deferred.promise;
 }
 
-
+ /**
+ * getByIdProjectShare: obtencion de los proyectos Compartidos de la bd
+ */
 function getByIdProjectShare(){
 	var deferred = Q.defer();
 
@@ -118,13 +109,13 @@ function getByIdProjectShare(){
 				deferred.resolve();
 			}		
 	});
-
-	console.log("ha entrado en projesctShare");
 	return deferred.promise;
 }
 
+ /**
+ * _delete: Borrado de los proyectos en la bd
+ */
 function _delete(ProjParam){
-	console.log("has entrado en _deete");
 	console.log(ProjParam._id);
     
     var deferred = Q.defer();
@@ -137,10 +128,12 @@ function _delete(ProjParam){
     	
     	deferred.resolve();
     });
-    	console.log("has salidod _delete");
     return deferred.promise;
 }
 
+ /**
+ * _delete: Envio de email a usuario destino
+ */
 function compartir(ProjParam){
 
 	db1.usuariosInvitados.insert(
@@ -151,8 +144,6 @@ function compartir(ProjParam){
 				deferred.resolve();
 			});
    
-	console.log("dentro de compartir");
-	console.log(ProjParam.emailDestino);
 	var deferred = Q.defer();
 
 	var smtpTransport = nodemailer.createTransport({
@@ -181,8 +172,10 @@ function compartir(ProjParam){
 		
 }
 
+/*
+*getbyIdInvitados: obtención de los usuarios invitados a un proyecto
+*/
 function getByIdInvitados(){
-	console.log("invitados");
 	var deferred = Q.defer();
 
 	db1.usuariosInvitados.find().toArray(function(err, proj){
@@ -194,11 +187,12 @@ function getByIdInvitados(){
 				deferred.resolve();
 			}		
 	});
-
-	console.log("ha entrado en invitados");
 	return deferred.promise;
 }
 
+/*
+deleteUserInvitado: eliminar usuarios invitados
+*/
 function deleteUserInvitado(ProjParam){
 	var deferred = Q.defer();
     var id= ProjParam._id;
@@ -215,10 +209,12 @@ function deleteUserInvitado(ProjParam){
 
 }
 
+/*
+*deleteShareProject: eliminar proyectos compartidos
+*/
 function deleteShareProject(ProjParam){
 	var deferred = Q.defer();
     var id= ProjParam._id;
-    console.log("id que se enviar a borrar a deleteShareProject"+ProjParam._id);
     db2.projectShare.remove(
     {_id: mongo.helper.toObjectID(ProjParam._id)},
     function(err){
@@ -226,7 +222,6 @@ function deleteShareProject(ProjParam){
     	
     	deferred.resolve();
     });
-    	console.log("has salidod deleteShareProject");
     return deferred.promise;
 }
 

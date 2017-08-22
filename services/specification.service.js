@@ -1,9 +1,6 @@
 /**
- * @fileoverview requerimentsfuncional.service.js: se exponen los servicios que va a utilizar 
- * en el manejo de requisitos funcionales.
- * @version 0.1
- * @author FcoCuenca 
- * History
+ * @fileoverview specification.service.js: se exponen los servicios que va a utilizar 
+ * en el manejo de las especificaciones.
  */
 
 var config = require('config.js');
@@ -12,7 +9,7 @@ var jwt = require('jsonwebtoken');
 var Q = require('q');
 var mongo = require('mongoskin');
 
-//inserccion de la collection rf en mongoDB
+//Creación de la coleccion specification
 var db = mongo.db(config.connectionString, { native_parser: true });
 db.bind('specification');
 
@@ -28,26 +25,14 @@ service.detectarId = detectarId;
 
 module.exports = service;
 
-/*
-	####Creacion de los servicios####
-*/
-
-
-/*
-	####CONTENIDO DEL REQ FUNC.####
-	{Campos que consta un requisito funcioanl: _id: proporcionado por mongoDB, content: contenido del requisito no funcional}
-*/
+//####Creacion de los servicios####
 
  /**
- * create: insercion de los requisitos funcionales en la bd
- * @param  {_id}
- * @param  {content}
- * @return  {promesa ok or fail}
+ * create: insercion de las especificaciones en la bd
  */
 function create(SpecParam){
 
 	var deferred = Q.defer();
-    console.log(SpecParam.id);
     if(detectarId(SpecParam.id) == true){
        
         db.specification.insert(
@@ -60,10 +45,12 @@ function create(SpecParam){
      }else{
             deferred.reject('Inserta el Id de la especificación');
      }   
-    
     return deferred.promise;    
 }
 
+/*
+*detectarId: verificar la insercion del id
+*/
 function detectarId(id){
     var re = /(?:\d*)?\d+/;
 
@@ -75,11 +62,9 @@ function detectarId(id){
 }
 
  /**
- * getById: obtencio de los requisitos funcionales de la bd
- * @return  {requisitos:_id, content}
+ * getById: obtencion de las especificaciones de la bd
  */
 function getById(){
-	console.log("ha entrado Spec");
 	var deferred = Q.defer();
 
 	db.specification.find().toArray(function(err, spec){
@@ -91,21 +76,13 @@ function getById(){
 				deferred.resolve();
 			}		
 	});
-
-	console.log("ha entrado en showAll");
 	return deferred.promise;
 }
 
  /**
- * _delete: Borrado de los requisitos funcionales en la bd
- * @param  {_id}
- * @param  {content}
- * @return  {usuario autenticado}
+ * _delete: Borrado de las especificaciones en la bd
  */
 function _delete(SpecParam){
-	console.log("has entrado en _deete");
-	console.log(SpecParam._id);
-    
     var deferred = Q.defer();
     var id= SpecParam._id;
 
@@ -116,19 +93,14 @@ function _delete(SpecParam){
     	
     	deferred.resolve();
     });
-    	console.log("has salidod _delete");
     return deferred.promise;
 }
 
  /**
- * update: modificacion de los requisitos funcionales
- * @param  {_id}
- * @param  {content}
- * @return  {usuario modificado}
+ * update: modificacion de las especificaciones en la bd
  */
 function update(SpecParam){
 
-	console.log("has entrado en updateSpec");
     var deferred = Q.defer();
     
     var id= SpecParam._id;
@@ -162,7 +134,5 @@ function update(SpecParam){
     	
     	deferred.resolve();
     });
-    	console.log("has salido update");
-        
     return deferred.promise;
 }

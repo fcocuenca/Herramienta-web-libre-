@@ -1,8 +1,5 @@
 /**
- * @fileoverview definimos las rutas con las enlazamos a las operaciones correspondientes al tratamiento de los requisitos funcionales
- * @version 1.0
- * @author Fco Cuenca
- * History
+ * @fileoverview definimos las rutas con las enlazamos a los servicios correspondientes al tratamiento de los proyectos
  */
 
 var config = require('config.js');
@@ -13,7 +10,6 @@ var userService = require('services/user.service');
 
 /*####Ubicacion del servicios####*/
 var projService = require('services/project.service');
-
 
 /*####Definicion de las rutas####*/
 router.post('/createProj', createProject);
@@ -30,9 +26,8 @@ module.exports = router;
 
 /*####Creacion de los controladores####*/
 
-
 /**
- * createReqFun: hacemos referencia al servicio de la creacion de requisitos funcionales
+ * createProject: hacemos referencia al servicio de la creacion de proyectos
  */
 
 function createProject(req, res){
@@ -48,7 +43,7 @@ function createProject(req, res){
 }
 
 /**
- * getCurrentRf: hacemos referencia al servicio getById
+ * getCurrentProject: hacemos referencia al servicio getById para obtener los proyectos
  */
  
 function getCurrentProject(req, res){
@@ -64,44 +59,53 @@ function getCurrentProject(req, res){
             res.status(400).send(err);
         });
 }
+
+/*
+*getCurrentProjectShare: hacemos referencia al servicio getByIdProjectShare para obtener los proyectos compartidos
+*/
 function getCurrentProjectShare(req, res){
     projService.getByIdProjectShare()
-        .then(function(proj){
-            if(proj){
-                res.send(proj);
-            }else{
-                res.sendStatus(404);
-            }
-        })
-        .catch(function(err){
-            res.status(400).send(err);
-        });
+    .then(function(proj){
+        if(proj){
+            res.send(proj);
+        }else{
+            res.sendStatus(404);
+        }
+    })
+    .catch(function(err){
+        res.status(400).send(err);
+    });
 }
 
+/*
+*deleteProject: hacemos referencia al servicio deleteProject para eliminar el proyecto
+*/
 function deleteProject(req, res){
-    console.log("entrado en el delete project");
     projService.delete(req.body)
-        .then(function(){
-            res.sendStatus(200);
-        })
-        .catch(function(err){
-            res.status(400).send(err);
-        });
-        console.log("entrado en el delete proekc");
+    .then(function(){
+        res.sendStatus(200);
+    })
+    .catch(function(err){
+        res.status(400).send(err);
+    });
 }
 
+/*
+*compartirProject: hacemos referencia al servicio compartir para compartir un proyecto
+*/
 function compartirProject(req, res){
-    console.log("entrado en el compartirProject project");
     projService.compartir(req.body)
-        .then(function(){
-            res.sendStatus(200);
-        })
-        .catch(function(err){
-            res.status(400).send(err);
-        });
-        console.log("entrado en el compartir proejct");
+    .then(function(){
+        res.sendStatus(200);
+    })
+    .catch(function(err){
+        res.status(400).send(err);
+    });
 }
 
+/*
+*compartirConOtroUsuario: hacemos referencia al servicio compartidoCon para compartir el proyecto con un usuario
+*/
 function compartidoConOtroUsuario(req, res){
     projService.compartidoCon(req.body)
     .then(function(){
@@ -112,41 +116,48 @@ function compartidoConOtroUsuario(req, res){
     });
 }
 
+/*
+*getCurrentInvitados: hacemos referencia al servicio getIdInvitados para obtener el ide del usuario invitado
+*/
 function getCurrentInvitados(req, res){
     projService.getByIdInvitados()
-        .then(function(proj){
-            if(proj){
-                res.send(proj);
-            }else{
-                res.sendStatus(404);
-            }
-        })
-        .catch(function(err){
-            res.status(400).send(err);
-        });
+    .then(function(proj){
+        if(proj){
+            res.send(proj);
+        }else{
+            res.sendStatus(404);
+        }
+    })
+    .catch(function(err){
+        res.status(400).send(err);
+    });
 }
 
+/*
+*delteInvitadoUser: hacemos referencia al servicio deleteUserInvitado para eliminar el usuario invitado 
+*/
 function deleteInvitadoUser(req, res){
 
     projService.deleteUserInvitado(req.body)
-        .then(function(){
-            res.sendStatus(200);
-        })
-        .catch(function(err){
-            res.status(400).send(err);
-        });
-        console.log("usuario invitado");
+    .then(function(){
+        res.sendStatus(200);
+    })
+    .catch(function(err){
+        res.status(400).send(err);
+    });
 }
 
+/*
+*deleteProjShare: hacemos referencia al servicio deleteShareProject  para eliminar el proyecto compartido
+*/
 function deleteProjShare(req, res){
-    console.log("proyecto compartido de otro usuario eliminar");
-         projService.deleteShareProject(req.body)
-        .then(function(){
-            res.sendStatus(200);
-        })
-        .catch(function(err){
-            res.status(400).send(err);
-        });
+    projService.deleteShareProject(req.body)
+    .then(function(){
+        res.sendStatus(200);
+    })
+    .catch(function(err){
+        res.status(400).send(err);
+    });
         
 }
 

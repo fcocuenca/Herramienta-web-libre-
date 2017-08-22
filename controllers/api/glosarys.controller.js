@@ -1,8 +1,5 @@
 /**
- * @fileoverview definimos las rutas con las enlazamos a las operaciones correspondientes al tratamiento de los requisitos funcionales
- * @version 1.0
- * @author Fco Cuenca
- * History
+ * @fileoverview definimos las rutas con las enlazamos a los servicios correspondientes al tratamiento de los términos
  */
 
 var config = require('config.js');
@@ -28,11 +25,10 @@ module.exports = router;
 
 
 /**
- * createReqFun: hacemos referencia al servicio de la creacion de requisitos funcionales
+ * createWord: hacemos referencia al servicio de la creacion de términos
  */
 
 function createWord(req, res){
-	console.log("entrado en el contoller glosary");
 	glosaryService.create(req.body)
 		.then(function(){
 			res.sendStatus(200);
@@ -40,11 +36,10 @@ function createWord(req, res){
 		.catch(function(err){
 			res.status(400).send(err);
 		});
-        console.log("entrado en el contoller createGlosar");
 }
 
 /**
- * getCurrentRf: hacemos referencia al servicio getById
+ * getCurrentWord: hacemos referencia al servicio getById
  */
  
 function getCurrentWord(req, res){
@@ -62,12 +57,10 @@ function getCurrentWord(req, res){
 }
 
 /**
- * deleteRf: hacemos referencia al servicio delete para eliminar los requisitos
+ * deleteWord: hacemos referencia al servicio delete para eliminar los términos
  */
  
 function deleteWord(req, res) {
-     console.log("deleteRf")
-     console.log("id api: "+req.body._id);
 
         glosaryService.delete(req.body)
             .then(function () {
@@ -77,17 +70,12 @@ function deleteWord(req, res) {
                 res.status(400).send(err);
             });
 
-            console.log("deleteRFfin")
     }
 
 /**
- * updateRf: hacemos referencia al servicio update para modificar los requisitos funcionales
+ * updateWord: hacemos referencia al servicio update para modificar los términos
  */
 function updateWord(req, res) {
-     console.log("dentro de UpdateRf")
-     console.log("id UpdateRf: "+req.body._id);
-     console.log("content: "+req.body.content);
-
         glosaryService.update(req.body)
             .then(function () {
                 res.sendStatus(200);
@@ -95,8 +83,6 @@ function updateWord(req, res) {
             .catch(function (err) {
                 res.status(400).send(err);
             });
-
-            console.log("updateWord")
 }
  
 

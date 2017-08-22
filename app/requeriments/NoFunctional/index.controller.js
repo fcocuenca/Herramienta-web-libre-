@@ -145,7 +145,6 @@ function Controller(UserService, NRfService, FlashService, CategoryServiceNRf, $
 
 /**
  * deleteNRf: llama al controlador Delete y borra un requisito de la bd
- * @param  {index}
 */
 	function deleteNRf(index){
 	   
@@ -166,7 +165,6 @@ function Controller(UserService, NRfService, FlashService, CategoryServiceNRf, $
 
 /**
  * updateRf: llama al controlador update y modifica un requisito de la bd
- * @param  {index}
 */
 	function updateNRf(index){
 
@@ -187,7 +185,6 @@ function Controller(UserService, NRfService, FlashService, CategoryServiceNRf, $
 
 /**
  * saveCat: almacena una categoria en la base de datos.
- * @param  {}
 */
     function saveCatNrf(){
 
@@ -199,7 +196,6 @@ function Controller(UserService, NRfService, FlashService, CategoryServiceNRf, $
 
 /**
  * updateCat: llama al controlador update y modifica una categoria de la bd
- * @param  {index}
 */
 	function updateCatNrf(index){
         vm.catnrf[index].category = vm.modcategorynrf;
@@ -215,7 +211,6 @@ function Controller(UserService, NRfService, FlashService, CategoryServiceNRf, $
     
 /**
  * deleteCat: llama al contraolador delete y elimina una categoria.
- * @param  {index}
 */
     function deleteCatNrf(index){
         angular.forEach(vm.catnrf, function(value, key){

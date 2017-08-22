@@ -1,3 +1,4 @@
+/*####CONTROLADOR DE ANGULAR####*/
 (function () {
     'use strict';
  
@@ -6,55 +7,53 @@
         .controller('Home.IndexController', Controller);
  
     function Controller(UserService, ProjService, FlashService, compartirDatos, RfService, CategoryService, NRfService, CategoryServiceNRf, SpecService, MatrixService, GlosaryService ) {
+    
+/*###########################################
+##########DECLARACIÓN DE VARIABLES###########
+###########################################*/  
+
     var vm = this;
     var idProjectFK = compartirDatos.getString();
-    
-    vm.proyectoCompartidoCon = proyectoCompartidoCon;
     vm.flag;
-    vm.projectShare = [];
-    vm.currentProjectShare= null;
-    vm.projectsShareOwn = [];
-    vm.deleteProjectShare = deleteProjectShare;
-
+    
+    /*####OBTENCIÓN DE DATOS####*/
     vm.user = null;
     vm.userId;
     vm.users = null;
-
-    vm.idProyecto= null;
-    vm.proyectos = [];
     vm.todosProyectos = null;
+    vm.proyectos = [];
+    vm.projectShare = [];
+    vm.projectsShareOwn = [];
 
+
+    /*####FUNCIONES PROYECTOS####*/
+    vm.proyectoCompartidoCon = proyectoCompartidoCon;
+    vm.deleteProjectShare = deleteProjectShare;
+    vm.eliminarUsuarioInvitado = eliminarUsuarioInvitado;
+    vm.getIdProjectCompartido = getIdProjectCompartido;
+    vm.enviarEmail = enviarEmail;
+    vm.getIdProject = getIdProject;
+    vm.deleteProject = deleteProject;
+    vm.currentProjectShare= null;
+    vm.idProyecto= null;
     vm.rf = null;
     vm.requisitosFuncionales = [];
-
     vm.cat = null;
     vm.categorias = [];
-
     vm.nrf = null;
     vm.requisitosNoFuncionales = [];
-
     vm.specifications = null;
     vm.especificaciones = [];
-
     vm.matrix = null;
     vm.matriz = [];
-
     vm.glosary = null;
     vm.glosario = [];
-
     vm.invitados = null;
     vm.invitadosUser = [];
-    vm.eliminarUsuarioInvitado = eliminarUsuarioInvitado;
-    
-    /*COMPARTIR PROYECTO*/
     vm.compartir = null;
-    vm.enviarEmail = enviarEmail;
-
-    vm.deleteProject = deleteProject;
-    vm.getIdProject = getIdProject;
-    vm.getIdProjectCompartido = getIdProjectCompartido;
 
 
+    /*####Funciones para obtener todos los usuarios existentes en la bd ####*/
     initController();
     function initController() {
         // get current user
@@ -64,6 +63,7 @@
         });
     }
 
+    /*####Funciones para obtener todos los usuarios existentes en la bd ####*/
     initUsersAllController();
     function initUsersAllController(){
         UserService.GetAllUsers().then(function(users){
@@ -71,6 +71,7 @@
         });
     }
 
+    /*####Funciones para obtener todos los proyectos existentes en la bd ####*/
     initProjectController();
     function initProjectController(){
         ProjService.GetCurrent().then(function(projects){
@@ -87,6 +88,7 @@
         });
     }
 
+    /*####Funciones para obtener todos los proyecto compartidos existentes en la bd ####*/
     initProjectShareController();
 	function initProjectShareController(){
 		ProjService.GetCurrentProjectShare().then(function(projectsShare){
@@ -101,6 +103,7 @@
 		});
 	}
 
+    /*####Funciones para obtener todos los usuarios invitados existentes en la bd ####*/
     initInvitadosController();
     function initInvitadosController(){
     	ProjService.GetCurrentInvitados().then(function(invit){
@@ -113,6 +116,7 @@
     	});
     }
 
+    /*####Funciones para obtener todos los requisitos existentes en la bd ####*/
     rfController();
     function rfController() {
         RfService.GetCurrent().then(function (rf) {            
@@ -125,6 +129,7 @@
         });
     }
 
+    /*####Funciones para obtener todos los categorias existentes en la bd ####*/
     catController();
     function catController(){
         CategoryService.GetCurrent().then(function (cat){
@@ -137,6 +142,7 @@
         });
     }
 
+    /*####Funciones para obtener todos los requisitos existentes en la bd ####*/
     nrfController();
     function nrfController() {
         NRfService.GetCurrent().then(function (nrf) {
@@ -148,6 +154,8 @@
             }
         });
     }
+
+    /*####Funciones para obtener todos las especificaciones existentes en la bd ####*/
     initSpec();
     function initSpec(){
         SpecService.GetCurrent().then(function(specifications){
@@ -160,7 +168,7 @@
         });
     }
 
-
+    /*####Funciones para obtener todos los checks en la bd ####*/
     initMatrix();
     function initMatrix(){
         MatrixService.GetCurrent().then(function(matrix){
@@ -173,6 +181,7 @@
         });
     }
 
+    /*####Funciones para obtener todos los términos existentes en la bd ####*/
     initGlosary();
     function initGlosary(){
         GlosaryService.GetCurrent().then(function(glosary)
@@ -185,9 +194,8 @@
             }
         });
     }
-
+/*deleleProject: Elimina un proyecto asociado a un usuario*/
     function deleteProject(index){
-        console.log(index);
 
         for(var i =0; i<vm.invitados.length; i++){
             if(vm.invitados[i].nameProyecto === vm.proyectos[index].name){
@@ -290,75 +298,77 @@
         }); 
     }
 
+/*getIdProject: obtencion del id del proyecto*/
+    function getIdProject(id){
+       var idProyecto = id;
+       compartirDatos.setString(idProyecto);
+    }
 
-        function getIdProject(id){
-           var idProyecto = id;
-           compartirDatos.setString(idProyecto);
+/*getIdProjectCompartido: obtencion del proyecto compartido*/
+    function getIdProjectCompartido(nameProyectoCompartido){
+        var idProyecto;
+        
+        for(var i=0; i<vm.invitados.length; i++){
+            if(nameProyectoCompartido === vm.invitados[i].nameProyecto){
+                idProyecto = vm.invitados[i].idProject;
+                compartirDatos.setString(idProyecto);
+            }
         }
+    }
 
-        function getIdProjectCompartido(nameProyectoCompartido){
-            var idProyecto;
-            
-            for(var i=0; i<vm.invitados.length; i++){
-                if(nameProyectoCompartido === vm.invitados[i].nameProyecto){
-                    idProyecto = vm.invitados[i].idProject;
-                    compartirDatos.setString(idProyecto);
-                }
+/*enviarEmail: envio de un email al usuario invitado*/
+    function enviarEmail(){
+    	
+        var encontradoNameproyect = false;
+        var encontradoEmailDestino = false;
+
+     	for(var i =0; i<vm.proyectos.length; i++){
+     		if(vm.proyectos[i].name === vm.compartir.nameProyecto){
+     				vm.compartir.idProject = vm.proyectos[i]._id;       			
+     		}
+     	}
+
+     	vm.compartir.usuarioOrigen = vm.user.email;	
+
+        for(var i =0; i<vm.invitados.length; i++){
+                if(vm.invitados[i].nameProyecto === vm.compartir.nameProyecto){
+                    encontradoNameproyect = true;
             }
         }
 
-
-        function enviarEmail(){
-        	
-            var encontradoNameproyect = false;
-            var encontradoEmailDestino = false;
-
-         	for(var i =0; i<vm.proyectos.length; i++){
-         		if(vm.proyectos[i].name === vm.compartir.nameProyecto){
-         				vm.compartir.idProject = vm.proyectos[i]._id;       			
-         		}
-         	}
-
-         	vm.compartir.usuarioOrigen = vm.user.email;	
-
+        if(encontradoNameproyect == true){
             for(var i =0; i<vm.invitados.length; i++){
-                    if(vm.invitados[i].nameProyecto === vm.compartir.nameProyecto){
-                        encontradoNameproyect = true;
+                if(vm.invitados[i].emailDestino === vm.compartir.emailDestino){
+                        encontradoEmailDestino = true;
                 }
             }
+        }                        
 
-            if(encontradoNameproyect == true){
-                for(var i =0; i<vm.invitados.length; i++){
-                    if(vm.invitados[i].emailDestino === vm.compartir.emailDestino){
-                            encontradoEmailDestino = true;
-                    }
-                }
-            }                        
-
-            if((encontradoEmailDestino == true ) && (encontradoNameproyect == true)){
-                FlashService.Error('Ya se ha compartido');
+        if((encontradoEmailDestino == true ) && (encontradoNameproyect == true)){
+            FlashService.Error('Ya se ha compartido');
+        }else{
+              for(var i =0; i<vm.users.length; i++){
+            if(vm.compartir.emailDestino === vm.users[i].email){
+                ProjService.compartirProyecto(vm.compartir)
+                    .then(function(){
+                        FlashService.Success('Proyecto compartido!!!');
+                    })
+                    .catch(function(error){
+                        FlashService.Error(error);
+                    });        
             }else{
-                  for(var i =0; i<vm.users.length; i++){
-                if(vm.compartir.emailDestino === vm.users[i].email){
-                    ProjService.compartirProyecto(vm.compartir)
-                        .then(function(){
-                            FlashService.Success('Proyecto compartido!!!');
-                        })
-                        .catch(function(error){
-                            FlashService.Error(error);
-                        });        
-                }else{
-                    FlashService.Error('El usuario destino no está registrado en la aplicación');   
-                }
+                FlashService.Error('El usuario destino no está registrado en la aplicación');   
             }
-            }
-            
-
         }
+        }
+        
 
-        function eliminarUsuarioInvitado(index){
-           
-    	 angular.forEach(vm.invitadosUser, function(value, key){
+    }
+
+/*eliminarUsuarioInvitado: Eliminacion de un usuario invitado a un proyecto*/
+    function eliminarUsuarioInvitado(index){
+       
+         angular.forEach(vm.invitadosUser, function(value, key){
             if(index === key)
             {
                 for(var i =0; i<vm.currentProjectShare.length; i++){
@@ -378,20 +388,18 @@
                 });
             } 
             });
-          //vm.deleteProjectShare(index);
+      
 
     }
 
-	    
+    /*proyectoComaprtidoCon: obtencion de los proyectos compartidos de un usuario */
     function proyectoCompartidoCon(){
     	/*voy a comprobar si el usuario tiene proyectos compartidos*/
-   		vm.flag = false;
-   		
+    	vm.flag = false;
+    		
     	for(var i =0; i<vm.invitados.length; i++){
     		if(vm.invitados[i].emailDestino === vm.user.email){
     				vm.flag = true;
-    				console.log("el usuario: "+vm.invitados[i].emailDestino+"tiene un proyecto compartido con alguien"+vm.flag);
-
     		}
     	}
 
@@ -411,41 +419,29 @@
     	}
     }
 
-        function deleteProjectShare(index){
-            console.log(index);
-            for(var i =0; i<vm.invitados.length; i++){
-                if(vm.invitados[i].nameProyecto == vm.projectsShareOwn[index].name){
-                    ProjService.DeleteInvitado(vm.invitados[i]);                 
-                }
-            }            
+    /*deleteProjectShare: Eliminacion de proyecto compartido*/
+    function deleteProjectShare(index){
+        for(var i =0; i<vm.invitados.length; i++){
+            if(vm.invitados[i].nameProyecto == vm.projectsShareOwn[index].name){
+                ProjService.DeleteInvitado(vm.invitados[i]);                 
+            }
+        }            
 
-            angular.forEach(vm.projectsShareOwn, function(value, key){
-            if(index === key)
-            { 
-                ProjService.Deleteprojectshare(vm.projectsShareOwn[key])
-                .then(function () {
-                    FlashService.Success('Proyecto eliminado correctamente');
-                })
-                .catch(function (error) {
-                    FlashService.Error(error);
-                });
-            } 
+        angular.forEach(vm.projectsShareOwn, function(value, key){
+        if(index === key)
+        { 
+            ProjService.Deleteprojectshare(vm.projectsShareOwn[key])
+            .then(function () {
+                FlashService.Success('Proyecto eliminado correctamente');
+            })
+            .catch(function (error) {
+                FlashService.Error(error);
+            });
+        } 
+     });
 
-
-         });
-
-               //vm.eliminarUsuarioInvitado(index);
-
-        }    
+    }    
 }
 
 
 })();
-
-/*for(var i=0; i<vm.projects.length; i++)
-        	{
-        		if( === vm.projects[i].userId)
-        		{
-        			vm.misProyectos[i] = vm.projects[i];
-        		}
-        	}*/

@@ -26,6 +26,7 @@
                     <div class="extend"  id="exclude" ><img src="app-content/icons/exclude.png"><div class="textHerramientasExclude">Extend</div></div>
                     <div class="generalizacion"  id="generalizacion" ><img src="app-content/icons/generalizacion.png"><div class="textHerramientasGen">Generalización</div></div>
                     <div class="buttonText"  id="text" ><img src="app-content/icons/text.png"><div class="textHerramientasTexto">Texto</div></div>
+                    <div class="" ><button class="btn btn-dangerSmall" ng-click="vm.eliminarDiagrama()" onclick="recargaTime()"><span width="30px;" heigth="30px;" class="glyphicon glyphicon-trash"></span> Eliminar Diagrama</button></div>
           
 <hr class="style13">
                     			
@@ -38,25 +39,29 @@
       <div class="flash-messageDiagram" ng-if="flash">
                   <div class="{{'alertDiagram alert-' + flash.type}}" ng-bind="flash.message"></div>
       </div>  
-      
-      <canvas  id="pizarra" height="550px" width="920px">
 
-      </canvas>
+      <div id = "loading">
+        <canvas  id="pizarra" height="550px" width="920px">
+
+        </canvas>
+      </div>
+
   </div>
 
   <div class="herramientasAbajo"></div>
 
 <script>
- 
+
  function recargaTime() {
   setTimeout(function(){
       location.reload(true);
   }, 300);
 }
 
+
 var canvas = new fabric.Canvas('pizarra');
 
-  var HideControls = {
+var HideControls = {
             'tl':true,
             'tr':false,
             'bl':true,
@@ -184,21 +189,20 @@ $(document).on('click',".deleteBtn",function(){
 });
 
 
+/*Muestra el diagrama que hemos editado para un proyecto concreto.*/
+var json = localStorage.getItem('angularToHtml');
+canvas.clear();
+localStorage.removeItem('angularToHtml');
+canvas.loadFromJSON(json, canvas.renderAll.bind(canvas), function(o, object) {
+  fabric.log(o, object);
+});
+
 /*Enviar JSON al angular*/
 function convertirJSON() {
-
     var data = canvas.toJSON();  
     var string  = JSON.stringify(data);
     localStorage.setItem('addJson', string);     
-    
 }
-
-/*Muestra el diagrama que hemos editado para un proyecto concreto.*/
-  var json = localStorage.getItem('angularToHtml');
-  canvas.loadFromJSON(json, canvas.renderAll.bind(canvas), function(o, object) {
-    fabric.log(o, object);
-  });
-
 
 function exportarPDF(){
   var canvas = document.getElementById('pizarra');
@@ -208,7 +212,6 @@ function exportarPDF(){
   pdf(dataURL);
 
 }
-
 
 function pdf(imagen){
   var doc = new jsPDF('a4');
@@ -222,20 +225,5 @@ function pdf(imagen){
   doc.save("diagrama.pdf");
   alert("Imprimiendo DiagramaCasosdDeUso.pdf");
 }
-
-
-
-
- /*
-  canvas.forEachObject(function(obj){
-        obj.sourcePath = './diagrama.svg';
-        console.log(obj.sourcePath)
-     });
-
-  JSON.stringify(canvas.toDatalessJSON());
-
-  fabric.log('JSON without additional properties: ', canvas.toJSON());
-  console.log(canvas);
-*/
 
 </script>

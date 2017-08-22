@@ -1,8 +1,5 @@
 /**
- * @fileoverview user.service.js: Se exponen los metodos CRUD.
- * @version 0.1
- * @author FcoCuenca 
- * History
+ * @fileoverview user.service.js: Se exponen los metodos CRUD para el manejo de los usuarios
  */
 
 var config = require('config.js');
@@ -12,10 +9,12 @@ var bcrypt = require('bcryptjs');
 var Q = require('q');
 var mongo = require('mongoskin');
 
-//creacion de users en la bd.
+//Creación de la coleccion users
 var db = mongo.db(config.connectionString, { native_parser: true });
 db.bind('users');
 
+/*especificacion de los servicios que vamos a implementar para posteriormente 
+que el controlador haga uso de ellos.*/
 var service = {};
  
 service.authenticate = authenticate;
@@ -26,12 +25,11 @@ service.delete = _delete;
 service.getCurrentAllUsers = getCurrentAllUsers;
  
 module.exports = service;
- 
+
+//####Creacion de los servicios####
+
  /**
  * authenticate: Verifica que la autenticacion del usuario es correcta.
- * @param  {email}
- * @param  {password}
- * @return  {usuario autenticado}
  */
 function authenticate(email, password) {
     //prepara los objetos para ser usados.
@@ -55,8 +53,6 @@ function authenticate(email, password) {
 
  /**
  * getById: Obtiene el id del usuario.
- * @param  {_id}
- * @return  {_id usuario}
  */
 function getById(_id) {
     var deferred = Q.defer();
@@ -78,7 +74,6 @@ function getById(_id) {
  
  /**
  * create: Insercion de usuario en la bd(createUser()) y posteriormente se verifica la existencia.
- * @param  {userParam}
  */
 function create(userParam) {
     var deferred = Q.defer();
@@ -127,8 +122,6 @@ function create(userParam) {
  
 /**
  * update: Actualiza los datos del usuario mediante updateUser y se verifica con update
- * @param  {_id}
- * @param  {userParam}
  */
 function update(_id, userParam) {
     var deferred = Q.defer();
@@ -156,37 +149,34 @@ function update(_id, userParam) {
         }
     });
  
-    function updateUser() {
-        // fields to update
-        var set = {
-            firstName: userParam.firstName,
-            lastName: userParam.lastName,
-            email: userParam.email,
-        };
- 
-        // update password if it was entered
-        if (userParam.password) {
-            set.hash = bcrypt.hashSync(userParam.password, 10);
-        }
- 
-        db.users.update(
-            { _id: mongo.helper.toObjectID(_id) },
-            { $set: set },
-            function (err, doc) {
-                if (err) deferred.reject(err);
- 
-                deferred.resolve();
-            });
+function updateUser() {
+    // fields to update
+    var set = {
+        firstName: userParam.firstName,
+        lastName: userParam.lastName,
+        email: userParam.email,
+    };
+
+    // update password if it was entered
+    if (userParam.password) {
+        set.hash = bcrypt.hashSync(userParam.password, 10);
     }
- 
+
+    db.users.update(
+        { _id: mongo.helper.toObjectID(_id) },
+        { $set: set },
+        function (err, doc) {
+            if (err) deferred.reject(err);
+
+            deferred.resolve();
+        });
+}
+
     return deferred.promise;
-    console.log("has entrado en el servicio de modificar usuario");
 }
  
  /**
  * _delete: Actualiza los datos del usuario mediante updateUser y se verifica con update
- * @param  {_id}
- * @param  {userParam}
  */
 //llamada _delete por que delete es una expresion de javascript
 function _delete(_id) {

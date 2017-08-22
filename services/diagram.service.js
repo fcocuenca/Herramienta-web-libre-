@@ -20,6 +20,7 @@ var service = {};
 service.create = create;
 service.getById = getById;
 service.update = update;
+service.delete = _delete;
 
 module.exports = service;
 
@@ -96,6 +97,21 @@ function update(diag){
     	if(err) deferred.reject(err);
     	
     	deferred.resolve();
+    });
+    return deferred.promise;
+}
+/*
+*_delete:funcion que elimina de forma completa todos los elementos del diagrama
+*/
+function _delete(diag){
+    var deferred = Q.defer();
+    var id= diag._id;
+    db.diagram.remove(
+    {_id: mongo.helper.toObjectID(diag._id)},
+    function(err){
+        if(err) deferred.reject(err);
+        
+        deferred.resolve();
     });
     return deferred.promise;
 }

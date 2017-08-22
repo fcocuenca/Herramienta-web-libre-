@@ -369,6 +369,14 @@ label > span {
   margin-top: 15px;
 }
 
+.col-md-12Spec {
+    background-color: #fff;
+    border-radius: 12px;
+    width: 60%;
+    margin-left: 20%;
+    margin-top: 15px;
+}
+
 
 .col-md-Ppal {
     background-color: #fff;
@@ -747,7 +755,7 @@ hr {
 .form p{  
   font-family: Pacifico;
   font-size: 32px;
-  margin: 0px 0 25px 0px;
+  margin: 32px 0 25px 0px;
 }
 
 .form label {
@@ -809,9 +817,9 @@ hr {
 
 }
 .form button {
-  width: 50%;
+  /*width: 50%;*/
   border: 0;
-  padding: 15px;
+  /*padding: 15px;*/
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
   border-bottom-left-radius: 3px;
@@ -838,6 +846,18 @@ button.btn-danger{
   background-color: #9b0c0c;
   font-family: 'Lobster', cursive;
   font-size: 20px;
+  margin-bottom: 15px;
+}
+
+button.btn-dangerSmall{
+  color: #fff;
+  background-color: #9b0c0c;
+  font-family: 'Lobster', cursive;
+  font-size: 20px;
+  margin-bottom: 15px;
+  width: 112px;
+  margin-left: 14px;
+  font-size: 10px;
 }
 
 .form .message{
@@ -1124,8 +1144,7 @@ td{
 }
 
 .form-controlInputSpec{
-   
-    width: 85%;
+    width: 60%;
     height: 34px;
     padding: 6px 9px;
     margin: 0px 8px 0px 0px;
@@ -1142,6 +1161,26 @@ td{
     -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
     transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s; 
 }
+
+.form-controlInputSpecId{
+   width: 6%;
+    height: 34px;
+    padding: 6px 9px;
+    margin: 0px 8px 0px 0px;
+    font-size: 18px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s; 
+}
+
 
 .attrTextSpec{
   padding: 12px 34px 0px 20px !important;
@@ -1277,7 +1316,7 @@ td{
   }
 
   .form-controlInputSpecTA{
-    width: 85%;
+    width: 90%;
     height: 115px;
     padding: 6px 12px;
     /*margin: 0px 0px 0px 95px;*/
@@ -1398,6 +1437,7 @@ td{
       min-height: 100%;
       overflow: hidden; 
 }
+
 
 
 /*

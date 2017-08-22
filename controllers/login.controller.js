@@ -2,9 +2,6 @@
  * @fileoverview define las rutas para mostrar la vista del login y los credenciales de aunteticacion
  * del usuario. Utiliza la api y no el servicio. Auth correcta devuelve el token y lo almacena en la 
  * sesion para ponerlo a disposucion de angular.
- * @version 1.0
- * @author Fco Cuenca
- * History
  */
 
 var express = require('express');

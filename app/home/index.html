@@ -78,7 +78,7 @@
 		                                      <td>{{p.desc}} </td>
 		                                      <td>{{p.fechaInicio}}</td>
 		                                      <td>{{p.iniciadoPor}}</td>
-		                                      <td><a ui-sref="functionalrequeriments"><button class="btn btn-warning" ng-click="vm.getIdProjectCompartido(p.name)"><span width="15px;" heigth="15px;" class=""></span>Abrir</td>
+		                                      <td><a ui-sref="functionalrequeriments"><button class="btn btn-warning" ng-click="vm.getIdProjectCompartido(p.name)"><span width="15px;" heigth="15px;"></span>Abrir</td>
 		                                      <td><a href="" id ="delete" ng-click="vm.deleteProjectShare($index)" onclick="recargaTime()"><span width="30px;" heigth="30px;" class="glyphicon glyphicon-trash"></span></a></td>
                                     	</tr>
                                   </tbody>                                
@@ -121,7 +121,7 @@
                                         <tr ng-repeat="u in vm.invitadosUser">
                                             <td>{{u.emailDestino}}</span></td>
                                             <td>{{u.nameProyecto}}</td>
-                                            <td><a href="" id ="delete" ng-click="vm.eliminarUsuarioInvitado($index)" onclick="recarga()"><span width="30px;" heigth="30px;" class="glyphicon glyphicon-trash"></span></a> </td>
+                                            <td><a href="" id ="delete" ng-click="vm.eliminarUsuarioInvitado($index)" onclick="recargaTime()"><span width="30px;" heigth="30px;" class="glyphicon glyphicon-trash"></span></a> </td>
                                         </tr>
                                   </tbody>
                               </table>
@@ -186,9 +186,6 @@
                 </div>
 
 <script>
-
-
-
 function recarga() {
     location.reload();
 }
@@ -198,7 +195,5 @@ function recargaTime() {
       window.location.reload(1);
   }, 300);
 }
-
-
 
 </script>

@@ -29,9 +29,6 @@ module.exports = service;
 
  /**
  * create: insercion de los requisitos no funcionales en la bd
- * @param  {_id}
- * @param  {content}
- * @return  {promise}
  */
 function create(NRfParam){
 
@@ -54,9 +51,8 @@ function create(NRfParam){
 	return deferred.promise;
 }
 
-/*detectarCont: detetectar contenido no nulo
-	@param:{contenido}
-	@return  {boolean}
+/*
+*detectarCont: detetectar contenido no nulo
 */
 function detectarCont(contenido){
 	if(contenido != null){
@@ -83,7 +79,6 @@ function detectarReq(requisito){
 
 /**
  * getById: obtencio de los requisitos no funcionales de la bd
- * @return  {requisitos:_id, content}
  */
 function getById(){
 	var deferred = Q.defer();
@@ -104,9 +99,6 @@ function getById(){
 
  /**
  * _delete: Borrado de los requisitos no funcionales en la bd
- * @param  {_id}
- * @param  {content}
- * @return  {usuario autenticado}
  */
 function _delete(NRfParam){
     var deferred = Q.defer();
@@ -124,9 +116,6 @@ function _delete(NRfParam){
 
  /**
  * update: modificacion de los no requisitos funcionales
- * @param  {_id}
- * @param  {content}
- * @return  {usuario modificado}
  */
 function update(NRfParam){
     var deferred = Q.defer();

@@ -7,7 +7,7 @@
                             <p>Modelo de Casos de uso: Especificación de Casos de usos</p>  
             </div>
                             
-            <div class="col-md-12">
+            <div class="col-md-12Spec">
              <div class="flash-message" ng-if="flash">
                     <div class="{{'alert alert-' + flash.type}}" ng-bind="flash.message"></div>
              </div> 
@@ -36,12 +36,12 @@
 
                                   <tr>
                                     <td class="attrTextSpec">Id: </td>
-                                    <td><input type="text" id="descripcion" class="form-controlInputSpec" ng-model=vm.spec.id required/></td>
+                                    <td><input type="text" id="descripcion" class="form-controlInputSpecId" ng-model=vm.spec.id required/></td>
                                   </tr>
                                    
                                   <tr>
                                     <td class="attrTextSpec">Descripción: </td>
-                                    <td> <input type="text" id="descripcion" class="form-controlInputSpec" ng-model=vm.spec.desc required/></td>
+                                    <td> <textarea class="form-controlInputSpecTA" ng-model=vm.spec.desc required/> </textarea>  </td>
                                   </tr>
                                    
                                   <tr>

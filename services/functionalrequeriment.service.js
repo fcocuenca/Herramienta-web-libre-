@@ -100,7 +100,6 @@ function getById(){
  * _delete: Borrado de los requisitos funcionales en la bd
  */
 function _delete(RfParam){
-	console.log(RfParam._id);
     
     var deferred = Q.defer();
     var id= RfParam._id;

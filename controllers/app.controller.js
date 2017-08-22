@@ -1,9 +1,6 @@
 /**
  * @fileoverview control de acceso a los ficheros angular, utilizando session/cookie
  * crea el JWT token usado para la aplicacion angular para realizar solicutdes auth
- * @version 1.0
- * @author Fco Cuenca
- * History
  */
 
 var express = require('express');

@@ -1,3 +1,4 @@
+/*####CONTROLADOR DE ANGULAR####*/
 (function () {
     'use strict';
  
@@ -30,52 +31,64 @@
             };
         });
  
+ 
     function Controller(UserService, ProjService, FlashService) {
-        var vm = this;
- 
-        vm.user = null;
-        vm.projects = null;
+/*###########################################
+##########DECLARACIÓN DE VARIABLES###########
+###########################################*/ 
+    var vm = this;
 
-        vm.project=null;
-        vm.saveProj = saveProj;
-        
-        initController();
+ /*####OBTENCIÓN DE DATOS####*/
+	vm.user = null;
+	vm.projects = null;
 
-        initProjectController();
- 
-        function initController() {
-            // get current user
+ /*####VARIABLES SCOPE####*/
+	vm.project=null;
 
-            UserService.GetCurrent().then(function (user) {
-                vm.user = user;
-            });
-        }
+/*####FUNCIONES PROYECTOS####*/
+	vm.saveProj = saveProj;
 
+/*####Funciones para obtener todos los usuarios existentes en la bd ####*/
+	initController();
 
-        function initProjectController(){
+/*####Funciones para obtener todos los proyectos existentes en la bd ####*/
+	initProjectController();
 
-            ProjService.GetCurrent().then(function(projects){
-                vm.projects = projects;
-            });
-        }
-
-        function saveProj(){
-
-            vm.project.iniciadoPor=vm.user.email;
-            vm.project.userId=vm.user._id;
-
-              (ProjService.Create(vm.project))
-                     .then(function(){
-                        FlashService.Success('Proyecto creado correctamente');
-                     })  
-                    .catch(function(error){
-                         FlashService.Error(error);
-                    });
-        }
-
-
-
-
+/*##################################
+###########GETCURRENT()#############
+###################################*/
+    function initController() {
+       
+        UserService.GetCurrent().then(function (user) {
+            vm.user = user;
+        });
     }
+
+
+    function initProjectController(){
+
+        ProjService.GetCurrent().then(function(projects){
+            vm.projects = projects;
+        });
+    }
+
+
+/**
+ * saveRf: llama al servicio Create y inserta un proyecto en la bd
+*/
+    function saveProj(){
+
+        vm.project.iniciadoPor=vm.user.email;
+        vm.project.userId=vm.user._id;
+
+          (ProjService.Create(vm.project))
+                 .then(function(){
+                    FlashService.Success('Proyecto creado correctamente');
+                 })  
+                .catch(function(error){
+                     FlashService.Error(error);
+                });
+    }
+}
  
 })();

@@ -46,7 +46,6 @@
     vm.cat=null;
     vm.projects=null;
 
-
 /*####VARIABLES SCOPE####*/
     vm.requisito=null;
     vm.categoria=null;
@@ -56,7 +55,6 @@
     vm.required = false;
     vm.requisitosFuncionales = [];
     vm.categorias= [];
-
 
 /*####FUNCIONES REQUISITOS FUNCIONALES####*/
     vm.saveRf = saveRf;
@@ -131,8 +129,6 @@
 */
     function saveRf(){
 
-    	//vm.vacioId();
-
         /*conversion del string a numero*/   
         vm.requisito.number =  parseInt(vm.requisito.number);
         vm.requisito.idProject = idProjectFK;
@@ -159,7 +155,6 @@
 
 /**
  * deleteRf: llama al servicio Delete y borra un requisito de la bd
- * @param  {index}
 */
     function deleteRf(index){
        
@@ -180,7 +175,6 @@
 
 /**
  * updateRf: llama al servicio update y modifica un requisito de la bd
- * @param  {index}
 */
     function updateRf(index){
 
@@ -202,7 +196,6 @@
 #####################################*/
 /**
  * saveCat: almacena una categoria en la base de datos.
- * @param  {}
 */
     function saveCat(){
         vm.categoria.idProject = idProjectFK
@@ -218,7 +211,6 @@
 
 /**
  * updateCat: llama al servicio update y modifica una categoria de la bd
- * @param  {index}
 */
     function updateCat(index){
         vm.categorias[index].category = vm.modcategory;
@@ -234,7 +226,6 @@
 
 /**
  * deleteCat: llama al servicio delete y elimina una categoria.
- * @param  {index}
 */
     function deleteCat(index){
         angular.forEach(vm.cat, function(value, key){
@@ -258,7 +249,6 @@
 ################################*/
 /**
  * verificarReqRepe: verificacion de id repetido en la bd
- * @param  {index}
 */
     function verificarReqRepe(){
         
