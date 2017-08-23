@@ -1,3 +1,4 @@
+
 <div class="herramientas">
     <a href="" ><span class="iconsEdicion"><img src="app-content/icons/exportar.png" onclick="exportarPDF()"></span></a>
 
@@ -31,12 +32,12 @@
                     			
                 
   </div>
+  
 
   <div class="herramientasDerecha"></div>
+  <div id="load"></div>
 
-  <div id="loader"></div>
-
-  <div class="hojaEdicion" id="hojaEdicion" style="display:none;" class="animate-bottom">
+  <div class="hojaEdicion" id="hojaEdicion">
      
       <div class="flash-messageDiagram" ng-if="flash">
                   <div class="{{'alertDiagram alert-' + flash.type}}" ng-bind="flash.message"></div>                  
@@ -57,7 +58,6 @@ function recargaTime() {
       location.reload(true);
   }, 300);
 }
-
 
 var canvas = new fabric.Canvas('pizarra');
 
@@ -225,5 +225,4 @@ function pdf(imagen){
   doc.save("diagrama.pdf");
   alert("Imprimiendo DiagramaCasosdDeUso.pdf");
 }
-
 </script>

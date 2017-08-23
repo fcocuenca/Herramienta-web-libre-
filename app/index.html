@@ -3,13 +3,12 @@
 <head>
     <meta charset="utf-8" />
 
-    
+<!--    
     <meta http-equiv="Cache-Control" content="no-cache, mustrevalidate">
-    <meta http-equiv="Expires" content="0">
     <meta http-equiv="Expires" content="0">
     <meta http-equiv="Last-Modified" content="0">
     <meta http-equiv="Pragma" content="no-cache">
-    
+  -->
     <title>Especificación de requisitos</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
  
@@ -54,7 +53,7 @@
 
 </head>
 
-<body onload="myFunction()" style="margin:0;">
+<body>
 
 <header class="header">
 <!-- Bara superior-->
@@ -179,16 +178,17 @@
     <script src="matrix/index.controller.js"></script>
     <script src="home/Proyecto/index.controller.js"></script>
 
-
-
 </html>
 <script>
-  function limpiarCache(){
+//onload="myFunction()" style="margin:0;"
+
+
+function limpiarCache(){
     setTimeout(function(){
       window.location.reload(1);
   });    
   }
-
+/*
 var myVar;
 function myFunction() {
     myVar = setTimeout(showPage, 1500);
@@ -198,5 +198,5 @@ function showPage() {
   document.getElementById("loader").style.display = "none";
   document.getElementById("hojaEdicion").style.display = "block";
 }
-  
+*/
 </script>

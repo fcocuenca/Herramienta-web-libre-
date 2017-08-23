@@ -1439,7 +1439,7 @@ td{
 }
 
 /* Center the loader */
-#loader {
+.loader {
   position: absolute;
   left: 65%;
   top: 50%;
@@ -1468,7 +1468,7 @@ td{
 
 /* Add animation to "page content" */
 .animate-bottom {
-  position: relative;
+  margin-left: 50px;
   -webkit-animation-name: animatebottom;
   -webkit-animation-duration: 1s;
   animation-name: animatebottom;
