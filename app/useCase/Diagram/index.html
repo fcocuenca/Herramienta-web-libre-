@@ -9,10 +9,9 @@
    
 
 
-   <span class="tituloHerramientas"><span class="glyphicon glyphicon-wrench"></span> Herramientas </span> 
+  <span class="tituloHerramientas"><span class="glyphicon glyphicon-wrench"></span> Herramientas </span> 
 
-
-    <span class="tituloEdicion">Modelo de Casos de uso: Edición de Diagramas de Casos de Uso</span>
+  <span class="tituloEdicion">Modelo de Casos de uso: Edición de Diagramas de Casos de Uso</span>
        
 </div>
 
@@ -33,18 +32,19 @@
                 
   </div>
 
-    <div class="herramientasDerecha"></div>
+  <div class="herramientasDerecha"></div>
 
-  <div class="hojaEdicion" id="hojaEdicion">
+  <div id="loader"></div>
+
+  <div class="hojaEdicion" id="hojaEdicion" style="display:none;" class="animate-bottom">
+     
       <div class="flash-messageDiagram" ng-if="flash">
-                  <div class="{{'alertDiagram alert-' + flash.type}}" ng-bind="flash.message"></div>
+                  <div class="{{'alertDiagram alert-' + flash.type}}" ng-bind="flash.message"></div>                  
       </div>  
 
-      <div id = "loading">
-        <canvas  id="pizarra" height="550px" width="920px">
+      <canvas  id="pizarra" height="550px" width="920px">
 
-        </canvas>
-      </div>
+      </canvas>  
 
   </div>
 
@@ -52,7 +52,7 @@
 
 <script>
 
- function recargaTime() {
+function recargaTime() {
   setTimeout(function(){
       location.reload(true);
   }, 300);

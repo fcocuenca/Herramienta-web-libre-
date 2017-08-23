@@ -48,9 +48,13 @@
   <script src="//cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.5.3/picker.time.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.5.3/legacy.js"></script>
 
+
+
+
+
 </head>
 
-<body>
+<body onload="myFunction()" style="margin:0;">
 
 <header class="header">
 <!-- Bara superior-->
@@ -184,4 +188,15 @@
       window.location.reload(1);
   });    
   }
+
+var myVar;
+function myFunction() {
+    myVar = setTimeout(showPage, 1500);
+}
+
+function showPage() {
+  document.getElementById("loader").style.display = "none";
+  document.getElementById("hojaEdicion").style.display = "block";
+}
+  
 </script>
