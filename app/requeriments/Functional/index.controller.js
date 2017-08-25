@@ -142,7 +142,7 @@
         {
             (RfService.Create(vm.requisito))
              .then(function(){
-                FlashService.Success('Requisito funcional introducido correctamente');
+                FlashService.Success('El requisito funcional se ha introducido correctamente');
              })  
             .catch(function(error){
                  FlashService.Error(error);
@@ -163,7 +163,7 @@
             {
                 RfService.Delete(vm.requisitosFuncionales[key])
                 .then(function () {
-                    FlashService.Success('Requisitos funcional borrado correctamente');
+                    FlashService.Success('El requisito funcional se ha borrado correctamente');
                 })
                 .catch(function (error) {
                     FlashService.Error(error);
@@ -182,7 +182,7 @@
 
                 RfService.Update(vm.requisitosFuncionales[index])
                     .then(function () {
-                        FlashService.Success('El Requisito funcional se ha modificado correctamente');
+                        FlashService.Success('El requisito funcional se ha modificado correctamente');
                     })
                     .catch(function (error) {
                         FlashService.Error(error);
