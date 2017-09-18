@@ -15,7 +15,18 @@
                 setString: function(value){
                     /*esta el idProyecto*/
                     $localStorage.id = value;
+                },
+                getMostrar: function(){
+                	return $localStorage.mostrar;
+                },
+                setMostrar: function(mostrar){
+                	//if(mostrar == true)
+                		$localStorage.mostrar = mostrar;
+
+                	/*if(mostrar != true)
+                		$localStorage.mostrar = false;*/
                 }
+
             }
         });
 
@@ -115,10 +126,15 @@
     function Controller(UserService, ProjService, compartirDatos){
 
         var vm = this;
+        vm.result = false;
+        vm.tieneProyecto = false;
         vm.users;
         vm.userId;
         vm.proyecto=[];
         vm.idProject = compartirDatos.getString();
+        vm.btnAbrir = false;
+        vm.mostrarMenu = mostrarMenu;
+
 
         initControllerUser();
         function initControllerUser() {
@@ -135,9 +151,18 @@
                     {
                         if(vm.userId === project[i].userId){
                             vm.proyecto.push(project[i]);
+                            vm.tieneProyecto = true;
                         }
                     }
             });
+        }
+
+        
+        function mostrarMenu(){
+        	vm.btnAbrir = compartirDatos.getMostrar();
+
+        	if(vm.tieneProyecto == true && vm.btnAbrir == true)
+        		return true;
         }
 }
 

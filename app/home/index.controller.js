@@ -24,6 +24,7 @@
     vm.proyectos = [];
     vm.projectShare = [];
     vm.projectsShareOwn = [];
+    compartirDatos.setMostrar(false);
 
 
     /*####FUNCIONES PROYECTOS####*/
@@ -51,6 +52,7 @@
     vm.invitados = null;
     vm.invitadosUser = [];
     vm.compartir = null;
+    vm.mostrarMenu = mostrarMenu;
 
 
     /*####Funciones para obtener todos los usuarios existentes en la bd ####*/
@@ -296,6 +298,11 @@
             });
         } 
         }); 
+    }
+
+    function mostrarMenu(value){
+
+    		compartirDatos.setMostrar(value);
     }
 
 /*getIdProject: obtencion del id del proyecto*/

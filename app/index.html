@@ -89,7 +89,7 @@
 
 <!--MenuIzquierdoAcordeon-->
 <div ng-controller="IndexController as mostrar">
-    <div class="menu">
+    <div class="menu" ng-hide="mostrar.result == false" ng-show="mostrar.mostrarMenu() == true">
       <ul class="menu__list">
        <li>
           <input id="group-1" type="checkbox" hidden />
@@ -151,6 +151,7 @@
     <script src="app-content/assets/fabricDirtyStatus.js"></script>
     <script src="app-content/assets/fabricUtilities.js"></script>
     <script src="app-content/assets/fabricWindow.js"></script>
+    
 
 
     <!-- application scripts -->
@@ -180,23 +181,14 @@
 
 </html>
 <script>
-//onload="myFunction()" style="margin:0;"
-
+$("#accionar").click(function(){
+	$('#mostrar').toogle();
+	$('#ocultar').toogle();
+});
 
 function limpiarCache(){
     setTimeout(function(){
       window.location.reload(1);
   });    
   }
-/*
-var myVar;
-function myFunction() {
-    myVar = setTimeout(showPage, 1500);
-}
-
-function showPage() {
-  document.getElementById("loader").style.display = "none";
-  document.getElementById("hojaEdicion").style.display = "block";
-}
-*/
 </script>

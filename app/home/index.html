@@ -39,7 +39,7 @@
                                       <td>{{p.desc}} </td>
                                       <td>{{p.fechaInicio}}</td>
                                       <td>{{p.iniciadoPor}}</td>
-                                      <td><a ui-sref="functionalrequeriments"><button class="btn btn-success" ng-click="vm.getIdProject(p._id)"><span width="15px;" heigth="15px;" class=""></span>Abrir</td>
+                                      <td><a ui-sref="functionalrequeriments"><button class="btn btn-success" ng-click="vm.getIdProject(p._id); vm.mostrarMenu(true)"><span width="15px;" heigth="15px;" class=""></span>Abrir</td>
                                       <td><button class="btn btn-success">
                                                 <span class="btnHomeComp" data-toggle="modal" data-target="#editar">Compartir</span></button></td>
                                       <td><a href="" id ="delete" ng-click="vm.deleteProject($index)"  onclick="recargaTime()"><span width="30px;" heigth="30px;" class="glyphicon glyphicon-trash"></span></a></td>
@@ -49,7 +49,24 @@
                           </div>
                       </div>
                   </div>
+
+
+
 				</div>
+
+
+                  <div>
+                  <div ng-show = "vm.proyectos == 0">
+                  	<center><p class="textHome">¿Todavía no has creado ningun proyecto en la aplicación?</p></center>
+                  </div>  
+
+                   <center><a ui-sref="project"><button class="btn btn-success"><span width="15px;" heigth="15px;" class="glyphicon glyphicon-plus"></span><span class="btnHome"> Crear Proyecto</span></button></a></center>
+                  </div>
+                    <br>  
+
+
+
+
                    <div class="col-md-Ppal" ng-if="vm.projectsShareOwn.length > 0">
                    <div class="box box-solid box-success">
                       <div class="box-headerHome">
@@ -90,13 +107,7 @@
 
 
 
-
-                  <div>
-                   <center><p class="textHome">¿Todavía no has creado ningun proyecto en la aplicación?</p></center>
-                                          
-                   <center><a ui-sref="project"><button class="btn btn-success"><span width="15px;" heigth="15px;" class="glyphicon glyphicon-plus"></span><span class="btnHome"> Crear Proyecto</span></button></a></center>
-                  </div>
-                             <br>        
+      
                                     
                 </div>
                    <div class="col-md-Ppal">
