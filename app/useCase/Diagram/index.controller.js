@@ -71,7 +71,6 @@ function Controller($window, UserService, FlashService, DService, $http, compart
     function crearDiagrama(){
         var d = []
         var jsonString = localStorage.getItem('addJson');
-          
         d.push({idProject: idProjectFK, json: jsonString});
 
             DService.Create(d)

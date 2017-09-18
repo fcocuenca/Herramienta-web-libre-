@@ -20,11 +20,9 @@
                 	return $localStorage.mostrar;
                 },
                 setMostrar: function(mostrar){
-                	//if(mostrar == true)
                 		$localStorage.mostrar = mostrar;
 
-                	/*if(mostrar != true)
-                		$localStorage.mostrar = false;*/
+                	
                 }
 
             }

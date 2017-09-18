@@ -30,6 +30,7 @@
             };
         });
         
+        
  function Controller(UserService, RfService, FlashService, CategoryService, $filter, compartirDatos, ProjService) {
 
 /*###########################################
@@ -45,6 +46,7 @@
     vm.rf = null;
     vm.cat=null;
     vm.projects=null;
+    vm.modPriority =null;
 
 /*####VARIABLES SCOPE####*/
     vm.requisito=null;
@@ -65,6 +67,9 @@
     vm.saveCat = saveCat;
     vm.updateCat = updateCat;
     vm.deleteCat = deleteCat;
+
+/*####FUNCIONES PRIORIDAD####*/
+	vm.updatePriority = vm.updatePriority;
 
 /*####VERIFICACIONES####*/
     vm.verificarReqRepe = verificarReqRepe;
@@ -241,6 +246,19 @@
                
             } 
        }); 
+    }
+
+    function updatePriority(index){
+
+    	 vm.requisitosFuncionales[index].priority = vm.modPriority;
+
+                RfService.Update(vm.requisitosFuncionales[index])
+                    .then(function () {
+                        FlashService.Success('El requisito funcional se ha modificado correctamente');
+                    })
+                    .catch(function (error) {
+                        FlashService.Error(error);
+                    });
     }
 
     
