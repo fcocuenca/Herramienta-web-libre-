@@ -21,8 +21,12 @@
                 },
                 setMostrar: function(mostrar){
                 		$localStorage.mostrar = mostrar;
-
-                	
+                },
+                getMostrarCompartido: function(){
+                	return $localStorage.mostrarCompartido;
+                },
+                setMostrarCompartido: function(mostrarCompartido){
+                		$localStorage.mostrarCompartido = mostrarCompartido;
                 }
 
             }
@@ -131,7 +135,9 @@
         vm.proyecto=[];
         vm.idProject = compartirDatos.getString();
         vm.btnAbrir = false;
+        vm.btnAbrirCompartido = false;
         vm.mostrarMenu = mostrarMenu;
+        vm.mostrarMenuCompartido = mostrarMenuCompartido;
 
 
         initControllerUser();
@@ -161,6 +167,13 @@
 
         	if(vm.tieneProyecto == true && vm.btnAbrir == true)
         		return true;
+        }
+
+        function mostrarMenuCompartido(){
+        	vm.btnAbrirCompartido = compartirDatos.getMostrarCompartido();
+        	if(vm.btnAbrirCompartido == true)
+        		return true;
+
         }
 }
 

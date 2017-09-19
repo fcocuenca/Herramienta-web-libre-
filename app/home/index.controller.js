@@ -25,6 +25,7 @@
     vm.projectShare = [];
     vm.projectsShareOwn = [];
     compartirDatos.setMostrar(false);
+    compartirDatos.setMostrarCompartido(false);
 
 
     /*####FUNCIONES PROYECTOS####*/
@@ -53,6 +54,7 @@
     vm.invitadosUser = [];
     vm.compartir = null;
     vm.mostrarMenu = mostrarMenu;
+    vm.mostrarMenuCompartido = mostrarMenuCompartido;
 
 
     /*####Funciones para obtener todos los usuarios existentes en la bd ####*/
@@ -302,7 +304,11 @@
 
     function mostrarMenu(value){
 
-    		compartirDatos.setMostrar(value);
+    	compartirDatos.setMostrar(value);
+    }
+
+    function mostrarMenuCompartido(value){
+        compartirDatos.setMostrarCompartido(value);
     }
 
 /*getIdProject: obtencion del id del proyecto*/

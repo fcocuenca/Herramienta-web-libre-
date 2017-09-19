@@ -86,7 +86,7 @@
 
 <!--MenuIzquierdoAcordeon-->
 <div ng-controller="IndexController as mostrar">
-    <div class="menu" >
+    <div class="menu" ng-show ="mostrar.mostrarMenu() == true || mostrar.mostrarMenuCompartido() == true" >
       <ul class="menu__list">
        <li>
           <input id="group-1" type="checkbox" hidden />
