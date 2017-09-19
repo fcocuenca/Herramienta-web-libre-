@@ -78,7 +78,7 @@ function _delete(MatParam){
 }
 
  /**
- * getById: obtencio de los checks de la bd
+ * getById: obtencion de los checks de la bd
  */
 function getById(){
 	var deferred = Q.defer();

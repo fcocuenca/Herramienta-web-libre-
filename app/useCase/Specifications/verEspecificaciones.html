@@ -100,6 +100,10 @@
     <div class="box box-solid box-success">
                       <div class="box-headerSpec">
                               <h3 class="box-tittle"> Listado de especificaciones</h3>
+                               <div class="box-tools pull-right" >
+                                        <a href="" onclick="pdfTodo()" ><span class="imprimir glyphicon glyphicon-print"></span></a>
+                                    </div>
+                             
                       </div>
                   </div>
                   </div>
@@ -203,10 +207,7 @@
         </ul>
         </div>
 
-        	<div class="button">
-      			<center><button id ="imprimir" class="btn btn-primary" onclick="pdfTodo()">Imprimir Todo</button></center>
-
-    			</div>
+        	
 
 <script>
 function recarga() {
@@ -230,8 +231,8 @@ function pdfTodo(){
         var elem = document.getElementsByTagName("table")[i];
         var data = doc.autoTableHtmlToJson(elem);
 
-        doc.text("Modelo de Casos de uso:", 70, 40);
-        doc.text("Especificación de Casos de Uso", 70, 48);
+        doc.text("Modelo de Casos de uso:", 70, 25);
+        doc.text("Especificación de Casos de Uso", 70, 33);
         columns = [" ",  "  Especificación de Casos de uso"];
         
         while(i<long){
@@ -250,7 +251,7 @@ function pdfTodo(){
               valign: 'middle',
               rowHeight: 9
           },
-          margin: {top: 60, left: 30},
+          margin: {top: 40, left: 30},
           alternateRowStyles: {
             fillColor: [239, 239, 239],
           },

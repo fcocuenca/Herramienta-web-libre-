@@ -1,11 +1,8 @@
-<div class="col-md-12">
- <div class="flash-message" ng-if="flash">
-        <div class="{{'alert alert-' + flash.type}}" ng-bind="flash.message"></div>
-  </div> 
-        <!--Header de la tabla-->
-        <div style="color: red" ng-show="vm.comprobarCU() == false">
-             El caso de uso {{vm.faltaCU}}no esta cubierto por ningun RF
-        </div>
+<div class="col-md-12MatTra">
+       <div class="flash-message" ng-if="flash">
+              <div class="{{'alert alert-' + flash.type}}" ng-bind="flash.message"></div>
+        </div> 
+
         <div class="box box-solid box-success">
             <div class="box-headerMat">
                     <h3 class="box-tittle"> Matriz de trazabilidad</h3>
@@ -15,13 +12,13 @@
                             <a href="" id ="delete" ng-click="vm.eliminarTodo()" onclick="recargaTime()"><span width="30px;" heigth="30px;" class="imprimir glyphicon-trash"></span></a> 
                              			&nbsp &nbsp 
                             <a href="" onclick="pdfMatrix()" ><span class="imprimir glyphicon glyphicon-print"></span></a>
-						</div>
+						          </div>
             </div>
-		</div>
+          </div>
+
 		<div class="box-body">
                     <div class="panel panel-default">
-                        <div class="box-body table-responsive no-padding">
-
+                      <div class="box-body ">
                         <table class="table" border="3" id="table">
 	                         	<thead>
                                    	<th class="listRFCU"><center>CU/RF</center></th>
@@ -41,42 +38,42 @@
                                    </tr>
 	                         </tbody>   
                         </table>
-             	 </div>
-                 
+             	       </div>
                 </div>
 			</div>
+    </div>
 
+    <div class="col-md-12">
+    					 <div class="box box-solid box-success">
+                			<div class="box-headerMat">
+                        	<h3 class="box-tittle"> Matriz de trazabilidad: Resultado</h3> 
+                                <div class="box-tools pull-right" >
+                                    <a href="" onclick="pdfListado()" ><span class="imprimir glyphicon glyphicon-print"></span></a>
+                                </div>
+                		</div>                     
+    				  </div>
+     
+    					<div class="box-body">
+                        <div class="panel panel-default">
+                            <div class="box-body table-responsive no-padding">
+                            <table class="table">
+                                    <thead>
+                                        <th></th>
+                                    </thead>
+    	                            <tbody>
+    										<tr ng-repeat="result in vm.matriz" >
+    											<td>
+    													<center>El CU {{result.idCU}} esta cubierto por el RF{{result.idRF}}</center>
+    											</td>	
+    										</tr>
+    	                           	</tbody>
 
-					 <div class="box box-solid box-success">
-            			<div class="box-headerMat">
-                    	<h3 class="box-tittle"> Matriz de trazabilidad: Resultado</h3> 
-                            <div class="box-tools pull-right" >
-                                <a href="" onclick="pdfListado()" ><span class="imprimir glyphicon glyphicon-print"></span></a>
-                            </div>
-            		</div>
-
-                                   
-				</div>
-					<div class="box-body">
-                    <div class="panel panel-default">
-                        <div class="box-body table-responsive no-padding">
-                        <table class="table">
-                                <thead>
-                                    <th></th>
-                                </thead>
-	                            <tbody>
-										<tr ng-repeat="result in vm.matriz" >
-											<td>
-													<center>El CU {{result.idCU}} esta cubierto por el RF{{result.idRF}}</center>
-											</td>	
-										</tr>
-	                           	</tbody>
-
-                        </table>
-             	 	</div>
-                </div>
-			</div>
-		</div>
+                            </table>
+                 	 	</div>
+                    </div>
+    			 </div>
+    </div>
+		
 
 <script>
 function recarga() {
@@ -93,8 +90,8 @@ function pdfMatrix() {
         var elem = document.getElementsByTagName('table')[0];
         var data = doc.autoTableHtmlToJson(elem);
 
-        doc.text("Modelo de Casos de Uso: ", 115, 40);
-        doc.text("Matriz de trazabilidad", 120, 48);
+        doc.text("Modelo de Casos de Uso: ", 115, 20);
+        doc.text("Matriz de trazabilidad", 120, 28);
         
         doc.autoTable(data.columns, data.rows,{
            columnStyles:{
@@ -107,7 +104,7 @@ function pdfMatrix() {
               valign: 'middle',
               rowHeight: 9,
           },
-          margin: {top: 60, left: 30},
+          margin: {top: 35, left: 30},
           alternateRowStyles: {
             fillColor: [239, 239, 239],
           },

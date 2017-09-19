@@ -67,7 +67,9 @@ function detectarId(id){
 function getById(){
 	var deferred = Q.defer();
 
-	db.specification.find().toArray(function(err, spec){
+    var mysort = {id: 1};
+
+	db.specification.find().sort(mysort).toArray(function(err, spec){
 			if(err) deferred.reject(err);
 
 			if(spec){

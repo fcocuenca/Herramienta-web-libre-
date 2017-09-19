@@ -369,6 +369,15 @@ label > span {
   margin-top: 15px;
 }
 
+.col-md-12MatTra
+{
+  background-color: #fff;
+  border-radius: 12px;
+  width: 83%;
+  margin-left: 8%;
+  margin-top: 15px;
+}
+
 .col-md-12Spec {
     background-color: #fff;
     border-radius: 12px;
@@ -529,6 +538,7 @@ td{
     border-bottom: 0px solid #f4f4f4;
     padding-bottom: 45px;
     font-family: Pacifico;
+    margin-top: 10%;
 }
 
 .box-headernrf {
@@ -1163,7 +1173,7 @@ td{
 }
 
 .form-controlInputSpecId{
-   width: 6%;
+   width: 9%;
     height: 34px;
     padding: 6px 9px;
     margin: 0px 8px 0px 0px;
@@ -1393,7 +1403,7 @@ td{
   top: -3px;
   padding: 5px 10px;
   /*position: absolute;*/
-  width: 120px;
+  width: 170px;
   z-index: 4;
   height: 38px;
 }
