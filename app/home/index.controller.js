@@ -55,6 +55,9 @@
     vm.compartir = null;
     vm.mostrarMenu = mostrarMenu;
     vm.mostrarMenuCompartido = mostrarMenuCompartido;
+    
+    vm.indiceProyecto = indiceProyecto;
+    vm.indiceProyectoCompartir = null;
 
 
     /*####Funciones para obtener todos los usuarios existentes en la bd ####*/
@@ -300,6 +303,10 @@
             });
         } 
         }); 
+    }
+
+    function indiceProyecto(indice){
+        vm.indiceProyectoCompartir = vm.proyectos[indice].name;
     }
 
     function mostrarMenu(value){

@@ -40,7 +40,7 @@
                                       <td>{{p.fechaInicio}}</td>
                                       <td>{{p.iniciadoPor}}</td>
                                       <td><a ui-sref="functionalrequeriments"><button class="btn btn-success" ng-click="vm.getIdProject(p._id); vm.mostrarMenu(true)"><span width="15px;" heigth="15px;" class=""></span>Abrir</td>
-                                      <td><button class="btn btn-success">
+                                      <td><button class="btn btn-success" ng-click="vm.indiceProyecto($index)">
                                                 <span class="btnHomeComp" data-toggle="modal" data-target="#editar">Compartir</span></button></td>
                                       <td><a href="" id ="delete" ng-click="vm.deleteProject($index)"  onclick="recargaTime()"><span width="30px;" heigth="30px;" class="glyphicon glyphicon-trash"></span></a></td>
                                     </tr>
@@ -168,16 +168,13 @@
                                                 <tr>
                                                    <td class="compartirProy">Correo: </td> 
                                                    <td class="compartirText">          
-                                                          <input type="email" ng-model="vm.compartir.emailDestino" class="form-controlInputSpec" required>
+                                                          <input type="email" ng-model="vm.compartir.emailDestino" class="form-controlInputCompartir" required>
                                                    </td> 
                                                   </tr>
                                                   <tr>
                                                      	<td class="compartirProy">Proyecto: </td>
-                                                      	<td class="compartirText">   
-                                                      	<select name="project" ng-model="vm.compartir.nameProyecto" required>
-                                            				<option value="">-SeleccionarProyecto-</option>
-                                           					<option ng-repeat="p in vm.proyectos">{{p.name}}</option>       
-                                           				</select>
+                                                      	<td>   
+                                                          <span class="proyectoCompartido">{{vm.indiceProyectoCompartir}}</span>
                                                       </td>
                                                   </tr>
                                               </tbody>

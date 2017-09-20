@@ -28,13 +28,13 @@
 								<div class='form-group'>
 												<p class="textProj">Fecha de Inicio: </p>
 								 			  	<div class="input-group" ng-model="vm.project.fechaInicio">
-    												<input type="text" class="form-controlInputDataProj"  datepicker ng-model="vm.project.fechaInicio" />
+    												<input type="text"  id="actual" class="form-controlInputDataProj" datepicker ng-model="vm.project.fechaInicio" />
   												</div>
   								</div>
 
 								<div class="form-group">
 										<p class="textProj">Iniciado por: </p>
-										<input type="text" class="form-controlInputProj"ng-model="vm.user.email" >
+										<input type="text" class="form-controlInputProj"ng-model="vm.user.email"  readonly>
 								</div>
 								<br>
 								<div class="box-footer">
@@ -48,6 +48,13 @@
             </div>
 
 <script>
+
+$(document).ready(function() {
+    $("#actual").datepicker({
+	dateFormat: 'dd/mm/yy',
+    }).datepicker("setDate", new Date());
+});
+
 function recarga() {
     location.reload();
 }
@@ -57,5 +64,7 @@ function recargaTime() {
    		window.location.reload(1);
 	}, 300);
 }
+
+
 
 </script>
