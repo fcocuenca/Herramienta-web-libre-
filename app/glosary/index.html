@@ -1,4 +1,46 @@
-                
+ <!--*********INICIO VENTANA MODAL CATEGORIAS**********-->
+                     <div class="modal fade" id="editarTerm" role="dialog">
+                        <div class="modal-dialog modal-lg" >
+                        <div class="modal-content">
+
+                          <!-- Modal content-->
+                          <div class="col-md-12">
+                            <div class="flash-message" ng-if="flash">
+                                 <div class="{{'alert alert-' + flash.type}}" ng-bind="flash.message"></div>
+                            </div>   
+                              <div class="box box-solid box-success">
+                                  <div class="box-headerGlosary">
+                                          <h3 class="box-tittle"> Edición de Términos</h3>
+                                  </div>
+                              </div>
+
+                              <div class="box-body">
+                                  <div class="panel panel-default">
+                                      <div class="box-body table-responsive no-padding">
+                                          <table class ="table" border="3">
+                                              <thead>
+                                              
+                                              </thead>
+
+                                              <tbody>
+                                                <tr>
+                                                   <td class="attrTextSpec">Término: </td> 
+                                                   <td>          
+                                                          <input type="text" ng-model="vm.modificadoTerm.content" class="form-controlInputSpec" required>
+                                                   </td> 
+                                                  </tr>
+                                                  </tbody>
+                                          </table>
+                                      </div>
+                                  </div>
+                              </div>
+                                  <center><button id ="save" class="btn btn-primary" ng-click="vm.updateTerm($index)" onclick="recargaTime()">Modificar</button></center>
+                        </div>
+                        </div>
+                        </div>
+                      </div>
+
+                <!--****************FIN VENTANA MODAL*****************-->                
             <div class="tittleContent"> 
                     <div class="idea">
                          <a href="" title="¿Que es un Glosario?" data-toggle="popover" data-trigger="focus" data-content="Un glosario es un conjunto de palabras ordenadas alfabeticamente junto con sus definiciones, con el objetivo de construir un vocabulario que sea común a todas las partes interesadas del proyecto" data-placement="bottom"><img src="app-content/bombilla.png" class="ideaIMG" alt="User Image"></a>
@@ -80,10 +122,10 @@
                               <tbody>
                                	<tr ng-repeat="t in vm.glosario">
                                		<td>
-                               			 <a display="Term" ng-model="vm.modificadoTerm" editable="{{t.content}}">{{t.content}}</a>
+                               			 {{t.content}}
                                		</td>
                                		<td>
-                               			<a href="" id ="update" ng-click="vm.updateTerm($index)" onclick="recargaTime()"><span width="30px;" heigth="30px;" class="glyphicon glyphicon-pencil"></span></a>
+                               			<a href="" id ="update" data-toggle="modal" ng-click="vm.getIndex($index)" data-target="#editarTerm"><span width="30px;" heigth="30px;" class="glyphicon glyphicon-pencil"></span></a>
                                		</td>
                                		<td>
                                         <a href="" id ="delete" ng-click="vm.deleteTerm($index)" onclick="recargaTime()"><span width="30px;" heigth="30px;" class="glyphicon glyphicon-trash"></span></a>

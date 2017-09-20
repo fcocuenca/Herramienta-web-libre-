@@ -54,6 +54,7 @@
     vm.saveTerm = saveTerm;
     vm.deleteTerm = deleteTerm;
     vm.updateTerm = updateTerm;
+    vm.getIndex = getIndex;
 
 
 /*##################################
@@ -120,11 +121,15 @@
     	
      }
 
+     function getIndex(index){
+        vm.modificadoTerm = vm.glosario[index];
+     }
+
 /**
  * updateTerm: llama al servicio update para almacenar el termino en la bd
 */
      function updateTerm(index){
-     	vm.glosario[index].content =vm.modificadoTerm;
+     	vm.glosario[index] =vm.modificadoTerm;
 
      	GlosaryService.Update(vm.glosario[index])
      	.then(function(){

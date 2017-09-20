@@ -58,6 +58,8 @@ function Controller(UserService, NRfService, FlashService, CategoryServiceNRf, $
     vm.saveNRf = saveNRf;
     vm.deleteNRf=deleteNRf;
     vm.updateNRf=updateNRf;
+    vm.getIndexNRf = getIndexNRf;
+    vm.verificarReqRepFinal = verificarReqRepFinal;
 
 /*####FUNCIONES CATEGORIAS####*/
     vm.saveCatNrf = saveCatNrf;
@@ -162,21 +164,30 @@ function Controller(UserService, NRfService, FlashService, CategoryServiceNRf, $
 	        } 
 	   }); 
 	}
+     function getIndexNRf(index){
+        vm.modificadonf = vm.requisitosNoFuncionales[index];
+    }
+
 
 /**
  * updateRf: llama al controlador update y modifica un requisito de la bd
 */
 	function updateNRf(index){
+        vm.modificadonf.number = parseInt(vm.modificadonf.number);
 
-	            vm.requisitosNoFuncionales[index].content = vm.modificadonf;
+        vm.requisitosNoFuncionales[index] = vm.modificadonf;
 
-	            NRfService.Update(vm.requisitosNoFuncionales[index])
-	               	.then(function () {
-	                    FlashService.Success('Requisito no funcional modificado correctamente');
-	                })
-	                .catch(function (error) {
-	                    FlashService.Error(error);
-	                });
+        if(verificarReqRepFinal() == true){
+                 FlashService.Error("Este Id ya existe en el listado, intentalo de nuevo");
+            }else{
+                NRfService.Update(vm.requisitosNoFuncionales[index])
+               	.then(function () {
+                    FlashService.Success('Requisito no funcional modificado correctamente');
+                })
+                .catch(function (error) {
+                    FlashService.Error(error);
+                });
+            }
 	}
 
 /*###################################
@@ -193,6 +204,7 @@ function Controller(UserService, NRfService, FlashService, CategoryServiceNRf, $
         else
             FlashService.Success('Ha ocurrido un error, intentelo de nuevo');
     }
+
 
 /**
  * updateCat: llama al controlador update y modifica una categoria de la bd
@@ -245,6 +257,25 @@ function Controller(UserService, NRfService, FlashService, CategoryServiceNRf, $
     function orden(){
         vm.orderReverse = !vm.orderReverse;
         vm.nrf = $filter('orderBy')(vm.nrf, 'number', vm.orderReverse);
+    }
+
+    function verificarReqRepFinal(){
+         var indice = 0;
+         var numeroBuscar = vm.requisitosNoFuncionales[indice].number;
+         var contador = 0;
+
+         angular.forEach(vm.requisitosNoFuncionales, function(value, key){
+
+            if(numeroBuscar === vm.requisitosNoFuncionales[key].number)
+                contador++;
+            else
+                indice++;
+       });
+
+         if(contador > 1){
+            return true;
+         }else
+            return false
     }
 
 

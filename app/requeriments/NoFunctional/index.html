@@ -1,4 +1,84 @@
-				
+ <!--*********INICIO VENTANA MODAL NRF**********-->
+                     <div class="modal fade" id="editarNRf" role="dialog">
+                        <div class="modal-dialog modal-lg" >
+                        <div class="modal-content">
+
+                          <!-- Modal content-->
+                          <div class="col-md-12">
+                            <div class="flash-message" ng-if="flash">
+                                 <div class="{{'alert alert-' + flash.type}}" ng-bind="flash.message"></div>
+                            </div>   
+                              <div class="box box-solid box-success">
+                                  <div class="box-headernrf">
+                                          <h3 class="box-tittle"> Edición de Requisitos Funcionales</h3>
+                                  </div>
+                              </div>
+
+                              <div class="box-body">
+                                  <div class="panel panel-default">
+                                      <div class="box-body table-responsive no-padding">
+                                          <table class ="table" border="3">
+                                              <thead>
+                                              
+                                              </thead>
+
+                                              <tbody>
+                                                <tr>
+                                                   <td class="attrTextSpec">Id: </td> 
+                                                   <td>          
+                                                          <input type="text" ng-model="vm.modificadonf.number" class="form-controlInputSpecId" required>
+                                                   </td> 
+                                                </tr>
+                                                <tr>
+                                                   <td class="attrTextSpec">Requisito: </td> 
+                                                   <td>          
+                                                          <input type="text" ng-model="vm.modificadonf.content" class="form-controlInputSpec" required>
+                                                   </td> 
+                                                </tr>
+                                                <tr>
+                                                   <td class="attrTextSpec">Prioridad: </td> 
+                                                   <td>  
+                                                      <select name="priority" ng-model="vm.modificadonf.priority" required>
+                                                        <option value="">-SeleccionarPrioridad-</option>
+                                                        <option value="M">Must have</option>
+                                                        <option value="S">Should have</option>
+                                                        <option value="C">Could have</option>
+                                                        <option value="W">Want to have</option>
+                                                      </select>        
+                                                   </td> 
+                                                </tr>
+                                                <tr>
+                                                   <td class="attrTextSpec">Categoría: </td> 
+                                                   <td> 
+                                                    <select name="category"  ng-model="vm.modificadonf.category" required>
+                                                          <option value="">-SeleccionarCategoría-</option>
+                                                          <option value="Rendimiento">Rendimiento</option>
+                                                          <option value="Disponibilidad">Disponibilidad</option>
+                                                          <option value="Accesibilidad">Accesibilidad</option>
+                                                          <option value="Usabilidad">Usabilidad</option>
+                                                          <option value="Estabilidad">Estabilidad</option>
+                                                          <option value="Portabilidad">Portabilidad</option>
+                                                          <option value="Costo">Costo</option>
+                                                          <option value="Interoperabilidad">Interoperabilidad</option>
+                                                          <option value="Escalabilidad">Escalabilidad</option>
+                                                          <option value="Concurrencia">Concurrencia</option>
+                                                          <option value="Mantenibilidad">Mantenibilidad</option>
+                                                          <option value="Interfaz">Interfaz</option>
+                                                          <option value="Seguridad">Seguridad</option>         
+                                                   </td> 
+                                                </tr>
+                                                  </tbody>
+                                          </table>
+                                      </div>
+                                  </div>
+                              </div>
+                                  <center><button id ="save" class="btn btn-primary" ng-click="vm.updateNRf($index)" onclick="recargaTime()">Modificar</button></center>
+                        </div>
+                        </div>
+                        </div>
+                      </div>
+
+                <!--****************FIN VENTANA MODAL*****************-->				
 			<div class="tittleContent"> 
 					<div class="idea">
 						 <a href="" title="¿Que es un Requisito No Funcional?" data-toggle="popover" data-trigger="focus" data-content=" Los requisitos no funcionales especifican criterios que pueden usarse para juzgar la operación de un sistema en lugar de sus comportamientos específicos, ya que éstos corresponden a los requisitos funcionales. Por tanto, se refieren a todos los requisitos que no describen información a guardar, ni funciones a realizar, sino características de funcionamiento, por eso suelen denominarse Atributos de calidad de un sistema. Entre los ejemplos de requerimientos no funcionales tenemos: seguridad, usabilidad, rendimiento, etc." data-placement="bottom"><img src="app-content/bombilla.png" class="ideaIMG" alt="User Image" width="40px;" height="40px"></a>
@@ -116,13 +196,13 @@
 				      			<tr class="tr" ng-repeat=" rnf in vm.requisitosNoFuncionales">
 				      					<td>RNF{{rnf.number}}</td>
 								        <td>
-								        	<a display="content" ng-model="vm.modificadonf" editablenrf="{{rnf.content}}">{{rnf.content}}</a>
+								        	{{rnf.content}}
 								        </td>
 								        <td>{{rnf.priority}}</td>
                                         <td>{{rnf.category}}</td>
 								       	
 								       	<td>
-								        	<a href="" id ="updatenrf" ng-click="vm.updateNRf($index)" onclick="recargaTime()"><span width="30px;" heigth="30px;" class="glyphicon glyphicon-pencil"></span></a>
+								        	<a href="" id ="updatenrf" data-toggle="modal" ng-click="vm.getIndexNRf($index)" data-target=#editarNRf ><span width="30px;" heigth="30px;" class="glyphicon glyphicon-pencil"></span></a>
 										</td>
 								        <td>
 								        	<a href="" id ="deletenrf" ng-click="vm.deleteNRf($index)" onclick="recargaTime()"><span width="30px;" heigth="30px;" class="glyphicon glyphicon-trash"></span></a>

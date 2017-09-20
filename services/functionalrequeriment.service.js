@@ -123,19 +123,31 @@ function update(RfParam){
     
     var id= RfParam._id;
     var content = RfParam.content;
+    var number = RfParam.number;
+    var priority = RfParam.priority;
+    var category = RfParam.category;
 
-    var set = {	
-    			content: content,
-    };
+    if(detectarCont(RfParam.content) == true && detectarReq(RfParam.number) == true){
+        var set = {	
+        			number: number,
+        			content: content,
+        			priority: priority,
+        			category: category,
+        };
 
-    db.funcionalrequeriments.update(
-    {_id: mongo.helper.toObjectID(RfParam._id)},
-    {$set: set},
-    function(err){
-    	if(err) deferred.reject(err);
-    	
-    	deferred.resolve();
-    });
+        db.funcionalrequeriments.update(
+        {_id: mongo.helper.toObjectID(RfParam._id)},
+        {$set: set},
+        function(err){
+        	if(err) deferred.reject(err);
+        	
+        	deferred.resolve();
+        });
+    }else
+    {
+        deferred.reject('El requisito no ha sido insertado correctamente');
+    }
+
     return deferred.promise;
 }
 

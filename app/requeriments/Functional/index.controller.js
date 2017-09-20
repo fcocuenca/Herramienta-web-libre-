@@ -38,6 +38,7 @@
 ###########################################*/    
     var vm = this;
     var result;
+    var flag;
     var vacio;
     var idProjectFK = compartirDatos.getString();
 
@@ -62,18 +63,17 @@
     vm.saveRf = saveRf;
     vm.deleteRf=deleteRf;
     vm.updateRf=updateRf;
+    vm.getIndexRf = getIndexRf;
 
 /*####FUNCIONES CATEGORIAS####*/
     vm.saveCat = saveCat;
     vm.updateCat = updateCat;
     vm.deleteCat = deleteCat;
-
-/*####FUNCIONES PRIORIDAD####*/
-	vm.updatePriority = vm.updatePriority;
+    vm.getIndexCat = getIndexCat;
 
 /*####VERIFICACIONES####*/
     vm.verificarReqRepe = verificarReqRepe;
-    vm.vacioId =  vacioId;
+    vm.verificarReqRepFinal = verificarReqRepFinal;
 
     /*####Funciones para obtener todos los requisitos existentes en la bd ####*/
     initController();
@@ -183,18 +183,32 @@
 */
     function updateRf(index){
 
-                vm.requisitosFuncionales[index].content = vm.modificado;
-
-                RfService.Update(vm.requisitosFuncionales[index])
-                    .then(function () {
-                        FlashService.Success('El requisito funcional se ha modificado correctamente');
-                    })
-                    .catch(function (error) {
-                        FlashService.Error(error);
-                    });
+            vm.modificado.number = parseInt(vm.modificado.number);
        
+            vm.requisitosFuncionales[index] = vm.modificado;
+
+            if(verificarReqRepFinal() == true){
+                 FlashService.Error("Este Id ya existe en el listado, intentalo de nuevo");
+            }else{
+                RfService.Update(vm.requisitosFuncionales[index])
+                .then(function () {
+                    FlashService.Success('El requisito funcional se ha modificado correctamente');
+                })
+                .catch(function (error) {
+                    FlashService.Error(error);
+                });    
+            }
+            
     }
-    
+
+    function getIndexRf(index){
+        vm.modificado = vm.requisitosFuncionales[index];
+    }
+
+    function getIndexCat(index){
+        vm.modcategory = vm.categorias[index];
+    }
+
 
 /*###################################
 ###########CRUD CATEGORIAS###########
@@ -218,7 +232,7 @@
  * updateCat: llama al servicio update y modifica una categoria de la bd
 */
     function updateCat(index){
-        vm.categorias[index].category = vm.modcategory;
+        vm.categorias[index]= vm.modcategory;
 
                 CategoryService.Update(vm.categorias[index])
                     .then(function () {
@@ -248,20 +262,6 @@
        }); 
     }
 
-    function updatePriority(index){
-
-    	 vm.requisitosFuncionales[index].priority = vm.modPriority;
-
-                RfService.Update(vm.requisitosFuncionales[index])
-                    .then(function () {
-                        FlashService.Success('El requisito funcional se ha modificado correctamente');
-                    })
-                    .catch(function (error) {
-                        FlashService.Error(error);
-                    });
-    }
-
-    
 /*################################
 ############VERIFICACIONES########
 ################################*/
@@ -277,9 +277,25 @@
        });
     }
 
-    function vacioId(){
+    function verificarReqRepFinal(){
+         var indice = 0;
+         var numeroBuscar = vm.requisitosFuncionales[indice].number;
+         var contador = 0;
 
+         angular.forEach(vm.requisitosFuncionales, function(value, key){
+
+            if( numeroBuscar === vm.requisitosFuncionales[key].number)
+                contador++;
+            else
+                indice++;
+       });
+
+         if(contador > 1){
+            return true;
+         }else
+            return false
     }
+
 
 
 }

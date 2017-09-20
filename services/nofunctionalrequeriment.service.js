@@ -122,19 +122,30 @@ function update(NRfParam){
     
     var id= NRfParam._id;
     var content = NRfParam.content;
+    var number = NRfParam.number;
+    var priority = NRfParam.priority;
+    var category = NRfParam.category;
 
-    var set = {	
-    			content: content,
-    };
+    if(detectarCont(NRfParam.content) == true && detectarReq(NRfParam.number) == true){
+	    var set = {	
+	    	    	number: number,
+	    			content: content,
+	    			priority: priority,
+	    			category: category,
+	    };
 
-    db.nofuncionalrequeriments.update(
-    {_id: mongo.helper.toObjectID(NRfParam._id)},
-    {$set: set},
-    function(err){
-    	if(err) deferred.reject(err);
-    	
-    	deferred.resolve();
-    });
+	    db.nofuncionalrequeriments.update(
+	    {_id: mongo.helper.toObjectID(NRfParam._id)},
+	    {$set: set},
+	    function(err){
+	    	if(err) deferred.reject(err);
+	    	
+	    	deferred.resolve();
+	    });
+	}else{
+		deferred.reject('El requisito no ha sido insertado correctamente');
+	}
+
     return deferred.promise;
 }
 

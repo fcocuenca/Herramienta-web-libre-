@@ -1,5 +1,59 @@
-  	<div class="tittleContent"> 
-       
+  	 <!--*********INICIO VENTANA MODAL**********-->
+                     <div class="modal fade" id="editar" role="dialog">
+                        <div class="modal-dialog modal-lg" >
+                        <div class="modal-contentCompartir">
+
+                          <!-- Modal content-->
+                          <div class="col-md-Compartir">
+                            <div class="flash-message" ng-if="flash">
+                                 <div class="{{'alert alert-' + flash.type}}" ng-bind="flash.message"></div>
+                            </div>   
+                              <div class="box box-solid box-success">
+                                  <div class="box-headerHome">
+                                          <h3 class="box-tittle">Compartir proyecto</h3>
+                                  </div>
+                              </div>
+                              
+
+                              <div class="box-body">
+                                  <div class="panel panel-default">
+                                      <div class="box-body table-responsive no-padding">
+                                          <table class ="table">
+                                              <thead>
+                                              
+                                              </thead>
+
+                                              <tbody>
+                                                <tr>
+                                                   <td class="compartirProy">Correo: </td> 
+                                                   <td class="compartirText">          
+                                                          <input type="email" ng-model="vm.compartir.emailDestino" class="form-controlInputCompartir" required>
+                                                   </td> 
+                                                  </tr>
+                                                  <tr>
+                                                      <td class="compartirProy">Proyecto: </td>
+                                                        <td>   
+                                                        <span class="proyectoCompartido">{{vm.indiceProyectoCompartir}}</span>
+                                                        
+                                                        <!-- <select name="project" ng-model="vm.compartir.nameProyecto" required>
+                                                            <option value="">-SeleccionarProyecto-</option>
+                                                            <option ng-repeat="p in vm.proyectos">{{p.name}}</option>       
+                                                            
+                                                  </select>-->
+                                                      </td>
+                                                  </tr>
+                                              </tbody>
+                                          </table>
+                                      </div>
+                                  </div>
+                              </div>
+                                  <center><button id ="save" class="btn btn-primary" ng-click="vm.enviarEmail(vm.indiceProyectoCompartir)" onclick="recargaTime()">Enviar <span width="15px;" heigth="15px;" class=" nube glyphicon-cloud"></span></button></center>
+                        </div>
+                      </div>
+                      </div>
+                </div>
+                                  <!--FIN VENTANA MODAL-->
+    <div class="tittleContent"> 
    	</div>
                             
             <br><br><br>
@@ -50,10 +104,7 @@
                       </div>
                   </div>
 
-
-
 				</div>
-
 
                   <div>
                   <div ng-show = "vm.proyectos == 0">
@@ -139,56 +190,7 @@
 						</center>
                   </div>
                                            
-                                         <!--*********INICIO VENTANA MODAL**********-->
-                     <div class="modal fade" id="editar" role="dialog">
-                        <div class="modal-dialog modal-lg" >
-                        <div class="modal-contentCompartir">
-
-                          <!-- Modal content-->
-                          <div class="col-md-Compartir">
-                            <div class="flash-message" ng-if="flash">
-                                 <div class="{{'alert alert-' + flash.type}}" ng-bind="flash.message"></div>
-                            </div>   
-                              <div class="box box-solid box-success">
-                                  <div class="box-headerHome">
-                                          <h3 class="box-tittle">Compartir proyecto</h3>
-                                  </div>
-                              </div>
-                              
-
-                              <div class="box-body">
-                                  <div class="panel panel-default">
-                                      <div class="box-body table-responsive no-padding">
-                                          <table class ="table">
-                                              <thead>
-                                              
-                                              </thead>
-
-                                              <tbody>
-                                                <tr>
-                                                   <td class="compartirProy">Correo: </td> 
-                                                   <td class="compartirText">          
-                                                          <input type="email" ng-model="vm.compartir.emailDestino" class="form-controlInputCompartir" required>
-                                                   </td> 
-                                                  </tr>
-                                                  <tr>
-                                                     	<td class="compartirProy">Proyecto: </td>
-                                                      	<td>   
-                                                          <span class="proyectoCompartido">{{vm.indiceProyectoCompartir}}</span>
-                                                      </td>
-                                                  </tr>
-                                              </tbody>
-                                          </table>
-                                      </div>
-                                  </div>
-                              </div>
-                                  <center><button id ="save" class="btn btn-primary" ng-click="vm.enviarEmail()" onclick="recargaTime()">Enviar <span width="15px;" heigth="15px;" class=" nube glyphicon-cloud"></span></button></center>
-                        </div>
-                      </div>
-                      </div>
-
-                </div>
-
+                                        
 <script>
 function recarga() {
     location.reload();

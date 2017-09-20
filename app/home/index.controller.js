@@ -310,7 +310,6 @@
     }
 
     function mostrarMenu(value){
-
     	compartirDatos.setMostrar(value);
     }
 
@@ -337,10 +336,11 @@
     }
 
 /*enviarEmail: envio de un email al usuario invitado*/
-    function enviarEmail(){
+    function enviarEmail(correo){
     	
         var encontradoNameproyect = false;
         var encontradoEmailDestino = false;
+        vm.compartir.nameProyecto = correo;
 
      	for(var i =0; i<vm.proyectos.length; i++){
      		if(vm.proyectos[i].name === vm.compartir.nameProyecto){

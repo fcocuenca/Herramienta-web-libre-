@@ -30,8 +30,6 @@ module.exports = service;
  * create: insercion de los terminos en la bd
  */
 function create(word){
-	console.log("createGlosary");
-
 	//orden de los elementos antes d einsertarlos en a BD
 		var deferred = Q.defer();
 

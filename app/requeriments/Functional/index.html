@@ -1,4 +1,121 @@
-                
+               <!--*********INICIO VENTANA MODAL CATEGORIAS**********-->
+                     <div class="modal fade" id="editarCat" role="dialog">
+                        <div class="modal-dialog modal-lg" >
+                        <div class="modal-contentCat">
+
+                          <!-- Modal content-->
+                          <div class="col-md-12">
+                            <div class="flash-message" ng-if="flash">
+                                 <div class="{{'alert alert-' + flash.type}}" ng-bind="flash.message"></div>
+                            </div>   
+                              <div class="box box-solid box-success">
+                                  <div class="box-header">
+                                          <h3 class="box-tittle"> Edición de Categorias</h3>
+                                  </div>
+                              </div>
+
+                              <div class="box-body">
+                                  <div class="panel panel-default">
+                                      <div class="box-body table-responsive no-padding">
+                                          <table class ="table" border="3">
+                                              <thead>
+                                              
+                                              </thead>
+
+                                              <tbody>
+                                                <tr>
+                                                   <td class="textTabla">Categoría: </td> 
+                                                   <td>          
+                                                          <input type="text" ng-model="vm.modcategory.category" class="textCategory" required>
+                                                   </td> 
+                                                  </tr>
+                                                  </tbody>
+                                          </table>
+                                      </div>
+                                  </div>
+                              </div>
+                                  <center><button id ="save" class="btn btn-primary" ng-click="vm.updateCat($index)" onclick="recargaTime()">Modificar</button></center>
+                        </div>
+                        </div>
+                        </div>
+                      </div>
+
+                <!--****************FIN VENTANA MODAL*****************-->
+
+
+                 <!--*********INICIO VENTANA MODAL RF**********-->
+                     <div class="modal fade" id="editarRf" role="dialog">
+                        <div class="modal-dialog modal-lg" >
+                        <div class="modal-contentRf">
+
+                          <!-- Modal content-->
+                          <div class="col-md-12">
+                            <div class="flash-message" ng-if="flash">
+                                 <div class="{{'alert alert-' + flash.type}}" ng-bind="flash.message"></div>
+                            </div>   
+                              <div class="box box-solid box-success">
+                                  <div class="box-header">
+                                          <h3 class="box-tittle"> Edición de Requisitos Funcionales</h3>
+                                  </div>
+                              </div>
+
+                              <div class="box-body">
+                                  <div class="panel panel-default">
+                                      <div class="box-body table-responsive no-padding">
+                                          <table class ="table" border="3">
+                                              <thead>
+                                              
+                                              </thead>
+
+                                              <tbody>
+                                                <tr>
+                                                   <td class="attrTextSpec">Id: </td> 
+                                                   <td>          
+                                                          <input type="text" ng-model="vm.modificado.number" class="form-controlInputSpecId" required>
+                                                   </td> 
+                                                </tr>
+                                                <tr>
+                                                   <td class="attrTextSpec">Requisito: </td> 
+                                                   <td>          
+                                                          <input type="text" ng-model="vm.modificado.content" class="form-controlInputSpec" required>
+                                                   </td> 
+                                                </tr>
+                                                <tr>
+                                                   <td class="attrTextSpec">Prioridad: </td> 
+                                                   <td>      
+                                                   <select name="priority" ng-model="vm.modificado.priority" required>
+                                                        <option value="">-SeleccionarPrioridad-</option>
+                                                        <option value="M">Must have</option>
+                                                        <option value="S">Should have</option>
+                                                        <option value="C">Could have</option>
+                                                        <option value="W">Want to have</option>
+                                                    </select>    
+                                                   </td> 
+                                                </tr>
+                                                <tr>
+                                                   <td class="attrTextSpec">Categoría: </td> 
+                                                   <td>     
+                                                    <select name="category"  ng-model="vm.modificado.category" required>
+                                                      <option value="">-SeleccionarCategoría-</option>
+                                                      <option ng-repeat="c in vm.categorias">{{c.category}}</option>     
+                                                    </select>
+                                                   </td> 
+                                                </tr>
+                                                  </tbody>
+                                          </table>
+                                      </div>
+                                  </div>
+                              </div>
+                                  <center><button id ="save" class="btn btn-primary" ng-click="vm.updateRf($index)" onclick="recargaTime()">Modificar</button></center>
+                        </div>
+                        </div>
+                        </div>
+                      </div>
+
+                <!--****************FIN VENTANA MODAL*****************-->
+
+
+
             <div class="tittleContent"> 
                     <div class="idea">
                          <a href="" title="¿Que es un Requisito Funcional?" data-toggle="popover" data-trigger="focus" data-content=
@@ -42,9 +159,8 @@
                                             <td width="170px"><center>Listado de categorias: </center></td>
                                             <td></td>
                                             <td><ul ng-repeat="c in vm.categorias">
-                                                      <li>  <a display="category" ng-model="vm.modcategory" editable="{{r.category}}">{{c.category}}</a> 
-                                                        
-                                                            <a href="" id ="update" ng-click="vm.updateCat($index)" onclick="recargaTime()"><span width="30px;" heigth="30px;" class="glyphicon glyphicon-pencil"></span></a>   
+                                                      <li>  {{c.category}}
+                                                            <a href="" id ="update" data-toggle="modal" ng-click="vm.getIndexCat($index)" data-target="#editarCat"><span width="30px;" heigth="30px;" class="glyphicon glyphicon-pencil"></span></a>   
                                                             
                                                             <a href="" id ="delete" ng-click="vm.deleteCat($index)" onclick="recargaTime()"><span width="30px;" heigth="30px;" class="glyphicon glyphicon-trash"></span></a> 
                                                       </li>
@@ -139,13 +255,15 @@
                         <div class="box box-solid box-success">
                             <div class="box-header">
                                     <h3 class="box-tittle"> Listado de Requisitos Funcionales</h3>
-                                   
+                                    
                                     <div class="box-tools pull-right" >
-                                        <a href="" onclick="pdf()" ><span class="imprimir glyphicon glyphicon-print"></span></a>
+                                        <a href="" onclick="pdf()"><span class="imprimir glyphicon glyphicon-print"></span></a>
                                     </div>
+
                             </div>
                         </div>
-                
+                       
+                                        
                             <table id="table" class="table">
                               <thead>
                                   <tr>
@@ -163,7 +281,7 @@
                                   <tr class="tr" ng-repeat=" r in vm.requisitosFuncionales" ng-click="vm.table()">
                                           <td>RF{{r.number}}</td>
                                           <td>
-                                              <a display="content" ng-model="vm.modificado" editable="{{r.content}}">{{r.content}}</a> 
+                                              {{r.content}}</a> 
                                           </td>
                                           <td> 
                                         	  {{r.priority}} 
@@ -171,7 +289,7 @@
                                           <td>{{r.category}}</td>
                                           
                                           <td>
-                                              <a href="" id ="update" ng-click="vm.updateRf($index); vm.updatePriority($index)" onclick="recargaTime()" ><span width="30px;" heigth="30px;" class="glyphicon glyphicon-pencil"></span></a>
+                                              <a href="" id ="update" data-toggle="modal" ng-click="vm.getIndexRf($index)" data-target="#editarRf" ><span width="30px;" heigth="30px;" class="glyphicon glyphicon-pencil"></span></a>
                                           </td>
                                           <td>
                                               <a href="" id ="delete" ng-click="vm.deleteRf($index)" onclick="recargaTime()"><span width="30px;" heigth="30px;" class="glyphicon glyphicon-trash"></span></a>
